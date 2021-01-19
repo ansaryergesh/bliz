@@ -25,7 +25,8 @@ class Register extends React.Component {
       loading: false,
       message: {visibility: false,message:null, type:null},
     };
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
   
   handleSubmit(values) {
@@ -38,7 +39,7 @@ class Register extends React.Component {
         this.setState({loading:false, message: {visibility: true, message: response.data.message, type: 'error'}})
        }
        else {
-        this.setState({loading: false, message: {visibility: true, message: response.data.message, type: 'success'}})
+        this.setState({loading: false, message: {visibility: true, message: 'Вы успешно зарегистрировались!', type: 'success'}})
         cookie.set('token',response.data.token)
        }
       
@@ -47,6 +48,26 @@ class Register extends React.Component {
       this.setState({loading: false, message: 'Ошибка'})
     });
   }
+
+handleLogin(values) {
+  this.setState({loading: true})
+  console.log(values)
+  axios.post('https://test.money-men.kz/api/login', values)
+    .then((response) => {
+      console.log(response)
+      if(!response.data.success) {
+      this.setState({loading:false, message: {visibility: true, message: response.data.message, type: 'error'}})
+      }
+      else {
+      this.setState({loading: false, message: {visibility: true, message: 'Добро пожаловать!', type: 'success'}})
+      cookie.set('token',response.data.token)
+      }
+    
+  }).catch((error) => {
+    console.log(error)
+    this.setState({loading: false, message: 'Ошибка'})
+  });
+}
   render() {
     return (
       <div className="register">
@@ -142,11 +163,21 @@ class Register extends React.Component {
         </Formik>
 
         <h2>Вход</h2>
-        <form className="register_form" action="register.php" method="POST">
-          <input type="email" name="email" placeholder="Электронная почта"/>
-          <input type="password" name="password" placeholder="Пароль"/>
-          <button className="btn" type="submit">Вход</button>
-        </form>
+        <Formik
+          initialValues={{
+            email: '',
+            password: ''
+          }}
+          onSubmit={(values) => {this.handleLogin(values)}}
+        >
+          {({errors, touched, isValidating, isSubmitting}) => (
+            <Form className='register_form'>
+              <Field name='email' type='email' placeholder='Электронная почта'></Field>
+              <Field name='password' type='password' placeholder='Пароль'></Field>
+              <button className="btn" type="submit">Вход</button>
+            </Form>
+          )}
+        </Formik>
       </div>
 
     )
