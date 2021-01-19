@@ -22,7 +22,8 @@ class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: false,
+      loadingReg: false,
+      loadingLog: false,
       message: {visibility: false,message:null, type:null},
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,42 +31,42 @@ class Register extends React.Component {
   }
   
   handleSubmit(values) {
-    this.setState({loading: true})
+    this.setState({loadingReg: true})
     console.log(values)
-    axios.post('https://test.money-men.kz/api/registration', values)
+    axios.post(`https://test.money-men.kz/api/registration`, values)
       .then((response) => {
        console.log(response)
        if(!response.data.success) {
-        this.setState({loading:false, message: {visibility: true, message: response.data.message, type: 'error'}})
+        this.setState({loadingReg:false, message: {visibility: true, message: response.data.message, type: 'error'}})
        }
        else {
-        this.setState({loading: false, message: {visibility: true, message: 'Вы успешно зарегистрировались!', type: 'success'}})
+        this.setState({loadingReg: false, message: {visibility: true, message: 'Вы успешно зарегистрировались!', type: 'success'}})
         cookie.set('token',response.data.token)
        }
       
     }).catch((error) => {
       console.log(error)
-      this.setState({loading: false, message: 'Ошибка'})
+      this.setState({loadingReg: false, message: 'Ошибка'})
     });
   }
 
 handleLogin(values) {
-  this.setState({loading: true})
+  this.setState({loadingLog: true})
   console.log(values)
   axios.post('https://test.money-men.kz/api/login', values)
     .then((response) => {
       console.log(response)
       if(!response.data.success) {
-      this.setState({loading:false, message: {visibility: true, message: response.data.message, type: 'error'}})
+      this.setState({loadingLog:false, message: {visibility: true, message: response.data.message, type: 'error'}})
       }
       else {
-      this.setState({loading: false, message: {visibility: true, message: 'Добро пожаловать!', type: 'success'}})
+      this.setState({loadingLog: false, message: {visibility: true, message: 'Добро пожаловать!', type: 'success'}})
       cookie.set('token',response.data.token)
       }
     
   }).catch((error) => {
     console.log(error)
-    this.setState({loading: false, message: 'Ошибка'})
+    this.setState({loadingLog: false, message: 'Ошибка'})
   });
 }
   render() {
@@ -95,7 +96,7 @@ handleLogin(values) {
                 className={(errors.name && touched.name
                 ? 'is-invalid'
                 : '')}
-                autocomplete="off"
+                autoComplete="off"
                 validate={required}/>
               <Field
                 name='secondName'
@@ -103,7 +104,7 @@ handleLogin(values) {
                 className={(errors.secondName && touched.secondName
                 ? 'is-invalid'
                 : '')}
-                autocomplete="off"
+                autoComplete="off"
                 validate={required}/>
               <Field
                 name='email'
@@ -155,8 +156,8 @@ handleLogin(values) {
                 ? 'is-invalid'
                 : '')}
                 validate={required}/>
-
-              <button className="btn" type="submit">Регистрировать</button>
+              {this.state.loadingReg===false ? <button className="btn" type="submit">Регистрировать</button>: <button className="btn"  disabled>Регистрируется...</button>}
+              
             </Form>
           )}
 
@@ -174,7 +175,7 @@ handleLogin(values) {
             <Form className='register_form'>
               <Field name='email' type='email' placeholder='Электронная почта'></Field>
               <Field name='password' type='password' placeholder='Пароль'></Field>
-              <button className="btn" type="submit">Вход</button>
+              {this.state.loadingLog===false ? <button className="btn" type="submit">Вход</button>: <button className="btn"  disabled>Загрузка...</button>}
             </Form>
           )}
         </Formik>

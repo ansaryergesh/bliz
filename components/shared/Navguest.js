@@ -1,30 +1,52 @@
-import Fragment from 'react'
 import React from 'react'
 export default function Navguest() {
   return (
     <>
-      {/* <div className="header__top__items">
-        <div className="header__top__item">
-          <img src="/img/widgets/language_logo.png" alt/>
-          <p>На русском</p>
-          <i className="fas fa-angle-down"/>
-          <div className="dropdown__items">
-            <div className="header__top__item">
-              <p>На казахском</p>
-            </div>
-            <div className="header__top__item">
-              <p>На английском</p>
-            </div>
-          </div>
+     <div className="header__top">
+  <div className="header__top__wrapper container">
+    <div className="header__top__items">
+      <div className="header__top__item">
+        <img src="/img/widgets/KZ.svg" alt />
+        <p>Казахстан, Алматы</p>
+        <i className="fas fa-angle-down" />
+        <div className="dropdown__items">
+          <div className="header__top__item">
+            <img src="/img/widgets/KZ.svg" alt />
+            <p>Казахстан, Астана</p>
+          </div> 
+          <div className="header__top__item">
+            <img src="/img/widgets/KZ.svg" alt />
+            <p>Казахстан, Актау</p>
+          </div>       
         </div>
-        <div className="header__top__item">
-          <a href="register.html">Регистрация</a>
+      </div>
+    </div>
+    <div className="header__top__items">
+      <div className="header__top__item">
+        <img src="/img/widgets/language_logo.png" alt />
+        <p>На русском</p>
+        <i className="fas fa-angle-down" />
+        <div className="dropdown__items">
+          <div className="header__top__item">
+            <p>На казахском</p>
+          </div> 
+          <div className="header__top__item">
+            <p>На английском</p>
+          </div>       
         </div>
-        <div className="header__top__item">
-          <img src="/img/widgets/personal_cabinet_logo.png" alt/>
-          <a href="cabinet-conf-nav1.html">Личный кабинет</a>
-        </div>
-      </div> */}
+      </div>
+      <div className="header__top__item">
+        <a href="/register">Регистрация</a>
+      </div>
+      <div className="header__top__item">
+        <img src="/img/widgets/personal_cabinet_logo.png" alt />
+        <a href="cabinet-conf-nav1.html">Личный кабинет</a>
+      </div>
+    </div>      
+  </div>
+</div>
+
+      
 
       <header>
         <nav>
