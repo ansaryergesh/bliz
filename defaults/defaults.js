@@ -70,4 +70,3 @@ export const user_type = [
   }
 ]
 
-//insecure disable verification

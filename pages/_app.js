@@ -1,13 +1,17 @@
 import '../styles/globals.css'
+import 'font-awesome/css/font-awesome.css';
 import App,{ Container } from 'next/app';
-import Navguest from '../components/shared/Navguest'
+import Nav from '../components/shared/Nav'
+import Footer from '../components/shared/Footer'
+
 class MyApp extends App {
   render(){
     const { Component,pageProps} = this.props;
     return(
       <>
-        <Navguest />
+        <Nav />
         <Component {...pageProps}/>
+        <Footer />
       </>
     )
   }

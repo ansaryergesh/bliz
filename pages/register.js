@@ -4,6 +4,7 @@ import InputMask from "react-input-mask";
 import {gorods, type, user_type} from '../defaults/defaults'
 import {Flash} from '../components/shared/FlashMessage'
 import axios from 'axios';
+import LoadingSpinner from '../components/shared/LoadingSpinner'
 import https from 'http'
 import cookie from 'js-cookie'
 import {required, phoneValidation, validEmail, passwordCheck, birthDayVal} from '../defaults/validation'
@@ -25,9 +26,17 @@ class Register extends React.Component {
       loadingReg: false,
       loadingLog: false,
       message: {visibility: false,message:null, type:null},
+      countries: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('https://test.money-men.kz/api/country')
+      .then(response=> {
+        this.setState({countries:response.data})
+      })
   }
   
   handleSubmit(values) {
@@ -72,18 +81,20 @@ handleLogin(values) {
   render() {
     return (
       <div className="register">
+        
         <Flash visibility={this.state.message.visibility} message={this.state.message.message} type={this.state.message.type} />
         <h2>Регистрация</h2>
         <Formik
           initialValues={{
-          name: 'name',
-          secondName: 'name',
-          email: 'name@name.com',
-          password: '123456',
-          phone: '77082839998',
-          birthDay: '02.07.1999',
-          city: '1',
-          address: 'address',
+          name: '',
+          secondName: '',
+          email: '',
+          password: '',
+          phone: '',
+          birthDay: '',
+          country: 1,
+          city: 1,
+          address: '',
           type: 1,
           user_type: 1
         }}
@@ -98,6 +109,7 @@ handleLogin(values) {
                 : '')}
                 autoComplete="off"
                 validate={required}/>
+                 {(errors.name && touched.name)? <p className='error'>{errors.name}</p> : null}
               <Field
                 name='secondName'
                 placeholder='Фамилия'
@@ -106,6 +118,7 @@ handleLogin(values) {
                 : '')}
                 autoComplete="off"
                 validate={required}/>
+                 {(errors.secondName && touched.secondName)? <p className='error'>{errors.secondName}</p> : null}
               <Field
                 name='email'
                 placeholder='Электронная почта'
@@ -121,6 +134,7 @@ handleLogin(values) {
                 ? 'is-invalid'
                 : '')}
                 validate={passwordCheck}/>
+                 {(errors.password && touched.password)? <p className='error'>{errors.password}</p> : null}
               <Field
                 name='phone'
                 type='tel'
@@ -130,21 +144,32 @@ handleLogin(values) {
                 ? 'is-invalid'
                 : '')}
                 validate={phoneValidation}/>
+                {(errors.phone && touched.phone)? <p className='error'>{errors.phone}</p> : null}
+                
               <Field
                 name='birthDay'
                 placeholder='Дата рождения'
-                />
-                {/* component={birthDate}
+                validate={required}
+                // component={birthDate}
                 className={(errors.birthDay && touched.birthDay
                 ? 'is-invalid'
-                : '')} */}
+                : '')}
+                />
+                {(errors.birthDay && touched.birthDay) ? <p className='error'>{errors.birthDay}</p> : null}
+              <Field
+                name='country'
+                as='select'
+                validate={required}
+                >
+                <option value="" disabled selected className='disabled'>Страна</option>
+                {this.state.countries.map(gorod => (
+                  <option key={gorod.id} value={gorod.id}>{gorod.name}</option>
+                ))}</Field>  
               <Field
                 name='city'
                 as='select'
                 validate={required}
-                className={(errors.city && touched.city
-                ? 'is-invalid'
-                : '')}>
+               >
                 <option value="" disabled selected className='disabled'>Город</option>
                 {gorods.map(gorod => (
                   <option key={gorod.id} value={gorod.id}>{gorod.name}</option>
@@ -156,13 +181,35 @@ handleLogin(values) {
                 ? 'is-invalid'
                 : '')}
                 validate={required}/>
+              <Field
+                name='type'
+                as='select'
+                validate={required}
+               >
+                 <option value="" disabled selected className='disabled'>Тип</option>
+                {type.map(type => (
+                  <option key={type.id} value={type.id}>{type.name}</option>
+                ))}</Field>
+                <p className='error'>{errors.type}</p>
+              <Field
+                name='user_type'
+                as='select'
+                validate={required}
+                className={(errors.user_type && touched.user_type
+                ? 'is-invalid'
+                : '')}>
+                 <option value="" disabled selected className='disabled'>Тип2</option>
+                {user_type.map(utype => (
+                  <option key={utype.id} value={utype.id}>{utype.name}</option>
+                ))}
+              </Field>
               {this.state.loadingReg===false ? <button className="btn" type="submit">Регистрировать</button>: <button className="btn"  disabled>Регистрируется...</button>}
               
             </Form>
           )}
 
         </Formik>
-
+        {this.state.loadingLog ||this.state.loadingReg ? <LoadingSpinner /> : null}
         <h2>Вход</h2>
         <Formik
           initialValues={{

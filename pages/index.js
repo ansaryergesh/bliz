@@ -18,13 +18,13 @@ export default function Home() {
         </p>
         <div className="under_header__btns">
           <a className="btn" href="#">НАЙТИ ГРУЗЫ И ТРАНСПОРТ</a>
-          <a className="btn btn--white" href="#">РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ</a>
+          <a className="btn btn--white" href="/post_add">РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ</a>
         </div>
       </div>
       <div className="services container">
         <div className="service__item">
           <div className="service__item__img">
-            <img src="/img/widgets/service1.png" alt="service"/>
+            <img src="/img/widgets/service1.png" />
           </div>
           <a href="goods-nav-2.html">Грузы и транспорт</a>
           <p>Поиск исполнителей и клиентов
@@ -33,7 +33,7 @@ export default function Home() {
         </div>
         <div className="service__item">
           <div className="service__item__img">
-            <img src="/img/widgets/service2.png" alt="service"/>
+            <img src="/img/widgets/service2.png" />
           </div>
           <a href="storage.html">Складские помещения</a>
           <p>Подбор складов ответственного
@@ -42,7 +42,7 @@ export default function Home() {
         </div>
         <div className="service__item">
           <div className="service__item__img">
-            <img src="/img/widgets/service3.png" alt="service"/>
+            <img src="/img/widgets/service3.png" />
           </div>
           <a href="equipment-nav-1.html">Спецтехника</a>
           <p>Техника для спецработ
@@ -51,7 +51,7 @@ export default function Home() {
         </div>
         <div className="service__item">
           <div className="service__item__img">
-            <img src="/img/widgets/service4.png" alt="service"/>
+            <img src="/img/widgets/service4.png" />
           </div>
           <a href="goods-nav-1.html">Грузы и транспорт</a>
           <p>Повышение квалификации
@@ -101,7 +101,7 @@ export default function Home() {
               <p>разгрузки</p>
             </div>
             <div className="offer1__btns">
-              <a className="btn" href="#">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+              <a className="btn" href="/register">ЗАРЕГИСТРИРОВАТЬСЯ</a>
               <a className="opacity_btn" href="#">Узнать подробнее</a>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function Home() {
           <p>Для этого необходимо зарегистрироваться на сервис, подписать договор. После
             все оплаты за перевозку будут проходить через сервис BLIZ.</p>
           <div className="offer1__btns">
-            <a className="btn" href="#">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+            <a className="btn" href="/register">ЗАРЕГИСТРИРОВАТЬСЯ</a>
             <a className="opacity_btn" href="#">Узнать подробнее</a>
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function Home() {
               <p>а также оснащенностей склада.</p>
             </div>
             <div className="offer1__btns">
-              <a className="btn" href="#">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+              <a className="btn" href="/register">ЗАРЕГИСТРИРОВАТЬСЯ</a>
               <a className="opacity_btn" href="#">Узнать подробнее</a>
             </div>
           </div>
