@@ -1,9 +1,9 @@
 import React from 'react'
-import {Flash} from '../components/shared/FlashMessage'
+import {Flash} from '../components/shared/others/FlashMessage'
 import {Formik, Form, Field} from 'formik';
 import InputMask from "react-input-mask";
 import axios from 'axios';
-import LoadingSpinner from '../components/shared/LoadingSpinner'
+import LoadingSpinner from '../components/shared/others/LoadingSpinner'
 import cookie from 'js-cookie'
 
 class AddPost extends React.Component {

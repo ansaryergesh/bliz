@@ -2,9 +2,9 @@ import React from 'react'
 import {Formik, Form, Field} from 'formik';
 import InputMask from "react-input-mask";
 import {gorods, type, user_type} from '../defaults/defaults'
-import {Flash} from '../components/shared/FlashMessage'
+import {Flash} from '../components/shared/others/FlashMessage'
 import axios from 'axios';
-import LoadingSpinner from '../components/shared/LoadingSpinner'
+import LoadingSpinner from '../components/shared/others/LoadingSpinner'
 import https from 'http'
 import cookie from 'js-cookie'
 import {required, phoneValidation, validEmail, passwordCheck, birthDayVal} from '../defaults/validation'

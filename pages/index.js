@@ -106,13 +106,13 @@ export default function Home() {
             </div>
           </div>
           <div className="offer1__img">
-            <img src="/img/widgets/offer1.png" alt/>
+            <img src="/img/widgets/offer1.png"/>
           </div>
         </div>
       </div>
       <div className="offer2">
         <div className="offer2__img">
-          <img src="/img/widgets/offer2.png" alt/>
+          <img src="/img/widgets/offer2.png"/>
         </div>
         <div className="offer2__text">
           <h2>Частным
@@ -149,7 +149,7 @@ export default function Home() {
             </div>
           </div>
           <div className="offer1__img">
-            <img src="/img/widgets/offer3.png" alt/>
+            <img src="/img/widgets/offer3.png"/>
           </div>
         </div>
       </div>
