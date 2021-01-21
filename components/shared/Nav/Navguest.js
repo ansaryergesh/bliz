@@ -1,7 +1,9 @@
 import React from 'react'
+import Flash from '../others/FlashMessage'
 export default function Navguest() {
   return (
     <>
+    <Flash />
      <div className="header__top">
   <div className="header__top__wrapper container">
     <div className="header__top__items">

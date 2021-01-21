@@ -12,6 +12,10 @@ const messageReducer = (state={
             return {
                 ...state,visibility: true, type: 'error', message: action.payload,
             };
+        case 'INFO_MESSAGE':
+            return {
+                ...state,visibility:true, type: 'info', message: action.payload,
+            }
         case 'CLOSE_MESSAGE':
             return {
                 ...state, visibility: false, type: null, message: null

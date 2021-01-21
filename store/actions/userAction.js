@@ -1,7 +1,9 @@
 import cookie from 'js-cookie';
+import Router from 'next/router';
 
 export const userAuthentication = (url,values) =>dispatch => {
   dispatch({type: 'AUTHENTICATING_USER'});
+  dispatch({type: 'CLOSE_MESSAGE'});
   fetch(url, {
     method: 'POST',
     body: JSON.stringify(values),
@@ -26,8 +28,12 @@ export const userAuthentication = (url,values) =>dispatch => {
     }
     if(jsonresponse.success) {
       cookie.set('token', jsonresponse.token)
-      dispatch({type: 'SUCCESS_MESSAGE', payload: 'Успешно'})
+      dispatch({type: 'SUCCESS_MESSAGE', payload: user.message})
       dispatch({type: 'SET_CURRENT_USER', payload: user})
+      setTimeout(() => {
+        dispatch({type: 'CLOSE_MESSAGE'})
+      },3500)
+      Router.push('/')
     }
     else {
       dispatch({type: 'FAILED_LOGIN', payload: jsonresponse.message})
@@ -40,17 +46,13 @@ export const userAuthentication = (url,values) =>dispatch => {
 
 
 export const fetchCurrentUser = () => dispatch => {
-  dispatch({type: 'AUTHENTICATION_USER'})
-  fetch('', {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${cookie.get('token')}`,
-    },
+  dispatch({type: 'AUTHENTICATING_USER'})
+  fetch(`https://test.money-men.kz/api/getProfile?token=${cookie.get('token')}`, {
+    method: 'GET'
   })
   .then(response => response.json())
   .then(jsonresponse => {
-    const user = {working: true};
-    dispatch({type: 'SET_CURRENT_USER', payload: user})
+    dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse})
   })
 }
 

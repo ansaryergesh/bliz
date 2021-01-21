@@ -3,9 +3,9 @@ import {Formik, Form, Field} from 'formik';
 import InputMask from "react-input-mask";
 import {gorods, type, user_type} from '../defaults/defaults'
 import Flash from '../components/shared/others/FlashMessage'
+import Router from 'next/router';
 import axios from 'axios';
 import LoadingSpinner from '../components/shared/others/LoadingSpinner'
-import https from 'http'
 import {userAuthentication} from '../store/actions/userAction'
 import cookie from 'js-cookie'
 import { connect } from 'react-redux';
@@ -19,7 +19,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) =>({
-  userAuthentication: (url,values) => {dispatch(userAuthentication(url,values))}
+  userAuthentication: (url,values) => {dispatch(userAuthentication(url,values))},
+  infoMessage: (msg) => {dispatch(infoMessage(msg))}
 })
 const PhoneMask = ({field, form, ...props}) => <InputMask
   mask="+7(999)-999-9999"
@@ -36,7 +37,6 @@ class Register extends React.Component {
     this.state = {
       loadingReg: this.props.usersReducer.authenticatingUser,
       loadingLog: this.props.usersReducer.authenticatingUser,
-      // message: {visibility: this.props.usersReducer.user.show || this.props.usersReducer.error.show ||false,message:null, type:null},
       countries: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,10 +44,19 @@ class Register extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://test.money-men.kz/api/country')
+    setTimeout(() => {
+      if(cookie.get('token') && this.props.usersReducer.loggedIn) {
+        Router.push('/')
+      }
+    },3000)
+   
+   
+      axios.get('https://test.money-men.kz/api/country')
       .then(response=> {
         this.setState({countries:response.data})
       })
+
+    
   }
   
   handleSubmit(values) {
@@ -58,9 +67,10 @@ handleLogin(values) {
   this.props.userAuthentication('https://test.money-men.kz/api/login', values)
 }
   render() {
+    
     return (
       <div className="register">
-        <Flash />
+        {/* <Flash /> */}
         <h2>Регистрация</h2>
         <Formik
           initialValues={{
@@ -188,7 +198,7 @@ handleLogin(values) {
           )}
 
         </Formik>
-        {this.state.loadingLog ||this.state.loadingReg ? <LoadingSpinner /> : null}
+        {this.props.usersReducer.authenticatingUser ? <LoadingSpinner /> : null}
         <h2>Вход</h2>
         <Formik
           initialValues={{

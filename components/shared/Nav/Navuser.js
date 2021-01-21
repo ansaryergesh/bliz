@@ -1,7 +1,16 @@
 import React from 'react'
-export default function Navuser() {
+import Flash from '../others/FlashMessage'
+import {connect} from 'react-redux'
+const mapStateToProps = ({
+  usersReducer: {user: {name, secondName}}
+}) => ({
+  name,
+  secondName
+})
+export default (connect(mapStateToProps,null)(function Navuser({name,secondName}) {
   return (
     <>
+    <Flash />
     <div className="header__top">
   <div className="header__top__wrapper container">
     <div className="header__top__items">
@@ -56,7 +65,7 @@ export default function Navuser() {
       </div>
       <div className="header__top__item">
         <img src="/img/widgets/personal_cabinet_logo.png"  />
-        <a href="cabinet-conf-nav1.html">Баталгазиев Р.В.</a>
+        <a href="cabinet-conf-nav1.html">{name + " " + secondName.charAt(0) + "."}</a>
         <i className="fas fa-angle-down" />
       </div>
     </div>      
@@ -83,4 +92,4 @@ export default function Navuser() {
     </>
 
   )
-}
+})) 
