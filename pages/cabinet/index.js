@@ -2,11 +2,14 @@ import React from 'react'
 import CabinetNav from '../../components/shared/Nav/CabinetNav'
 import axios,{post} from 'axios'
 import cookie from 'js-cookie'
+import {Flash} from '../../components/shared/others/FlashMessage'
 class Cabinet extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state ={
 			file:null,
+			message: {visibility: false,message:null, type:null},
+			loading: false,
 		}
 		this.onFormSubmit = this.onFormSubmit.bind(this)
 		this.onChange = this.onChange.bind(this)
@@ -32,14 +35,17 @@ class Cabinet extends React.Component {
 
 	onFormSubmit(e){
 		e.preventDefault() // Stop form submit
+		this.setState({loading:true})
     this.fileUpload(this.state.file).then((response)=>{
-			console.log(response.data);
+			this.setState({loading: false, 
+				message: {visibility: true, message: 'Аватарка успешно обновлен!', type: 'success'}})
     })
 	}
 	
 	render() {
 		return(
 			<>
+				<Flash visibility={this.state.message.visibility} message={this.state.message.message} type={this.state.message.type} />
 				<CabinetNav />
 				<div className="grid-container container">
 					<div className="section">
@@ -58,12 +64,12 @@ class Cabinet extends React.Component {
 									<img src="/img/widgets/user_img.png" alt />
 								</div>
 								<form onSubmit={this.onFormSubmit}>
-									<div class="fileUpload">
-										<input type="file" class="upload" onChange={this.onChange} accept="image/*"/>
+									<div className="fileUpload">
+										<input type="file" className="upload" onChange={this.onChange} accept="image/*"/>
 										<span>Изменить</span>
 										
 									</div>
-									<input type="submit" class="upload" value='Отправка'/>
+									<input type="submit" className="upload" value='Отправка'/>
 								</form>
 							
 								

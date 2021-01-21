@@ -2,14 +2,25 @@ import React from 'react'
 import {Formik, Form, Field} from 'formik';
 import InputMask from "react-input-mask";
 import {gorods, type, user_type} from '../defaults/defaults'
-import {Flash} from '../components/shared/others/FlashMessage'
+import Flash from '../components/shared/others/FlashMessage'
 import axios from 'axios';
 import LoadingSpinner from '../components/shared/others/LoadingSpinner'
 import https from 'http'
+import {userAuthentication} from '../store/actions/userAction'
 import cookie from 'js-cookie'
+import { connect } from 'react-redux';
 import {required, phoneValidation, validEmail, passwordCheck, birthDayVal} from '../defaults/validation'
 
-const agent = new https.Agent({rejectUnauthorized: false});
+
+const mapStateToProps = state => {
+  return {
+    usersReducer: state.usersReducer
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>({
+  userAuthentication: (url,values) => {dispatch(userAuthentication(url,values))}
+})
 const PhoneMask = ({field, form, ...props}) => <InputMask
   mask="+7(999)-999-9999"
   maskChar=" "
@@ -23,9 +34,9 @@ class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      loadingReg: false,
-      loadingLog: false,
-      message: {visibility: false,message:null, type:null},
+      loadingReg: this.props.usersReducer.authenticatingUser,
+      loadingLog: this.props.usersReducer.authenticatingUser,
+      // message: {visibility: this.props.usersReducer.user.show || this.props.usersReducer.error.show ||false,message:null, type:null},
       countries: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,49 +51,16 @@ class Register extends React.Component {
   }
   
   handleSubmit(values) {
-    this.setState({loadingReg: true})
-    console.log(values)
-    axios.post(`https://test.money-men.kz/api/registration`, values)
-      .then((response) => {
-       console.log(response)
-       if(!response.data.success) {
-        this.setState({loadingReg:false, message: {visibility: true, message: response.data.message, type: 'error'}})
-       }
-       else {
-        this.setState({loadingReg: false, message: {visibility: true, message: 'Вы успешно зарегистрировались!', type: 'success'}})
-        cookie.set('token',response.data.token)
-       }
-      
-    }).catch((error) => {
-      console.log(error)
-      this.setState({loadingReg: false, message: 'Ошибка'})
-    });
+    this.props.userAuthentication('https://test.money-men.kz/api/registration', values)
   }
 
 handleLogin(values) {
-  this.setState({loadingLog: true})
-  console.log(values)
-  axios.post('https://test.money-men.kz/api/login', values)
-    .then((response) => {
-      console.log(response)
-      if(!response.data.success) {
-      this.setState({loadingLog:false, message: {visibility: true, message: response.data.message, type: 'error'}})
-      }
-      else {
-      this.setState({loadingLog: false, message: {visibility: true, message: 'Добро пожаловать!', type: 'success'}})
-      cookie.set('token',response.data.token)
-      }
-    
-  }).catch((error) => {
-    console.log(error)
-    this.setState({loadingLog: false, message: 'Ошибка'})
-  });
+  this.props.userAuthentication('https://test.money-men.kz/api/login', values)
 }
   render() {
     return (
       <div className="register">
-        
-        <Flash visibility={this.state.message.visibility} message={this.state.message.message} type={this.state.message.type} />
+        <Flash />
         <h2>Регистрация</h2>
         <Formik
           initialValues={{
@@ -149,6 +127,7 @@ handleLogin(values) {
               <Field
                 name='birthDay'
                 placeholder='Дата рождения'
+                type='date'
                 validate={required}
                 // component={birthDate}
                 className={(errors.birthDay && touched.birthDay
@@ -232,4 +211,5 @@ handleLogin(values) {
   }
 }
 
-export default Register
+// export default Register
+export default (connect(mapStateToProps,mapDispatchToProps)(Register));

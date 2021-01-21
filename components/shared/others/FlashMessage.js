@@ -1,12 +1,24 @@
 import React, {useState} from 'react';
+// import {closeMessage} from '../../../store/actions/messageAction'
+import {connect} from 'react-redux'
+import { useDispatch } from 'react-redux';
+const mapStateToProps =({
+  messageReducer: {visibility,type,message}
+}) => ({
+  visibility,
+  type,
+  message
+})
 
-
-export const Flash = (props) => {
+const Flash = ({visibility,type,message}) => {
+  const dispatch = useDispatch();
   // let [visibility, setVisibility] = useState(false);
   return (
-    props.visibility && <div className={`alert alert-${props.type}`}>
-      <span className="close"><strong>X</strong></span>
-      <p>{props.message}</p>
+    visibility && <div className={`alert alert-${type}`}>
+      <span className="close" onClick={() => dispatch({type: 'CLOSE_MESSAGE'})}><strong>X</strong></span>
+      <p>{message}</p>
     </div>
   )
 }
+
+export default (connect(mapStateToProps,null)(Flash));
