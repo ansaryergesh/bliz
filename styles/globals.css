@@ -553,6 +553,7 @@ template {
   color: #20273D;
 }
 
+
 .nav__wrapper {
   display: flex;
   align-items: center;
@@ -3119,7 +3120,7 @@ nav.cabinet_ad_nav {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8) url("/img/loader.gif") 50% 50% no-repeat;
+  background: rgb(39, 45, 66) url("/img/loader.gif") 50% 50% no-repeat;
 }
 
 /* Input type file */
@@ -3169,4 +3170,201 @@ input[type="file"] {
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
+}
+
+
+/* Photo onchange modal */
+.driver_modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background-color: rgba(32, 39, 61, 0.6);
+}
+
+.driver_modal.active {
+  display: flex;
+}
+
+.driver_modal__inner {
+  padding: 30px 20px;
+  background-color: white;
+  position: relative;
+}
+
+.driver_modal__inner h2 {
+  font-weight: 500;
+  font-size: 21px;
+  color: #20273D;
+}
+
+.driver_modal__inner .driver_times {
+  color: #20273D;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.driver_modal__inner textarea {
+  padding: 10px;
+  font-size: 16px;
+  color: #3E455B;
+  font-weight: 300;
+  resize: vertical;
+  margin: 20px 0;
+  outline: none;
+  background-color: #FAFAFA;
+  border: 2px solid #DADEE6;
+  border-radius: 5px;
+}
+
+.drivers__list {
+  padding: 0 20px;
+  margin: 20px 0;
+}
+
+.driver__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #DFE2E6;
+  padding: 10px 0;
+}
+
+.driver__item__content {
+  display: flex;
+  align-items: center;
+}
+
+.driver__item__img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.driver__item__img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.driver__item__title {
+  margin-left: 10px;
+}
+
+.driver__item__title h4 {
+  font-size: 17px;
+  font-weight: 500;
+  color: #20273D;
+}
+
+.driver__item__title h4.active {
+  color: #008EFF;
+}
+
+.driver__item__title span {
+  font-size: 13px;
+  font-weight: 300;
+  color: #A2A9B2;
+}
+
+.driver__item__checked {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #DFE2E6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.driver__item__checked.active i {
+  display: block;
+}
+
+.driver__item__checked i {
+  display: none;
+  color: #008EFF;
+  font-size: 20px;
+}
+
+.driver_modal__btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 50px;
+}
+
+.driver_modal__btns a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 7px 0;
+}
+
+.driver_modal__input {
+  position: relative;
+  margin: 15px 0;
+}
+
+.driver_modal__input input {
+  padding: 10px;
+  outline: none;
+  border-radius: 5px;
+  width: 95%;
+  border: none;
+  background-color: rgba(142, 142, 147, 0.2);
+}
+
+.driver_modal__input i {
+  color: #008EFF;
+  position: absolute;
+  right: 15px;
+  top: 13px;
+  cursor: pointer;
+}
+
+.driver_modal__wrapper2 {
+  display: none;
+}
+
+.driver_modal__wrapper2 p {
+  font-size: 14px;
+  font-weight: 300;
+  color: #A2A9B2;
+  line-height: 1.3em;
+}
+
+.driver_modal__invite {
+  margin-top: 20px;
+  padding: 20px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+  background-color: #E7F6FF;
+  text-align: center;
+}
+
+.driver_modal__invite p {
+  color: #3E455B;
+  margin: 10px 0;
+  margin-bottom: 30px;
+}
+
+.driver_modal__invite h3 {
+  font-size: 21px;
+  font-weight: 600;
+  color: #008EFF;
+  margin-top: 7px;
+}
+.edit_photo__img img {
+  height: 50vh;
 }

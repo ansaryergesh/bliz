@@ -1,19 +1,32 @@
 import React from 'react'
 import CabinetNav from '../../components/shared/Nav/CabinetNav'
-import axios,{post} from 'axios'
+import axios from 'axios'
 import cookie from 'js-cookie'
-import {Flash} from '../../components/shared/others/FlashMessage'
+import {connect} from 'react-redux'
+import swal from "sweetalert";
+import Avatar from '../../components/shared/Avatar'
+import * as msgaction from '../../store/actions/messageAction'
+const mapStateToProps = state => {
+  return {
+    usersReducer: state.usersReducer
+  }
+}
+
+const mapDispatchToProps =dispatch =>({
+  successMessage:(msg)=>dispatch(msgaction.successMessage(msg)),
+  errorMessage:(msg)=>dispatch(msgaction.errorMessage(msg))
+})
 class Cabinet extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state ={
 			file:null,
-			message: {visibility: false,message:null, type:null},
 			loading: false,
 		}
 		this.onFormSubmit = this.onFormSubmit.bind(this)
 		this.onChange = this.onChange.bind(this)
-		this.fileUpload = this.fileUpload.bind(this)
+    this.fileUpload = this.fileUpload.bind(this)
+    this.handleClose = this.handleClose.bind(this)
 	}
 	onChange(e) {
 		e.preventDefault()
@@ -33,50 +46,74 @@ class Cabinet extends React.Component {
 		return  axios.post(url,formData,config)
 	}
 
+  handleClose() {
+    this.setState({file:null})
+  }
 	onFormSubmit(e){
-		e.preventDefault() // Stop form submit
+    e.preventDefault() // Stop form submit
 		this.setState({loading:true})
-    this.fileUpload(this.state.file).then((response)=>{
-			this.setState({loading: false, 
-				message: {visibility: true, message: 'Аватарка успешно обновлен!', type: 'success'}})
+    this.fileUpload(this.state.file)
+    .then((response)=>{
+      this.setState({loading: false})
+      if(response.status) {
+        this.props.successMessage('Аватарка обновлена успешно!')
+        this.setState({file:null})
+      }else {
+        this.props.errorMessage(response.message)
+      }
     })
 	}
-	
+  
+  onDelete() {
+    swal({
+      title: 'Вы уверены, что хотите удалить аватарку',
+      buttons:{
+        catch:{
+          text: 'Да',
+          value: 'yes'
+        },
+        cancel: 'Нет'
+      }
+    }).then(value=>{
+      switch (value){
+        case 'yes':
+          axios.get(`https://test.money-men.kz/api/deleteAvatar?token=${cookie.get('token')}`)
+          .then(response => {
+            console.log(response)
+            if(response.data.success) {
+              swal({
+                icon: "success",
+                title: 'Успешно обновлена аватарка'
+              });
+            }else {
+            }
+          })
+      }
+    })
+  }
+  
 	render() {
 		return(
 			<>
-				<Flash visibility={this.state.message.visibility} message={this.state.message.message} type={this.state.message.type} />
 				<CabinetNav />
 				<div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">
+              {/* <p>{this.props.usersReducer.user.image}</p> */}
 							{/* <p>{this.state.file? 'true': 'false'}</p> */}
 							<h4>Личный кабинет / Настройки / Личная информация</h4>
 							<h1 className="smaller_font">Личная информация</h1>
 						</div>
-						<div className="user__profile">
-							<div className="user__profile__title">
-								<h3>Фото контактного лица</h3>
-								<p>Настоящее фото вызывает больше доверия к вашей компании</p>
-							</div>
-							<div className="user__profile__picture">
-								<div className="user__profile__img">
-									<img src="/img/widgets/user_img.png" alt />
-								</div>
-								<form onSubmit={this.onFormSubmit}>
-									<div className="fileUpload">
-										<input type="file" className="upload" onChange={this.onChange} accept="image/*"/>
-										<span>Изменить</span>
-										
-									</div>
-									<input type="submit" className="upload" value='Отправка'/>
-								</form>
-							
-								
-								<a className="btn btn--white" href="#"><i className="far fa-trash-alt" /></a>
-							</div>
-							{this.state.file ? <img src={URL.createObjectURL(this.state.file)} /> : null}
-						</div>
+            <Avatar
+              img={this.state.file}
+              onChange={this.onChange}
+              onSubmit={this.onFormSubmit}
+              onClose={this.handleClose}
+              loading={this.state.loading}
+              onDelete={this.onDelete}
+              // profileImg={this.props.usersReducer.user.image}
+            />
+					
 						{/* <div className="user__personal_data">
 							<div className="user__profile__title">
 								<h3>Персональные данные</h3>
@@ -184,4 +221,4 @@ class Cabinet extends React.Component {
 	
 }
 
-export default Cabinet;
+export default (connect(mapStateToProps,mapDispatchToProps)(Cabinet))

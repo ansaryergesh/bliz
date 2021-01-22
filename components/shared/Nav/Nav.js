@@ -5,6 +5,7 @@ import Navuser from './Navuser'
 import {fetchCurrentUser} from '../../../store/actions/userAction'
 import {connect} from 'react-redux'
 import LoadingNav from './LoadingNav'
+import LoadingSpinner from '../others/LoadingSpinner'
 const mapDispatchToProps = dispatch => ({
   fetchCurrentUser: () => {dispatch(fetchCurrentUser())}
 })
@@ -15,21 +16,26 @@ const mapStateToProps = state => ({
 })
 class Nav extends React.Component {
     componentDidMount() {
+      console.log(cookie.get('token'))
       if (cookie.get('token') && !this.props.loggedIn) this.props.fetchCurrentUser();
     }
     render() {
+      
         if(this.props.authenticatingUser) {
-          <div></div>
+          return(<LoadingSpinner/>)
         }
         if(cookie.get('token') && this.props.loggedIn) {
             return(<Navuser/>)
         }if(cookie.get('token') && (this.props.authenticatingUser || !this.props.loggedIn)) {
           <LoadingNav />
         }
-        if(!cookie.get('token')) {
+        if(cookie.get('token') == undefined) {
           <Navguest />
+        }else {
+          // return(<Navguest/>)
         }
-        return(<LoadingNav/>)
+        return(<Navguest/>)
+
     }
 }
 

@@ -32,7 +32,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchCurrentUser: () => dispatch(actions.fetchCurrentUser()),
+  fetchCurrentUser: () => dispatch(fetchCurrentUser()),
 });
 
 export default wrapper.withRedux(MyApp);

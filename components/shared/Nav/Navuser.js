@@ -65,7 +65,8 @@ export default (connect(mapStateToProps,null)(function Navuser({name,secondName}
       </div>
       <div className="header__top__item">
         <img src="/img/widgets/personal_cabinet_logo.png"  />
-        <a href="cabinet-conf-nav1.html">{name + " " + secondName.charAt(0) + "."}</a>
+        {/* + secondName.charAt(0) + "." */}
+        <a href="/cabinet">{name + " " }</a>
         <i className="fas fa-angle-down" />
       </div>
     </div>      
@@ -75,7 +76,7 @@ export default (connect(mapStateToProps,null)(function Navuser({name,secondName}
   <div className="nav__wrapper container">
     <div className="nav__items">
       <div className="nav__logo">
-        <a href="index.html">BLIZ.KZ</a>
+        <a href="/">BLIZ.KZ</a>
       </div>
       <div className="nav__links">
         <a className="cabinet_config_opener active" href="#">Настройки</a>
