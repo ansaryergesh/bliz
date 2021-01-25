@@ -1,5 +1,4 @@
 import React from 'react'
-import {Flash} from '../components/shared/others/FlashMessage'
 import {Formik, Form, Field} from 'formik';
 import InputMask from "react-input-mask";
 import axios from 'axios';
@@ -41,7 +40,6 @@ class AddPost extends React.Component {
         return (
             <div className='register'>
                {this.state.loading ||this.state.loading ? <LoadingSpinner /> : null}
-              <Flash visibility={this.state.message.visibility} message={this.state.message.message} type={this.state.message.type} />
               <h2>РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ</h2>
               <Formik
                 initialValues={{

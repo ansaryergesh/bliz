@@ -1,13 +1,33 @@
 import React from 'react'
 import Flash from '../others/FlashMessage'
 import {connect} from 'react-redux'
+import * as msgaction from '../../../store/actions/messageAction'
+import axios from 'axios'
+import cookie from 'js-cookie'
 const mapStateToProps = ({
-  usersReducer: {user: {name, secondName}}
+  usersReducer: {user: {name, secondName,email}}
 }) => ({
   name,
-  secondName
+  secondName,
+  email
 })
-export default (connect(mapStateToProps,null)(function Navuser({name,secondName}) {
+
+const mapDispatchToProps = ({
+  successMessage:(msg)=>dispatch(msgaction.successMessage(msg)),
+  errorMessage:(msg)=>dispatch(msgaction.errorMessage(msg))
+})
+
+const handleLogout =() => {
+  cookie.remove('token')
+  axios.post('https://test.money-men.kz/api/logout')
+  .then(response => {
+    if(response.success) {
+      this.props.successMessage('Вы успешно вышли из аккаунта')
+      cookie.remove('token')
+    }
+  })
+}
+export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({name,secondName}) {
   return (
     <>
     <Flash />
@@ -66,8 +86,16 @@ export default (connect(mapStateToProps,null)(function Navuser({name,secondName}
       <div className="header__top__item">
         <img src="/img/widgets/personal_cabinet_logo.png"  />
         {/* + secondName.charAt(0) + "." */}
-        <a href="/cabinet">{name + " " }</a>
+        <a>{name + " " }</a>
         <i className="fas fa-angle-down" />
+        <div className="dropdown__items">
+          <div className="header__top__item">
+          <a href="/cabinet"><p>Личный кабинет</p></a>
+          </div> 
+          <div className="header__top__item" onClick={handleLogout()}>
+            <p>Выйти</p>
+          </div>       
+        </div>
       </div>
     </div>      
   </div>

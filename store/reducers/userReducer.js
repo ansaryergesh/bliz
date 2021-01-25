@@ -1,5 +1,5 @@
 const defaultState = {
-    user: null,
+    user: {image:null, birthDay:null,name:null, email:null, phone:null, secondName: null, type: null, userType: null},
     loggedIn: false,
     authenticatingUser: false,
     failedLogin: false,
@@ -12,7 +12,7 @@ const defaultState = {
       case 'SET_CURRENT_USER':
         // action.payload {username: 'Chandler Bing', bio: 'my user bio', avatar: 'some image url'}
         return {
-          ...state, user: action.payload, error: null, loggedIn: true, authenticatingUser: false,
+          ...state, user: action.payload, error: null, loggedIn: true, authenticatingUser: 'done',
         };
       case 'AUTHENTICATING_USER': // tells the app we're fetching
         return { ...state, authenticatingUser: true };

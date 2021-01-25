@@ -1,13 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router'
-import * as actions from '../store/actions'
+import redirect from 'nextjs-redirect'
+import * as actions from '../store/actions/userAction'
 import cookie from 'js-cookie'
 import LoadingSpinner from '../components/shared/others/LoadingSpinner'
+const Redirect = redirect('/register')
 const withAuth = WrappedComponent => {
   class AuthorizedComponent extends React.Component {
     componentDidMount() {
       if (cookie.get('token') && !this.props.loggedIn) this.props.fetchCurrentUser();
+      
     }
 
     render() {
@@ -16,7 +18,7 @@ const withAuth = WrappedComponent => {
       } if (cookie.get('token') && (this.props.authenticatingUser || !this.props.loggedIn)) {
         return <LoadingSpinner />;
       }
-      return <Redirect to="/register" />;
+      return <Redirect />;
     }
   }
 
