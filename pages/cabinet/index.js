@@ -7,7 +7,10 @@ import swal from "sweetalert";
 import Avatar from '../../components/userCabinet/Avatar'
 import UserPersonalData from '../../components/userCabinet/UserPersonalData'
 import * as msgaction from '../../store/actions/messageAction'
+import {fetchCurrentUser} from '../../store/actions/userAction'
+import CompanySide from '../../components/company/CompanySideInfo'
 import withAuth from '../../hocs/withAuth'
+import { countries, gorods } from '../../defaults/defaults'
 const mapStateToProps = state => {
   return {
     usersReducer: state.usersReducer
@@ -16,9 +19,13 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps =dispatch =>({
   successMessage:(msg)=>dispatch(msgaction.successMessage(msg)),
-  errorMessage:(msg)=>dispatch(msgaction.errorMessage(msg))
+  errorMessage:(msg)=>dispatch(msgaction.errorMessage(msg)),
+  fetchCurrentUser:()=>dispatch(fetchCurrentUser())
 })
 class Cabinet extends React.Component {
+  componentDidMount() {
+    console.log(this.props.usersReducer.user.image)
+  }
 	constructor(props) {
 		super(props);
 		this.state ={
@@ -38,6 +45,11 @@ class Cabinet extends React.Component {
   }
   onEdit() {
     this.setState({edit: !this.state.edit})
+  }
+
+  onUpdate(values) {
+    axios.get('https://test.money-men.kz/api/updateProfile', {params: {values}})
+    // console.log(values)
   }
 	
 	fileUpload(file){
@@ -64,6 +76,7 @@ class Cabinet extends React.Component {
       this.setState({loading: false})
       if(response.status) {
         this.props.successMessage('Аватарка обновлена успешно!')
+        this.props.fetchCurrentUser()
         this.setState({file:null})
       }else {
         this.props.errorMessage(response.message)
@@ -102,7 +115,7 @@ class Cabinet extends React.Component {
 	render() {
 		return(
 			<>
-				<CabinetNav />
+				<CabinetNav bin={this.props.usersReducer.user.bin} activeLink='index'/>
 				<div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">
@@ -116,10 +129,15 @@ class Cabinet extends React.Component {
               onClose={this.handleClose}
               loading={this.state.loading}
               onDelete={this.onDelete}
-              profileImg={this.props.usersReducer.user.image}
+              profileImg={this.props.usersReducer.user.image === undefined ? null :this.props.usersReducer.user.image }
             />
-            <UserPersonalData user={this.props.usersReducer.user} edit={this.state.edit} onEdit={this.onEdit}/>
+            <UserPersonalData user={this.props.usersReducer.user} edit={this.state.edit} countries={countries} cities={gorods} 
+              onEdit={this.onEdit}
+              onSave={this.onUpdate}
+            />
 					</div>
+          
+        <CompanySide />
 				</div>
 			</>
 	)

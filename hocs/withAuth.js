@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import redirect from 'nextjs-redirect'
 import * as actions from '../store/actions/userAction'
+import * as msgaction from '../store/actions/messageAction'
 import cookie from 'js-cookie'
 import LoadingSpinner from '../components/shared/others/LoadingSpinner'
 const Redirect = redirect('/register')
@@ -9,7 +10,7 @@ const withAuth = WrappedComponent => {
   class AuthorizedComponent extends React.Component {
     componentDidMount() {
       if (cookie.get('token') && !this.props.loggedIn) this.props.fetchCurrentUser();
-      
+
     }
 
     render() {
@@ -29,6 +30,7 @@ const withAuth = WrappedComponent => {
 
   const mapDispatchToProps = dispatch => ({
     fetchCurrentUser: () => dispatch(actions.fetchCurrentUser()),
+    errorMessage: () => dispatch(msgaction.errorMessage())
   });
 
   return connect(

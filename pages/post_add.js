@@ -4,6 +4,7 @@ import InputMask from "react-input-mask";
 import axios from 'axios';
 import LoadingSpinner from '../components/shared/others/LoadingSpinner'
 import cookie from 'js-cookie'
+import withAuth from '../hocs/withAuth'
 
 class AddPost extends React.Component {
 
@@ -39,6 +40,7 @@ class AddPost extends React.Component {
     render() {
         return (
             <div className='register'>
+               <div className="register__container">
                {this.state.loading ||this.state.loading ? <LoadingSpinner /> : null}
               <h2>РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ</h2>
               <Formik
@@ -69,8 +71,9 @@ class AddPost extends React.Component {
                 </Formik>
                
             </div>
+            </div>
         )
     }
 }
 
-export default AddPost
+export default withAuth(AddPost)

@@ -117,3 +117,14 @@ export const birthDayVal = (val) => {
 	}
 	return error;
 }
+
+
+export const validateConfirmPassword = (pass, value) => {
+  let error = "";
+  if (pass && value) {
+    if (pass !== value) {
+      error = "Password not matched";
+    }
+  }
+  return error;
+};

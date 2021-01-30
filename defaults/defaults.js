@@ -1,3 +1,8 @@
+export const countries = [
+  {"id": 1,
+    "name": 'Казахстан'
+  }
+]
 export const gorods = [
   {
     "id": 3,
@@ -6,7 +11,7 @@ export const gorods = [
     "id": 4,
     "name": "Актобе"
   }, {
-    "id": 5,
+    "id": 1,
     "name": "Алматы"
   }, {
     "id": 6,
@@ -70,3 +75,16 @@ export const user_type = [
   }
 ]
 
+
+export const company_type = [
+  {
+    'id': 1,
+    'name': 'TOO'
+  }, {
+    'id': 2,
+    'name': 'ИП'
+  }, {
+    'id': 3,
+    'name': 'АО'
+  }
+]

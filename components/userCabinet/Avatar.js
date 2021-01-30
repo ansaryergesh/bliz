@@ -1,5 +1,4 @@
 import React from 'react'
-import {isImage} from '../../defaults/validation'
 const Avatar = ({img, onChange, onSubmit, onClose, loading, onDelete, profileImg, isAutheticating}) => {
   return (
     <>
@@ -7,13 +6,16 @@ const Avatar = ({img, onChange, onSubmit, onClose, loading, onDelete, profileImg
       <div className="user__profile__title">
         <h3>Фото контактного лица</h3>
         <p>Настоящее фото вызывает больше доверия к вашей компании</p>
+
       </div>
       <div className="user__profile__picture">
         <div className="user__profile__img">
           {/* {isAutheticating ? <img src='' /> : <img src={profileImg} /> } */}
           {/* {isImage(profileImg) ? <img src='/img/noavatar.jpg' />: <img src={profileImg} />} */}
-          {/* <img src='/img/noavatar.pg' alt={profileImg} title={profileImg}/> */}
-          <img src={profileImg}/>
+          {/* <img src='/img/noavatar.jpg' alt={profileImg} title={profileImg}/> */}
+          {profileImg!== null ? <img src={profileImg} /> : <img src='/img/noavatar.jpg' />}
+        
+          {/* <img src={profileImg}/>/ */}
         </div>
         <form onSubmit={onSubmit}>
           <div className="fileUpload">

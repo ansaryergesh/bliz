@@ -42,7 +42,7 @@ export default function Navguest() {
       </div>
       <div className="header__top__item">
         <img src="/img/widgets/personal_cabinet_logo.png"  />
-        <a href="cabinet-conf-nav1.html">Личный кабинет</a>
+        <a href="/login">Личный кабинет</a>
       </div>
     </div>      
   </div>

@@ -1,7 +1,13 @@
 import cookie from 'js-cookie';
 import Router from 'next/router';
 
+function replaceDate(val) {
+  return String(val).replace(/[^A-Z0-9]/g, '')
+}
+
 export const userAuthentication = (url,values) =>dispatch => {
+  values.phone = replaceDate(values.phone)
+  console.log(values)
   dispatch({type: 'AUTHENTICATING_USER'});
   dispatch({type: 'CLOSE_MESSAGE'});
   fetch(url, {
@@ -19,17 +25,11 @@ export const userAuthentication = (url,values) =>dispatch => {
     throw response;
   })
   .then(jsonresponse => {
-    const user = {
-      name: jsonresponse.name, 
-      phone: jsonresponse.phone,
-      avatar: jsonresponse.url+'/'+jsonresponse.image,
-      image:jsonresponse.image,
-      message: 'Добро пожаловать',
-    }
+ 
     if(jsonresponse.success) {
-      cookie.set('token', jsonresponse.token)
-      dispatch({type: 'SUCCESS_MESSAGE', payload: user.message})
-      dispatch({type: 'SET_CURRENT_USER', payload: user})
+      cookie.set('token', jsonresponse.token, {expires: 7})
+      dispatch({type: 'SUCCESS_MESSAGE', payload: 'Добро пожаловать'})
+      dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse})
       setTimeout(() => {
         dispatch({type: 'CLOSE_MESSAGE'})
       },3500)
@@ -40,7 +40,10 @@ export const userAuthentication = (url,values) =>dispatch => {
       dispatch({type: 'ERROR_MESSAGE', payload: jsonresponse.message})
     }
   })
-  .catch(r=>r.json().then(e=>dispatch({type: 'FAILED_LOGIN',payload: e.message})));
+  .catch(error => {
+    dispatch({type: 'FAILED_LOGIN', payload: error})
+    dispatch({type: 'ERROR_MESSAGE', payload: error})
+  });
 }
 
 
@@ -55,6 +58,8 @@ export const fetchCurrentUser = () => dispatch => {
     dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse})
   })
 }
+
+
 
 export const logoutUser = () => ({
   type: 'LOGOUT_USER',

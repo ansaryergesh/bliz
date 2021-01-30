@@ -4,12 +4,11 @@ import {connect} from 'react-redux'
 import * as msgaction from '../../../store/actions/messageAction'
 import axios from 'axios'
 import cookie from 'js-cookie'
+import { Router } from 'next/router'
 const mapStateToProps = ({
-  usersReducer: {user: {name, secondName,email}}
+  usersReducer: {user: {email,fullName}}
 }) => ({
-  name,
-  secondName,
-  email
+  email, fullName
 })
 
 const mapDispatchToProps = ({
@@ -17,17 +16,23 @@ const mapDispatchToProps = ({
   errorMessage:(msg)=>dispatch(msgaction.errorMessage(msg))
 })
 
-const handleLogout =() => {
-  cookie.remove('token')
-  axios.post('https://test.money-men.kz/api/logout')
-  .then(response => {
-    if(response.success) {
-      this.props.successMessage('Вы успешно вышли из аккаунта')
-      cookie.remove('token')
-    }
-  })
+const handleLogout =(val) => {
+  axios.post('https://test.money-men.kz/api/logout', {email: {val}})
+    .then(response => {
+      if(response.data.success) {
+        cookie.remove('token')
+      }
+    })
+  // cookie.remove('token')
+  // axios.post('https://test.money-men.kz/api/logout', {email: {email}})
+  // .then(response => {
+  //   if(response.success) {
+  //     this.props.successMessage('Вы успешно вышли из аккаунта')
+  //     // cookie.remove('token')
+  //   }
+  // })
 }
-export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({name,secondName}) {
+export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({email, fullName}) {
   return (
     <>
     <Flash />
@@ -86,13 +91,13 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({na
       <div className="header__top__item">
         <img src="/img/widgets/personal_cabinet_logo.png"  />
         {/* + secondName.charAt(0) + "." */}
-        <a>{name + " " }</a>
+        <a>{fullName + " " }</a>
         <i className="fas fa-angle-down" />
         <div className="dropdown__items">
           <div className="header__top__item">
           <a href="/cabinet"><p>Личный кабинет</p></a>
           </div> 
-          <div className="header__top__item" onClick={handleLogout()}>
+          <div className="header__top__item" onClick={() => handleLogout(email)}>
             <p>Выйти</p>
           </div>       
         </div>

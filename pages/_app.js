@@ -21,7 +21,12 @@ class MyApp extends App {
     if(cookie.get('token')) {
       axios.get(`https://test.money-men.kz/api/getProfile?token=${userToken}`)
       .then(response => {
-          this.props.fetchCurrentUser({type:'SET_CURRENT_USER', payload: response.data});
+          if(response.data.success) {
+            this.props.fetchCurrentUser({type:'SET_CURRENT_USER', payload: response.data});
+          }else {
+            cookie.remove('token');
+          }
+          
       })
       .catch(err => {
         console.log(err)
