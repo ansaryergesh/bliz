@@ -128,4 +128,23 @@ const Cargo = () => {
   )
 }
 
+Cargo.getInitalProps = async ({router}) => {
+  const {page} = router.query
+  const {filter} = router.filter
+  const {id} = router.id
+  if(filter!== undefined) {
+    const items = await axios.get(`${process.env.BASE_URL}/getPost?category_id=1&sub_id=${id}&page=${page}`)
+    return {
+      posts: items.data.data,
+      isLoading: false
+    }
+  }else {
+    const items = await axios.get(`${process.env.BASE_URL}/getPost?category_id=1&page=${page}`)
+    return {
+      posts: items.data.data,
+      isLoading: false
+    }
+  }
+ 
+}
 export default Cargo
