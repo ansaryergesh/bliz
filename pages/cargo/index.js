@@ -69,39 +69,52 @@ const Cargo = () => {
   const onChangeCategory = (catName,catId) => {
     setLoading(true)
     router.push(`/cargo?filter=${catName}&id=${catId}`)
-    setTimeout(() => {
-      location.reload()
-    },100)
-    // location.reload()
 
-    // if(catId!== 0) {
-    //   axios.get(`${process.env.BASE_URL}/getPost?category_id=1&sub_id=${catId}`)
-    //     .then(res=> {
-    //       setLoading(false)
-    //       setPosts(res.data)
-    //       // location.reload()
-    //     })
-    // }else {
-    //   axios.get(`${process.env.BASE_URL}/getPost?category_id=1`)
-    //     .then(res=> {
-    //       setLoading(false)
-    //       setPosts(res.data)
-    //       // location.reload()
-    //     })
-    // }
+
+    if(catId!== 0) {
+      axios.get(`${process.env.BASE_URL}/getPost?category_id=1&sub_id=${catId}`)
+        .then(res=> {
+          setLoading(false)
+          setPosts(res.data.data)
+          setCurrentPage(res.data.pagination.page)
+          setTotal(res.data.pagination.total)
+          setMaxPage(res.data.pagination.max_page)
+        })
+    }else {
+      axios.get(`${process.env.BASE_URL}/getPost?category_id=1`)
+        .then(res=> {
+          setLoading(false)
+          setPosts(res.data.data)
+          setCurrentPage(res.data.pagination.page)
+          setTotal(res.data.pagination.total)
+          setMaxPage(res.data.pagination.max_page)
+        })
+    }
   }
 
   const onChangePage = (pageNum) => {
+    setLoading(true)
     if(filter !== undefined) {
       router.push(`/cargo?filter=${filter}&id=${id}&page=${pageNum}`)
-      setTimeout(() => {
-        location.reload()
-      },100)
-    }else {
+      axios.get(`${process.env.BASE_URL}/getPost?category_id=1&sub_id=${id}&page=${pageNum}`)
+        .then(res=> {
+          setLoading(false)
+          setPosts(res.data.data)
+          setCurrentPage(res.data.pagination.page)
+          setTotal(res.data.pagination.total)
+          setMaxPage(res.data.pagination.max_page)
+        })
+    }
+    else {
       router.push(`/cargo?page=${pageNum}`)
-      setTimeout(() => {
-        location.reload()
-      },100)
+      axios.get(`${process.env.BASE_URL}/getPost?category_id=1&page=${pageNum}`)
+        .then(res=> {
+          setLoading(false)
+          setPosts(res.data.data)
+          setCurrentPage(res.data.pagination.page)
+          setTotal(res.data.pagination.total)
+          setMaxPage(res.data.pagination.max_page)
+        })
     }
   }
 
