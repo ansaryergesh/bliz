@@ -1,6 +1,8 @@
 import React from 'react'
 import Flash from '../others/FlashMessage'
+import { useRouter } from 'next/router'
 export default function Navguest() {
+  const router = useRouter()
   return (
     <>
     <Flash />
@@ -58,7 +60,7 @@ export default function Navguest() {
                 <a href="/">BLIZ.KZ</a>
               </div>
               <div className="nav__links">
-                <a className="goods__nav__opener" href="#">Грузоперевозки</a>
+                <a className={router.pathname.includes('cargo') ? "goods__nav__opener active" : "goods__nav__opener"} href="#">Грузоперевозки</a>
                 <a href="storage.html">Склады</a>
                 <a className="equipment__opener" href="#">Спецтехника</a>
                 <a href="#">Онлайн-курсы</a>
@@ -70,13 +72,13 @@ export default function Navguest() {
             </div>
           </div>
         </nav>
-        <div className="goods__nav goods">
+        <div className={router.pathname.includes('cargo') ? 'goods__nav goods active' : 'goods__nav goods'}>
           <div className="goods__nav__links container">
-            <a href="goods-nav-1.html">Грузы</a>
-            <a href="goods-nav-2.html">Транспорт</a>
-            <a href="goods-nav-3.html">Аукцион</a>
-            <a href="goods-nav-4.html">Расчет растояний</a>
-            <a href="goods-nav-5.html">Проверка компаний</a>
+            <a className={router.pathname === '/cargo' ? 'active' : ''} href="/cargo">Грузы</a>
+            <a className={router.pathname === '/cargo/transport' ? 'active' : ''}  href="/cargo/transport">Транспорт</a>
+            <a className={router.pathname === '/cargo/auction' ? 'active' : ''}  href="/cargo/auction">Аукцион</a>
+            <a className={router.pathname === '/cargo/distance' ? 'active' : ''}  href="/cargo/distance">Расчет растояний</a>
+            <a className={router.pathname === '/cargo/check' ? 'active' : ''}  href="/cargo/check">Проверка компаний</a>
           </div>
         </div>
         <div className="goods__nav equipment">

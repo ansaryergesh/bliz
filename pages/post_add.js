@@ -1,34 +1,53 @@
 import React from 'react'
 import {Formik, Form, Field} from 'formik';
-import InputMask from "react-input-mask";
+import {connect} from 'react-redux'
 import axios from 'axios';
 import LoadingSpinner from '../components/shared/others/LoadingSpinner'
 import cookie from 'js-cookie'
 import withAuth from '../hocs/withAuth'
+import * as msgaction from '../store/actions/messageAction'
+
+const mapDispatchToProps = (dispatch) =>({
+  errorMessage:(msg) => {dispatch(msgaction.errorMessage(msg))},
+  successMessage:(msg) => {dispatch(msgaction.successMessage(msg))}
+})
 
 class AddPost extends React.Component {
-
+    componentDidMount() {
+      axios.get('https://test.money-men.kz/api/getCategory')
+        .then(res=> {
+          this.setState({
+            categories: res.data
+          })
+        })
+      axios.get('https://test.money-men.kz/api/getSubcategories')
+      .then(res=> {
+        this.setState({
+          subcategories: res.data
+        })
+      })
+    }
     constructor(props) {
       super(props)
       this.state = {
         loading: false,
-        message: {visibility: false,message:null, type:null},
+        categories: [],
+        subcategories: []
       };
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(values) {
       this.setState({loading: true})
-    console.log(values)
-    axios.post(`https://test.money-men.kz/api/addPost`, values)
-      .then((response) => {
-       console.log(response)
-       if(!response.data.success) {
-        this.setState({loading:false, message: {visibility: true, message: response.data.message, type: 'error'}})
-       }
+      axios.post(`https://test.money-men.kz/api/addPost`, values)
+        .then((response) => {
+        if(!response.data.success) {
+          this.setState({loading:false})
+          this.props.errorMessage(response.data.message ||'Что то пошло не так')
+        }
        else {
-        this.setState({loading: false, message: {visibility: true, message: 'Вы успешно зарегистрировались!', type: 'success'}})
-        cookie.set('token',response.data.token)
+          this.setState({loading: false})
+          this.props.successMessage('Успешно добавлен')
        }
       
     }).catch((error) => {
@@ -46,22 +65,35 @@ class AddPost extends React.Component {
               <Formik
                 initialValues={{
                   title: 'test',
-                  sub_id: 1,
+                  sub_id: 0,
+                  category_id: 0,
                   volume: 20,
                   net: 20,
                   start_date: '2020-12-20',
                   end_date:'2020-12-20',
                   from: 'Almaty',
                   to: 'Shymkent',
-                  token: cookie.get('token') || ''
+                  token: cookie.get('token')
                 }
               }
                 onSubmit={(values) => {this.handleSubmit(values)}}>
                 <Form className='register_form'>
                   <Field name='title' placeholder='Название'/>
-                  <Field name='sub_id' />
-                  <Field name='volume' placeholder='Емкость '/>
-                  <Field name='net' placeholder='Масса' />
+                  <Field name='category_id' as='select'>
+                    <option value='0'>Выберите категорию</option>
+                    {this.state.categories.map(cat=> (
+                      <option key={cat.id} value={cat.id}>{cat.name}</option>
+                    ))}
+                  </Field>
+                
+                  <Field name='sub_id' as='select'>
+                    <option value='0'>Выберите субкатегорию</option>
+                    {this.state.subcategories.map(sub=> (
+                      <option key={sub.id} value={sub.id}>{sub.name}</option>
+                    ))}
+                  </Field>
+                  <Field name='volume' placeholder='Емкость (м3) '/>
+                  <Field name='net' placeholder='Масса (тн)' />
                   <Field name='start_date' placeholder='Дата отправки' />
                   <Field name='end_date' placeholder='Дата окончания' />
                   <Field name='from' placeholder='Место начало' />
@@ -76,4 +108,4 @@ class AddPost extends React.Component {
     }
 }
 
-export default withAuth(AddPost)
+export default withAuth(connect(null,mapDispatchToProps)(AddPost))

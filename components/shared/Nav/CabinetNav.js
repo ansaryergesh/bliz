@@ -10,7 +10,7 @@ const  CabinetNav = ({bin, activeLink}) => {
         {bin? <a href="/cabinet/documents" className={activeLink==='documents' ? 'active' :''}>Документы</a> : ''}
         {bin? <a href="/cabinet/companyProfile" className={activeLink==='companyProfile'? 'active': ''}>Профиль компании</a> : ''}
         <a href="/cabinet/password" className={activeLink==='password'? 'active': ''}>Изменить пароль</a>
-        <a href="/cabinet/notification">Уведомления</a>
+        <a href="/cabinet/notification" className={activeLink==='notification'? 'active': ''}>Уведомления</a>
         <a href="/cabinet/delete" className={activeLink==='delete' ? 'active' : ''}>Удалить аккаунт</a>
       </div>
     </div>

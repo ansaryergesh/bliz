@@ -3559,6 +3559,13 @@ nav.cabinet_ad_nav {
   font-weight: 500;
 }
 
+.register_form select {
+  padding: 7px;
+  outline: none;
+  border: 1px solid #DFE2E6;
+  margin-bottom: 10px;
+}
+
 .register_form input.number__input {
   margin-top: 20px;
 }
@@ -4448,7 +4455,13 @@ input.is-invalid {
     height: 46px;
   cursor: pointer;
 }
-
+.fileUpload span {
+  display: flex;
+  align-items: center;
+}
+.fileUpload span i{
+  margin-right: 15px;
+}
 input[type="file"] {
     position: fixed;
     right: 100%;
@@ -4469,4 +4482,8 @@ input[type="file"] {
 
 .blockError {
   color: red!important;
+}
+
+.user_docs {
+  width: 100px;
 }

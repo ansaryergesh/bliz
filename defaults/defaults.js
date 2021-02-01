@@ -88,3 +88,37 @@ export const company_type = [
     'name': 'АО'
   }
 ]
+
+
+export const category = [
+  {
+    'id': 1,
+    'name': 'Грузы'
+  },
+  {
+    'id': 2,
+    'name': 'Транспорт'
+  }
+]
+
+export const subCategories = [
+  {
+    'id': 0,
+    'name': 'Все'
+  }, {
+    'id': 1,
+    'name': 'Авто'
+  }, {
+    'id': 2,
+    'name': 'Авиа'
+  }, {
+    'id': 3,
+    'name': 'ЖД'
+  }, {
+    'id': 4,
+    'name': 'Морской'
+  }, {
+    'id': 5,
+    'name': 'Мультимодальный'
+  }
+]

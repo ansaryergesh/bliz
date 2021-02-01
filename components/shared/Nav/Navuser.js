@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Flash from '../others/FlashMessage'
 import {connect} from 'react-redux'
 import * as msgaction from '../../../store/actions/messageAction'
 import axios from 'axios'
 import cookie from 'js-cookie'
-import { Router } from 'next/router'
+import Router from 'next/router'
+import { useRouter } from 'next/router'
+import { fetchCurrentUser } from '../../../store/actions/userAction'
 const mapStateToProps = ({
   usersReducer: {user: {email,fullName}}
 }) => ({
@@ -13,7 +15,8 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = ({
   successMessage:(msg)=>dispatch(msgaction.successMessage(msg)),
-  errorMessage:(msg)=>dispatch(msgaction.errorMessage(msg))
+  errorMessage:(msg)=>dispatch(msgaction.errorMessage(msg)),
+  fetchCurrentUser:()=>dispatch(fetchCurrentUser())
 })
 
 const handleLogout =(val) => {
@@ -21,6 +24,10 @@ const handleLogout =(val) => {
     .then(response => {
       if(response.data.success) {
         cookie.remove('token')
+        Router.push('/login')
+        setTimeout(() => {
+          location.reload()
+        },200)
       }
     })
   // cookie.remove('token')
@@ -33,6 +40,8 @@ const handleLogout =(val) => {
   // })
 }
 export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({email, fullName}) {
+  
+  const router = useRouter()
   return (
     <>
     <Flash />
@@ -105,6 +114,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
     </div>      
   </div>
 </div>
+{router.pathname.includes('cabinet') ?
 <nav className="cabinet_nav">
   <div className="nav__wrapper container">
     <div className="nav__items">
@@ -122,7 +132,47 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
       </div>
     </div>
   </div>
-</nav>
+</nav> : <header>
+        <nav>
+          <div className="nav__wrapper container">
+            <div className="nav__items">
+              <div className="nav__logo">
+                <a href="/">BLIZ.KZ</a>
+              </div>
+              <div className="nav__links">
+              <a className={router.pathname.includes('cargo') ? "goods__nav__opener active" : "goods__nav__opener"} href="#">Грузоперевозки</a>
+                <a href="storage.html">Склады</a>
+                <a className="equipment__opener" href="#">Спецтехника</a>
+                <a href="#">Онлайн-курсы</a>
+              </div>
+            </div>
+            <div className="nav__nums">
+              <a href="tel:+77073734124">+7 (707) 373 41 24</a>
+              <a href="tel:+77273956983">+7 (727) 395 69 83</a>
+            </div>
+          </div>
+        </nav>
+        <div className={router.pathname.includes('cargo') ? 'goods__nav goods active' : 'goods__nav goods'}>
+          <div className="goods__nav__links container">
+            <a className={router.pathname === '/cargo' ? 'active' : ''} href="/cargo">Грузы</a>
+            <a className={router.pathname === '/cargo/transport' ? 'active' : ''}  href="/cargo/transport">Транспорт</a>
+            <a className={router.pathname === '/cargo/auction' ? 'active' : ''}  href="/cargo/auction">Аукцион</a>
+            <a className={router.pathname === '/cargo/distance' ? 'active' : ''}  href="/cargo/distance">Расчет растояний</a>
+            <a className={router.pathname === '/cargo/check' ? 'active' : ''}  href="/cargo/check">Проверка компаний</a>
+          </div>
+        </div>
+        <div className="goods__nav equipment">
+          <div className="goods__nav__links container">
+            <a href="equipment-nav-1.html">Все</a>
+            <a href="equipment-nav-1.html">Землеройная</a>
+            <a href="equipment-nav-1.html">Строительная</a>
+            <a href="equipment-nav-1.html">Бетонные работы</a>
+            <a href="equipment-nav-1.html">Грузоперевозки</a>
+            <a href="equipment-nav-1.html">Коммунальная</a>
+            <a href="equipment-nav-1.html">Прочее</a>
+          </div>
+        </div>
+      </header>}
     </>
 
   )

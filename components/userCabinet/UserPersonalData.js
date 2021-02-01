@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Formik, Form, Field} from 'formik';
 import InputMask from "react-input-mask";
 import cookie from 'js-cookie'
 import { phoneValidation, required } from '../../defaults/validation';
+import axios from 'axios';
 
 const PhoneMask = ({field, form, ...props}) => <InputMask
   mask="+7(999)-999-9999"
@@ -12,7 +13,27 @@ const PhoneMask = ({field, form, ...props}) => <InputMask
   {...props}
 />;
 
-const UserPersonalData = ({user, edit, onEdit, onSave, countries, cities,}) => {
+const UserPersonalData = ({user, edit, onEdit, onSave}) => {
+
+
+   useEffect(() => {
+    axios.get('https://test.money-men.kz/api/country')
+      .then(res => {
+        setCountries(res.data)
+      })
+  },[])
+
+  const [countries, setCountries] = useState([])
+  const [cities, setCities] = useState([])
+  
+  const onChooseCountry = (id) => {
+    axios.get(`https://test.money-men.kz/api/city?countryID=${id}`)
+      .then(res => {
+        setCities(res.data)
+      })
+  }
+ 
+  
   return (
     <>
       <div className="user__personal_data">
@@ -47,12 +68,17 @@ const UserPersonalData = ({user, edit, onEdit, onSave, countries, cities,}) => {
               <div className='user__data_form__item'>
                 <span>Страна</span>
                 {edit ?
-                  <Field name='country' as='select' validate={required}>
+                
+                  <Field name='country' as='select' validate={required}  onChange={() => onChooseCountry(country.id)}>
                     {countries.map(country=> (
                       <option key={country.id} value={country.id}>{country.name}</option>
                     ))}
                   </Field> : 
-                  <Field name='country' disabled/>
+                  <Field name='country' as='select' validate={required}  disabled>
+                  {countries.map(country=> (
+                    <option key={country.id} value={country.id} >{country.name}</option>
+                  ))}
+                </Field>
                 }
               </div>
               <div className='user__data_form__item'>

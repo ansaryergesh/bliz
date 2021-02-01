@@ -38,6 +38,7 @@ class Cabinet extends React.Component {
     this.fileUpload = this.fileUpload.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.onEdit = this.onEdit.bind(this)
+    this.onUpdate = this.onUpdate.bind(this)
 	}
 	onChange(e) {
 		e.preventDefault()
@@ -48,8 +49,24 @@ class Cabinet extends React.Component {
   }
 
   onUpdate(values) {
-    axios.get('https://test.money-men.kz/api/updateProfile', {params: {values}})
-    // console.log(values)
+    axios.get('https://test.money-men.kz/api/updateProfile', {params: {
+      fullName: values.fullName,
+      city: values.city,
+      email: values.email,
+      country: values.country,
+      token: values.token,
+      city_id: values.city_id,
+      phone: values.phone
+    }})
+      .then(res => {
+        if(res.data.success) {
+          this.props.successMessage('Успешно обновлен')
+          this.props.fetchCurrentUser() 
+          // console.log(res)
+        }else {
+          this.props.errorMessage(res.data.message)
+        }
+      })
   }
 	
 	fileUpload(file){
@@ -131,7 +148,7 @@ class Cabinet extends React.Component {
               onDelete={this.onDelete}
               profileImg={this.props.usersReducer.user.image === undefined ? null :this.props.usersReducer.user.image }
             />
-            <UserPersonalData user={this.props.usersReducer.user} edit={this.state.edit} countries={countries} cities={gorods} 
+            <UserPersonalData user={this.props.usersReducer.user} edit={this.state.edit} 
               onEdit={this.onEdit}
               onSave={this.onUpdate}
             />
