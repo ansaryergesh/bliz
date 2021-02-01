@@ -49,7 +49,7 @@ class Cabinet extends React.Component {
   }
 
   onUpdate(values) {
-    axios.get('https://test.money-men.kz/api/updateProfile', {params: {
+    axios.get(`${process.env.BASE_URL}/updateProfile`, {params: {
       fullName: values.fullName,
       city: values.city,
       email: values.email,
@@ -70,7 +70,7 @@ class Cabinet extends React.Component {
   }
 	
 	fileUpload(file){
-    const url = 'https://test.money-men.kz/api/setImage';
+    const url = `${process.env.BASE_URL}/setImage`;
     const formData = new FormData();
 		formData.append('image',file)
 		formData.append('token', cookie.get('token'))
@@ -114,7 +114,7 @@ class Cabinet extends React.Component {
     }).then(value=>{
       switch (value){
         case 'yes':
-          axios.get(`https://test.money-men.kz/api/deleteAvatar?token=18272b6fc7c060a2097052a54274b11828edd9ba`)
+          axios.get(`${process.env.BASE_URL}/deleteAvatar?token=18272b6fc7c060a2097052a54274b11828edd9ba`)
           .then(response => {
             console.log(response)
             if(response.data.success) {

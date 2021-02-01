@@ -20,7 +20,7 @@ const mapDispatchToProps = ({
 })
 
 const handleLogout =(val) => {
-  axios.post('https://test.money-men.kz/api/logout', {email: {val}})
+  axios.post(`${process.env.BASE_URL}/logout`, {email: {val}})
     .then(response => {
       if(response.data.success) {
         cookie.remove('token')
@@ -31,7 +31,7 @@ const handleLogout =(val) => {
       }
     })
   // cookie.remove('token')
-  // axios.post('https://test.money-men.kz/api/logout', {email: {email}})
+  // axios.post(`${process.env.BASE_URL}/logout`, {email: {email}})
   // .then(response => {
   //   if(response.success) {
   //     this.props.successMessage('Вы успешно вышли из аккаунта')

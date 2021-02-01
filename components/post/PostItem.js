@@ -1,6 +1,6 @@
 import React from 'react'
 import PostAside from './PostAside'
-const PostItem = ({post, total, maxPage, currentPage, onChangePage}) => {
+const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName}) => {
 
   const paginationBtns = [];
 
@@ -17,8 +17,8 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage}) => {
   return (
       <div className="products__content">
         <div className="products__title">
-          <h4>Главная / Грузоперевозки / Грузы</h4>
-          <h1>Грузоперевозки в Казахстане</h1>
+          <h4>Главная / Грузоперевозки / {pathName === '/cargo' ? 'Грузы' : 'Транпорт'}</h4>
+          <h1>{pathName==='/cargo' ? 'Грузоперевозки': 'Транспорт для грузоперевозок'} в Казахстане</h1>
           <h3>Найдено {total} объявлений</h3>
 
           <div class="products__items__wrapper">

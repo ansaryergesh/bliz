@@ -5,7 +5,7 @@ import cookie from 'js-cookie'
 const dispatch = useDispatch()
 export default function setCurrentUser(){
     const userToken = cookie.get('token')
-    axios.get(`https://test.money-men.kz/api/getProfile?token=${userToken}`)
+    axios.get(`${process.env.BASE_URL}/getProfile?token=${userToken}`)
       .then(response => {
           if(response.data.success) {
             dispatch({type:'SET_CURRENT_USER', payload: response.data});

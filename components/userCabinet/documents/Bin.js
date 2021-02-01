@@ -23,7 +23,7 @@ const Bin = ({bin, fetchCurrentUser}) => {
 
   const onSubmit = () => {
     setLoading(true)
-    axios.get('https://test.money-men.kz/api/updateBin', {params: {token: cookie.get('token'), bin: binVal}})
+    axios.get(`${process.env.BASE_URL}/updateBin`, {params: {token: cookie.get('token'), bin: binVal}})
       .then(response => {
         setLoading(false)
         if(response.data.success) {

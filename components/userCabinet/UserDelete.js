@@ -36,7 +36,7 @@ const UserDelete = () => {
       switch(value) {
         case 'yes':
           setLoading(true)
-          axios.get('https://test.money-men.kz/api/deleteAccount', {params: {password: password, token: cookie.get('token')}})
+          axios.get(`${process.env.BASE_URL}/deleteAccount`, {params: {password: password, token: cookie.get('token')}})
             .then(res=> {
               if(res.data.success) {
                 setLoading(false)

@@ -11,7 +11,7 @@ const Document1 = ({license, fetchCurrentUser}) => {
   const dispatch = useDispatch()
 
   const fileUpload = (doc) => {
-    const url = 'https://test.money-men.kz/api/updateLicense';
+    const url = `${process.env.BASE_URL}/updateLicense`;
     const formData = new FormData();
     formData.append('license', doc)
     formData.append('token', cookie.get('token'))

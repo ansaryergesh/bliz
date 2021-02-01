@@ -17,7 +17,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
 
 
    useEffect(() => {
-    axios.get('https://test.money-men.kz/api/country')
+    axios.get(`${process.env.BASE_URL}/country`)
       .then(res => {
         setCountries(res.data)
       })
@@ -27,7 +27,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
   const [cities, setCities] = useState([])
   
   const onChooseCountry = (id) => {
-    axios.get(`https://test.money-men.kz/api/city?countryID=${id}`)
+    axios.get(`${process.env.BASE_URL}/city?countryID=${id}`)
       .then(res => {
         setCities(res.data)
       })

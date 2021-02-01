@@ -24,7 +24,7 @@ const Cargo = () => {
     setLoading(true)
     if(filter === undefined) {
       if(page===undefined && page===1) {
-        axios.get('https://test.money-men.kz/api/getPost?category_id=1')
+        axios.get(`${process.env.BASE_URL}/getPost?category_id=1`)
         .then(res=> {
           setLoading(false)
           setPosts(res.data.data)
@@ -34,7 +34,7 @@ const Cargo = () => {
         })
       }
       else {
-        axios.get(`https://test.money-men.kz/api/getPost?category_id=1&page=${page}`)
+        axios.get(`${process.env.BASE_URL}/getPost?category_id=1&page=${page}`)
         .then(res=> {
           setLoading(false)
           setPosts(res.data.data)
@@ -45,7 +45,7 @@ const Cargo = () => {
       }
     }else {
       if(page === undefined && page===1) {
-        axios.get(`https://test.money-men.kz/api/getPost?category_id=1&sub_id=${id}`)
+        axios.get(`${process.env.BASE_URL}/getPost?category_id=1&sub_id=${id}`)
           .then(res=> {
             setLoading(false)
             setPosts(res.data.data)
@@ -54,7 +54,7 @@ const Cargo = () => {
             setMaxPage(res.data.pagination.max_page)
           })
       }else {
-        axios.get(`https://test.money-men.kz/api/getPost?category_id=1&sub_id=${id}&page=${page}`)
+        axios.get(`${process.env.BASE_URL}/getPost?category_id=1&sub_id=${id}&page=${page}`)
           .then(res=> {
             setLoading(false)
             setPosts(res.data.data)
@@ -75,14 +75,14 @@ const Cargo = () => {
     // location.reload()
 
     // if(catId!== 0) {
-    //   axios.get(`https://test.money-men.kz/api/getPost?category_id=1&sub_id=${catId}`)
+    //   axios.get(`${process.env.BASE_URL}/getPost?category_id=1&sub_id=${catId}`)
     //     .then(res=> {
     //       setLoading(false)
     //       setPosts(res.data)
     //       // location.reload()
     //     })
     // }else {
-    //   axios.get(`https://test.money-men.kz/api/getPost?category_id=1`)
+    //   axios.get(`${process.env.BASE_URL}/getPost?category_id=1`)
     //     .then(res=> {
     //       setLoading(false)
     //       setPosts(res.data)
@@ -118,7 +118,8 @@ const Cargo = () => {
           total={total}
           maxPage={maxPage}
           currentPage={currentPage}
-          onChangePage={onChangePage}  
+          onChangePage={onChangePage}
+          pathName={router.pathname}
         />
         <PostAside />
     </div>

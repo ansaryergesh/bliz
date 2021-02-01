@@ -41,7 +41,7 @@ class Register extends React.Component {
     },3000)
    
    
-      axios.get('https://test.money-men.kz/api/country')
+      axios.get(`${process.env.BASE_URL}/country`)
       .then(response=> {
         this.setState({countries:response.data})
       })
@@ -54,11 +54,11 @@ class Register extends React.Component {
   }
   
   handleSubmitLegal(values) {
-    this.props.userAuthentication('https://test.money-men.kz/api/entityRegistration', values)
+    this.props.userAuthentication(`${process.env.BASE_URL}/entityRegistration`, values)
   }
 
   handleSubmitNatural(values) {
-    this.props.userAuthentication('https://test.money-men.kz/api/registration', values)
+    this.props.userAuthentication(`${process.env.BASE_URL}/registration`, values)
   }
 
 

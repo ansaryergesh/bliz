@@ -19,7 +19,7 @@ class MyApp extends App {
     }
     const userToken = cookie.get('token')
     if(cookie.get('token')) {
-      // axios.get(`https://test.money-men.kz/api/getProfile?token=${userToken}`)
+      // axios.get(`${process.env.BASE_URL}/getProfile?token=${userToken}`)
       // .then(response => {
       //     if(response.data.success) {
       //       this.props.fetchCurrentUser({type:'SET_CURRENT_USER', payload: response.data});

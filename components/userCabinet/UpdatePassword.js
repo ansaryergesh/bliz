@@ -36,7 +36,7 @@ const UpdatePassword = () => {
     }else {
       setError('')
       setLoading(true)
-      axios.get('https://test.money-men.kz/api/changePassword', {params: {password: password, repeat: passwordConfirm,token: cookie.get('token')}})
+      axios.get(`${process.env.BASE_URL}/changePassword`, {params: {password: password, repeat: passwordConfirm,token: cookie.get('token')}})
         .then(res=> {
           if(res.data.success) {
             setLoading(false)

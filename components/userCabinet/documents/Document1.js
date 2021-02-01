@@ -11,7 +11,7 @@ const Document1 = ({registration, fetchCurrentUser}) => {
   const dispatch = useDispatch()
 
   const fileUpload = (doc) => {
-    const url = 'https://test.money-men.kz/api/updateRegistration';
+    const url = `${process.env.BASE_URL}/updateRegistration`;
     const formData = new FormData();
     formData.append('register', doc)
     formData.append('token', cookie.get('token'))

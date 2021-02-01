@@ -50,7 +50,7 @@ export const userAuthentication = (url,values) =>dispatch => {
 
 export const fetchCurrentUser = () => dispatch => {
   dispatch({type: 'AUTHENTICATING_USER'})
-  fetch(`https://test.money-men.kz/api/getProfile?token=${cookie.get('token')}`, {
+  fetch(`${process.env.BASE_URL}/getProfile?token=${cookie.get('token')}`, {
     method: 'GET'
   })
   .then(response => response.json())

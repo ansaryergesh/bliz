@@ -14,13 +14,13 @@ const mapDispatchToProps = (dispatch) =>({
 
 class AddPost extends React.Component {
     componentDidMount() {
-      axios.get('https://test.money-men.kz/api/getCategory')
+      axios.get(`${process.env.BASE_URL}/getCategory`)
         .then(res=> {
           this.setState({
             categories: res.data
           })
         })
-      axios.get('https://test.money-men.kz/api/getSubcategories')
+      axios.get(`${process.env.BASE_URL}/getSubcategories`)
       .then(res=> {
         this.setState({
           subcategories: res.data
@@ -39,7 +39,7 @@ class AddPost extends React.Component {
 
     handleSubmit(values) {
       this.setState({loading: true})
-      axios.post(`https://test.money-men.kz/api/addPost`, values)
+      axios.post(`${process.env.BASE_URL}/addPost`, values)
         .then((response) => {
         if(!response.data.success) {
           this.setState({loading:false})
