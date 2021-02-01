@@ -73,7 +73,8 @@ class AddPost extends React.Component {
                   end_date:'2020-12-20',
                   from: 'Almaty',
                   to: 'Shymkent',
-                  token: cookie.get('token')
+                  token: cookie.get('token'),
+                  price: '10000'
                 }
               }
                 onSubmit={(values) => {this.handleSubmit(values)}}>
@@ -98,6 +99,7 @@ class AddPost extends React.Component {
                   <Field name='end_date' placeholder='Дата окончания' />
                   <Field name='from' placeholder='Место начало' />
                   <Field name='to'  placeholder='Место завершение' />
+                  <Field name='price'  placeholder='Цена' />
                   {this.state.loading===false ? <button className="btn" type="submit">РАЗМЕСТИТЬ</button>: <button className="btn"  disabled>Загрузка...</button>}
                 </Form>
                 </Formik>

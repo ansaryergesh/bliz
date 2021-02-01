@@ -13,7 +13,7 @@ const Filter = ({onChangeCategory, activeCategory, queryFilter}) => {
               <h4>Транспорт</h4>
               <div className="filter__item__form">
                 {subCategories.map(cat=> (
-                     <a onClick={onChangeCategory(cat.name, cat.id)} key={cat.id} className={queryFilter === cat.name ? 'active' : ''}>{cat.name}</a>
+                  <a onClick={() => onChangeCategory(cat.name, cat.id)} key={cat.id} className={queryFilter === cat.name ? 'active' : ''}>{cat.name}</a>
                 ))}
              
               </div>
