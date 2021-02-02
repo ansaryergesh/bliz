@@ -61,7 +61,7 @@ export default function Navguest() {
               </div>
               <div className="nav__links">
                 <a className={router.pathname.includes('cargo') ? "goods__nav__opener active" : "goods__nav__opener"} href="#">Грузоперевозки</a>
-                <a href="storage.html">Склады</a>
+                <a сclassName={router.pathname === '/storage' ? 'goods__nav__opener active' : 'goods__nav__opener'} href='/storage'>Склады</a>
                 <a className="equipment__opener" href="#">Спецтехника</a>
                 <a href="#">Онлайн-курсы</a>
               </div>

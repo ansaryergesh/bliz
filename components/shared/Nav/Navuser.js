@@ -105,6 +105,9 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
         <div className="dropdown__items">
           <div className="header__top__item">
           <a href="/cabinet"><p>Личный кабинет</p></a>
+          </div>
+          <div className="header__top__item">
+          <a href="/storage_add"><p>Добавить склад</p></a>
           </div> 
           <div className="header__top__item" onClick={() => handleLogout(email)}>
             <p>Выйти</p>
@@ -141,7 +144,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
               </div>
               <div className="nav__links">
               <a className={router.pathname.includes('cargo') ? "goods__nav__opener active" : "goods__nav__opener"} href="#">Грузоперевозки</a>
-                <a href="storage.html">Склады</a>
+              <a className={router.pathname === '/storage' ? "goods__nav__opener active" : "goods__nav__opener"} href="/storage">Склады</a>
                 <a className="equipment__opener" href="#">Спецтехника</a>
                 <a href="#">Онлайн-курсы</a>
               </div>

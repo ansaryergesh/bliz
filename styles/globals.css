@@ -4408,7 +4408,7 @@ nav.cabinet_ad_nav {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgb(39, 45, 66) url("/img/loader.gif") 50% 50% no-repeat;
+  background: rgba(2, 27, 118, 0.694) url("/img/loader.gif") 50% 50% no-repeat;
 }
 
 /* Invalid input */
