@@ -1,6 +1,17 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
+import axios from 'axios'
+const SideBarCurrency = () => {
 
-const PostAside = () => {
+  useEffect(() => {
+    var Connect = new XMLHttpRequest();
+  // Define which file to open and
+  // send the request.
+    Connect.open("GET", "https://www.nationalbank.kz/rss/rates_all.xml", false);
+    Connect.setRequestHeader("Content-Type", "text/xml");
+    // Connect.send(null);
+  }, [])
+
+  const [currency, setCurrency] = useState({rubl: 0, dollar:0, euro:0, yuan: 0})
   return (
     <div className="products__aside">
       <div className="aside__add__ad">
@@ -13,19 +24,19 @@ const PostAside = () => {
         <h4>Курсы валют</h4>
         <div className="exchange__item">
           <p>₽, Рубль</p>
-          <span>5.81 ₸</span>
+          <span>{currency.rubl} ₸</span>
         </div>
         <div className="exchange__item">
           <p>$, Доллар</p>
-          <span>424.57 ₸</span>
+          <span>{currency.dollar} ₸</span>
         </div>
         <div className="exchange__item">
           <p>€, Евро</p>
-          <span>460. 12 ₸</span>
+          <span>{currency.euro} ₸</span>
         </div>
         <div className="exchange__item">
           <p>¥, Юань</p>
-          <span>60. 24 ₸</span>
+          <span>{currency.yuan} ₸</span>
         </div>
       </div>
       <div className="aside__ad">
@@ -51,4 +62,4 @@ const PostAside = () => {
   )
 }
 
-export default PostAside
+export default SideBarCurrency

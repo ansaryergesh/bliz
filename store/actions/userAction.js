@@ -55,7 +55,8 @@ export const fetchCurrentUser = () => dispatch => {
   })
   .then(response => response.json())
   .then(jsonresponse => {
-    dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse})
+    // console.log(jsonresponse)
+    dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse.data[0]})
   })
 }
 

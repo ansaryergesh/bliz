@@ -4,7 +4,7 @@ import InputMask from "react-input-mask";
 import cookie from 'js-cookie'
 import { phoneValidation, required } from '../../defaults/validation';
 import axios from 'axios';
-
+import {useDispatch} from 'react-redux'
 const PhoneMask = ({field, form, ...props}) => <InputMask
   mask="+7(999)-999-9999"
   maskChar=" "
@@ -14,8 +14,7 @@ const PhoneMask = ({field, form, ...props}) => <InputMask
 />;
 
 const UserPersonalData = ({user, edit, onEdit, onSave}) => {
-
-
+  const dispatch = useDispatch()
    useEffect(() => {
     axios.get(`${process.env.BASE_URL}/country`)
       .then(res => {
@@ -32,7 +31,6 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
         setCities(res.data)
       })
   }
- 
   
   return (
     <>
@@ -40,13 +38,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
         <div className="user__profile__title">
           <h3>Персональные данные</h3>
           <p className='mb'>Личные данные администратора компании</p>
-          {edit ?
-            <div className="fileUpload">
-              <span onClick={onEdit}>Отменить</span>
-            </div> :
-            <div className="fileUpload">
-              <span onClick={onEdit}>Редактировать</span>
-            </div>}
+   
         
         </div>
         <Formik initialValues={{
@@ -123,7 +115,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
               {edit ?
                 <div className="user__data__btns">
                   <button className="btn" href="#" type='submit'>Сохранить ИЗМЕНЕНИЯ</button>
-                  <span className="btn btn--white" href="#" onClick={onEdit}>ОТМЕНИТЬ</span>
+                  <span className="btn btn--white" href="#" onClick={()=>location.reload()}>ОТМЕНИТЬ</span>
                 </div>: 
                 null 
               }

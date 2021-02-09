@@ -31,7 +31,7 @@ class Cabinet extends React.Component {
 		this.state ={
 			file:null,
       loading: false,
-      edit: false,
+      edit: true,
 		}
 		this.onFormSubmit = this.onFormSubmit.bind(this)
 		this.onChange = this.onChange.bind(this)
@@ -132,7 +132,7 @@ class Cabinet extends React.Component {
 	render() {
 		return(
 			<>
-				<CabinetNav bin={this.props.usersReducer.user.bin} activeLink='index'/>
+				<CabinetNav bin={this.props.usersReducer.user.companyDetails[0].bin} activeLink='index'/>
 				<div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">

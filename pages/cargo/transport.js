@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Loader from '../../components/shared/others/LoadingSpinner'
 import Filter from '../../components/post/Filter'
 import PostItem from '../../components/post/PostItem'
-import PostAside from '../../components/post/PostAside';
+import SideBarCurrency from '../../components/post/SideBarCurrency';
 
 const Transport = () => {
   const router  = useRouter()
@@ -12,8 +12,6 @@ const Transport = () => {
   const {id} = router.query
   const {page} = router.query
 
-  const [activeCategory, setActiveCategory] = useState('Все')
-  const [categoryId, setCategoryId] = useState(0)
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([{}])
   const [currentPage, setCurrentPage] = useState(1)
@@ -24,7 +22,7 @@ const Transport = () => {
     setLoading(true)
     if(filter === undefined) {
       if(page===undefined && page===1) {
-        axios.get(`${process.env.BASE_URL}/getPost?category_id=2`)
+        axios.get(`${process.env.BASE_URL}/newGetPost?category_id=2`)
         .then(res=> {
           setLoading(false)
           setPosts(res.data.data)
@@ -34,7 +32,7 @@ const Transport = () => {
         })
       }
       else {
-        axios.get(`${process.env.BASE_URL}/getPost?category_id=2&page=${page}`)
+        axios.get(`${process.env.BASE_URL}/newGetPost?category_id=2&page=${page}`)
         .then(res=> {
           setLoading(false)
           setPosts(res.data.data)
@@ -45,7 +43,7 @@ const Transport = () => {
       }
     }else {
       if(page === undefined && page===1) {
-        axios.get(`${process.env.BASE_URL}/getPost?category_id=2&sub_id=${id}`)
+        axios.get(`${process.env.BASE_URL}/newGetPost?category_id=2&sub_id=${id}`)
           .then(res=> {
             setLoading(false)
             setPosts(res.data.data)
@@ -54,7 +52,7 @@ const Transport = () => {
             setMaxPage(res.data.pagination.max_page)
           })
       }else {
-        axios.get(`${process.env.BASE_URL}/getPost?category_id=2&sub_id=${id}&page=${page}`)
+        axios.get(`${process.env.BASE_URL}/newGetPost?category_id=2&sub_id=${id}&page=${page}`)
           .then(res=> {
             setLoading(false)
             setPosts(res.data.data)
@@ -72,7 +70,7 @@ const Transport = () => {
 
 
     if(catId!== 0) {
-      axios.get(`${process.env.BASE_URL}/getPost?category_id=2&sub_id=${catId}`)
+      axios.get(`${process.env.BASE_URL}/newGetPost?category_id=2&sub_id=${catId}`)
         .then(res=> {
           setLoading(false)
           setPosts(res.data.data)
@@ -81,7 +79,7 @@ const Transport = () => {
           setMaxPage(res.data.pagination.max_page)
         })
     }else {
-      axios.get(`${process.env.BASE_URL}/getPost?category_id=2`)
+      axios.get(`${process.env.BASE_URL}/newGetPost?category_id=2`)
         .then(res=> {
           setLoading(false)
           setPosts(res.data.data)
@@ -96,7 +94,7 @@ const Transport = () => {
     setLoading(true)
     if(filter !== undefined) {
       router.push(`/cargo/transport?filter=${filter}&id=${id}&page=${pageNum}`)
-      axios.get(`${process.env.BASE_URL}/getPost?category_id=2&sub_id=${id}&page=${pageNum}`)
+      axios.get(`${process.env.BASE_URL}/newGetPost?category_id=2&sub_id=${id}&page=${pageNum}`)
         .then(res=> {
           setLoading(false)
           setPosts(res.data.data)
@@ -107,7 +105,7 @@ const Transport = () => {
     }
     else {
       router.push(`/cargo/transport?page=${pageNum}`)
-      axios.get(`${process.env.BASE_URL}/getPost?category_id=2&page=${pageNum}`)
+      axios.get(`${process.env.BASE_URL}/newGetPost?category_id=2&page=${pageNum}`)
         .then(res=> {
           setLoading(false)
           setPosts(res.data.data)
@@ -134,7 +132,7 @@ const Transport = () => {
           onChangePage={onChangePage}
           pathName={router.pathname}
         />
-        <PostAside />
+        <SideBarCurrency />
     </div>
       
     </div>

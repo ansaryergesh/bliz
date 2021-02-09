@@ -1,16 +1,15 @@
 import '../styles/globals.css'
 import '@fortawesome/fontawesome-free/css/all.css';
-import App,{ Container } from 'next/app';
+import App from 'next/app';
 import Nav from '../components/shared/Nav/Nav'
 import cookie from 'js-cookie'
 import {createWrapper} from "next-redux-wrapper";
-import { Provider } from 'react-redux'
 import store from '../store/store'
 import Footer from '../components/shared/Footer'
 import LoadingSpinner from '../components/shared/others/LoadingSpinner'
 import {connect} from 'react-redux'
 import {fetchCurrentUser} from '../store/actions/userAction'
-import axios from 'axios';
+
 
 class MyApp extends App {
   componentDidMount() {

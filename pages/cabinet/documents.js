@@ -23,14 +23,14 @@ class Delete extends React.Component {
   render() {
     return (
       <>
-        <CabinetNav bin={this.props.usersReducer.user.bin} activeLink='documents'/>
+        <CabinetNav bin={this.props.usersReducer.user.companyDetails[0].bin} activeLink='documents'/>
         <div className="grid-container container">
 					<div className="section">
           <div className="products__title paddings">
             <h4>Личный кабинет / Настройки / Документы</h4>
             <h1 className="smaller_font">Документы</h1>
           </div>
-            <Bin bin={this.props.usersReducer.user.bin} fetchCurrentUser={this.props.fetchCurrentUser}/>
+            <Bin bin={this.props.usersReducer.user.companyDetails[0].bin} fetchCurrentUser={this.props.fetchCurrentUser}/>
             <Document1 registration={this.props.usersReducer.user.registration}  fetchCurrentUser={this.props.fetchCurrentUser} />
             <Document2 license={this.props.usersReducer.user.license} fetchCurrentUser={this.props.fetchCurrentUser}/>
             {/* <UserDelete /> */}
