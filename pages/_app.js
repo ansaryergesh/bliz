@@ -9,6 +9,7 @@ import Footer from '../components/shared/Footer'
 import LoadingSpinner from '../components/shared/others/LoadingSpinner'
 import {connect} from 'react-redux'
 import {fetchCurrentUser} from '../store/actions/userAction'
+import Head from "next/head";
 
 
 class MyApp extends App {
@@ -37,6 +38,9 @@ class MyApp extends App {
 
   }
   render(){
+    <Head>
+      <script dangerouslySetInnerHTML={{ __html: `https://maps.googleapis.com/maps/api/js?key=AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk&libraries=places` }} />
+    </Head>
     const { Component,pageProps,store} = this.props;
     return(
       <>

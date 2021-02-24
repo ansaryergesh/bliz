@@ -55,8 +55,18 @@ export const fetchCurrentUser = () => dispatch => {
   })
   .then(response => response.json())
   .then(jsonresponse => {
+    console.log(jsonresponse)
+    if(jsonresponse.data.length) {
+      dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse.data[0]})
+    }else {
+      dispatch({type: 'FAILED_LOGIN'})
+      cookie.remove('token')
+      setTimeout(() => {
+        location.reload()
+      }, 100)
+      // dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse.data[0]})
+    }
     // console.log(jsonresponse)
-    dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse.data[0]})
   })
 }
 

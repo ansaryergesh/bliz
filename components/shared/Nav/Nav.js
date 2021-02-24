@@ -199,7 +199,7 @@ class Nav extends React.Component {
         }if(cookie.get('token') && (this.props.authenticatingUser || !this.props.loggedIn)) {
           // <LoadingNav />
         }
-        if(cookie.get('token') == undefined) {
+        if(cookie.get('token') == undefined && !this.props.loggedIn) {
           <Navguest />
         }else {
           return(<Navguest/>)

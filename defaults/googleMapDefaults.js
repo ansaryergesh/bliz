@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import GPlace from '../../components/googleMap/GPlace';
-
-// API key of the google map
 const GOOGLE_MAP_API_KEY = "AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk";
 
 // load google map script
-const loadGoogleMapScript = (callback) => {
+export const loadGoogleMapScript = (callback) => {
   if (typeof window.google === 'object' && typeof window.google.maps === 'object') {
     callback();
   } else {
@@ -16,20 +12,3 @@ const loadGoogleMapScript = (callback) => {
   }
 }
 
-const Distance = () => {
-  const [loadMap, setLoadMap] = useState(false);
-
-  useEffect(() => {
-    loadGoogleMapScript(() => {
-      setLoadMap(true)
-    });
-  }, []);
-
-  return (
-    <div className="App">
-      {!loadMap ? <div>Loading...</div> : <GPlace />}
-    </div>
-  );
-}
-
-export default Distance;

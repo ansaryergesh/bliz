@@ -1332,11 +1332,17 @@ nav.cabinet_ad_nav {
   font-size: 17px;
 }
 
-.row__item__text p.descr__gray {
+.row__item__text p.descr__gray, .row__item__text div {
   color: #A2A9B2;
   font-size: 14px;
   font-weight: 300;
+  line-height: 1.2;
 }
+.row__item__text b {
+  color:#005eac
+}
+
+
 
 .info__map__path {
   margin-top: 40px;
@@ -1345,6 +1351,41 @@ nav.cabinet_ad_nav {
   padding-top: 30px;
   margin-top: 40px;
   border-top: 2px #DFE2E5 solid;
+}
+
+
+.info__map__path__wrapper__flex {
+  display: flex;
+}
+
+.info__map__path__wrapper {
+  border-left: 3px solid #008EFF;
+  position: relative;
+  width: 100%;
+}
+
+.info__map__path__wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -11px;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: 2px solid #008EFF;
+  background-color: white;
+}
+
+.info__map__path__wrapper::after {
+  content: '';
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: 2px solid #008EFF;
+  bottom: 0;
+  left: -11px;
+  background-color: white;
 }
 
 .goods__city {
@@ -2398,7 +2439,7 @@ nav.cabinet_ad_nav {
   margin-bottom: 10px;
 }
 
-.dis_calc__item select {
+.dis_calc__item select, .dis_calc__item input {
   padding: 7px 10px;
   padding-right: 30%;
   color: #20273D;
@@ -2407,6 +2448,21 @@ nav.cabinet_ad_nav {
   outline: none;
   border: 2px solid #DFE2E6;
   border-radius: 5px;
+}
+.dis_calc__item .clearInput {
+  position: relative
+}
+.dis_calc__item .clearInput a{
+  position: absolute;
+  font-size: 18px;
+  top:50%;
+  left:115%;
+  font-weight: 900;
+  color:rgb(25, 25, 99);
+  transform: translateY(-50%);
+  /* transform: translateX(-50%); */
+  padding: 5px;
+  cursor: pointer;
 }
 
 .dis_calc__item.check_company__item {

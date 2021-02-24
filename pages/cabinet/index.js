@@ -79,6 +79,7 @@ class Cabinet extends React.Component {
             'content-type': 'multipart/form-data'
         }
     }
+    console.log(formData)
 		return  axios.post(url,formData,config)
 	}
 
@@ -88,6 +89,7 @@ class Cabinet extends React.Component {
 	onFormSubmit(e){
     e.preventDefault() // Stop form submit
 		this.setState({loading:true})
+    console.log(this.state.file)
     this.fileUpload(this.state.file)
     .then((response)=>{
       this.setState({loading: false})

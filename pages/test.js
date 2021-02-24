@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import SideBarCurrency from "../post/SideBarCurrency";
 import {useDispatch} from 'react-redux'
 import axios from "axios";
 import parse from 'html-react-parser'
+import { loadGoogleMapScript } from "../defaults/googleMapDefaults";
 
 
-const GPlace = () => {
+const Test = () => {
   const dispatch = useDispatch();
   const placeInputRef = useRef(null);
   const placeInputRef2 = useRef(null);
+  const [country, setCountry] = useState('kz')
   const [place, setPlace] = useState({address: '', id: null});
   const [place2, setPlace2] = useState({address: '', id: null});
   const [placeInfo, setPlaceInfo] = useState({
@@ -55,7 +56,6 @@ const GPlace = () => {
     if(place1 && place2) {
       axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${place1}&destination=place_id:${place2}&key=${GOOGLE_MAP_API_KEY}`, {withCredentials: true},)
       .then(res => {
-        console.log(res.data.routes[0].legs[0].steps)
         setPlaceInfo ({
           duration: res.data.routes[0].legs[0].duration.text,
           distance: res.data.routes[0].legs[0].distance.text,
@@ -66,10 +66,11 @@ const GPlace = () => {
     }
     
   }
+
   // initialize the google place autocomplete
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(placeInputRef.current,
-      { types: ["(geocode)"], componentRestrictions: { country: ["kz", "ru"] } });
+      { types: ['(regions)'], componentRestrictions: {country: `${country}`}});
     let autocomplete2 = new window.google.maps.places.Autocomplete(placeInputRef2.current,
       { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
@@ -83,6 +84,7 @@ const GPlace = () => {
 
     new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
       let place = autocomplete2.getPlace();
+      console.log(place)
       setPlace2({
         address: place.formatted_address,
         id: place.place_id
@@ -186,11 +188,40 @@ const GPlace = () => {
           <p className="goods__info__add-text">Погрузка груза должна выполняться аккуратно. <br /> Коробки с фруктами и овощами закрепить надежно. <br /> Оплата на месте получения.</p>
         </div>
       </div>
-      <SideBarCurrency />
     </div>
 
     </>
   );
 };
+// const GOOGLE_MAP_API_KEY = "AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk";
 
-export default GPlace;
+// // load google map script
+// const loadGoogleMapScript = (callback) => {
+//   if (typeof window.google === 'object' && typeof window.google.maps === 'object') {
+//     callback();
+//   } else {
+//     const googleMapScript = document.createElement("script");
+//     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_API_KEY}&libraries=places`;
+//     window.document.body.appendChild(googleMapScript);
+//     googleMapScript.addEventListener("load", callback);
+//   }
+// }
+
+
+const TestDistance = () => {
+    const [loadMap, setLoadMap] = useState(false);
+  
+    useEffect(() => {
+      loadGoogleMapScript(() => {
+        setLoadMap(true)
+      });
+    }, []);
+  
+    return (
+      <div className="App">
+        {!loadMap ? <div>Loading...</div> : <Test />}
+      </div>
+    );
+  }
+
+export default TestDistance;

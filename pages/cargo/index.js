@@ -26,6 +26,7 @@ const Cargo = () => {
       if(page===undefined && page===1) {
         axios.get(`${process.env.BASE_URL}/newGetPost?category_id=1`)
         .then(res=> {
+          console.log(res)
           setLoading(false)
           setPosts(res.data.data)
           setTotal(res.data.pagination.total)
@@ -36,6 +37,8 @@ const Cargo = () => {
       else {
         axios.get(`${process.env.BASE_URL}/newGetPost?category_id=1&page=${page}`)
         .then(res=> {
+          
+          console.log(res)
           setLoading(false)
           setPosts(res.data.data)
           setTotal(res.data.pagination.total)

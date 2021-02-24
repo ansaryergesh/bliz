@@ -31,8 +31,8 @@ class Delete extends React.Component {
             <h1 className="smaller_font">Документы</h1>
           </div>
             <Bin bin={this.props.usersReducer.user.companyDetails[0].bin} fetchCurrentUser={this.props.fetchCurrentUser}/>
-            <Document1 registration={this.props.usersReducer.user.registration}  fetchCurrentUser={this.props.fetchCurrentUser} />
-            <Document2 license={this.props.usersReducer.user.license} fetchCurrentUser={this.props.fetchCurrentUser}/>
+            <Document1 registration={this.props.usersReducer.user.companyDetails[0].registration}  fetchCurrentUser={this.props.fetchCurrentUser} />
+            <Document2 license={this.props.usersReducer.user.companyDetails[0].license} fetchCurrentUser={this.props.fetchCurrentUser}/>
             {/* <UserDelete /> */}
 					</div>
           
