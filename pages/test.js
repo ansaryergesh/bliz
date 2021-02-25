@@ -10,8 +10,8 @@ const Test = () => {
   const placeInputRef = useRef(null);
   const placeInputRef2 = useRef(null);
   const [country, setCountry] = useState('kz')
-  const [place, setPlace] = useState({address: '', id: null});
-  const [place2, setPlace2] = useState({address: '', id: null});
+  const [place, setPlace] = useState({address: '', id: null, lat1: '', long1: '', lat2:'', long2: ''});
+  const [place2, setPlace2] = useState({address: '', id: null, lat1:'', long1:'', lat2:'', long2: ''});
   const [placeInfo, setPlaceInfo] = useState({
     distance: null,
     duration: null,
@@ -31,8 +31,6 @@ const Test = () => {
   }
   
   const [steps, setSteps] = useState([])
-
-  const GOOGLE_MAP_API_KEY = 'AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk'
   useEffect(() => {
     initPlaceAPI();
   }, []);
@@ -54,7 +52,7 @@ const Test = () => {
       dispatch({type: 'ERROR_MESSAGE', payload: 'Выберите конечный адрес'})
     }
     if(place1 && place2) {
-      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${place1}&destination=place_id:${place2}&key=${GOOGLE_MAP_API_KEY}`, {withCredentials: true},)
+      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${place1}&destination=place_id:${place2}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true},)
       .then(res => {
         setPlaceInfo ({
           duration: res.data.routes[0].legs[0].duration.text,
@@ -69,13 +67,22 @@ const Test = () => {
 
   // initialize the google place autocomplete
   const initPlaceAPI = () => {
+    var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(43.0287452876177 ,76.74156181578172),
+      new google.maps.LatLng(43.40665861045117 , 77.14676855202366)  
+    );
+    var cityBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(43.0287452876177, 76.74156181578172));
     let autocomplete = new window.google.maps.places.Autocomplete(placeInputRef.current,
       { types: ['(regions)'], componentRestrictions: {country: `${country}`}});
     let autocomplete2 = new window.google.maps.places.Autocomplete(placeInputRef2.current,
-      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
+      {bounds: defaultBounds,
+        types: ['geocode'],
+        strictBounds: true });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
       console.log(place)
+      console.log(defaultBounds)
       setPlace({
         address: place.formatted_address,
         id: place.place_id
@@ -87,7 +94,7 @@ const Test = () => {
       console.log(place)
       setPlace2({
         address: place.formatted_address,
-        id: place.place_id
+        id: place.place_id,
       });
     });
   };
@@ -143,7 +150,7 @@ const Test = () => {
         </div>
         <div className="goods__info__map border_none">
           <h4 className="goods__title">Карта маршрута</h4>
-          <iframe src={`https://www.google.com/maps/embed/v1/directions?key=${GOOGLE_MAP_API_KEY}&origin=${place.id ? "place_id:" +place.id : 'Алматы, Казахстан'}&destination=${place2.id ? "place_id:" + place2.id : 'Астана, Казахстан'}&avoid=tolls|highways`} width="100%" height={450} frameBorder={0} style={{border: 0}} allowFullScreen aria-hidden="false" tabIndex={0} />
+          <iframe src={`https://www.google.com/maps/embed/v1/directions?key=${process.env.GOOGLE_MAP_API_KEY}&origin=${place.id ? "place_id:" +place.id : 'Алматы, Казахстан'}&destination=${place2.id ? "place_id:" + place2.id : 'Астана, Казахстан'}&avoid=tolls|highways`} width="100%" height={450} frameBorder={0} style={{border: 0}} allowFullScreen aria-hidden="false" tabIndex={0} />
           <div className="info__map__path">
             <div className="info__map__title">
               <h4 className="goods__title">Полный маршрут</h4>

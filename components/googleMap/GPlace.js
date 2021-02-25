@@ -31,7 +31,6 @@ const GPlace = () => {
   
   const [steps, setSteps] = useState([])
 
-  const GOOGLE_MAP_API_KEY = 'AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk'
   useEffect(() => {
     initPlaceAPI();
   }, []);
@@ -53,7 +52,7 @@ const GPlace = () => {
       dispatch({type: 'ERROR_MESSAGE', payload: 'Выберите конечный адрес'})
     }
     if(place1 && place2) {
-      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${place1}&destination=place_id:${place2}&key=${GOOGLE_MAP_API_KEY}`, {withCredentials: true},)
+      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${place1}&destination=place_id:${place2}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true},)
       .then(res => {
         console.log(res.data.routes[0].legs[0].steps)
         setPlaceInfo ({
@@ -141,7 +140,7 @@ const GPlace = () => {
         </div>
         <div className="goods__info__map border_none">
           <h4 className="goods__title">Карта маршрута</h4>
-          <iframe src={`https://www.google.com/maps/embed/v1/directions?key=${GOOGLE_MAP_API_KEY}&origin=${place.id ? "place_id:" +place.id : 'Алматы, Казахстан'}&destination=${place2.id ? "place_id:" + place2.id : 'Астана, Казахстан'}&avoid=tolls|highways`} width="100%" height={450} frameBorder={0} style={{border: 0}} allowFullScreen aria-hidden="false" tabIndex={0} />
+          <iframe src={`https://www.google.com/maps/embed/v1/directions?key=${process.env.GOOGLE_MAP_API_KEY}&origin=${place.id ? "place_id:" +place.id : 'Алматы, Казахстан'}&destination=${place2.id ? "place_id:" + place2.id : 'Астана, Казахстан'}&avoid=tolls|highways`} width="100%" height={450} frameBorder={0} style={{border: 0}} allowFullScreen aria-hidden="false" tabIndex={0} />
           <div className="info__map__path">
             <div className="info__map__title">
               <h4 className="goods__title">Полный маршрут</h4>

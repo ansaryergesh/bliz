@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {createRef} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios';
 import withAuth from '../../hocs/withAuth'
@@ -6,6 +6,7 @@ import CheckBox from '../../components/shared/CheckBox'
 import cookie from 'js-cookie'
 import * as msgaction from '../../store/actions/messageAction'
 import { fireSystems, ventilations } from '../../defaults/checkboxes/documents';
+import { loadGoogleMapScript } from '../../defaults/googleMapDefaults';
 
 const mapDispatchToProps = (dispatch) =>({
   errorMessage:(msg) => {dispatch(msgaction.errorMessage(msg))},
@@ -26,6 +27,12 @@ class AddPost extends React.Component {
           subcategories: res.data
         })
       })
+
+      loadGoogleMapScript(() => {
+        this.setState({
+          loadMap: true,
+        },() => this.initPlaceAPI())
+      })
     }
 
     fileObj = [];
@@ -33,7 +40,10 @@ class AddPost extends React.Component {
 
     constructor(props) {
       super(props)
+      this.city = createRef();
+      this.street = createRef();
       this.state = {
+        loadMap: false,
         loading: false,
         area: '',
         image: [null],
@@ -41,8 +51,8 @@ class AddPost extends React.Component {
         type: 1,
         year: '',
         totalArea: '',
-        city_id: 1,
-        address: 'adad',
+        place: {place_id: '', placeBound: ''},
+        address: {address_id: ''},
         floor: 1,
         floor_type: 1,
         rack: true,
@@ -69,7 +79,41 @@ class AddPost extends React.Component {
       this.removeFile =this.removeFile.bind(this)
     }
 
+    initPlaceAPI() {
+      const self = this;
+      let viewport = '';
+      let autocomplete =  new window.google.maps.places.Autocomplete(this.city.current,
+        { types: ['(cities)'], componentRestrictions: {country: ['kz', 'ru']}});
+
+      new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
+        let place = autocomplete.getPlace();
+        console.log(place)
+        viewport = place.geometry.viewport
+        self.setState({place: {
+          place_id: place.place_id,
+          placeBound: place.geometry.viewport,
+        
+        }})
+
+        let autocomplete2 =  new window.google.maps.places.Autocomplete(self.street.current,
+          {bounds: viewport,
+            types: ['geocode'],
+            radius: 0,
+            origin: 'center',
+            strictBounds: true });
+        new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
+          let place = autocomplete2.getPlace();
+          console.log(place)
+          self.setState({address: place.place_id})
+        });
+      });
+  
+        
+    }
+
     handleSubmit(e) {
+      
+      e.preventDefault()
       console.log(this.state.image)
       var fs = Array.from(this.state.fire_system.keys()).join(",");
       var vent = Array.from(this.state.ventilation.keys()).join(",");
@@ -82,7 +126,7 @@ class AddPost extends React.Component {
         }
       }
       
-      console.log(finalImgs)
+      // console.log(finalImgs)
       const formData = new FormData();
       formData.append('token', cookie.get('token'));
       formData.append('area', this.state.area);
@@ -111,35 +155,7 @@ class AddPost extends React.Component {
       formData.append('inline_block', parseBoolean(this.state.inline_block));
       
       this.setState({loading: true})
-      axios.post(`${process.env.BASE_URL}/addStorage`, formData
-      // {
-      //   token: cookie.get('token'),
-      //   area: this.state.area,
-      //   image: this.state.image,
-      //   class: this.state.class,
-      //   type: this.state.type,
-      //   price: '200000',
-      //   price_type: 1,
-      //   currency: 1,
-      //   year: this.state.year,
-      //   totalArea: this.state.totalArea,
-      //   city_id: this.state.city_id,
-      //   address: this.state.address,
-      //   floor: this.state.floor,
-      //   floor_type: this.state.floor_type,
-      //   rack: parseBoolean(this.state.rack),
-      //   ramp: parseBoolean(this.state.ramp),
-      //   floor_load: this.state.floor_load,
-      //   parking_car: this.state.parking_car,
-      //   parking_cargo: this.state.parking_cargo,
-      //   fire_system[]: fs,
-      //   ventilation[]: vent,
-      //   fire_alarm: parseBoolean(this.state.fire_alarm), 
-      //   security_alarm: parseBoolean(this.state.security_alarm),
-      //   storage_transport_area: parseBoolean(this.state.storage_transport_area),
-      //   inline_block: parseBoolean(this.state.inline_block)
-      // }
-      )
+      axios.post(`${process.env.BASE_URL}/addStorage`, formData)
         .then((response) => {
         if(!response.data.success) {
           this.setState({loading:false})
@@ -156,7 +172,6 @@ class AddPost extends React.Component {
         this.props.errorMessage('Что то пошло не так')
       });
 
-      e.preventDefault()
     }
 
     handleCheckBox(e) {
@@ -271,7 +286,7 @@ class AddPost extends React.Component {
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Город/Регион</p>
                       <div className="post_ad__storage__chars__item__input">
-                        <input name='city_id' className="post_ad__input" type="text" placeholder="Казахстан, Алматы" />
+                        <input name='city_id' ref={this.city} className="post_ad__input" type="text" placeholder="Казахстан, Алматы" />
                         <i className="fas fa-map-marker-alt" />
                       </div>
                     </div>
@@ -280,7 +295,7 @@ class AddPost extends React.Component {
                   <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Адрес</p>
                       <div className="post_ad__storage__chars__item__input">
-                        <input name='address' className="post_ad__input" type="text" placeholder="Алматы, Бостандыкский р-н, Розыбакиева 17А" />
+                        <input name='address' disabled={this.state.place.place_id != '' ? false : true}ref={this.street} className="post_ad__input" type="text" placeholder="Алматы, Бостандыкский р-н, Розыбакиева 17А" />
                         <i className="fas fa-map-marker-alt" />
                       </div>
                     </div>
@@ -401,7 +416,7 @@ class AddPost extends React.Component {
                 </div>
               </div>
               <div className="post_ad__btns">
-                <button className="btn">Добавить объявление</button>
+                <button className="btn" type='submit'>Добавить объявление</button>
                 <div className="post_ad__price__checkbox">
                   <input type="checkbox" />
                   <p className="post_ad__par">Добавить объявление в топ</p>

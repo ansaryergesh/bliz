@@ -1,4 +1,4 @@
-import React, {createRef, useState} from 'react'
+import React, {createRef} from 'react'
 import axios from 'axios'
 import cookie from 'js-cookie'
 import {documents, pogruzka, condition, extra} from '../../defaults/checkboxes/documents'
@@ -80,21 +80,18 @@ class CargoAdd extends React.Component {
   handleCheckBox(e) {
     const item = e.target.value;
     const isChecked = e.target.checked;
-    console.log(this.state.docs)
-    // var ks = Array.from(this.state.docs.keys()).join(",");
-    // console.log(ks)
     this.setState(prevState => ({ docs: prevState.docs.set(item, isChecked) }));
   }
 
   handleSubmit(e) {
     this.props.closeMessage();
     var docVals = this.state.docs;
-    docVals.forEach(value,key,map){
+    docVals.forEach((value,key) =>{
       if(value === false) {
         docVals.delete(key);
       }
-    }
-    var ks = Array.from(this.state.docs.keys()).join(",");
+    })
+    var ks = Array.from(docVals.keys()).join(",");
     axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=${ks}`, {params: {
       token: cookie.get('token'),
       category_id: 1,
