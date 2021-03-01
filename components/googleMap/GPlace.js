@@ -52,7 +52,10 @@ const GPlace = () => {
       dispatch({type: 'ERROR_MESSAGE', payload: 'Выберите конечный адрес'})
     }
     if(place1 && place2) {
-      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${place1}&destination=place_id:${place2}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true},)
+      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${place1}&destination=place_id:${place2}&key=${process.env.GOOGLE_MAP_API_KEY}`,{headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }}, {withCredentials: true},)
       .then(res => {
         console.log(res.data.routes[0].legs[0].steps)
         setPlaceInfo ({

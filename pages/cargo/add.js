@@ -101,7 +101,10 @@ class CargoAdd extends React.Component {
     if(p1.length>0 && p2.length>0) {
       this.setState({
         loadingDisDur: true})
-      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true},)
+      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true},{headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }})
         .then(res => {
           if(res.status ===200) {
             this.setState({

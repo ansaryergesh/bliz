@@ -6,7 +6,10 @@ const getPlace = () => {
 
     useEffect(() => {
         axios.get(`${process.env.BASE_URL}/getPostById?post_id=1`);
-        axios.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJXclESTPsrjgRHr6Zl3zTblY&key=AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk')
+        axios.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJXclESTPsrjgRHr6Zl3zTblY&key=AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk', {headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          }})
             .then(res=> {
                 let getPlace = new Map();
              
