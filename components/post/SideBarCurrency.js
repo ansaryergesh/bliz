@@ -20,7 +20,8 @@ const SideBarCurrency = () => {
   }
   useEffect(() => {
     axios.get('https://www.nationalbank.kz/rss/rates_all.xml', {
-      "Content-Type": "application/xml; charset=utf-8"
+      "Content-Type": "application/xml; charset=utf-8",
+      'Access-Control-Allow-Origin': '*',
     })
       .then(response=> {
         setLoading(false)
