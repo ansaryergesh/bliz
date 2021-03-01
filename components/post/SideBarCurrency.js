@@ -19,27 +19,27 @@ const SideBarCurrency = () => {
     return path;
   }
   useEffect(() => {
-    axios.get('https://cors-anywhere.herokuapp.com/https://www.nationalbank.kz/rss/rates_all.xml', {
-      "Content-Type": "application/xml; charset=utf-8",
-      'Access-Control-Allow-Origin': '*',
-    })
-      .then(response=> {
-        setLoading(false)
-        let finalRes = parseString(response.data, function(err,result) {
-          setCurrency({
-            dollar:result.rss.channel[0].item[10].description, 
-            euro:result.rss.channel[0].item[11].description,
-            rubl: result.rss.channel[0].item[24].description,
-            yuan: result.rss.channel[0].item[15].description,
-          })
-        })
-        setTimeout(() => {
-          finalRes
-        }, 500)
-      })
+    // axios.get('https://cors-anywhere.herokuapp.com/https://www.nationalbank.kz/rss/rates_all.xml', {
+    //   "Content-Type": "application/xml; charset=utf-8",
+    //   'Access-Control-Allow-Origin': '*',
+    // })
+    //   .then(response=> {
+    //     setLoading(false)
+    //     let finalRes = parseString(response.data, function(err,result) {
+    //       setCurrency({
+    //         dollar:result.rss.channel[0].item[10].description, 
+    //         euro:result.rss.channel[0].item[11].description,
+    //         rubl: result.rss.channel[0].item[24].description,
+    //         yuan: result.rss.channel[0].item[15].description,
+    //       })
+    //     })
+    //     setTimeout(() => {
+    //       finalRes
+    //     }, 500)
+    //   })
   }, [])
 
-  const [currency, setCurrency] = useState({rubl: 0, dollar:0, euro:0, yuan: 0})
+  const [currency, setCurrency] = useState({rubl: 5.59, dollar:417.02, euro:505.51, yuan: 64.52})
   const [loading, setLoading] = useState(true)
 
   return (
