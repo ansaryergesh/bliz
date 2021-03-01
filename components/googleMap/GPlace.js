@@ -68,7 +68,7 @@ const GPlace = () => {
   // initialize the google place autocomplete
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(placeInputRef.current,
-      { types: ["(geocode)"], componentRestrictions: { country: ["kz", "ru"] } });
+      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
     let autocomplete2 = new window.google.maps.places.Autocomplete(placeInputRef2.current,
       { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
@@ -116,7 +116,8 @@ const GPlace = () => {
               </div>
               <div className="dis_calc__item">
                 <h3>КУДА</h3>
-                 {place2.address ? <input value={place2.address} ref={placeInputRef2}/> : <input type="text" ref={placeInputRef2} />}
+                 {/* {place2.address ? <input value={place2.address} ref={placeInputRef2}/> : <input type="text" ref={placeInputRef2} />} */}
+                 <input type="text" ref={placeInputRef2} />
            
               </div>
               <a className="btn btn--white" href="#"><i className="fas fa-plus-circle" />Добавить</a>

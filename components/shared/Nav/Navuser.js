@@ -143,7 +143,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
                 <a href="/">BLIZ.KZ</a>
               </div>
               <div className="nav__links">
-              <a className={router.pathname.includes('cargo') ? "goods__nav__opener active" : "goods__nav__opener"} href="#">Грузоперевозки</a>
+              <a className={router.pathname.includes('cargo') ? "goods__nav__opener active" : "goods__nav__opener"} href="/cargo">Грузоперевозки</a>
               <a className={router.pathname === '/storage' ? "goods__nav__opener active" : "goods__nav__opener"} href="/storage">Склады</a>
               <a className={router.pathname.includes('equipment') ? 'goods__nav__opener active' : 'goods__nav__opener'} href="/equipment">Спецтехника</a>
               <a href="#">Онлайн-курсы</a>
