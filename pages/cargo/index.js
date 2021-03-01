@@ -12,8 +12,6 @@ const Cargo = () => {
   const {id} = router.query
   const {page} = router.query
 
-  const [activeCategory, setActiveCategory] = useState('Все')
-  const [categoryId, setCategoryId] = useState(0)
   const [loading, setLoading] = useState(true)
   const [posts, setPosts] = useState([{}])
   const [currentPage, setCurrentPage] = useState(1)
