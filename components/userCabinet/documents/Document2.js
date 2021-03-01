@@ -52,7 +52,7 @@ const Document1 = ({license, fetchCurrentUser}) => {
         <p>Прикрепите скан-копию документа, в формате .jpg, .png, .pdf</p>
     </div>
       {/* {document!== null ? <img src={URL.createObjectURL(document)} /> : null} */}
-      {license ? <img  className='user_docs' src={license} /> :
+      {license ? <img  className='user_docs' src={`${process.env.DOC_URL}/images/company/${license}`} /> :
  
            <div className="fileUpload">
             <input type="file" className="upload" onChange={(e) =>onChange(e)}  accept="image/*" />

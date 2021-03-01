@@ -7,6 +7,17 @@ var parseString = require('xml2js').parseString;
 const SideBarCurrency = () => {
   const router = useRouter();
   const path = router.pathname
+
+  const redirect = () => {
+    let path = `${router.pathname}/add`
+    if(router.pathname.includes('transport')) {
+      path = '/cargo/transportAdd'
+    }
+    if(router.pathname.includes('auction')) {
+      path = '/cargo/auctionAdd'
+    }
+    return path;
+  }
   useEffect(() => {
     axios.get('https://www.nationalbank.kz/rss/rates_all.xml', {
       "Content-Type": "application/xml; charset=utf-8"
@@ -35,7 +46,7 @@ const SideBarCurrency = () => {
       {loading? <LoadingSpinner /> : ''}
       <div className="aside__add__ad">
         {/* {finalRes} */}
-        <a className="btn" onClick={() => router.push(`${path}/add`)}>Подать объявление</a>
+        <a className="btn" onClick={() => {router.push(redirect())}}>Подать объявление</a>
         <p>Размещение за 5 минут:
           <br/>
           легко,быстро и выгодно!</p>

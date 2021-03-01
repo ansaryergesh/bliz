@@ -7,6 +7,7 @@ import cookie from 'js-cookie'
 import * as msgaction from '../../store/actions/messageAction'
 import { fireSystems, ventilations } from '../../defaults/checkboxes/documents';
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults';
+import { parseBoolean } from '../../defaults/extraFunctions';
 
 const mapDispatchToProps = (dispatch) =>({
   errorMessage:(msg) => {dispatch(msgaction.errorMessage(msg))},
@@ -14,102 +15,111 @@ const mapDispatchToProps = (dispatch) =>({
 })
 
 class AddPost extends React.Component {
-    componentDidMount() {
-      axios.get(`${process.env.BASE_URL}/getCategory`)
-        .then(res=> {
-          this.setState({
-            categories: res.data
-          })
-        })
-      axios.get(`${process.env.BASE_URL}/getSubcategories`)
+  componentDidMount() {
+    axios.get(`${process.env.BASE_URL}/getCategory`)
       .then(res=> {
         this.setState({
-          subcategories: res.data
+          categories: res.data
         })
       })
-
-      loadGoogleMapScript(() => {
-        this.setState({
-          loadMap: true,
-        },() => this.initPlaceAPI())
+    axios.get(`${process.env.BASE_URL}/getSubcategories`)
+    .then(res=> {
+      this.setState({
+        subcategories: res.data
       })
-    }
+    })
 
-    fileObj = [];
-    fileArray = [];
+    loadGoogleMapScript(() => {
+      this.setState({
+        loadMap: true,
+      },() => this.initPlaceAPI())
+    })
+  }
 
-    constructor(props) {
-      super(props)
-      this.city = createRef();
-      this.street = createRef();
-      this.state = {
-        loadMap: false,
-        loading: false,
-        area: '',
-        image: [null],
-        class: 1,
-        type: 1,
-        year: '',
-        totalArea: '',
-        place: {place_id: '', placeBound: ''},
-        address: {address_id: ''},
-        floor: 1,
-        floor_type: 1,
-        rack: true,
-        ramp: true,
-        floor_load: '',
-        parking_car: '',
-        parking_cargo:'',
-        price: '200000',
-        price_type: 1,
-        currency: 1,
-        fire_system: new Map(),
-        ventilation: new Map(),
-        fire_alarm: false,
-        security_alarm: false,
-        storage_transport_area: false,
-        inline_block: false,
-      };
-      this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleCheckBox = this.handleCheckBox.bind(this);
-      this.handleCheckBoxVent = this.handleCheckBoxVent.bind(this);
-      this.handleChange = this.handleChange.bind(this);
-      this.handleOtherCheckBox = this.handleOtherCheckBox.bind(this);
-      this.uploadMultipleFiles = this.uploadMultipleFiles.bind(this);
-      this.removeFile =this.removeFile.bind(this)
-    }
+  fileObj = [];
+  fileArray = [];
 
-    initPlaceAPI() {
-      const self = this;
-      let viewport = '';
-      let autocomplete =  new window.google.maps.places.Autocomplete(this.city.current,
-        { types: ['(cities)'], componentRestrictions: {country: ['kz', 'ru']}});
+  constructor(props) {
+    super(props)
+    this.city = createRef();
+    this.street = createRef();
+    this.state = {
+      loadMap: false,
+      loading: false,
+      area: '',
+      image: [],
+      class: 1,
+      type: 1,
+      year: '',
+      totalArea: '',
+      place: {place_id: '', placeBound: '', formatted_address: ''},
+      address: {address_id: '', formatted_address: ''},
+      floor: 1,
+      floor_type: 1,
+      rack: true,
+      ramp: true,
+      floor_load: '',
+      parking_car: '',
+      parking_cargo:'',
+      price: '200000',
+      price_type: 1,
+      currency: 1,
+      fire_system: new Map(),
+      ventilation: new Map(),
+      fire_alarm: false,
+      security_alarm: false,
+      storage_transport_area: false,
+      inline_block: false,
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCheckBox = this.handleCheckBox.bind(this);
+    this.handleCheckBoxVent = this.handleCheckBoxVent.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleOtherCheckBox = this.handleOtherCheckBox.bind(this);
+    this.uploadMultipleFiles = this.uploadMultipleFiles.bind(this);
+    this.removeFile =this.removeFile.bind(this)
+  }
 
-      new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
-        let place = autocomplete.getPlace();
-        console.log(place)
-        viewport = place.geometry.viewport
-        self.setState({place: {
-          place_id: place.place_id,
-          placeBound: place.geometry.viewport,
-        
-        }})
+  initPlaceAPI() {
+    const self = this;
+    let viewport = '';
+    let autocomplete =  new window.google.maps.places.Autocomplete(this.city.current,
+      { types: ['(cities)'], componentRestrictions: {country: ['kz', 'ru']}});
+    
+    new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
+      let place = autocomplete.getPlace();
+      console.log(place)
+      viewport = place.geometry.viewport
+      self.setState({place: {
+        place_id: place.place_id,
+        placeBound: place.geometry.viewport,
+        formatted_address: place.formatted_address
+      }})
 
-        let autocomplete2 =  new window.google.maps.places.Autocomplete(self.street.current,
-          {bounds: viewport,
-            types: ['geocode'],
-            radius: 0,
-            origin: 'center',
-            strictBounds: true });
-        new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
-          let place = autocomplete2.getPlace();
-          console.log(place)
-          self.setState({address: place.place_id})
-        });
+      let autocomplete2 =  new window.google.maps.places.Autocomplete(self.street.current,
+        {bounds: viewport,
+          types: ['geocode'],
+          radius: 0,
+          origin: 'center',
+          strictBounds: true });
+      new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
+        let place = autocomplete2.getPlace();
+        let address_string = '';
+        let address_map = new Map();
+        place.address_components.forEach(el=>{
+          address_map.set(el.long_name, el.long_name);
+        })
+        address_string = Array.from(address_map.keys()).join(',')
+        self.setState({address: 
+          { address_id: place.place_id,
+            formatted_address: address_string,
+          }
+        })
       });
-  
-        
-    }
+    });
+
+      
+  }
 
     handleSubmit(e) {
       
@@ -117,20 +127,13 @@ class AddPost extends React.Component {
       console.log(this.state.image)
       var fs = Array.from(this.state.fire_system.keys()).join(",");
       var vent = Array.from(this.state.ventilation.keys()).join(",");
-
-      function parseBoolean(val) {
-        if(val === true) {
-          return 1
-        }else {
-          return 0
-        }
-      }
+      
       
       // console.log(finalImgs)
       const formData = new FormData();
       formData.append('token', cookie.get('token'));
       formData.append('area', this.state.area);
-      formData.append('image[]', this.state.image);
+      formData.append('image', this.state.image);
       formData.append('class', this.state.class);
       formData.append('type', this.state.type);
       formData.append('price', this.state.price);
@@ -138,8 +141,9 @@ class AddPost extends React.Component {
       formData.append('currency', this.state.currency);
       formData.append('year', this.state.year);
       formData.append('totalArea', this.state.totalArea);
-      formData.append('city_id', this.state.city_id);
-      formData.append('address', this.state.address);
+      formData.append('city_id', this.state.place.place_id);
+      formData.append('address', this.state.address.address_id);
+      formData.append('region', this.state.address.formatted_address);
       formData.append('floor', this.state.floor);
       formData.append('floor_type', this.state.floor_type);
       formData.append('rack', parseBoolean(this.state.rack));
@@ -167,7 +171,7 @@ class AddPost extends React.Component {
        }
       
       }).catch((error) => {
-        console.log(error)
+        console.log(error.response.data.status)
         this.setState({loading: false, message: 'Ошибка'})
         this.props.errorMessage('Что то пошло не так')
       });
@@ -211,8 +215,12 @@ class AddPost extends React.Component {
       for (let i = 0; i < this.fileObj[0].length; i++) {
           this.fileArray.push(URL.createObjectURL(this.fileObj[0][i]))
       }
-      this.setState({ image: this.fileObj})
-      // this.setState({ image: e.target.files[0]})
+      // this.setState({ image: this.fileObj})
+      let file = [];
+      file = this.state.image;
+      file.push(e.target.files[0]);
+      // this.setState({ image: file})
+      this.setState({image: e.target.files[0]})
     }
 
     removeFile(event) {
@@ -295,7 +303,7 @@ class AddPost extends React.Component {
                   <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Адрес</p>
                       <div className="post_ad__storage__chars__item__input">
-                        <input name='address' disabled={this.state.place.place_id != '' ? false : true}ref={this.street} className="post_ad__input" type="text" placeholder="Алматы, Бостандыкский р-н, Розыбакиева 17А" />
+                        <input name='address' disabled={this.state.place.place_id != '' ? false : true}ref={this.street} className="post_ad__input" type="text" placeholder="ул. Розыбакиева 17А, Алматы, Казахстан" />
                         <i className="fas fa-map-marker-alt" />
                       </div>
                     </div>

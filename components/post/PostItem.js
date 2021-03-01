@@ -1,34 +1,9 @@
-import React, { useEffect } from 'react'
-import SideBarCurrency from './SideBarCurrency'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import PaginationBtns from '../pagination/PaginationBtns'
+import { dateParse, parseDateTime } from '../../defaults/extraFunctions';
 const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, loading}) => {
-
-  const paginationBtns = [];
-
-  for (let i = 0; i < maxPage; i++) {
-    paginationBtns.push(
-      <a
-        onClick={() => onChangePage(i+1)}
-        className={currentPage === i + 1
-        ? 'active'
-        : ''}
-        disabled>{i + 1}</a>
-    )
-  }
-  
-  const dateParse = (date) => {
-    let months = [
-        'янв', 'фев', 'мар', 'апр', 'май', 'июн',
-        'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'
-    ];
-  
-    if(date.slice(3,4) === '0') {
-        return date.slice(0,2) + ' ' + months[parseInt(date.slice(4,5)) - 1]
-    }else {
-        return date.slice(0,2) + ' ' + months[parseInt(date.slice(3,5)) - 1]
-    }
-  }
-
-
+ 
   return (
       <div className="products__content">
         <div className="products__title">
@@ -44,12 +19,12 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
               <div className="product__item">
                 <div className="product__item__date">
                 {p.details ? dateParse(p.details[0].start_date) + '-' + dateParse(p.details[0].end_date) : 'Загрузка...'}
-                  <p>изм: 3 мая 14:40</p>
+                  <p>{parseDateTime(p.updated_at)} </p>
                 </div>
                 <div className="product__item__title">
-                  <a href="goods_nav1_item.html">{p.details ? p.details[0].from : 'Загрузка...'}
-                    — {p.details ? p.details[0].to : 'Загрузка...'}
-                    (РК)</a>
+                  <a href={`cargo/${p.id}`}>{p.details ? p.details[0].from_string : 'Загрузка...'}
+                    — {p.details ? p.details[0].to_string : 'Загрузка...'}
+                    </a>
                   <p>~{p.details ? p.details[0].distance : '...'} км, отходы стальные, растентовка</p>
                 </div>
                 <div className="product__item__title">
@@ -64,13 +39,10 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
             ))}
               </div>}
          
-
-            {/* Pagination */}
-            <div className="product__items__list">
+            {/* <div className="product__items__list">
               {paginationBtns}
-            </div>
-            {/* Pagination end */}
-
+            </div> */}
+            <PaginationBtns max_page={maxPage} current_page={currentPage} onChangePage={onChangePage} />
             <div className="products__text">
               <div className="products__text__item">
                 <h3>Грузоперевозки в Казахстане и в Алматы</h3>

@@ -145,8 +145,8 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
               <div className="nav__links">
               <a className={router.pathname.includes('cargo') ? "goods__nav__opener active" : "goods__nav__opener"} href="#">Грузоперевозки</a>
               <a className={router.pathname === '/storage' ? "goods__nav__opener active" : "goods__nav__opener"} href="/storage">Склады</a>
-                <a className="equipment__opener" href="#">Спецтехника</a>
-                <a href="#">Онлайн-курсы</a>
+              <a className={router.pathname.includes('equipment') ? 'goods__nav__opener active' : 'goods__nav__opener'} href="/equipment">Спецтехника</a>
+              <a href="#">Онлайн-курсы</a>
               </div>
             </div>
             <div className="nav__nums">
@@ -164,15 +164,15 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
             <a className={router.pathname === '/cargo/check' ? 'active' : ''}  href="/cargo/check">Проверка компаний</a>
           </div>
         </div>
-        <div className="goods__nav equipment">
+        <div className={router.pathname.includes('equipment') ? 'goods__nav equipment active' : 'goods__nav equipment'}>
           <div className="goods__nav__links container">
-            <a href="equipment-nav-1.html">Все</a>
-            <a href="equipment-nav-1.html">Землеройная</a>
-            <a href="equipment-nav-1.html">Строительная</a>
-            <a href="equipment-nav-1.html">Бетонные работы</a>
-            <a href="equipment-nav-1.html">Грузоперевозки</a>
-            <a href="equipment-nav-1.html">Коммунальная</a>
-            <a href="equipment-nav-1.html">Прочее</a>
+            <a href="/equipment">Все</a>
+            <a className={router.pathname === '/equipment' ? 'active' : ''} href="#">Землеройная</a>
+            <a href="#">Строительная</a>
+            <a href="#">Бетонные работы</a>
+            <a href="#">Грузоперевозки</a>
+            <a href="#">Коммунальная</a>
+            <a href="#">Прочее</a>
           </div>
         </div>
       </header>}

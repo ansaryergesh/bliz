@@ -8,6 +8,7 @@ import {connect} from 'react-redux'
 import { todaysDate } from '../../defaults/defaults'
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
+import { deleteFalseKey } from '../../defaults/extraFunctions'
 
 const mapDispatchToProps = (dispatch) =>({
   successMessage: (msg) => {dispatch(successMessage(msg))},
@@ -30,20 +31,29 @@ class CargoAdd extends React.Component {
     this.placeInputRef2 = createRef();
     this.state = {
       loadMap:false,
-      title: 'title',
+      loadingDisDur: false,
+      title: '',
       from: '',
       to: '',
       volume: '22',
       net: '86',
+      height: '',
+      length: '',
+      width: '',
       startDate: todaysDate(),
       endDate: todaysDate(),
       price: '100',
       priceType: 1,
       paymentType: 1,
+      type_transport:1,
       docs: new Map(),
       pogruzki: new Map(),
       condition: new Map(),
       extra: new Map(),
+      distance: '',
+      duration: '',
+      fromString: '',
+      toString: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -54,20 +64,64 @@ class CargoAdd extends React.Component {
   initPlaceAPI() {
     const self = this;
     let autocomplete =  new window.google.maps.places.Autocomplete(this.placeInputRef.current,
-      { types: ['(regions)'], componentRestrictions: {country: ['kz', 'ru']}});
+      { types: ['(cities)'], componentRestrictions: {country: ['kz', 'ru']}});
     let autocomplete2 =  new window.google.maps.places.Autocomplete(this.placeInputRef2.current,
-      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
+      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru"] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
-      console.log(place.place_id)
-      self.setState({from: place.place_id})
+      console.log(place)
+      let addressString=new Map();
+      place.address_components.forEach(elem=> {
+        if(elem.types.includes('locality') || elem.types.includes('country')) {
+          addressString.set(elem.short_name, elem.short_name);
+        }
+      })
+      self.setState({
+        from: place.place_id, 
+        fromString:Array.from(addressString.keys()).join(',')
+      },() => {self.getDistanceDuration(self.state.from,self.state.to)})
     });
 
       new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
       let place = autocomplete2.getPlace();
-      console.log(place)
-      self.setState({to: place.place_id})
+      let addressString=new Map();
+      place.address_components.forEach(elem=> {
+        if(elem.types.includes('locality') || elem.types.includes('country')) {
+          addressString.set(elem.short_name, elem.short_name);
+        }
+      })
+      self.setState({
+        to: place.place_id,
+        toString:Array.from(addressString.keys()).join(',')
+      },() => {self.getDistanceDuration(self.state.from,self.state.to)})
     });
+  }
+
+  getDistanceDuration(p1,p2) {
+    if(p1.length>0 && p2.length>0) {
+      this.setState({
+        loadingDisDur: true})
+      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true},)
+        .then(res => {
+          if(res.status ===200) {
+            this.setState({
+              loadingDisDur: false,
+              distance: res.data.routes[0].legs[0].distance.text,
+              duration:res.data.routes[0].legs[0].duration.text
+            })
+          }
+          if(res.status ===400 ) {
+            this.setState({
+              loadingDisDur:false
+            })
+            console.log(res)
+          }
+          
+        })
+    }else {
+      this.setState({loadingDisDur: false})
+    }
+    
   }
   handleChange(event) {
     const target = event.target;
@@ -80,19 +134,30 @@ class CargoAdd extends React.Component {
   handleCheckBox(e) {
     const item = e.target.value;
     const isChecked = e.target.checked;
-    this.setState(prevState => ({ docs: prevState.docs.set(item, isChecked) }));
+
+
+    if(documents.some(d=> d.name === e.target.name)) {
+      this.setState(prevState => ({ docs: prevState.docs.set(item, isChecked) }));
+    }
+    if(condition.some(c=>c.name===e.target.name)) {
+      this.setState(prevState=>({condition: prevState.condition.set(item,isChecked)}))
+    }
+    if(pogruzka.some(p=>p.name===e.target.name)) {
+      this.setState(prevState=>({pogruzki: prevState.pogruzki.set(item,isChecked)}))
+    }
+    if(extra.some(c=>c.name===e.target.name)) {
+      this.setState(prevState=>({extra: prevState.extra.set(item,isChecked)}))
+    }
+    
   }
 
   handleSubmit(e) {
     this.props.closeMessage();
-    var docVals = this.state.docs;
-    docVals.forEach((value,key) =>{
-      if(value === false) {
-        docVals.delete(key);
-      }
-    })
-    var ks = Array.from(docVals.keys()).join(",");
-    axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=${ks}`, {params: {
+    var docVals = deleteFalseKey(this.state.docs);
+    var loads = deleteFalseKey(this.state.pogruzki);
+    var condits = deleteFalseKey(this.state.condition)
+    var extras = deleteFalseKey(this.state.extra)
+    axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=${docVals}&loading[]=${loads}&condition[]=${condits}&addition[]=${extras}`, {params: {
       token: cookie.get('token'),
       category_id: 1,
       sub_id: 1,
@@ -105,7 +170,12 @@ class CargoAdd extends React.Component {
       end_date: this.state.endDate,
       price_type: this.state.priceType,
       payment_type: this.state.paymentType,
-      price: this.state.price
+      price: this.state.price,
+      type_transport: this.state.type_transport,
+      duration: this.state.duration,
+      distance: this.state.distance,
+      from_string: this.state.fromString,
+      to_string: this.state.toString,
     }})
       .then(res => {
         if(res.data.success) {
@@ -123,6 +193,7 @@ class CargoAdd extends React.Component {
       <>
         {!this.state.loadMap ? <LoadingSpinner/> :
           <section className="post_ad__body">
+            {this.state.loadingDisDur ? <LoadingSpinner /> : ''}
             <div className="products__container container">
               <div className="products__content">
               <div className="products__title">
@@ -137,12 +208,7 @@ class CargoAdd extends React.Component {
                 <div className="post_ad__adress no_topBorder">
                   <div className="post_ad__adress__wrapper">
                     <div className="post_ad__adress__items">
-                      <div className="post_ad__adress__item">
-                        <p className="post_ad__par">Название</p>
-                        <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" value={this.state.title} onChange={this.handleChange} name='from' type="text" placeholder="Краткое название поста"/>
-                        </div>
-                      </div>
+                 
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Откуда</p>
                         <div className="post_ad__adress__item__input">
@@ -192,7 +258,7 @@ class CargoAdd extends React.Component {
                     <div className="post_ad__chars__items">
                       <div className="post_ad__chars__item">
                         <p className="post_ad__par">Характер груза</p>
-                        <input className="post_ad__input" type="text" placeholder="Овощи и фрукты"/>
+                        <input name='title' className="post_ad__input" value={this.state.title} onChange={this.handleChange} type="text" placeholder="Овощи и фрукты"/>
                       </div>
                       <div className="post_ad__chars__items__inputs">
                         <div className="post_ad__chars__item">
@@ -224,9 +290,9 @@ class CargoAdd extends React.Component {
                       <div className="post_ad__chars__items__inputs__container">
                         <p className="post_ad__par">Размер груза, м</p>
                         <div className="post_ad__chars__items__inputs__wrapper">
-                          <input className="post_ad__input" type="text" placeholder="Ширина, м"/>
-                          <input className="post_ad__input" type="text" placeholder="Длина, м"/>
-                          <input className="post_ad__input" type="text" placeholder="Высота, м"/>
+                          <input name='width' value={this.state.width} onChange={this.handleChange} className="post_ad__input" type="text" placeholder="Ширина, м"/>
+                          <input name='length' value={this.state.length} onChange={this.handleChange} className="post_ad__input" type="text" placeholder="Длина, м"/>
+                          <input name='height' value={this.state.height}  onChange={this.handleChange} className="post_ad__input" type="text" placeholder="Высота, м"/>
                         </div>
                       </div>
                     </div>
@@ -303,17 +369,17 @@ class CargoAdd extends React.Component {
                     <div className="post_ad__aditional__checkbox__items">
                       <h3>Погрузка</h3>
                       {pogruzka.map(pog=> (
-                        <CheckBox name={pog.name} value={pog.value} checked={this.state.pogruzki.get(pog.value)}  />
+                        <CheckBox name={pog.name} value={pog.value} checked={this.state.pogruzki.get(pog.value)} handleCheckBox={this.handleCheckBox}  />
                       ))}
                     </div>
                     <div className="post_ad__aditional__checkbox__items">
                       <h3>Условия </h3>
                       {condition.map(con=> (
-                        <CheckBox name={con.name} value={con.value} checked={this.state.condition.get(con.value)}  />
+                        <CheckBox name={con.name} value={con.value} checked={this.state.condition.get(con.value)} handleCheckBox={this.handleCheckBox}  />
                       ))}
                       <h3 class="margin">Дополнительно</h3>
                       {extra.map(ext=> (
-                        <CheckBox name={ext.name} value={ext.value} checked={this.state.extra.get(ext.value)}  />
+                        <CheckBox name={ext.name} value={ext.value} checked={this.state.extra.get(ext.value)}  handleCheckBox={this.handleCheckBox}/>
                       ))}
                     </div>
                   </div>
@@ -364,55 +430,3 @@ class CargoAdd extends React.Component {
 }
 
 export default (connect(null,mapDispatchToProps)(CargoAdd));
-// const CargoAdd = () => {
-  
-//   const [title, setTitle] = useState('title')
-//   const [from,setFrom] = useState(1)
-//   const [to,setTo] = useState(2)
-//   const [volume,setVolume] = useState('22')
-//   const [net,setnet] = useState('86')
-//   const [startDate,setstartDate] = useState('08.02.2021')
-//   const [endDate,setendDate] = useState('10.02.2021')
-//   const [price,setPrice] = useState('150000')
-//   const [priceType,setPriceType] =  useState(1)
-//   const [paymentType,setPaymentType] = useState(1)
-//   const [docs, setDocs] = useState(new Map())
-
-//   const dispatch = useDispatch();
-
-//   const handleSubmit = (e) => {
-//     axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=1,2`, {params: {
-//       token: cookie.get('token'),
-//       category_id: 1,
-//       sub_id: 1,
-//       title: title,
-//       from: from,
-//       to: to,
-//       volume: volume,
-//       net: net,
-//       start_date: startDate,
-//       end_date: endDate,
-//       price_type: priceType,
-//       payment_type: paymentType,
-//       price
-//     }})
-//       .then(res => {
-//         if(res.data.success) {
-//           dispatch({type: 'SUCCESS_MESSAGE', payload: 'Успешно добавлен пост'})
-//         }else {
-//           dispatch({type: 'ERROR_MESSAGE', payload: res.data.message})
-//         }
-//       })
-
-//     e.preventDefault()
-//   }
-
-//   const handleCheckBoxChange = (e) => {
-//     const item = e.target.value;
-//     const isChecked = e.target.checked;
-//     setDocs(...docs.set(item,isChecked))
-
-//     console.log(docs)
-//   }
- 
-// }
