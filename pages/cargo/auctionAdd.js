@@ -134,7 +134,7 @@ class AuctionAdd extends React.Component {
     if(p1.length>0 && p2.length>0) {
       this.setState({
         loadingDisDur: true})
-      axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true})
+      axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`)
         .then(res => {
           if(res.status ===200) {
             this.setState({
