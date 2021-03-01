@@ -19,7 +19,7 @@ const SideBarCurrency = () => {
     return path;
   }
   useEffect(() => {
-    axios.get('https://www.nationalbank.kz/rss/rates_all.xml', {
+    axios.get('https://cors-anywhere.herokuapp.com/https://www.nationalbank.kz/rss/rates_all.xml', {
       "Content-Type": "application/xml; charset=utf-8",
       'Access-Control-Allow-Origin': '*',
     })

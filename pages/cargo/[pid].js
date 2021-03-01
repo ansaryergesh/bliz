@@ -8,7 +8,7 @@ import PostAside from '../../components/post/PostAside'
 
 const CargoDetailed = () => {
   const getRoute = () => {
-    axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${postInfo.details.from}&destination=place_id:${postInfo.details.to}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true},{headers: {
+    axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${postInfo.details.from}&destination=place_id:${postInfo.details.to}&key=${process.env.GOOGLE_MAP_API_KEY}`, {withCredentials: true},{headers: {
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json'
     }})
