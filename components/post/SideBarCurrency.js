@@ -40,7 +40,7 @@ const SideBarCurrency = () => {
   }, [])
 
   const [currency, setCurrency] = useState({rubl: 5.59, dollar:417.02, euro:505.51, yuan: 64.52})
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   return (
     <div className="products__aside">
