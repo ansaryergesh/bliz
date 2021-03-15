@@ -188,6 +188,30 @@ class Nav extends React.Component {
           $('#register_title').html('Контакное лицо')
         })
       });
+
+      $('.big_filter_btn').click(function(){
+        $('.main_filter__big').toggle();
+      });
+    
+      $('.mobile_bar').click(function(){
+        $(this).toggleClass('active');
+        $('.header__top__mobile').slideToggle();
+        $('body').toggleClass('lock');
+      })
+      $('.header__top__mobile__nav__item').click(function(){
+        $(this).siblings().find('.header__top__mobile__nav__item__inner').slideUp();
+        $(this).siblings().find('.header__top__mobile__nav__item__text').removeClass('active');
+        $(this).find('.header__top__mobile__nav__item__inner').slideToggle();
+        $(this).find('.header__top__mobile__nav__item__text').toggleClass('active');
+      })
+    
+      $(window).scroll(function (){
+        if ($(this).scrollTop() > 120){
+            $('.header__top').addClass('fixed');
+        } else{
+          $('.header__top').removeClass('fixed');
+        } 
+    });
     }
     render() {
       

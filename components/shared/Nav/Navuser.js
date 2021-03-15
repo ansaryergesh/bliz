@@ -48,6 +48,11 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
     <div className="header__top">
   <div className="header__top__wrapper container">
     <div className="header__top__items">
+    <div classNamr="header__top__mobile__item">
+            <div className="mobile_bar">
+              <span></span>
+            </div>
+          </div>
       <div className="header__top__item">
         <img src="/img/widgets/KZ.svg"  />
         <p>Казахстан, Алматы</p>
@@ -77,7 +82,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
         </div>
       </div>
     </div>
-    <div className="header__top__items">
+    <div className="header__top__items mobile_none">
       <div className="header__top__item">
         <div className="header__item__notification">2</div>
         <i className="far fa-clipboard" />
@@ -114,8 +119,10 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
           </div>       
         </div>
       </div>
-    </div>      
+    </div>
+      
   </div>
+  
 </div>
 {router.pathname.includes('cabinet') ?
 <nav className="cabinet_nav">

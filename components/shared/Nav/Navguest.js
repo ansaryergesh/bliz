@@ -9,6 +9,11 @@ export default function Navguest() {
      <div className="header__top">
   <div className="header__top__wrapper container">
     <div className="header__top__items">
+    <div classNamr="header__top__mobile__item">
+            <div className="mobile_bar">
+              <span></span>
+            </div>
+          </div>
       <div className="header__top__item">
         <img src="/img/widgets/KZ.svg"  />
         <p>Казахстан, Алматы</p>
@@ -48,6 +53,124 @@ export default function Navguest() {
       </div>
     </div>      
   </div>
+  
+  {/* <div className="header__top__mobile">
+  <div className="header__top__mobile__wrapper container">
+    <div className="header__top__mobile__nav">
+      <div className="header__top__mobile__nav__item">
+        <div className="header__top__mobile__nav__item__text">
+          <h3>Грузоперевозки</h3>
+          <i className="fas fa-angle-down" />
+        </div>
+        <div className="header__top__mobile__nav__item__inner">
+          <div className="header__top__mobile__nav__item__inner__wrapper">
+            <a href="goods-nav-1.html">Грузы</a>
+            <a href="goods-nav-2.html">Транспорт</a>
+            <a href="goods-nav-3.html">Аукцион</a>
+            <a href="goods-nav-4.html">Расчет растояний</a>
+            <a href="goods-nav-5.html">Проверка компаний</a>
+          </div>
+        </div>
+      </div>
+      <div className="header__top__mobile__nav__item">
+        <div className="header__top__mobile__nav__item__text">
+          <h3>Склады</h3>
+          <i className="fas fa-angle-down" />
+        </div>
+        <div className="header__top__mobile__nav__item__inner">
+          <div className="header__top__mobile__nav__item__inner__wrapper">
+            <a href="goods-nav-1.html">Грузы</a>
+            <a href="goods-nav-2.html">Транспорт</a>
+            <a href="goods-nav-3.html">Аукцион</a>
+            <a href="goods-nav-4.html">Расчет растояний</a>
+            <a href="goods-nav-5.html">Проверка компаний</a>
+          </div>
+        </div>
+      </div>
+      <div className="header__top__mobile__nav__item">
+        <div className="header__top__mobile__nav__item__text">
+          <h3>Спецтехника</h3>
+          <i className="fas fa-angle-down" />
+        </div>
+        <div className="header__top__mobile__nav__item__inner">
+          <div className="header__top__mobile__nav__item__inner__wrapper">
+            <a href="goods-nav-1.html">Грузы</a>
+            <a href="goods-nav-2.html">Транспорт</a>
+            <a href="goods-nav-3.html">Аукцион</a>
+            <a href="goods-nav-4.html">Расчет растояний</a>
+            <a href="goods-nav-5.html">Проверка компаний</a>
+          </div>
+        </div>
+      </div>
+      <div className="header__top__mobile__nav__item">
+        <div className="header__top__mobile__nav__item__text">
+          <h3>Онлайн курсы</h3>
+          <i className="fas fa-angle-down" />
+        </div>
+        <div className="header__top__mobile__nav__item__inner">
+          <div className="header__top__mobile__nav__item__inner__wrapper">
+            <a href="goods-nav-1.html">Грузы</a>
+            <a href="goods-nav-2.html">Транспорт</a>
+            <a href="goods-nav-3.html">Аукцион</a>
+            <a href="goods-nav-4.html">Расчет растояний</a>
+            <a href="goods-nav-5.html">Проверка компаний</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="header__top__mobile__login">
+      <h3>Вход и регистрация</h3>
+      <div className="header__top__mobile__login__btns">
+        <a href="login.html">Войти</a>
+        <a href="register.html">Регистрация</a>
+      </div>
+    </div>
+    <div className="header__top__mobile__language">
+      <h3>Регион и язык</h3>
+      <div className="header__top__mobile__nav__item">
+        <div className="header__top__mobile__nav__item__text">
+          <div className="header__top__mobile__nav__item__text__inner">
+            <img src="assets/img/widgets/KZ.svg" alt />
+            <h3>Казахстан, Алматы</h3>
+          </div>
+          <i className="fas fa-angle-down" />
+        </div>
+        <div className="header__top__mobile__nav__item__inner">
+          <div className="header__top__mobile__nav__item__inner__wrapper">
+            <a href="#">Казахстан, Алматы</a>
+            <a href="#">Казахстан, Алматы</a>
+          </div>
+        </div>
+      </div>
+      <div className="header__top__mobile__nav__item">
+        <div className="header__top__mobile__nav__item__text">
+          <div className="header__top__mobile__nav__item__text__inner">
+            <img src="assets/img/widgets/language_logo.png" alt />
+            <h3>На русском</h3>
+          </div>
+          <i className="fas fa-angle-down" />
+        </div>
+        <div className="header__top__mobile__nav__item__inner">
+          <div className="header__top__mobile__nav__item__inner__wrapper">
+            <a href="#">На казахском</a>
+            <a href="#">На английском</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="header__top__mobile__contacts">
+      <a href={+77073734124}>+7 (707) <span>373 41 24</span></a>
+      <a href={+77273956983}>+7 (727) <span>395 69 83</span></a>
+      <div className="header__top__mobile__contacts__icons">
+        <a href="#"><img src="assets/img/footer/Instagram.png" alt="instagram" /></a>
+        <a href="#"><img src="assets/img/footer/Telegram.png" alt="telegram" /></a>
+        <a href="#"><img src="assets/img/footer/VK.png" alt="vk" /></a>
+      </div>
+    </div>
+  </div>
+</div> */}
+
+  
 </div>
 
       
