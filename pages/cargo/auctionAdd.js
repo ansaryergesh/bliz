@@ -135,11 +135,11 @@ class AuctionAdd extends React.Component {
       this.setState({
         loadingDisDur: true})
       axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`,
-      {headers: {
-        'Access-Control-Allow-Origin': '*',
-        "Access-Control-Allow-Methods":"DELETE, POST, GET, OPTIONS",
-        "Access-Control-Allow-Headers":"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-      }}
+      // {headers: {
+      //   'Access-Control-Allow-Origin': '*',
+      //   "Access-Control-Allow-Methods":"DELETE, POST, GET, PUT",
+      //   "Access-Control-Allow-Headers":"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+      // }}
       )
         .then(res => {
           if(res.status ===200) {

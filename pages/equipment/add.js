@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, {createRef} from 'react'
 import {connect} from 'react-redux'
 import { closeMessage, errorMessage, successMessage } from '../../store/actions/messageAction'
-import { todaysDate } from '../../defaults/defaults'
+import { currencies, paymentType, todaysDate } from '../../defaults/defaults'
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import cookie from 'js-cookie'
 
@@ -326,7 +326,9 @@ class EquipmentAdd extends React.Component  {
                       <div className="post_ad__equipment__chars__item">
                         <p className="post_ad__par">Валюта</p>
                         <select name='currency' value={this.state.currency} onChange={this.handleChange} className="post_ad__input">
-                          <option>Тенге, KZT</option>
+                          {currencies.map(p => (
+                            <option value={p.value}>{p.name}</option>
+                          ))}
                         </select>
                       </div>
                       <div className="post_ad__equipment__price__radio">

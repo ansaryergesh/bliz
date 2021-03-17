@@ -3,7 +3,7 @@ import SideBarCurrency from "../post/SideBarCurrency";
 import {useDispatch} from 'react-redux'
 import axios from "axios";
 import parse from 'html-react-parser'
-
+// 
 
 const GPlace = () => {
   const dispatch = useDispatch();
@@ -52,22 +52,32 @@ const GPlace = () => {
       dispatch({type: 'ERROR_MESSAGE', payload: 'Выберите конечный адрес'})
     }
     if(place1 && place2) {
-      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${place1}&destination=place_id:${place2}&key=${process.env.GOOGLE_MAP_API_KEY}`,
+      axios.get(`${process.env.DOC_URL}distance?from=${place1}&to=${place2}`,
       {headers: {
         'Access-Control-Allow-Origin': '*',
-        "Access-Control-Allow-Methods":"DELETE, POST, GET, OPTIONS",
+        "Access-Control-Allow-Methods":"DELETE, POST, GET, PUT",
         "Access-Control-Allow-Headers":"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
       }}
       )
       .then(res => {
-        console.log(res.data.routes[0].legs[0].steps)
         setPlaceInfo ({
-          duration: res.data.routes[0].legs[0].duration.text,
-          distance: res.data.routes[0].legs[0].distance.text,
+          duration: res.data.distance,
+          distance: res.data.duration,
         })
         
-        setSteps(res.data.routes[0].legs[0].steps)
+        setSteps(res.data.routes)
       })
+      // map.getDirections({
+      //   origin: `place_id: ${place1}`,
+      //   destination: `place_id: ${place2}`,
+      //   key: `${process.env.GOOGLE_MAP_API_KEY}`
+      // }, function(err,data) {
+      //   if(err) {
+      //     console(err);
+      //     return 1
+      //   }
+      //   console.log
+      // })
     }
     
   }

@@ -5,7 +5,7 @@ import {documents, pogruzka, condition, extra} from '../../defaults/checkboxes/d
 import CheckBox from '../../components/shared/CheckBox'
 import { closeMessage, errorMessage, successMessage } from '../../store/actions/messageAction'
 import {connect} from 'react-redux'
-import { todaysDate } from '../../defaults/defaults'
+import { currencies, paymentType, todaysDate } from '../../defaults/defaults'
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
 import { deleteFalseKey } from '../../defaults/extraFunctions'
@@ -101,10 +101,11 @@ class CargoAdd extends React.Component {
     if(p1.length>0 && p2.length>0) {
       this.setState({
         loadingDisDur: true})
+      
       axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`,
       {headers: {
         'Access-Control-Allow-Origin': '*',
-        "Access-Control-Allow-Methods":"DELETE, POST, GET, OPTIONS",
+        "Access-Control-Allow-Methods":"DELETE, POST, GET, PUT",
         "Access-Control-Allow-Headers":"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
       }}
       )
@@ -314,14 +315,21 @@ class CargoAdd extends React.Component {
                     <div className="post_ad__price__item">
                       <p className="post_ad__par">Валюта</p>
                       <select className="post_ad__input" value={this.state.priceType} name='priceType' onChange={this.handleChange}>
-                        <option value='1'>Тенге, KZT</option>
+                        {currencies.map(p => (
+                          <option value={p.value}>{p.name}</option>
+                        ))}
                       </select>
                     </div>
                     <div className="post_ad__price__item">
                       <p className="post_ad__par">Способ оплаты</p>
-                      <select className="post_ad__input" value={this.state.paymentType} name='paymentType' onChange={this.handleChange}>
-                        <option value='1'>Безналичный</option>
-                      </select>
+                     
+                        <select className="post_ad__input" value={this.state.paymentType} name='paymentType' onChange={this.handleChange}>
+                          {paymentType.map(p => (
+                            <option value={p.value}>{p.name}</option>
+                          ))}
+                         </select>
+                   
+                    
                     </div>
                   </div>
                   <div className="post_ad__price__checkbox">

@@ -180,3 +180,39 @@ export const todaysDate = () => {
 
   return today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2)
 }
+
+export const paymentType=[
+  {
+    'id': 1,
+    'value': '1',
+    'name': "Безналичный"
+  },
+  {
+    'id': 2,
+    'value': '2',
+    'name': "Наличный"
+  },
+  {
+    'id': 3,
+    'value': '3',
+    'name': "На карту"
+  }
+]
+
+export const currencies=[
+  {
+    'id': 1,
+    'value': '1',
+    'name': "Тенге, KZ"
+  },
+  {
+    'id': 2,
+    'value': '2',
+    'name': "Рубль, RUB"
+  },
+  {
+    'id': 3,
+    'value': '3',
+    'name': "Доллар, $"
+  }
+]
