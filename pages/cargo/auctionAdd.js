@@ -134,19 +134,19 @@ class AuctionAdd extends React.Component {
     if(p1.length>0 && p2.length>0) {
       this.setState({
         loadingDisDur: true})
-      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`,
-      // {headers: {
-      //   'Access-Control-Allow-Origin': '*',
-      //   "Access-Control-Allow-Methods":"DELETE, POST, GET, PUT",
-      //   "Access-Control-Allow-Headers":"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-      // }}
+      axios.get(`${process.env.BASE_URL}/distance?from=${p1}&to=${p2}`,
+      {headers: {
+        'Access-Control-Allow-Origin': '*',
+        "Access-Control-Allow-Methods":"DELETE, POST, GET, PUT",
+        "Access-Control-Allow-Headers":"Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+      }}
       )
         .then(res => {
           if(res.status ===200) {
             this.setState({
               loadingDisDur: false,
-              distance: res.data.routes[0].legs[0].distance.text,
-              duration:res.data.routes[0].legs[0].duration.text
+              distance: res.data.distance,
+              duration:res.data.duration
             })
           }
           if(res.status ===400 ) {

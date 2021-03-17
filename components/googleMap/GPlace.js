@@ -52,7 +52,7 @@ const GPlace = () => {
       dispatch({type: 'ERROR_MESSAGE', payload: 'Выберите конечный адрес'})
     }
     if(place1 && place2) {
-      axios.get(`${process.env.DOC_URL}distance?from=${place1}&to=${place2}`,
+      axios.get(`${process.env.BASE_URL}/distance?from=${place1}&to=${place2}`,
       {headers: {
         'Access-Control-Allow-Origin': '*',
         "Access-Control-Allow-Methods":"DELETE, POST, GET, PUT",

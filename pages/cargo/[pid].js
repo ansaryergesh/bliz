@@ -8,9 +8,9 @@ import PostAside from '../../components/post/PostAside'
 
 const CargoDetailed = () => {
   const getRoute = () => {
-    axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${postInfo.details.from}&destination=place_id:${postInfo.details.to}&key=${process.env.GOOGLE_MAP_API_KEY}`,)
+    axios.get(`${process.env.BASE_URL}/distance?from=${postInfo.details.from}&to=${postInfo.details.to}`,)
       .then(res => {
-        setSteps(res.data.routes[0].legs[0].steps)
+        setSteps(res.data.routes)
       })
   }
   useEffect(() => {

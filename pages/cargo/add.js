@@ -102,7 +102,7 @@ class CargoAdd extends React.Component {
       this.setState({
         loadingDisDur: true})
       
-      axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=place_id:${p1}&destination=place_id:${p2}&key=${process.env.GOOGLE_MAP_API_KEY}`,
+      axios.get(`${process.env.BASE_URL}/distance?from=${p1}&to=${p2}`,
       {headers: {
         'Access-Control-Allow-Origin': '*',
         "Access-Control-Allow-Methods":"DELETE, POST, GET, PUT",
@@ -110,11 +110,11 @@ class CargoAdd extends React.Component {
       }}
       )
         .then(res => {
-          if(res.status ===200) {
+          if(res.data.success ===true) {
             this.setState({
               loadingDisDur: false,
-              distance: res.data.routes[0].legs[0].distance.text,
-              duration:res.data.routes[0].legs[0].duration.text
+              distance: res.data.distance,
+              duration:res.data.duration
             })
           }
           if(res.status ===400 ) {
@@ -207,6 +207,7 @@ class CargoAdd extends React.Component {
         
                 <h4>Главная / Грузоперевозки / Добавить обьявление</h4>
                 <h1>Добавить груз</h1>
+                <p>{this.state.distance + this.state.duration + this.state.fromString + this.state.toString}</p>
                 <p className="post_ad__title">Укажите желаемые пункты погрузки и выгрузки, параметры
                   <br/>
                   транспортного средства и контактную информацию</p>
