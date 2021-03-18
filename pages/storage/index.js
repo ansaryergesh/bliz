@@ -46,7 +46,6 @@ const Storage = () => {
   }
   return (
     <div>
-      <h1>Руд  + {currentPath}</h1>
       <Filter />
       <div className="products__container container">
         {storages === [] ? '' :  <StorageItems total={total} storages={storages} maxPage={maxPage} onChangePage={onChangePage} currentPage={currentPage} loading={loading}/>}

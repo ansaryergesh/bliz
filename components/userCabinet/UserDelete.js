@@ -68,7 +68,7 @@ const UserDelete = () => {
 
       {focus? <div className="user__data__btns">
         {loading?  <span className='btn' disabled>Сохраняется...</span>:
-          <span className="btn" onClick={() => handleSubmit()}>Сохранить ИЗМЕНЕНИЯ</span>
+          <span className="btn" onClick={() => handleSubmit()}>Удалить аккаунт</span>
         }
         <span className="btn btn--white"  onClick={() => onCancel()}>ОТМЕНИТЬ</span>
       </div> : ''}

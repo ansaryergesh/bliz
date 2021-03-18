@@ -11,6 +11,8 @@ const Timer = (props) => {
     return {'total': t, 'days': days, 'hours': hours, 'minutes': minutes, 'seconds': seconds};
   }
 
+  
+
   const initializeClock = (endtime) => {
     const updateClock = () => {
       var t = getTimeRemaining(endtime);
@@ -37,7 +39,7 @@ const Timer = (props) => {
   }, [])
   return (
     <div title={'Закончится' + props.date_finish}>
-      {time.days + " дней" + " " + ""  +time.hours + " часа" + " " + time.minutes + " минута"}
+      {time.days + " дн" + " " + ""  +time.hours + " ч" + " " + time.minutes + " мин"}
     </div>
   )
 }
