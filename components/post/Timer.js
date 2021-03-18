@@ -36,7 +36,7 @@ const Timer = (props) => {
     initializeClock(props.date_finish.slice(6,10) + '-' + props.date_finish.slice(3,5) + '-' + props.date_finish.slice(0,2) +' '+ props.date_finish.slice(11,17))
   }, [])
   return (
-    <div>
+    <div title={'Закончится' + props.date_finish}>
       {time.days + " дней" + " " + ""  +time.hours + " часа" + " " + time.minutes + " минута"}
     </div>
   )
