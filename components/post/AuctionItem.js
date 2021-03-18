@@ -30,7 +30,7 @@ const AuctionItem = ({
                        <p>{auction.details ? dateParse2(auction.updated_at) : ''}</p>
                      </div>
                      <div className="product__item__title">
-                       <a href="goods_nav1_item2.html">{auction.details ? auction.details[0].from_string : ''} — {auction.details ? auction.details[0].to_string : ''}</a>
+                       <a href={`/cargo/auction/${auction.id}`}>{auction.details ? auction.details[0].from_string : ''} — {auction.details ? auction.details[0].to_string : ''}</a>
                        <p>~{auction.details ? auction.details[0].distance : ''}, отходы стальные, растентовка</p>
                      </div>
                      <div className="product__item__title">
