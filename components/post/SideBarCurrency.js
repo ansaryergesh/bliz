@@ -19,24 +19,24 @@ const SideBarCurrency = () => {
     return path;
   }
   useEffect(() => {
-    // axios.get('https://cors-anywhere.herokuapp.com/https://www.nationalbank.kz/rss/rates_all.xml', {
-    //   "Content-Type": "application/xml; charset=utf-8",
-    //   'Access-Control-Allow-Origin': '*',
-    // })
-    //   .then(response=> {
-    //     setLoading(false)
-    //     let finalRes = parseString(response.data, function(err,result) {
-    //       setCurrency({
-    //         dollar:result.rss.channel[0].item[10].description, 
-    //         euro:result.rss.channel[0].item[11].description,
-    //         rubl: result.rss.channel[0].item[24].description,
-    //         yuan: result.rss.channel[0].item[15].description,
-    //       })
-    //     })
-    //     setTimeout(() => {
-    //       finalRes
-    //     }, 500)
-    //   })
+    axios.get('https://test.money-men.kz/api/currency', {
+      "Content-Type": "application/xml; charset=utf-8",
+      'Access-Control-Allow-Origin': '*',
+    })
+      .then(response=> {
+        setLoading(false)
+        let finalRes = parseString(response.data, function(err,result) {
+          setCurrency({
+            dollar:result.rss.channel[0].item[10].description, 
+            euro:result.rss.channel[0].item[11].description,
+            rubl: result.rss.channel[0].item[24].description,
+            yuan: result.rss.channel[0].item[15].description,
+          })
+        })
+        setTimeout(() => {
+          finalRes
+        }, 500)
+      })
   }, [])
 
   const [currency, setCurrency] = useState({rubl: 5.59, dollar:417.02, euro:505.51, yuan: 64.52})
@@ -56,19 +56,19 @@ const SideBarCurrency = () => {
         <h4>Курсы валют</h4>
         <div className="exchange__item">
           <p>₽, Рубль</p>
-          <span>{loading ? '...' : currency.rubl} ₸</span>
+          <span title='Дата обновление: сегодня'>{loading ? '...' : currency.rubl} ₸</span>
         </div>
         <div className="exchange__item">
           <p>$, Доллар</p>
-          <span>{loading ? '...' : currency.dollar} ₸</span>
+          <span  title='Дата обновление: сегодня'>{loading ? '...' : currency.dollar} ₸</span>
         </div>
         <div className="exchange__item">
           <p>€, Евро</p>
-          <span>{loading ? '...' : currency.euro} ₸</span>
+          <span  title='Дата обновление: сегодня'>{loading ? '...' : currency.euro} ₸</span>
         </div>
         <div className="exchange__item">
           <p>¥, Юань</p>
-          <span>{loading ? '...' : currency.yuan} ₸</span>
+          <span  title='Дата обновление: сегодня'>{loading ? '...' : currency.yuan} ₸</span>
         </div>
       </div>
       <div className="aside__ad">

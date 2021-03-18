@@ -61,7 +61,7 @@ const AuctionItem = ({
                          <h3 className={auction.price_details && auction.price_details.length>0 ? ''  : 'gray_font'}>{auction.price_details && auction.price_details.length>0 ? auction.price_details[0].price + auction.price_details[0].currency: 'не указано'}</h3>
                        </div>
                      </div>
-                     <a className="btn" onClick={()=>onParticipate(auction.id)}>Участвовать</a>
+                     <a className="btn" onClick={()=>onParticipate(auction.id)}>Участвовать {auction.id}</a>
                    </div>
                  </div>
               ))}

@@ -5781,7 +5781,9 @@ input[type="file"] {
       right: -450px;
   }
 }
-
+.btn {
+  cursor: pointer;
+}
 @media (max-width: 350px) {
   .footer__block-content {
       margin-top: 20px;
