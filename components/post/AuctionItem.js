@@ -1,5 +1,6 @@
 import { dateParse2 } from "../../defaults/extraFunctions";
 import PaginationBtns from '../pagination/PaginationBtns'
+import Timer from "./Timer";
 const AuctionItem = ({
   total,
   auctions,
@@ -44,7 +45,7 @@ const AuctionItem = ({
                        <i className="far fa-clock"/>
                        <div className="auction__item__date__text">
                          <p>Закончиться через:</p>
-                         <h2>{auction.details ? auction.details[0].date_finish : ''}</h2>
+                         <h2>{auction.details ? <Timer date_finish={auction.details[0].date_finish} /> : ''}</h2>
                        </div>
                      </div>
                      <div className="auction__item__users">
@@ -61,7 +62,7 @@ const AuctionItem = ({
                          <h3 className={auction.price_details && auction.price_details.length>0 ? ''  : 'gray_font'}>{auction.price_details && auction.price_details.length>0 ? auction.price_details[0].price + auction.price_details[0].currency: 'не указано'}</h3>
                        </div>
                      </div>
-                     <a className="btn" onClick={()=>onParticipate(auction.id)}>Участвовать {auction.id}</a>
+                     <a className="btn" onClick={()=>onParticipate(auction.id)}>участвовать</a>
                    </div>
                  </div>
               ))}

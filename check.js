@@ -1,30 +1,18 @@
-const dateParse2 = (date) => {
-    let months = [
-        'янв', 'фев', 'мар', 'апр', 'май', 'июн',
-        'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'
-    ];
-  
-    let dateFinal = date.slice(0,10)
-    let time = date.slice(11, date.length)
-    let day =  dateFinal.slice(0,2);
-    let month = ''
+console.log(Date.parse('12.03.2021 23:00'))
+function getTimeRemaining(endtime) {
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var seconds = Math.floor((t / 1000) % 60);
+    var minutes = Math.floor((t / 1000 / 60) % 60);
+    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+    var days = Math.floor(t / (1000 * 60 * 60 * 24));
+    // return {'total': t, 'days': days, 'hours': hours, 'minutes': minutes, 'seconds': seconds};
+    return t;
+  }
 
-    if(date.slice(3,4) === '0') {
-        month = months[date.slice(4,5)-1]
-    }else {
-        month = months[date.slice(3,5)-1]
-    }
-    return day + ' ' + month + ' ' + time
-}
+  console.log(getTimeRemaining('10.03.2021T12:00'))
 
-console.log(dateParse2("28.02.2021 15:03"));
+  console.log(Date.parse(new Date()))
+  console.log(Date.parse('2021-05-05 12:00'))
 
-
-const leftTime = (date) => {
-    date = '12.03.2021 23:00'
-
-    let timeNow = new Date()
-    return timeNow
-}
-
-console.log(leftTime())
+  let date = '19.03.2021 12:00'
+  console.log(date.slice(6,10) + '-' + date.slice(3,5) + '-' + date.slice(0,2) +' '+ date.slice(11,17))
