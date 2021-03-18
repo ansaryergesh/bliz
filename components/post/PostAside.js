@@ -8,7 +8,7 @@ const PostAside = ({postinfo}) => {
             <div className="contactCard__content">
               <img src="/img/widgets/company_icon.png" alt/>
               <div className="contactCard__title">
-                <h3>{postinfo.user.companyDetails.companyName}</h3>
+                <h3>{postinfo.user.companyDetails.companyName!=='' ? postinfo.user.companyDetails.companyName : postinfo.user.fullName }</h3>
                 <p>Рейтинг: 5.0</p>
               </div>
             </div>

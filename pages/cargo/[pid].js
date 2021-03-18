@@ -8,9 +8,11 @@ import PostAside from '../../components/post/PostAside'
 
 const CargoDetailed = () => {
   const getRoute = () => {
+    setRouteLoad(true)
     axios.get(`${process.env.BASE_URL}/distance?from=${postInfo.details.from}&to=${postInfo.details.to}`,)
       .then(res => {
         setSteps(res.data.routes)
+        setRouteLoad(false)
       })
   }
   useEffect(() => {
@@ -19,6 +21,7 @@ const CargoDetailed = () => {
         setLoading(false)
         if(res.data.success) {
           let finalres = res.data.data[0];
+          console.log(finalres)
           setPostInfo({user: {
             id: finalres.user[0].id,
             fullName: finalres.user[0].fullName,
@@ -26,8 +29,8 @@ const CargoDetailed = () => {
             phone: finalres.user[0].phone,
             address: finalres.user[0].address,
             companyDetails: {
-              companyName: finalres.user[0].companyDetails[0].companyName,
-              bin: finalres.user[0].companyDetails[0].bin
+              companyName: finalres.user[0].companyDetails ? finalres.user[0].companyDetails[0].companyName: '',
+              bin: finalres.user[0].companyDetails ? finalres.user[0].companyDetails[0].bin  : '',
             }
             },
             details: {
@@ -52,6 +55,7 @@ const CargoDetailed = () => {
   const router = useRouter()
   const [steps,setSteps] = useState([])
   const [loading, setLoading] = useState(true)
+  const [routeLoad, setRouteLoad] = useState(false)
   const {pid} = router.query
   const [postInfo, setPostInfo] = useState({
     errorId: false,
@@ -193,7 +197,7 @@ const CargoDetailed = () => {
             </div>
             <PostPlaceMap steps={steps} to_string={postInfo.details.to_string} from_string={postInfo.details.from_string} loading={loading} from={postInfo.details.from} to={postInfo.details.to}/>
             
-            <button className={steps.length>0 ? 'd-none' : ''} onClick={getRoute}>Показать маршрут</button>
+            <button disabled={routeLoad ? true : false} className={steps.length>0 ? 'd-none' : ''} onClick={getRoute}>{routeLoad ? 'Подождите ...' : 'Показать маршрут'}</button>
           </div>
         </section>
         <PostAside postinfo={postInfo} />
