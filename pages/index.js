@@ -18,7 +18,7 @@ export default function Home() {
         </p>
         <div className="under_header__btns">
           <a className="btn" href="#">НАЙТИ ГРУЗЫ И ТРАНСПОРТ</a>
-          <a className="btn btn--white" href="/post_add">РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ</a>
+          <a className="btn btn--white" href="/cargo/add">РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ</a>
         </div>
       </div>
       <div className="services container">
