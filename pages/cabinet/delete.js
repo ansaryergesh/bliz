@@ -15,7 +15,7 @@ class Delete extends React.Component {
   render() {
     return (
       <>
-        <CabinetNav bin={this.props.usersReducer.user.companyDetails[0].bin} activeLink='delete'/>
+        <CabinetNav activeLink='delete'/>
         <div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">

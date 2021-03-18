@@ -17,7 +17,7 @@ export default function Home() {
           и перевозчиков. База складов и спецтехники.
         </p>
         <div className="under_header__btns">
-          <a className="btn" href="#">НАЙТИ ГРУЗЫ И ТРАНСПОРТ</a>
+          <a className="btn" href="/cargo">НАЙТИ ГРУЗЫ И ТРАНСПОРТ</a>
           <a className="btn btn--white" href="/cargo/add">РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ</a>
         </div>
       </div>
@@ -26,7 +26,7 @@ export default function Home() {
           <div className="service__item__img">
             <img src="/img/widgets/service1.png" />
           </div>
-          <a href="goods-nav-2.html">Грузы и транспорт</a>
+          <a href="/cargo">Грузы и транспорт</a>
           <p>Поиск исполнителей и клиентов
             <br/>
             грузовперевозок</p>
@@ -35,7 +35,7 @@ export default function Home() {
           <div className="service__item__img">
             <img src="/img/widgets/service2.png" />
           </div>
-          <a href="storage.html">Складские помещения</a>
+          <a href="/storage">Складские помещения</a>
           <p>Подбор складов ответственного
             <br/>
             хранения по Казахстану</p>
@@ -44,7 +44,7 @@ export default function Home() {
           <div className="service__item__img">
             <img src="/img/widgets/service3.png" />
           </div>
-          <a href="equipment-nav-1.html">Спецтехника</a>
+          <a href="/equipment">Спецтехника</a>
           <p>Техника для спецработ
             <br/>
             по любым напрвлениям</p>
@@ -53,7 +53,7 @@ export default function Home() {
           <div className="service__item__img">
             <img src="/img/widgets/service4.png" />
           </div>
-          <a href="goods-nav-1.html">Грузы и транспорт</a>
+          <a href="/cargo">Грузы и транспорт</a>
           <p>Повышение квалификации
             <br/>
             для логистов и менеджеров продаж</p>

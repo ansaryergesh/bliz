@@ -1,8 +1,8 @@
-import Timer from "../components/post/Timer"
+import Share from "../components/shared/ShareSocial";
 
 const Test = () => {
     return(
-        <Timer date_finish={'19.03.2021 12:00'} />
+        <Share />
     )
 }
 

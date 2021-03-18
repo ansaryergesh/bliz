@@ -21,8 +21,8 @@ const StorageDetailed = () => {
             phone: finalres.user[0].phone,
             address: finalres.user[0].address,
             companyDetails: {
-              companyName: finalres.user[0].companyDetails[0].companyName,
-              bin: finalres.user[0].companyDetails[0].bin
+              companyName: finalres.user[0].companyDetails ? finalres.user[0].companyDetails[0].companyName: '',
+              bin: finalres.user[0].companyDetails ? finalres.user[0].companyDetails[0].bin: ''
             }
           },
           properties: {
@@ -110,7 +110,7 @@ const StorageDetailed = () => {
           <p className="goods__info__gray">Главная / Склады / Склады в Алматы</p>
         </div>  
         <div className="goods__info__title storage__info__title">
-          <h2>{storageInfo.properties.area + " м2 " + storageInfo.user.companyDetails.companyName}</h2>
+          <h2>{storageInfo.properties.area + " м2 "}</h2>
           <p>{storageInfo.properties.price}</p>
         </div>
       </div>

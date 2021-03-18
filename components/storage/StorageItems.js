@@ -20,7 +20,7 @@ const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, load
                     </div>
                     <div className="storage__item__desc">
                       <div className="storage__item__title">
-                        <a href={`storage/${s.id}`}>Склад {s.properties? s.properties[0].area : ''}м2, "{s.user? s.user[0].companyDetails[0].companyName : ''}", Алматы</a>
+                        <a href={`storage/${s.id}`}>Склад ", Алматы</a>
                         <h3>{s.properties? s.properties[0].price : ''}</h3>
                       </div>
                       <div className="storage__item__details">
@@ -58,7 +58,7 @@ const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, load
                           <a className="opacity_btn" href="#">показать на карте</a>
                         </div>
                         <div className="storage__item__adress__item">
-                          <p>{s.user ? s.user[0].companyDetails[0].companyName : ''}</p>
+                          <p>{s.user && s.user[0].companyDetails ? s.user[0].companyDetails[0].companyName : ''}</p>
                           <span>{s.updated_at ? dateParse2(s.updated_at)  : ''}</span>
                         </div>
                       </div>

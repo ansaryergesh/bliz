@@ -133,7 +133,7 @@ class Cabinet extends React.Component {
 	render() {
 		return(
 			<>
-				<CabinetNav bin={this.props.usersReducer.user.companyDetails[0].bin} activeLink='index'/>
+				<CabinetNav  activeLink='index'/>
 				<div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">

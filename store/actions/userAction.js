@@ -41,6 +41,7 @@ export const userAuthentication = (url,values) =>dispatch => {
     }
   })
   .catch(error => {
+    console.log(error)
     dispatch({type: 'FAILED_LOGIN', payload: error})
     dispatch({type: 'ERROR_MESSAGE', payload: error})
   });

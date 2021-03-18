@@ -46,6 +46,7 @@ class CargoAdd extends React.Component {
       priceType: 1,
       paymentType: 1,
       type_transport:1,
+      quantity: '',
       docs: new Map(),
       pogruzki: new Map(),
       condition: new Map(),
@@ -283,16 +284,14 @@ class CargoAdd extends React.Component {
                       <div className="post_ad__chars__items__selects">
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Тип транспорта</p>
+                          
                           <select className="post_ad__input">
-                            <option>ЖД Рефрижиратор</option>
+                            <option >ЖД Рефрижиратор</option>
                           </select>
                         </div>
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Кол-во</p>
-                          <select className="post_ad__input">
-                            <option>1</option>
-                            <option>2</option>
-                          </select>
+                          <input name='quantity' value={this.state.quantity} onChange={this.handleChange} className="post_ad__input" type="text" placeholder="Количество"/>
                         </div>
                       </div>
                       <div className="post_ad__chars__items__inputs__container">

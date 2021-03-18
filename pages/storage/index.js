@@ -10,7 +10,6 @@ const Storage = () => {
   const router  = useRouter()
   const {id} = router.query
   const {page} = router.query
-
   const [loading, setLoading] = useState(true)
   const [storages, setStorages] = useState([{}])
   const [currentPage, setCurrentPage] = useState(1)
@@ -47,12 +46,18 @@ const Storage = () => {
   }
   return (
     <div>
+      <h1>Руд  + {currentPath}</h1>
       <Filter />
       <div className="products__container container">
         {storages === [] ? '' :  <StorageItems total={total} storages={storages} maxPage={maxPage} onChangePage={onChangePage} currentPage={currentPage} loading={loading}/>}
        
         <SideBarCurrency />
       </div>
+    
+              
+      {/* <FacebookShareCount url={process.env.PROD_URL/pathName}>
+  {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
+</FacebookShareCount> */}
     </div>
 
   )

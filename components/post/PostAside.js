@@ -1,7 +1,18 @@
+import React, { useState } from "react";
 import { formatPhoneNumber, formatPhoneNumberHidden, parseDateTime} from "../../defaults/extraFunctions";
+import Share from "../shared/ShareSocial";
 
 const PostAside = ({postinfo}) => {
+  const [share, setShare] = useState(false)
+  const closeModal = (e) => {
+    e.preventDefault()
+    if(e.target.className!== 'modal_bg') {
+      setShare(false)
+    }
+  } 
   return(
+    <>
+    {share ? ''  :''}
     <aside className="aside">
           <div className="aside__contactCard">
             <p>Контактная информация</p>
@@ -24,7 +35,7 @@ const PostAside = ({postinfo}) => {
           <div className="aside__functions__wrapper">
             <div className="aside__functions">
               <a className="izbrannoe" href="#"><i className="far fa-star"/>В избранное</a>
-              <a className="download" href="example" download><img src="/img/widgets/aside_function1.png" alt/></a>
+              <a onClick={() => setShare(true)} className="download" href="example" ><img src="/img/widgets/aside_function1.png" alt/></a>
               <a className="print" href="javascript:(print());"><img src="/img/widgets/aside_function2.png" alt/></a>
               <a className="someShit" href="#"><img src="/img/widgets/aside_function3.png" alt/></a>
             </div>
@@ -33,6 +44,7 @@ const PostAside = ({postinfo}) => {
             </div>
           </div>
         </aside>
+        </>
   )
 }
 

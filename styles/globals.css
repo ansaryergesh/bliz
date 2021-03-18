@@ -5791,3 +5791,28 @@ input[type="file"] {
 }
 
 /* Default styles */
+.modal_share_none {
+  display: none;
+}
+.modal_share {
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: hidden!important;
+  position: relative;
+  position: fixed;
+  z-index: 55000;
+  background-color: #00218c74;
+}
+.modal_bg {
+  border-radius: 15px;
+  margin: 20px auto;
+  width: 30%!important;
+  padding: 55px 25px;
+  background-color: rgba(115, 105, 105, 0.619);
+ 
+}
+.sharebutton {
+  display: flex!important;
+  justify-content: space-between;
+  align-items: center;
+}

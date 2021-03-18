@@ -61,6 +61,7 @@ class AuctionAdd extends React.Component {
       to: '',
       volume: '22',
       net: '86',
+      quantity: '',
       height: '',
       width: '',
       length: '',
@@ -362,10 +363,7 @@ class AuctionAdd extends React.Component {
                         </div>
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Кол-во</p>
-                          <select className="post_ad__input">
-                            <option>1</option>
-                            <option>2</option>
-                          </select>
+                          <input name='quantity' onChange={this.handleChange} value={this.state.quantity} className="post_ad__input" type="text" placeholder="Количество"/>
                         </div>
                       </div>
                       <div className="post_ad__chars__items__inputs__container">
