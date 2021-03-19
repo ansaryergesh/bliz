@@ -5,8 +5,10 @@ import PostPlaceMap from '../../components/googleMap/PostPlaceMap'
 import { dateParse } from '../../defaults/extraFunctions'
 import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
 import PostAside from '../../components/post/PostAside'
-
+import {useDispatch} from 'react-redux'
+import cookie from 'js-cookie'
 const CargoDetailed = () => {
+  const dispatch = useDispatch();
   const getRoute = () => {
     setRouteLoad(true)
     axios.get(`${process.env.BASE_URL}/distance?from=${postInfo.details.from}&to=${postInfo.details.to}`,)
@@ -52,6 +54,27 @@ const CargoDetailed = () => {
       }
       })
   },[])
+
+  
+  const sendRequest = () => {
+    axios.post(`https://test.money-men.kz/api/sendRequest`, {
+      post_id: pid,
+      token: cookie.get('token'),
+      currency: 1,
+      price: 15000
+    })
+      .then(res=> {
+        if(res.data.success) {
+          console.log(res.data.message)
+          dispatch({type: 'SUCCESS_MESSAGE', payload: res.data.message})
+        }else {
+          console.log(res.data.message)
+          dispatch({type: 'ERROR_MESSAGE', payload: res.data.message})
+        }
+      })
+      .catch(err=> {
+      })
+  }
   const router = useRouter()
   const [steps,setSteps] = useState([])
   const [loading, setLoading] = useState(true)
@@ -200,7 +223,7 @@ const CargoDetailed = () => {
             <button disabled={routeLoad ? true : false} className={steps.length>0 ? 'd-none' : ''} onClick={getRoute}>{routeLoad ? 'Подождите ...' : 'Показать маршрут'}</button>
           </div>
         </section>
-        <PostAside postinfo={postInfo} />
+        <PostAside sendRequest={sendRequest} postinfo={postInfo} />
       </div>
 
     </div>

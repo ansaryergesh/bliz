@@ -368,7 +368,9 @@ template {
   transition: .2s;
   text-transform: uppercase;
 }
-
+.btn + .btn {
+  margin-top: 15px;
+}
 .btn.block {
   display: flex;
   align-items: center;

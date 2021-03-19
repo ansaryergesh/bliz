@@ -7,9 +7,14 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
   return (
       <div className="products__content">
         <div className="products__title">
-          <h4>Главная / Грузоперевозки / {pathName === '/cargo' ? 'Грузы' : 'Транпорт'}</h4>
-          <h1>{pathName==='/cargo' ? 'Грузоперевозки': 'Транспорт для грузоперевозок'} в Казахстане</h1>
-          <h3>Найдено {total} объявлений</h3>
+          {pathName === '/cabinet/favourites' ? '' :
+              <>
+              <h4>Главная / Грузоперевозки / {pathName === '/cargo' ? 'Грузы' : 'Транпорт'}</h4>
+              <h1>{pathName==='/cargo' ? 'Грузоперевозки': 'Транспорт для грузоперевозок'} в Казахстане</h1>
+              <h3>Найдено {total} объявлений</h3>
+              </>
+          }
+        
 
           <div class="products__items__wrapper">
             {loading ? <div>Загрузка....</div> : 
@@ -22,7 +27,7 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
                   <p>{parseDateTime(p.updated_at)} </p>
                 </div>
                 <div className="product__item__title">
-                  <a href={`cargo/${p.id}`}>{p.details ? p.details[0].from_string : 'Загрузка...'}
+                  <a href={`/cargo/${p.id}`}>{p.details ? p.details[0].from_string : 'Загрузка...'}
                     — {p.details ? p.details[0].to_string : 'Загрузка...'}
                     </a>
                   <p>~{p.details ? p.details[0].distance : '...'} км, отходы стальные, растентовка</p>

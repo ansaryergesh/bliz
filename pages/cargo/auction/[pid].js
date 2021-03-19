@@ -8,6 +8,7 @@ import LoadingSpinner from '../../../components/shared/others/LoadingSpinner'
 import PostAside from '../../../components/post/PostAside'
 import Timer from '../../../components/post/Timer'
 import cookie from 'js-cookie'
+import { currencies } from '../../../defaults/defaults'
 
 const AuctionDetail = () => {
   
@@ -44,14 +45,24 @@ const AuctionDetail = () => {
       })
   }, [])
 
+  const onFavoure = (id) => {
+      axios.get(`https://test.money-men.kz/api/addPostFavourites?token=${cookie.get('token')}&post_id=${pid}&category_id=3`,)
+        .then(res=> {
+            if(res.data.success) {
+                dispatch({type: 'SUCCESS_MESSAGE', payload: 'Добавлен в избранные'})
+            }else {
+                dispatch({type: 'ERROR_MESSAGE', payload: 'Уже добавлен'})
+            }
+        })
+  }
   const onParticipate = (aucId) => {
     dispatch({type: 'CLOSE_MESSAGE'})
     let tokenUser = cookie.get('token')
     if(tokenUser!== undefined) {
       axios.post(`${process.env.BASE_URL}/sendAuctionRequest`, {
         token: tokenUser,
-        price:160000,
-        currency:1,
+        price:price,
+        currency:currency,
         auction_id: aucId
       })
         .then(res=> {
@@ -76,6 +87,9 @@ const AuctionDetail = () => {
     setLoading] = useState(true)
   const [routeLoad,
     setRouteLoad] = useState(false)
+  const [price, setPrice] = useState('');
+  const [currency,setCurrency] = useState(1)
+  const [auctionModal, setAuction] = useState(false)
   const {pid} = router.query
   const [postInfo,
     setPostInfo] = useState({
@@ -106,6 +120,24 @@ const AuctionDetail = () => {
         ? <LoadingSpinner/>
         : ''}
       <div className="grid-container container">
+      <div className={auctionModal ? "driver_modal edit_photo active" : 'driver_modal edit_photo'}>
+            <div className="driver_modal__inner ">
+              <h2>Аукцион</h2>
+              <i className="fas fa-times driver_times" onClick={()=>setAuction(false)}/>
+              <div className="edit_photo__img">
+                <input type='number' value={price} onChange={(e) => setPrice(e.target.value)}/>
+                <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
+                    {currencies.map(c=> (
+                        <option value={c.id}>{c.name}</option>
+                    ))}
+                </select>
+              </div>   
+                <button id="close_edit_photo" className="btn block inherit" onClick={() => onParticipate(pid)}>Участвовать...</button>
+               
+              
+          
+            </div>
+          </div>
         <section className="section">
           <div className="goods__info">
             <div className="goods__info__head">
@@ -264,11 +296,11 @@ const AuctionDetail = () => {
                 </p>
               </div>
             </div>
-            <a className="btn" href="#" onClick={() => onParticipate(pid)}>Учавствовать в аукционе</a>
+            <a className="btn" href="#" onClick={() => setAuction(true)}>Учавствовать в аукционе</a>
           </div>
           <div className="aside__functions__wrapper">
             <div className="aside__functions">
-              <a className="izbrannoe" href="#"><i className="far fa-star"/>В избранное</a>
+              <a className="izbrannoe" onClick={() => onFavoure(pid)}><i className="far fa-star"/>В избранное</a>
               <a className="download" href="example" download><img src="/img/widgets/aside_function1.png" alt/></a>
               <a className="print" href="javascript:(print());"><img src="/img/widgets/aside_function2.png" alt/></a>
               <a className="someShit" href="#"><img src="/img/widgets/aside_function3.png" alt/></a>

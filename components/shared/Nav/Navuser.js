@@ -133,9 +133,9 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
       </div>
       <div className="nav__links">
         <a className="cabinet_config_opener" href="/cabinet">Настройки</a>
-        <a href="#">Заявки</a>
-        <a href="cabinet/posts" className={router.pathname==='/cabinet/posts' ? "cabinet_config_opener active" : "cabinet_config_opener"}>Объявления</a>
-        <a href="cabinet/workers"  className={router.pathname==='/cabinet/workers' ? "cabinet_config_opener active" : "cabinet_config_opener"}>Сотрудники</a>
+        <a href="/cabinet/requests" className={router.pathname==='/cabinet/requests' ? "cabinet_config_opener active" : "cabinet_config_opener"}>Заявки</a>
+        <a href="/cabinet/posts" className={router.pathname==='/cabinet/posts' ? "cabinet_config_opener active" : "cabinet_config_opener"}>Объявления</a>
+        <a href="/cabinet/workers"  className={router.pathname==='/cabinet/workers' ? "cabinet_config_opener active" : "cabinet_config_opener"}>Сотрудники</a>
         <a  href="/cabinet/balance" className={router.pathname==='/cabinet/balance' ? "cabinet_config_opener active" : "cabinet_config_opener"} >Баланс</a>
         <a href="/cabinet/message"  className={router.pathname==='/cabinet/message' ? "cabinet_config_opener active" : "cabinet_config_opener"}>Сообщения</a>
         <a href="/cabinet/favourites"  className={router.pathname==='/cabinet/favourites' ? "cabinet_config_opener active" : "cabinet_config_opener"}>Избранное</a>
