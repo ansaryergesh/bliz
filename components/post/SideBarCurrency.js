@@ -47,7 +47,7 @@ const SideBarCurrency = () => {
       {loading? <LoadingSpinner /> : ''}
       <div className="aside__add__ad">
         {/* {finalRes} */}
-        {router.pathname!=='/cargo/distance' ?
+        {router.pathname!=='/cargo/distance' && router.pathname!=='/cargo/check' ?
          <>
          <a className="btn" onClick={() => {router.push(redirect())}}>Подать объявление</a>
          <p>Размещение за 5 минут:
