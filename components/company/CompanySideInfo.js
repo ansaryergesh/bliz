@@ -26,14 +26,14 @@ const CompanySideInfo = ({user}) => {
               <p>Рейтинг:</p>
               <div className="contactCard__detail__item__inner">
                 <i className="far fa-star" />
-                <h3>5.0</h3>
+                <h3>0</h3>
               </div>
             </div>
             <div className="contactCard__detail__item">
               <p>Ваш баланс:</p>
               <div className="contactCard__detail__item__inner">
                 <img src="assets/img/widgets/tenge.svg" alt />
-                <h3 className="green">15 000 ₸</h3>
+                <h3 className="green">0 ₸</h3>
               </div>
             </div>
           </div>

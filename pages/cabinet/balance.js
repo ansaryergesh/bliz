@@ -21,7 +21,7 @@ const Balance = () => {
             <p>Рейтинг:</p>
             <div className="balance__detail__item__inner">
               <i className="far fa-star"/>
-              <h3 className="blue">5.0</h3>
+              <h3 className="blue">0</h3>
             </div>
           </div>
           <div className="balance__detail__item">
@@ -71,7 +71,7 @@ const Balance = () => {
             </div>
           </div>
         </div>
-        <div className="balance__history">
+        {/* <div className="balance__history">
           <div className="products__title special_pads">
             <h1>История счета</h1>
           </div>
@@ -112,7 +112,7 @@ const Balance = () => {
               <h3> {balance} тг</h3>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="aside"></div>
     </div>

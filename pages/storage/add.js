@@ -237,7 +237,6 @@ class AddPost extends React.Component {
           <div className="products__content">
             <div className="products__title">
             <h4><a href='/'>Главная</a> / <a href='/storage'>Склады</a> / <a href='#' className='gray_font'>Добавить обьявление</a></h4>
-              <h4>Главная / Склады / Добавить обьявление</h4>
               <h1>Добавить склад</h1>
               <p className="post_ad__title">Укажите параметры складского помещения и контактную <br /> информацию.</p>
             </div>
