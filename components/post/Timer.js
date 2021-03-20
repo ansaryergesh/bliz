@@ -29,7 +29,7 @@ const Timer = (props) => {
     updateClock();
     var timeinterval = setInterval(updateClock, 1000*60);
   }
-
+  const parsedFinalTime = () => time.days<0 ? "Аукцион закончен" : parsedDays() + " "   +parsedHours() + " " + parsedMinutes()
   const parsedDays = () => time.days!==0 ? time.days + " дн" : '';
   const parsedHours = () => time.hours!==0 ? time.hours + " ч." :'';
   const parsedMinutes = () => time.minutes!==0 ? time.minutes + " мин." :'';
@@ -42,7 +42,7 @@ const Timer = (props) => {
   }, [])
   return (
     <div title={'Закончится' + props.date_finish}>
-      {parsedDays() + " "   +parsedHours() + " " + parsedMinutes()}
+      {parsedFinalTime()}
     </div>
   )
 }
