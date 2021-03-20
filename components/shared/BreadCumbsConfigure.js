@@ -14,7 +14,7 @@ const BreadCumbs = () => {
   if(router.pathname.includes('cargo')) {
     return(
       <>
-      <h4><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/cargo' >Грузоперевозки </a>/<a href="#" className='gray_font'>{" " + getBreadCumpActive(breadcumbs,router.pathname)}</a></h4>
+      <h4><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/cargo' >Грузоперевозки /</a><a href="#" className='gray_font'>{" " + getBreadCumpActive(breadcumbs,router.pathname)}</a></h4>
     </>
     )
   }

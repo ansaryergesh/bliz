@@ -5667,7 +5667,9 @@ input[type="file"] {
       padding-bottom: 15px;
       margin-bottom: 10px;
   }
-
+  .cabinet_ad_nav {
+    cursor: pointer!important;
+  }
   .table__column__1 p {
       font-size: 15px;
   }

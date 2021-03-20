@@ -17,7 +17,8 @@ export const breadcumbs =
        'Расчет расстояний': '/cargo/distance',
        'Проверка компаний': '/cargo/check',
        'Склады' : '/cargo',
-       'Добавить обьявление' : '/cargo/add',
+       'Добавить объявление' : '/cargo/add',
+       'Добавить объявление' : '/addposts'
        
     }
 
