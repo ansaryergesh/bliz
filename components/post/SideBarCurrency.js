@@ -47,10 +47,15 @@ const SideBarCurrency = () => {
       {loading? <LoadingSpinner /> : ''}
       <div className="aside__add__ad">
         {/* {finalRes} */}
-        <a className="btn" onClick={() => {router.push(redirect())}}>Подать объявление</a>
-        <p>Размещение за 5 минут:
+        {router.pathname!=='/cargo/distance' ?
+         <>
+         <a className="btn" onClick={() => {router.push(redirect())}}>Подать объявление</a>
+         <p>Размещение за 5 минут:
           <br/>
           легко,быстро и выгодно!</p>
+         </>
+         : ''}
+  
       </div>
       <div className="exchange_rate">
         <h4>Курсы валют</h4>
