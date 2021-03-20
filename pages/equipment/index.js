@@ -17,6 +17,7 @@ const Equipment = () => {
     setLoading(true)
     axios.get(`${process.env.BASE_URL}/getAllEquipment?page=${page}`)
       .then(res=> {
+        console.log(res)
         setLoading(false)
         setEquipments(res.data.data)
         setTotal(res.data.count)
