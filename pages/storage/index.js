@@ -45,19 +45,17 @@ const Storage = () => {
       })
   }
   return (
-    <div>
+    <>
       <Filter />
-      <div className="products__container container">
         {storages === [] ? '' :  <StorageItems total={total} storages={storages} maxPage={maxPage} onChangePage={onChangePage} currentPage={currentPage} loading={loading}/>}
        
-        <SideBarCurrency />
-      </div>
+    
     
               
       {/* <FacebookShareCount url={process.env.PROD_URL/pathName}>
   {shareCount => <span className="myShareCountWrapper">{shareCount}</span>}
 </FacebookShareCount> */}
-    </div>
+    </>
 
   )
 }

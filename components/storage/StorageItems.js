@@ -1,9 +1,10 @@
 import { dateParse2 } from '../../defaults/extraFunctions';
 import PaginationBtns from '../pagination/PaginationBtns'
+import SideBarCurrency from '../post/SideBarCurrency';
 
 const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, loading}) => {
   return (
-    <div>
+    <div className='products__container container'>
       <div className="products__content">
         <div className="products__title">
         <h4><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/storage' >Склады </a>/<a href="#" className='gray_font'>{" " + "Склады в Алматы"}</a></h4>
@@ -64,32 +65,20 @@ const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, load
                       </div>
                     </div>
                   </div>
+
+                  
               ))}
-           
+            
           </>
           }
           
        
           </div>
-        
+          <PaginationBtns max_page={maxPage} current_page={currentPage} onChangePage={onChangePage} />
         </div>
-        <PaginationBtns max_page={maxPage} current_page={currentPage} onChangePage={onChangePage} />
-        <div className="products__text">
-          <div className="products__text__item">
-            <h3>Аренда складов и складских помещений в Казахстане</h3>
-            <p>Исходя из набора и качества этих параметров складу присваивается класс: A,
-              B+, B или C. Стоит обратить внимание на склады B и C классов, где арендная
-              ставка начинается с 2 000 тенге за кв. м. Чтобы снять склад в бизнес-центрах A
-              или B+ класса, стоит заложить в бюджет от 3 500 до 20 000 тенге за кв. м.</p>
-          </div>
-          <div className="products__text__item">
-            <h3>Ответхранение и склады в Алматы</h3>
-            <p>С помощью профессиональной консалтинговой компании Bliz.kz можно найти склад
-              в аренду в Алматы по выгодной цене без комиссии и посредников. Специалисты
-              компании помогут подобрать помещение, учитывая пожелания и бюджет заказчика,
-              организуют просмотр и подписание договора с собственником.</p>
-          </div>
-        </div>
+      <SideBarCurrency />
+      
+     
       </div>
   )
 }

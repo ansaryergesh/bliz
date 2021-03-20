@@ -70,7 +70,7 @@ const PostAside = ({postinfo, sendRequest}) => {
               </p>
               <button className="show_num">Показать телефон</button>
             </div>
-            <a className="btn" onClick={sendRequest}>Отправить заявку</a>
+            {!router.pathname.includes('storage') ? <a className="btn" onClick={sendRequest}>Отправить заявку</a> : ''}
             <a className="btn" href="#">Написать сообщение</a>
           </div>
           <div className="aside__functions__wrapper">
