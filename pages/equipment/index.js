@@ -17,20 +17,19 @@ const Equipment = () => {
     setLoading(true)
     axios.get(`${process.env.BASE_URL}/getAllEquipment?page=${page}`)
       .then(res=> {
-        console.log(res.data.data)
         setLoading(false)
-        setEquipments(res.data.data[0])
+        setEquipments(res.data.data)
         setTotal(res.data.count)
         setMaxPage(res.data.max_page)
         setCurrentPage(res.data.current_page)
       })
-  })
+  }, [])
   const onChangePage=(pageNum) => {
     axios.get(`${process.env.BASE_URL}/getAllEquipment?page=${pageNum}`)
       .then(res=> {
         router.push(`/equipment?page=${pageNum}`)
         setLoading(false)
-        setEquipments(res.data.data[0])
+        setEquipments(res.data.data)
         setTotal(res.data.count)
         setMaxPage(res.data.max_page)
         setCurrentPage(res.data.current_page)

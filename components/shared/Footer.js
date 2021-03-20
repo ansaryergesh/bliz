@@ -55,9 +55,11 @@ const Footer = () => {
                     <span className="blue__number">395 69 83</span>
                   </a>
                   <div className="footer__block-social-icons">
-                    <a href="https://www.instagram.com/bliz.kz"><img src="/img/footer/Instagram.png" alt="instagram"/></a>
-                    <a href="#"><img src="/img/footer/Telegram.png" alt="telegram"/></a>
-                    <a href="https://vk.com/blizkz"><img src="/img/footer/VK.png" alt="vk"/></a>
+                    <a href="https://www.instagram.com/bliz.kz" target='__blank'><img src="/img/footer/Instagram.png" alt="instagram"/></a>
+                    
+                    <a href="https://www.facebook.com/Bliz.kz/" target='__blank'><img src="/img/social-icons/Instagram Copy.svg" alt="ok"/></a>
+                    <a href="https://ok.ru/group/58514389663865" target='__blank'><img src="/img/social-icons/Combined Shape.svg" alt="facebook"/></a>
+                    <a href="https://vk.com/blizkz" target='__blank'><img src="/img/footer/VK.png" alt="vk"/></a>
                   </div>
                 </div>
               </div>

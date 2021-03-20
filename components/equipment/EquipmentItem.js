@@ -28,7 +28,7 @@ const EquipmentItem = ({
                     <div className="table__dash__bord"></div>
                   </div>
                   <div className="table__column__2 small">
-                    <p>{e.details[0].net} тн</p>
+                    <p>{e.details ? e.details[0].net : ''} тн</p>
                   </div>
                 </div>
                 <div className="table__row">
@@ -52,7 +52,7 @@ const EquipmentItem = ({
               </div>
               <div className="storage__item__adress right_self">
                 <div className="storage__item__adress__item">
-                  <p>{e.user[0].fullName}</p>
+                  <p>{e.user ? e.user[0].fullName : ''}</p>
                   <span>7 мая 12:30</span>
                 </div>
               </div>
