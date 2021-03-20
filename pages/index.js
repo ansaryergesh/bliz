@@ -1,5 +1,33 @@
+import axios from 'axios'
 import Head from 'next/head'
+import { useState } from 'react'
+import {useDispatch} from 'react-redux'
 export default function Home() {
+  const dispatch = useDispatch()
+  const [zvonok, setZvonok] = useState(false)
+  const [fio, setFio] = useState('')
+  const [phone,setPhone] = useState('')
+  const onSubmit= (e) => {
+    e.preventDefault()
+    const message =`Заказ звонка:
+      <b>Имя: ${fio}</b>
+      <b>Телефон: ${phone}</b>
+    `
+    if(phone&& fio) {
+      axios.get(`https://api.telegram.org/bot1763904279:AAG2ulxW1UwzpyAsecF0q8Q_7ebb934EZ30/sendMessage?chat_id=-440248730&text=Имя:${fio+"   \n"} Телефон: ${phone}&parse_mode=HTML`)
+        .then(res=> {
+          if(res.data.ok) {
+            setZvonok(false)
+            dispatch({type: 'SUCCESS_MESSAGE', payload: 'Ждите звонка'})
+          }
+        })
+        .catch(err=>{console.log(err)})
+    }else {
+      console.log('error')
+    }
+  
+   
+  }
   return (
     <div>
       <Head>
@@ -24,7 +52,7 @@ export default function Home() {
       <div className="services container">
         <div className="service__item">
           <div className="service__item__img">
-            <img src="/img/widgets/service1.png" />
+            <img src="/img/widgets/service1.png"/>
           </div>
           <a href="/cargo">Грузы и транспорт</a>
           <p>Поиск исполнителей и клиентов
@@ -33,7 +61,7 @@ export default function Home() {
         </div>
         <div className="service__item">
           <div className="service__item__img">
-            <img src="/img/widgets/service2.png" />
+            <img src="/img/widgets/service2.png"/>
           </div>
           <a href="/storage">Складские помещения</a>
           <p>Подбор складов ответственного
@@ -42,7 +70,7 @@ export default function Home() {
         </div>
         <div className="service__item">
           <div className="service__item__img">
-            <img src="/img/widgets/service3.png" />
+            <img src="/img/widgets/service3.png"/>
           </div>
           <a href="/equipment">Спецтехника</a>
           <p>Техника для спецработ
@@ -51,7 +79,7 @@ export default function Home() {
         </div>
         <div className="service__item">
           <div className="service__item__img">
-            <img src="/img/widgets/service4.png" />
+            <img src="/img/widgets/service4.png"/>
           </div>
           <a href="/cargo">Грузы и транспорт</a>
           <p>Повышение квалификации
@@ -153,6 +181,127 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
+      <> <div className="faq">
+        <div className="faq__content container">
+          <h2>Вопросы и ответы</h2>
+          <h4>Здесь вы найдете ответы, на часто возникающие вопросы.</h4>
+          <div className="faq__wrapper">
+            <div className="accordion-container">
+              <div className="set">
+                <a href="#">
+                  Как зарегистрироваться на сервисе?
+                  <i className="fas fa-angle-down"/>
+                </a>
+                <div className="content">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna.</p>
+                </div>
+              </div>
+              <div className="set">
+                <a href="#">
+                  Как добавить сотрудника?
+                  <i className="fas fa-angle-down"/>
+                </a>
+                <div className="content">
+                  <p>
+                    Aliquam cursus vitae nulla non rhoncus. Nunc condimentum erat nec dictum tempus.
+                    Suspendisse aliquam erat hendrerit vehicula vestibulum.</p>
+                </div>
+              </div>
+              <div className="set">
+                <a href="#">
+                  Как добавить сотрудника?
+                  <i className="fas fa-angle-down"/>
+                </a>
+                <div className="content">
+                  <p>Pellentesque aliquam ligula libero, vitae imperdiet diam porta vitae. sed do
+                    eiusmod tempor incididunt ut labore et dolore magna.</p>
+                </div>
+              </div>
+              <div className="set">
+                <a href="#">
+                  Как добавить сотрудника?
+                  <i className="fas fa-angle-down"/>
+                </a>
+                <div className="content">
+                  <p>
+                    Donec tincidunt consectetur orci at dignissim. Proin auctor aliquam justo, vitae
+                    luctus odio pretium scelerisque. Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Nihil accusantium vitae ab sapiente provident quaerat
+                    voluptates recusandae placeat minus maiores quasi totam error, tempore voluptas
+                    non, architecto explicabo sequi sit!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="accordion-container">
+              <div className="set">
+                <a href="#">
+                  Как восстановить пароль?
+                  <i className="fas fa-angle-down"/>
+                </a>
+                <div className="content">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna.</p>
+                </div>
+              </div>
+              <div className="set">
+                <a href="#">
+                  Как стать платным пользователем?
+                  <i className="fas fa-angle-down"/>
+                </a>
+                <div className="content">
+                  <p>
+                    Aliquam cursus vitae nulla non rhoncus. Nunc condimentum erat nec dictum tempus.
+                    Suspendisse aliquam erat hendrerit vehicula vestibulum.</p>
+                </div>
+              </div>
+              <div className="set">
+                <a href="#">
+                  Как стать платным пользователем?
+                  <i className="fas fa-angle-down"/>
+                </a>
+                <div className="content">
+                  <p>Pellentesque aliquam ligula libero, vitae imperdiet diam porta vitae. sed do
+                    eiusmod tempor incididunt ut labore et dolore magna.</p>
+                </div>
+              </div>
+              <div className="set">
+                <a href="#">
+                  Как стать платным пользователем?
+                  <i className="fas fa-angle-down"/>
+                </a>
+                <div className="content">
+                  <p>
+                    Donec tincidunt consectetur orci at dignissim. Proin auctor aliquam justo, vitae
+                    luctus odio pretium scelerisque.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="still_questions">
+        <h2>Остались вопросы?</h2>
+        <p>Оставьте заявку с вашими контактными данными,</p>
+        <p>и наши менеджеры любезно проконсультируют вас</p>
+        <p>по любым возникшим вопросам.</p>
+        <a className="btn" href="#" onClick={() => setZvonok(true)}>ЗАКАЗАТЬ ОБРАТНЫЙ ЗВОНОК</a>
+      </div>
+      <div className={zvonok === false ? "driver_modal edit_photo" : "driver_modal edit_photo active"}>
+          <div className="driver_modal__inner ">
+            <h2>Обратный звонок</h2>
+            <i className="fas fa-times driver_times" onClick={() => setZvonok(false)}/>
+            <form onSubmit={(e) => onSubmit(e)}>
+              <input name='name' value={fio} onChange={(e) =>setFio(e.target.value)} placeholder='Имя'/>
+              <input name='phone' value={phone} onChange={(e) =>setPhone(e.target.value)} placeholder='Телефон'/>
+              <button>Отправить</button>
+            </form>
+          </div>
+          </div>
+    </>
+
+  </div>
   )
 }
