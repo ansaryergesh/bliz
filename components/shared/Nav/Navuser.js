@@ -84,7 +84,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
     </div>
     <div className="header__top__items mobile_none">
       <div className="header__top__item">
-        <div className="header__item__notification">2</div>
+        {/* <div className="header__item__notification">2</div> */}
         <i className="far fa-clipboard" />
         <a href="/cabinet/requests">Заявки</a>
       </div>
@@ -93,7 +93,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
         <a href="/cabinet/favourites">Избранное</a>
       </div>
       <div className="header__top__item margin_right">
-        <div className="header__item__notification">2</div>
+        {/* <div className="header__item__notification">2</div> */}
         <i className="far fa-bell" />
         <a href="/cabinet/notification">Уведомления</a>
         <i className="fas fa-angle-down" />

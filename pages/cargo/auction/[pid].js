@@ -237,7 +237,7 @@ const AuctionDetail = () => {
          
             <AuctionMap   to_string={postInfo.details.to_string} from_string={postInfo.details.from_string} loading={loading} from={postInfo.details.from} to={postInfo.details.to}/>
             <div className="goods__info__auction">
-              <h4 className="goods__title">Участники аукциона</h4>
+              <h4 className="goods__title">Участники аукциона ({postInfo.price_details.length})</h4>
               <div className="info__auction__table">
                 <div className="auction__table">
                     {postInfo.price_details.map(details => (

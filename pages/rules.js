@@ -11,9 +11,9 @@ const Rules = () => {
           </h4>
           <div className="products__text">
             <div className="products__text__item text-justify">
-              <h1>Пользовательское соглашение
+              <h1>Пользовательское соглашение<br></br>
               </h1>
-
+              <br></br>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
               explicabo, blanditiis quod nulla non illo perspiciatis rerum laborum eaque,
               voluptates quae eius? Fugit neque eos vero rem facilis dolore voluptates?
