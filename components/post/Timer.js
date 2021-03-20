@@ -30,6 +30,9 @@ const Timer = (props) => {
     var timeinterval = setInterval(updateClock, 1000*60);
   }
 
+  const parsedDays = () => time.days!==0 ? time.days + " дн" : '';
+  const parsedHours = () => time.hours!==0 ? time.hours + " ч." :'';
+  const parsedMinutes = () => time.minutes!==0 ? time.minutes + " мин." :'';
   useEffect(() => {
     var finalDate = () => {
       let date = props.date_finish;
@@ -39,7 +42,7 @@ const Timer = (props) => {
   }, [])
   return (
     <div title={'Закончится' + props.date_finish}>
-      {time.days + " дн" + " " + ""  +time.hours + " ч" + " " + time.minutes + " мин"}
+      {parsedDays() + " "   +parsedHours() + " " + parsedMinutes()}
     </div>
   )
 }

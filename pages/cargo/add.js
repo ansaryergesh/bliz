@@ -11,7 +11,7 @@ import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
 import { deleteFalseKey } from '../../defaults/extraFunctions'
 import CompanyOnAddInfo from '../../components/company/CompanyOnAddInfo'
 import withAuth from '../../hocs/withAuth'
-
+import Router from 'next/router'
 const mapDispatchToProps = (dispatch) =>({
   successMessage: (msg) => {dispatch(successMessage(msg))},
   errorMessage: (msg) => {dispatch(errorMessage(msg))},
@@ -190,7 +190,8 @@ class CargoAdd extends React.Component {
       .then(res => {
         if(res.data.success) {
           this.props.successMessage('Успешно добавлен пост')
-          console.log('posted')
+          Router.push('/cargo')
+          
         }else {
           this.props.errorMessage(res.data.message)
         }

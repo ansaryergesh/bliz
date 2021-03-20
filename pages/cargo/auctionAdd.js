@@ -1,6 +1,7 @@
 import React, {createRef} from 'react'
 import axios from 'axios'
 import cookie from 'js-cookie'
+import Router from 'next/router'
 import {documents, pogruzka, condition, extra} from '../../defaults/checkboxes/documents'
 import CheckBox from '../../components/shared/CheckBox'
 import { closeMessage, errorMessage, successMessage } from '../../store/actions/messageAction'
@@ -242,7 +243,8 @@ class AuctionAdd extends React.Component {
       .then(res => {
         if(res.data.success) {
           this.props.successMessage('Успешно добавлен пост')
-          console.log('posted')
+          Router.push('/cargo/auction')
+          
         }else {
           this.props.errorMessage(res.data.message)
         }

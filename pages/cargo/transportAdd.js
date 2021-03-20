@@ -9,7 +9,7 @@ import { todaysDate } from '../../defaults/defaults'
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
 import CompanyOnAddInfo from '../../components/company/CompanyOnAddInfo'
-
+import Router from 'next/router'
 const mapDispatchToProps = (dispatch) =>({
   successMessage: (msg) => {dispatch(successMessage(msg))},
   errorMessage: (msg) => {dispatch(errorMessage(msg))},
@@ -172,7 +172,7 @@ class CargoAdd extends React.Component {
       .then(res => {
         if(res.data.success) {
           this.props.successMessage('Успешно добавлен пост')
-          console.log('posted')
+          Router.push('/cargo/transport')
         }else {
           this.props.errorMessage(res.data.message)
         }
