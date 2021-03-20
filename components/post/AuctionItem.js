@@ -1,6 +1,8 @@
 import { dateParse2 } from "../../defaults/extraFunctions";
 import PaginationBtns from '../pagination/PaginationBtns'
+import React,{useState} from 'react'
 import Timer from "./Timer";
+import { currencies } from "../../defaults/defaults";
 const AuctionItem = ({
   total,
   auctions,
@@ -9,7 +11,11 @@ const AuctionItem = ({
   onChangePage,
   loading,
   onParticipate,
+  onAuctionModal,
 }) => {
+  const [price, setPrice] = useState('');
+  const [currency,setCurrency] = useState(1)
+  const [auctionModal, setAuction] = useState(false)
   return (
     <div>
       <div className="products__content">
@@ -62,9 +68,27 @@ const AuctionItem = ({
                          <h3 className={auction.price_details && auction.price_details.length>0 ? ''  : 'gray_font'}>{auction.price_details && auction.price_details.length>0 ? auction.price_details[0].price + auction.price_details[0].currency: 'не указано'}</h3>
                        </div>
                      </div>
-                     <a className="btn" onClick={()=>onParticipate(auction.id)}>участвовать</a>
+                     <a className="btn" onClick={()=>setAuction(true)}>участвовать</a>
                    </div>
+
+                   <div className={auctionModal ? "driver_modal edit_photo active" : 'driver_modal edit_photo'}>
+                      <div className="driver_modal__inner ">
+                        <h2>Аукцион</h2>
+                        <i className="fas fa-times driver_times" onClick={()=>setAuction(false)}/>
+                        <div className="edit_photo__img">
+                          <input type='number' value={price} onChange={(e) => setPrice(e.target.value)}/>
+                          <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
+                              {currencies.map(c=> (
+                                  <option value={c.id}>{c.name}</option>
+                              ))}
+                          </select>
+                        </div>   
+                          <button id="close_edit_photo" className="btn block inherit" onClick={() => onParticipate(auction.id,price,currency)}>Участвовать...</button>
+                    </div>
+          </div>
                  </div>
+
+                 
               ))}
             </div>
           }
@@ -72,6 +96,7 @@ const AuctionItem = ({
          
         
           <PaginationBtns max_page={maxPage} current_page={currentPage} onChangePage={onChangePage} />
+        
         </div>
         <div className="products__text normal_margin">
           <div className="products__text__item">

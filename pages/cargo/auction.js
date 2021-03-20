@@ -22,7 +22,7 @@ const Cargo = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [total, setTotal] = useState(0)
   const [maxPage,setMaxPage] = useState(0)
-
+ 
   useEffect(() => {
     getAuction()
   },[])
@@ -43,14 +43,14 @@ const Cargo = () => {
       })
   }
 
-  const onParticipate = (aucId) => {
+  const onParticipate = (aucId,price, currency) => {
     dispatch({type: 'CLOSE_MESSAGE'})
     let tokenUser = cookie.get('token')
     if(tokenUser!== undefined) {
       axios.post(`${process.env.BASE_URL}/sendAuctionRequest`, {
         token: tokenUser,
-        price:160000,
-        currency:1,
+        price:price,
+        currency:currency,
         auction_id: aucId
       })
         .then(res=> {
@@ -101,6 +101,7 @@ const Cargo = () => {
         onChangePage={onChangePage}
         onParticipate={onParticipate}
       />
+      
       <SideBarCurrency />
     </div>
       
