@@ -86,21 +86,21 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
       <div className="header__top__item">
         <div className="header__item__notification">2</div>
         <i className="far fa-clipboard" />
-        <a href="#">Заявки</a>
+        <a href="/cabinet/requests">Заявки</a>
       </div>
       <div className="header__top__item">
         <i className="far fa-star" />
-        <a href="#">Избранное</a>
+        <a href="/cabinet/favourites">Избранное</a>
       </div>
       <div className="header__top__item margin_right">
         <div className="header__item__notification">2</div>
         <i className="far fa-bell" />
-        <a href="#">Уведомления</a>
+        <a href="/cabinet/notification">Уведомления</a>
         <i className="fas fa-angle-down" />
       </div>
       <div className="header__top__item">
         <i className="far fa-envelope" />
-        <a href="#">Сообщения</a>
+        <a href="/cabinet/message">Сообщения</a>
       </div>
       <div className="header__top__item">
         <img src="/img/widgets/personal_cabinet_logo.png"  />

@@ -7,6 +7,7 @@ export const breadcumbs =
        'Заявки' : '/cabinet/requests',
        'Баланс': '/cabinet/balance',
        'Избранное' : '/cabinet/favourites',
+       'Сообщения' : '/cabinet/message',
        'Удалить аккаунт' : '/cabinet/delete',
        'Уведомления' : '/cabinet/notification',
        'Документы' : '/cabinet/documents',
