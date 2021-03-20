@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import StorageItems from '../../components/storage/StorageItems';
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
+import StorageCal from '../../components/storage/StorageCalculator';
 
 const Storage = () => {
   const router  = useRouter()
@@ -15,7 +16,7 @@ const Storage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [total, setTotal] = useState(0)
   const [maxPage,setMaxPage] = useState(0)
-
+  
 
   useEffect(() => {
     setLoading(true)
@@ -48,7 +49,7 @@ const Storage = () => {
     <>
       <Filter />
         {storages === [] ? '' :  <StorageItems total={total} storages={storages} maxPage={maxPage} onChangePage={onChangePage} currentPage={currentPage} loading={loading}/>}
-       
+        <StorageCal />
     
     
               

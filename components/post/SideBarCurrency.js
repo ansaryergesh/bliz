@@ -55,8 +55,20 @@ const SideBarCurrency = () => {
           легко,быстро и выгодно!</p>
          </>
          : ''}
-  
+
       </div>
+      {router.pathname ==='/storage' ? 
+      <div className="aside__call">
+      <div className="aside__call__content">
+        <div className="aside__call__text">
+          <h4>Калькулятор склада</h4>
+          <p>Просчитайте, какого <br /> размера склад вам нужен.</p>
+        </div>
+        <img src="/img/widgets/aside_calc.png" alt />
+      </div>
+      <a className="btn btn--white open_calc_modal" href="#">Калькулятор склада</a>
+    </div>
+    : ''}
       <div className="exchange_rate">
         <h4>Курсы валют</h4>
         <div className="exchange__item">
