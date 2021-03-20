@@ -107,7 +107,7 @@ const StorageDetailed = () => {
     <div className="goods__info">
       <div className="goods__info__head">
         <div className="goods__info__breadcrumbs">
-          <p className="goods__info__gray">Главная / Склады / Склады в Алматы</p>
+        <p><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/storage' >Склады </a>/<a href="#" className='gray_font'>{" " + "Склады в Алматы"}</a></p>
         </div>  
         <div className="goods__info__title storage__info__title">
           <h2>{storageInfo.properties.area + " м2 "}</h2>

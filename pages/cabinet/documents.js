@@ -9,6 +9,7 @@ import Document2 from '../../components/userCabinet/documents/Document2'
 import {connect} from 'react-redux'
 import withAuth from '../../hocs/withAuth'
 import { fetchCurrentUser } from '../../store/actions/userAction';
+import BreadCumbs from '../../components/shared/BreadNastroikaCabinet';
 const mapStateToProps = state => {
   return {
     usersReducer: state.usersReducer
@@ -27,7 +28,7 @@ class Delete extends React.Component {
         <div className="grid-container container">
 					<div className="section">
           <div className="products__title paddings">
-            <h4>Личный кабинет / Настройки / Документы</h4>
+            <BreadCumbs />
             <h1 className="smaller_font">Документы</h1>
           </div>
             <Bin bin={this.props.usersReducer.user.companyDetails[0].bin} fetchCurrentUser={this.props.fetchCurrentUser}/>

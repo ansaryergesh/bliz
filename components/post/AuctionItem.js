@@ -3,6 +3,7 @@ import PaginationBtns from '../pagination/PaginationBtns'
 import React,{useState} from 'react'
 import Timer from "./Timer";
 import { currencies } from "../../defaults/defaults";
+import BreadCumbs from "../shared/BreadCumbsConfigure";
 const AuctionItem = ({
   total,
   auctions,
@@ -20,7 +21,7 @@ const AuctionItem = ({
     <div>
       <div className="products__content">
         <div className="products__title">
-          <h4>Главная / Грузоперевозки / Аукцион</h4>
+          <BreadCumbs />
           <h1>Аукцион грузов в Казахстане</h1>
           <h3>Найдено {total} объявлений</h3>
         </div>

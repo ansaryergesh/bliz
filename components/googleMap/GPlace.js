@@ -3,6 +3,7 @@ import SideBarCurrency from "../post/SideBarCurrency";
 import {useDispatch} from 'react-redux'
 import axios from "axios";
 import parse from 'html-react-parser'
+import BreadCumbs from "../shared/BreadCumbsConfigure";
 // 
 
 const GPlace = () => {
@@ -110,7 +111,7 @@ const GPlace = () => {
     <div className="products__container container">
       <div className="products__content">
         <div className="products__title">
-          <h4>Главная / Грузоперевозки / Расчет расстояний</h4>
+          <BreadCumbs />
           <h1>Расчет расстояний</h1>
           <h3>Добавьте место выезда и приезда, и расчитайте расстояние и маршрут между ними</h3>
         </div>

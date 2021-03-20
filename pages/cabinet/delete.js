@@ -5,6 +5,7 @@ import CompanySide from '../../components/company/CompanySideInfo'
 import UserDelete from '../../components/userCabinet/UserDelete'
 import {connect} from 'react-redux'
 import withAuth from '../../hocs/withAuth'
+import BreadCumbs from '../../components/shared/BreadNastroikaCabinet';
 const mapStateToProps = state => {
   return {
     usersReducer: state.usersReducer
@@ -19,8 +20,8 @@ class Delete extends React.Component {
         <div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">
-              <h4>Личный кабинет / Настройки / Изменить пароль</h4>
-              <h1 class="smaller_font">Изменить пароль</h1>
+              <BreadCumbs />
+              <h1 class="smaller_font">Удалить аккаунт</h1>
 						</div>
 
             <UserDelete />

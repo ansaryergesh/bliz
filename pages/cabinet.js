@@ -10,6 +10,7 @@ import * as msgaction from '../store/actions/messageAction'
 import {fetchCurrentUser} from '../store/actions/userAction'
 import CompanySide from '../components/company/CompanySideInfo'
 import withAuth from '../hocs/withAuth'
+import BreadCumbs from '../components/shared/BreadNastroikaCabinet'
 const mapStateToProps = state => {
   return {
     usersReducer: state.usersReducer
@@ -137,7 +138,7 @@ class Cabinet extends React.Component {
 				<div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">
-							<h4>Личный кабинет / Настройки / Личная информация</h4>
+              <BreadCumbs />
 							<h1 className="smaller_font">Личная информация</h1>
 						</div>
             <Avatar

@@ -6,7 +6,7 @@ const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, load
     <div>
       <div className="products__content">
         <div className="products__title">
-          <h4>Главная / Склады / Склады в Алматы</h4>
+        <h4><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/storage' >Склады </a>/<a href="#" className='gray_font'>{" " + "Склады в Алматы"}</a></h4>
           <h1>Склады и складские помещения в Алматы</h1>
           <h3>Найдено {total} объявлений</h3>
         </div>

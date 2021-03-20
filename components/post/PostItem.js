@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import PaginationBtns from '../pagination/PaginationBtns'
 import { dateParse, parseDateTime } from '../../defaults/extraFunctions';
+import BreadCumbs from '../shared/BreadCumbsConfigure';
 const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, loading}) => {
  
   return (
@@ -9,7 +10,7 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
         <div className="products__title">
           {pathName === '/cabinet/favourites' ? '' :
               <>
-              <h4>Главная / Грузоперевозки / {pathName === '/cargo' ? 'Грузы' : 'Транпорт'}</h4>
+              <BreadCumbs />
               <h1>{pathName==='/cargo' ? 'Грузоперевозки': 'Транспорт для грузоперевозок'} в Казахстане</h1>
               <h3>Найдено {total} объявлений</h3>
               </>

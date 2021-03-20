@@ -4,6 +4,7 @@ import InWork from "../../components/requests/InWork"
 import Waiting from "../../components/requests/Waiting"
 import cookie from 'js-cookie'
 import withAuth from "../../hocs/withAuth"
+import BreadCumbs from "../../components/shared/BreadCumbsConfigure"
 const Requests = () => {
 
   const [active, setActive] = useState('wait')
@@ -25,7 +26,7 @@ const Requests = () => {
     <div className="grid-container margin container">
       <div className="section">
         <div className="products__title paddings little_pad">
-          <h4>Личный кабинет / Заявки</h4>
+          <BreadCumbs />
           <h1 className="smaller_font">Заявки</h1>
         </div>
         <nav className="cabinet_ad_nav">

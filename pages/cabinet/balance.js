@@ -1,9 +1,11 @@
+import BreadCumbs from "../../components/shared/BreadCumbsConfigure";
+
 const Balance = () => {
   return (
     <div className="grid-container container">
       <div className="section">
         <div className="products__title paddings little_pad">
-          <h4>Личный кабинет / Баланс</h4>
+          <BreadCumbs />
           <h1 className="smaller_font">Мой баланс</h1>
         </div>
         <div className="balance__details">

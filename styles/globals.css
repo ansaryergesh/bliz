@@ -702,6 +702,9 @@ nav.cabinet_ad_nav {
 .nav__links a.gray_font {
   color: #A2A9B2;
 }
+.gray_font {
+  color: #A2A9B2!important;
+}
 
 .nav__links a.active {
   color: #20273D;

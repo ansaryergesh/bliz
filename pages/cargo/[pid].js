@@ -126,7 +126,7 @@ const CargoDetailed = () => {
           <div className="goods__info">
             <div className="goods__info__head">
               <div className="goods__info__breadcrumbs">
-                <p className="goods__info__gray">Главная / Склады / Склады в Алматы</p>
+              <p className='goods__info__gray'><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/storage' >Грузоперевозки </a>/<a href="#" className='gray_font'>{" " + "Грузы"}</a></p>
               </div>
               <div className="goods__info__title">
                 <h2>Груз: {postInfo.details.title} {postInfo.details.net} тн / {postInfo.details.volume} м³</h2>

@@ -4,6 +4,7 @@ import cookie from 'js-cookie'
 import PostItem from "../../components/post/PostItem"
 import {useRouter} from 'next/router'
 import withAuth from "../../hocs/withAuth"
+import BreadCumbs from "../../components/shared/BreadCumbsConfigure"
 const Favourites = () => {
   const router = useRouter()
   const [favourites,setFavourites] = useState({cargo: '',post: '', auction: '', storage: '', special: ''})
@@ -26,7 +27,7 @@ const Favourites = () => {
     <div className="grid-container container">
       <div className="section">
         <div className="products__title paddings little_pad">
-          <h4>Личный кабинет / Избранное</h4>
+          <BreadCumbs />
           <h1 className="smaller_font">Избранное</h1>
         </div>
         <nav className="cabinet_ad_nav">

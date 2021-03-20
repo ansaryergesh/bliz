@@ -23,13 +23,13 @@ const CompanyOnAddInfo = ({user}) => {
         <div className="post_ad__about_company__contacts">
           <i className="fas fa-phone-alt"/>
           <div className="post_ad__about_company__contacts__content">
-            <a href="#">{user.phone}</a>
+            <a href={`tel: ${user.phone}`}>{user.phone}</a>
             {/* <a href="#">+7 727 360 70 30</a> */}
           </div>
         </div>
         <div className="post_ad__about_company__contacts">
           <i className="far fa-envelope"/>
-          <a href="#">{user.email}</a>
+          <a href={`mailto: ${user.email}`}>{user.email}</a>
         </div>
       </div>
     </div>

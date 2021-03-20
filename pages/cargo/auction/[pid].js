@@ -142,6 +142,7 @@ const AuctionDetail = () => {
           <div className="goods__info">
             <div className="goods__info__head">
               <div className="goods__info__breadcrumbs">
+              <p className='goods__info__gray'><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/cargo' >Грузоперевозки </a>/<a href="#" className='gray_font'>{" " + "Аукцион"}</a></p>
                 <p className="goods__info__gray">Главная / Грузоперевозки / Аукцион</p>
               </div>
               <div className="goods__info__title">

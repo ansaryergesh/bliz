@@ -1,14 +1,20 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-const CompanySideInfo = () => {
+const mapStateToProps = ({usersReducer: {
+  user
+}}) => ({user})
+
+const CompanySideInfo = ({user}) => {
+  const nameOfUser = () => user.companyDetails ? user.companyDetails[0].companyName : user.fullName
     return(
         <div className="aside">
         <div className="aside__contactCard">
           <div className="contactCard__content">
-            <img src="assets/img/widgets/company_icon.png" alt />
+            <img src="/img/widgets/company_icon.png" alt />
             <div className="contactCard__title">
-              <h3>ТОО «Alma Logistics»</h3>
-              <p>Баталгазиев Р.В. </p>
+              <h3>{nameOfUser()}</h3>
+              <p>{user.fullName} </p>
             </div>
           </div>
           <div className="contactCard__details">
@@ -37,4 +43,4 @@ const CompanySideInfo = () => {
     )
 }
 
-export default CompanySideInfo;
+export default(connect(mapStateToProps, null)(CompanySideInfo));
