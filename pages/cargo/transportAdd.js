@@ -32,7 +32,7 @@ class CargoAdd extends React.Component {
     this.state = {
       loadMap:false,
       loadingDisDur: false,
-      title: 'title',
+      title: '',
       from: '',
       to: '',
       volume: '22',
@@ -203,7 +203,7 @@ class CargoAdd extends React.Component {
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Название</p>
                         <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" value={this.state.title} onChange={this.handleChange} name='from' type="text" placeholder="Краткое название поста"/>
+                          <input className="post_ad__input" name='title' value={this.state.title} onChange={this.handleChange} type="text" placeholder="Краткое название поста"/>
                         </div>
                       </div>
                       <div className="post_ad__adress__item">
@@ -222,6 +222,7 @@ class CargoAdd extends React.Component {
                       </div>
                       <div className="post_ad__adress__select__wrappers">
                         <div className="post_ad__adress__item">
+                         
                           <p className="post_ad__par">Дата погрузки</p>
                           <div className="post_ad__adress__item__input">
                             <input className="post_ad__input" type="date" value={this.state.startDate}  name='startDate' onChange={this.handleChange} placeholder="28.04.2020"/>
