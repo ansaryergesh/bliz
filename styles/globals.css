@@ -13,7 +13,10 @@
   -webkit-text-size-adjust: 100%;
 /* 2 */
 }
-
+.text-justify {
+  text-align: justify!important;
+  line-height: 28px;
+}
 /* Sections
    ========================================================================== */
 /**
