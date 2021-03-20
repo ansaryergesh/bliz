@@ -5,6 +5,8 @@ import { closeMessage, errorMessage, successMessage } from '../../store/actions/
 import { currencies, paymentType, todaysDate } from '../../defaults/defaults'
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import cookie from 'js-cookie'
+import CompanyOnAddInfo from '../../components/company/CompanyOnAddInfo'
+import withAuth from '../../hocs/withAuth'
 
 
 const mapDispatchToProps = (dispatch) =>({
@@ -343,32 +345,7 @@ class EquipmentAdd extends React.Component  {
                   </div>
                 </div>
               </div>
-              <div className="post_ad__about_company">
-                <h2 className="post_ad__section_title">О компании</h2>
-                <div className="post_ad__about_company__wrapper">
-                  <div className="post_ad__about_company__title">
-                    <div className="post_ad__about_company__title__img">
-                      <img src="assets/img/widgets/company_icon.png" alt/>
-                    </div>
-                    <div className="post_ad__about_company__title__name">
-                      <h3>ТОО «ОУСА Альянс»</h3>
-                      <p>Айсулу А.Л.</p>
-                      <span>Экспедитор</span>
-                    </div>
-                  </div>
-                  <div className="post_ad__about_company__contacts">
-                    <i className="fas fa-phone-alt"/>
-                    <div className="post_ad__about_company__contacts__content">
-                      <a href="#">+7 702 360 70 20</a>
-                      <a href="#">+7 727 360 70 30</a>
-                    </div>
-                  </div>
-                  <div className="post_ad__about_company__contacts">
-                    <i className="far fa-envelope"/>
-                    <a href="#">aisulu@ousa-al.kz</a>
-                  </div>
-                </div>
-              </div>
+              <CompanyOnAddInfo />
               <div className="post_ad__btns">
                 <button type='submit' className="btn">Добавить объявление</button>
                 <div className="post_ad__price__checkbox">
@@ -386,4 +363,4 @@ class EquipmentAdd extends React.Component  {
   }
 
 }
-export default (connect(null, mapDispatchToProps)(EquipmentAdd));
+export default withAuth(connect(null, mapDispatchToProps)(EquipmentAdd));
