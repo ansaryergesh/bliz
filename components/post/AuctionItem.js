@@ -18,7 +18,7 @@ const AuctionItem = ({
   const [currency,setCurrency] = useState(1)
   const [auctionModal, setAuction] = useState(false)
   return (
-    <div>
+    <>
       <div className="products__content">
         <div className="products__title">
           <BreadCumbs />
@@ -117,7 +117,7 @@ const AuctionItem = ({
         </div>
       </div>
 
-    </div>
+    </>
   )
 }
 
