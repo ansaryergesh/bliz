@@ -11,8 +11,6 @@ import cookie from 'js-cookie'
 import { currencies } from '../../../defaults/defaults'
 
 const AuctionDetail = () => {
-  
-
   useEffect(() => {
     axios
       .get(`${process.env.BASE_URL}/getAuctionById?auction_id=${pid}`)
@@ -43,8 +41,17 @@ const AuctionDetail = () => {
           setPostInfo({errorId: true})
         }
       })
+      
+
   }, [])
 
+
+  const minPrice=() => {
+    let prices = [];
+    postInfo.price_details.forEach(p=>prices.push(p.price))
+    
+    return prices;
+  }
   const onFavoure = (id) => {
       axios.get(`https://test.money-men.kz/api/addPostFavourites?token=${cookie.get('token')}&post_id=${pid}&category_id=3`,)
         .then(res=> {
@@ -239,20 +246,26 @@ const AuctionDetail = () => {
                       <img src="/img/goods__nav1__item/logistic-logo.svg" alt="logistic__logo"/>
                       <div className="column__item">
                         <p className="column__item1" a href={details.user[0].id}>{details.user[0].fullName}</p>
-                        <p className="column__item2">Рейтинг: 5.0</p>
+                        <p className="column__item2">Рейтинг: 0</p>
                       </div>
                     </div>
                     <div className="auction__table__column2">
-                      <p className="column__item1">5 мая 12:30</p>
+                      <p className="column__item1">{dateParse2(details.created)}</p>
                     </div>
+                    
+                        {details.price === Math.min.apply(Math,minPrice()) ?
                     <div className="auction__table__column3 separator">
-                      <img src="/img/goods__nav1__item/separator.png" alt="separator"/>
-                      <div className="separator__item">
+                      <img src="/img/goods__nav1__item/separator.png" alt="separator"/>     <div className="separator__item">
                         <p className="column__item__price">{details.price}</p>
                         <p className="column__item__bet">лучшая ставка</p>
                       </div>
+                  </div>: 
+                      <div class="auction__table__column3">
+                        <p class="column__item__price">{details.price} ₸</p>
+                      </div>}
+                      
+                      
                     </div>
-                  </div>
                     ))}
                 </div>
               </div>
@@ -290,10 +303,10 @@ const AuctionDetail = () => {
             <div className="contactCard__auction__item">
               <p>Ставка:
                 <br/>
-                (макс/текущ)</p>
+                (мин/текущ)</p>
               <div className="contactCard__auction__info">
                 <img src="/img/widgets/tenge.svg" alt/>
-                <p className="column__item__price">165 000 ₸
+                <p className="column__item__price">{Math.min.apply(Math,minPrice()) + ' т'}
                 </p>
               </div>
             </div>
