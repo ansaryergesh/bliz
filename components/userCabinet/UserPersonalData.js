@@ -109,7 +109,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
                 <Field name='phone' type='tel' component={PhoneMask} disabled/>}
               </div>
               <div className="user__data_form__item center">
-                <a className="btn btn--white" href="#">ДОБАВИТЬ ТЕЛЕФОН</a>
+                {/* <a className="btn btn--white" href="#">ДОБАВИТЬ ТЕЛЕФОН</a> */}
               </div>
               
               {edit ?

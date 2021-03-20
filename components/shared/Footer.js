@@ -1,5 +1,4 @@
 import React from 'react'
-
 const Footer = () => {
   return (
     <footer>
@@ -25,17 +24,17 @@ const Footer = () => {
               <p className="footer__block-title">Объявление</p>
               <div className="footer__block-list">
                 <div className="list__items">
-                  <a href="#">Грузоперевозки</a>
-                  <a href="#" className="list__item">Транспорт</a>
-                  <a href="#" className="list__item">Аукцион</a>
+                  <a href="/cargo">Грузоперевозки</a>
+                  <a href="/cargo/transport" className="list__item">Транспорт</a>
+                  <a href="/cargo/auction" className="list__item">Аукцион</a>
                 </div>
                 <div className="list__items">
-                  <a href="#" className="list__item">Склады</a>
-                  <a href="#">Спецтехника</a>
+                  <a href="/storage" className="list__item">Склады</a>
+                  <a href="/equipment">Спецтехника</a>
                 </div>
                 <div className="list__items">
-                  <a href="#">Расчет расстояний</a>
-                  <a href="#">Проверка компаний</a>
+                  <a href="/cargo/distance">Расчет расстояний</a>
+                  <a href="/cargo/check">Проверка компаний</a>
                 </div>
               </div>
             </div>
