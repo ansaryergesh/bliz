@@ -306,7 +306,7 @@ const AuctionDetail = () => {
                 (мин/текущ)</p>
               <div className="contactCard__auction__info">
                 <img src="/img/widgets/tenge.svg" alt/>
-                <p className="column__item__price">{Math.min.apply(Math,minPrice()) + ' т'}
+                <p className="column__item__price">{Math.min.apply(Math,minPrice())== 'Infinity'? 0 + ' т': Math.min.apply(Math,minPrice())+ ' т'}
                 </p>
               </div>
             </div>
