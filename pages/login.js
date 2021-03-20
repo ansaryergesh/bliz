@@ -46,8 +46,8 @@ class Login extends React.Component{
             <h2>Войти в личный кабинет</h2>
             <p>Введите ваши данные для входа</p>
             <Formik initialValues={{
-              phone: '+77082839998',
-              password: '123456'
+              phone: '',
+              password: ''
             }} onSubmit={(values) => this.handleLogin(values)}>
               {({errors,touched}) => (
                 <Form className='register_form'>

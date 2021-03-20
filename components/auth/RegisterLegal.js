@@ -16,13 +16,13 @@ const RegisterLegal = ({handleSubmit, isLoading, handleType}) => {
     <div>
         <Formik initialValues = {{
             companyType: 1,
-            companyName: 'Companyname',
-            bin:123456,
-            fullName: 'Tester tester',
-            email: 'tester@test.kz',
-            phone: '+77082839998',
-            password: '123456',
-            password_confirmation: '123456',
+            companyName: '',
+            bin:'',
+            fullName: '',
+            email: '',
+            phone: '',
+            password: '',
+            password_confirmation: '',
         }}
         onSubmit={(values)=> {handleSubmit(values)}}>
             {({errors,touched}) => (
