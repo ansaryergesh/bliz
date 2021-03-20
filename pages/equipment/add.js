@@ -195,7 +195,7 @@ class EquipmentAdd extends React.Component  {
         <div className="products__container container">
           <div className="products__content">
             <div className="products__title">
-              <h4>Главная / Спецтехника / Добавить обьявление</h4>
+            <h4><a href='/'>Главная</a> / <a href='/equipment'>Спецтехника</a> / <a href='#' className='gray_font'>Добавить обьявление</a></h4>
               <h1>Добавить обьявление</h1>
               <p className="post_ad__title">Укажите параметры техники и контактную информацию.</p>
             </div>

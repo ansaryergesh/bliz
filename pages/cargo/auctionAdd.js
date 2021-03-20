@@ -261,8 +261,8 @@ class AuctionAdd extends React.Component {
             <div className="products__container container">
               <div className="products__content">
               <div className="products__title">
-        
-                <h4>Главная / Аукцион / Добавить обьявление</h4>
+              <h4><a href='/'>Главная</a> / <a href='/cargo/auction'>Аукцион</a> / <a href='#' className='gray_font'>Добавить обьявление</a></h4>
+
                 <h1>Добавить аукцион</h1>
                 <p className="post_ad__title">Укажите срок проведения аукциона, а также всю необходимую
                   <br/>

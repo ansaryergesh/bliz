@@ -209,7 +209,7 @@ class CargoAdd extends React.Component {
               <div className="products__content">
               <div className="products__title">
         
-                <h4>Главная / Грузоперевозки / Добавить обьявление</h4>
+                <h4><a href='/'>Главная</a> / <a href='/cargo/add'>Грузоперевозки</a> / <a href='#' className='gray_font'>Добавить обьявление</a></h4>
                 <h1>Добавить груз</h1>
                 <p>{this.state.distance + this.state.duration + this.state.fromString + this.state.toString}</p>
                 <p className="post_ad__title">Укажите желаемые пункты погрузки и выгрузки, параметры

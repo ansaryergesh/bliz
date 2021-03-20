@@ -1,6 +1,8 @@
+import { useState } from "react";
 import BreadCumbs from "../../components/shared/BreadCumbsConfigure";
 
 const Balance = () => {
+  const [balance, setBalance] = useState('0')
   return (
     <div className="grid-container container">
       <div className="section">
@@ -26,7 +28,7 @@ const Balance = () => {
             <p>Баланс:</p>
             <div className="balance__detail__item__inner">
               <img src="/img/widgets/tenge.svg" alt/>
-              <h3 className="green">15 000 ₸</h3>
+              <h3 className="green">{balance} ₸</h3>
             </div>
           </div>
         </div>
@@ -86,28 +88,28 @@ const Balance = () => {
                 <p>15.05.2020</p>
                 <h3>Пополение счета онлайн Paybox.kz</h3>
               </div>
-              <h3 className="green">+ 65 000 тг</h3>
+              <h3 className="green">+ {balance} тг</h3>
             </div>
             <div className="balance__history__item">
               <div className="balance__history__item__inner">
                 <p>10.05.2020</p>
                 <h3>Поднятие объявления в ТОП</h3>
               </div>
-              <h3>- 5 000 тг</h3>
+              <h3> {balance} тг</h3>
             </div>
             <div className="balance__history__item">
               <div className="balance__history__item__inner">
                 <p>15.05.2020</p>
                 <h3>Пополение счета (счет для юр. лица)</h3>
               </div>
-              <h3 className="green">+ 10 000 тг</h3>
+              <h3 className="green">{balance} тг</h3>
             </div>
             <div className="balance__history__item">
               <div className="balance__history__item__inner">
                 <p>10.05.2020</p>
                 <h3>Поднятие объявления в ТОП</h3>
               </div>
-              <h3>- 5 000 тг</h3>
+              <h3> {balance} тг</h3>
             </div>
           </div>
         </div>
