@@ -101,8 +101,8 @@ const Favourites = () => {
                <a className={active==='cargo' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('cargo')} href="#">Грузоперевозки {favourites.cargo}</a>
               <a className={active==='transport' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('transport')} href="#" >Транспорт {favourites.post} </a>
               <a className={active==='storage' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('storage')} href="#">Склады {favourites.storage}</a> 
-              <a className={active==='auction' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('auction')} href="#">Аукцион {favourites.auction}</a>
-              <a className={active==='special' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('special')} href="#">Спецтехника {favourites.special}</a>  
+              <a className={active==='special' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('special')} href="#">Спецтехника {favourites.special}</a> 
+              <a className={active==='auction' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('auction')} href="#">Аукцион {favourites.auction}</a> 
             </div>
           </div>
         </nav>
