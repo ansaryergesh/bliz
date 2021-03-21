@@ -9,12 +9,12 @@ const Share = () => {
     <div className=''>
       <div className=''>
     <div className='sharebutton'>
+      {/* {url} */}
       <FacebookShareButton
         url={url}
         quote={"CampersTribe - World is yours to explore"}
         hashtag="#camperstribe">
         <img src="/img/social-icons/Instagram Copy.svg" alt="instagram"/>
-        {/* <FacebookIcon size={36}/> */}
       </FacebookShareButton>
       <InstapaperShareButton
         url={url}
