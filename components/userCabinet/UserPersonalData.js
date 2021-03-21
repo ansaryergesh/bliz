@@ -5,6 +5,7 @@ import cookie from 'js-cookie'
 import { phoneValidation, required } from '../../defaults/validation';
 import axios from 'axios';
 import {useDispatch} from 'react-redux'
+import { user_type } from '../../defaults/defaults';
 const PhoneMask = ({field, form, ...props}) => <InputMask
   mask="+7(999)-999-9999"
   maskChar=" "
@@ -26,20 +27,39 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
   
 
   const [countries, setCountries] = useState([])
-  const [cities, setCities] = useState([])
-  const [countryVal, setCountryVal] = useState('1')
+  const [addressChange,setaddressChange] = useState(false)
+  const [countryVal, setCountryVal] = useState(user.country_id || '0')
+  const [shortCode, setShortCode] = useState('')
+  const [address,setAddress] = useState({address_string: user.city_string || '', address_id: user.city ||  ''})
   const cityRef = useRef(null);
   // const countrisVal = ['kz', 'ru', '', 'kg', '']
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(cityRef.current,
-      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
+      { types: ["(regions)"], componentRestrictions: { country: [`${shortCode}`] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
-      console.log(place)
+      console.log(place.place_id, place.formatted_address)
+      setAddress({address_string: place.formatted_address, address_id: place.place_id})
     });
 
 
   };
+
+  const changeCountry=(e) => {
+    setCountryVal(e.target.value)
+    setAddress({address_string: '', address_id: ''})
+    const int = parseInt(e.target.value)
+    let shortcode = countries.filter(c=> c.id === int)
+    setShortCode(shortcode[0].short_code)
+    console.log(shortcode[0].short_code)
+  }
+
+  // const getShortCode = () => {
+  //   const int = parseInt(user.country_id);
+  //   let shortcode = countries.filter(c=> c.id === int);
+  //   return user.country_id ? shortcode.short_code : ''
+  // }
+
 
   return (
     <>
@@ -48,7 +68,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
           <h3>Персональные данные</h3>
           <p className='mb'>Личные данные администратора компании</p>
    
-        
+          {shortCode}
         </div>
         <Formik initialValues={{
           fullName: user.fullName,
@@ -57,9 +77,17 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
           email: user.email,
           phone: user.phone,
           country: user.country || 1,
-          city_id: 1,
+          city: address.address_id || '',
+          city_string: address.address_string || '',
+          country_id: '',
           token: cookie.get('token'),
-        }} onSubmit={(values) => onSave(values)} >
+          
+        }} onSubmit={(values) => {
+          values.city = address.address_id
+          values.city_string = address.address_string
+          values.country_id = countryVal
+          onSave(values)
+          }} >
           {({errors,touched}) => (
             <Form className="user__data_form">
               <div className='user__data_form__item'>
@@ -69,7 +97,8 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
               <div className='user__data_form__item'>
                 <span>Страна</span>
                   {edit ?
-                  <Field name='country' as='select' validate={required} value={countryVal} onChange={(e) => setCountryVal(e.target.value)}>
+                  <Field name='country' as='select' validate={required} value={countryVal} onChange={(e) => changeCountry(e)}>
+                      <option  value='0'>Страна не выбрана</option>
                     {countries.map(country=> (
                       <option key={country.id} value={country.id}>{country.name}</option>
                     ))}
@@ -84,10 +113,19 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
           
               <div className='user__data_form__item'>
                 <span>Адрес</span>
-                <input type="text" ref={cityRef} />
+                <input type='text' value={user.city_string || ''} disabled className={addressChange ? 'd-none' : ''} />
+                <input type="text" ref={cityRef} className={!addressChange? 'd-none': ''}/>
+                {/* {!addressChange ? <input type='text' value="Алматы" onFocus={()=>setFocus(true)}/> : <input type="text" ref={cityRef} />} */}
+               
               </div>
+              <div className='user__data_form__item'>
+              <span></span>
 
-
+              <button  type='button' onClick={()=>{
+                setaddressChange(!addressChange)
+                
+                }}>{addressChange ? 'Отмена' : 'Изменить адрес'}</button>
+              </div>
               <div className="user__personal_data">
                 <div className="user__profile__title">
                   <h3>Контактные данные</h3>

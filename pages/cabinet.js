@@ -57,13 +57,14 @@ class Cabinet extends React.Component {
   }
 
   onUpdate(values) {
+    console.log(values)
     axios.get(`${process.env.BASE_URL}/updateProfile`, {params: {
       fullName: values.fullName,
       city: values.city,
+      city_string: values.city_string,
       email: values.email,
-      country: values.country,
+      country_id: values.country_id,
       token: values.token,
-      city_id: values.city_id,
       phone: values.phone
     }})
       .then(res => {
