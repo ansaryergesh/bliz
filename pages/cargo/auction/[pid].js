@@ -92,7 +92,7 @@ const AuctionDetail = ({user}) => {
     return prices;
   }
   const onFavoure = (id) => {
-      axios.get(`https://test.money-men.kz/api/addPostFavourites?token=${cookie.get('token')}&post_id=${pid}&category_id=3`,)
+      axios.get(`https://test.money-men.kz/api/addAuctionFavourites?token=${cookie.get('token')}&auction_id=${pid}`,)
         .then(res=> {
             if(res.data.success) {
                 dispatch({type: 'SUCCESS_MESSAGE', payload: 'Добавлен в избранные'})

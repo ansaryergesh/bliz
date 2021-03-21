@@ -5,11 +5,14 @@ import PostItem from "../../components/post/PostItem"
 import {useRouter} from 'next/router'
 import withAuth from "../../hocs/withAuth"
 import BreadCumbs from "../../components/shared/BreadCumbsConfigure"
+import AuctionItem from "../../components/post/AuctionItem"
+import StorageItems from "../../components/storage/StorageItems"
 const Favourites = () => {
   const router = useRouter()
   const [favourites,setFavourites] = useState({cargo: '',post: '', auction: '', storage: '', special: ''})
   const [favourList, setFavourList] = useState([{}]);
   const [active, setActive] = useState('cargo');
+  const [loading, setLoading] = useState(true)
   const {fav} = router.query
   useEffect(() => {
     getFavoures()
@@ -18,41 +21,49 @@ const Favourites = () => {
       .then(res => {
         console.log(res)
         if(res.data.success) {
+          setLoading(false)
           setFavourites(res.data.data)
         }
       })
   }, [])
 
   const changeFavour = (name) => {
+    setLoading(true)
     const finalDates = (val) => val.data.data[0] ? val.data.data[0] : val.data.data
     setActive(name)
     if(name==='cargo') {
       axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
         .then(res=> {
+          setLoading(false)
           setFavourList(finalDates(res))
         })
     }
     if(name==='transport') {
+      
       axios.get(`${process.env.BASE_URL}/getListPostFavourites?token=${cookie.get('token')}`)
         .then(res=> {
+          setLoading(false)
           setFavourList(finalDates(res))
         })
     }
     if(name==='auction') {
       axios.get(`${process.env.BASE_URL}/getListAuctionFavourites?token=${cookie.get('token')}`)
         .then(res=> {
+          setLoading(false)
           setFavourList(finalDates(res))
         })
     }
     if(name==='storage') {
       axios.get(`${process.env.BASE_URL}/getListStorageFavourites?token=${cookie.get('token')}`)
         .then(res=> {
+          setLoading(false)
           setFavourList(finalDates(res))
         })
     }
     if(name==='special') {
       axios.get(`${process.env.BASE_URL}/getListSpecialFavourites?token=${cookie.get('token')}`)
         .then(res=> {
+          setLoading(false)
           setFavourList(finalDates(res))
         })
     }
@@ -61,6 +72,7 @@ const Favourites = () => {
     if(fav && fav==='transport') {
       axios.get(`${process.env.BASE_URL}/getListPostFavourites?token=${cookie.get('token')}`)
         .then(res=> {
+          setLoading(false)
           setFavourList(res.data.data)
         })
     }
@@ -70,6 +82,7 @@ const Favourites = () => {
     if(!fav || fav==='cargo') {
       axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
         .then(res=> {
+          setLoading(false)
           setFavourList(res.data.data[0])
         })
     }
@@ -94,7 +107,10 @@ const Favourites = () => {
           </div>
         </nav>
       
-        <PostItem post={favourList} pathName={router.pathname} />
+        {active==='cargo' || active==='transport' ?  <PostItem post={favourList} pathName={router.pathname} /> : ''}
+        {active==='storage' ? <StorageItems storages={favourList} loading={loading}/> : ''}
+        {loading===false && active==='auction' ? <AuctionItem loading={true} auctions={favourList}/> : ''}
+        {/* <AuctionItem auctions={favourList} /> */}
 {/* 
         <div className="storage__item without_pads">
           <i id="storges_absolute" className="fas fa-star"/>

@@ -4,13 +4,9 @@ import SideBarCurrency from '../post/SideBarCurrency';
 
 const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, loading}) => {
   return (
-    <div className='products__container container'>
-      <div className="products__content">
-        <div className="products__title">
-        <h4><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/storage' >Склады </a>/<a href="#" className='gray_font'>{" " + "Склады в Алматы"}</a></h4>
-          <h1>Склады и складские помещения в Алматы</h1>
-          <h3>Найдено {total} объявлений</h3>
-        </div>
+    <>
+    
+      
         <div className="products__items__wrapper">
           {loading? <div>Загрузка...</div> :
             <>
@@ -73,13 +69,10 @@ const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, load
           }
           
        
-          </div>
           <PaginationBtns max_page={maxPage} current_page={currentPage} onChangePage={onChangePage} />
         </div>
-      <SideBarCurrency />
       
-     
-      </div>
+      </>
   )
 }
 

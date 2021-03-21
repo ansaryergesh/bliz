@@ -5,6 +5,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios';
 import StorageCal from '../../components/storage/StorageCalculator';
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults';
+import SideBarCurrency from '../../components/post/SideBarCurrency';
 
 const Storage = () => {
   
@@ -73,7 +74,17 @@ const Storage = () => {
         maxArea = {maxArea}
         setMaxArea = {setMaxArea}
       />
-        {storages === [] ? '' :  <StorageItems total={total} storages={storages} maxPage={maxPage} onChangePage={onChangePage} currentPage={currentPage} loading={loading}/>}
+      <div className='products__container container'>
+      <div className="products__content">
+        <div className="products__title">
+        <h4><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/storage' >Склады </a>/<a href="#" className='gray_font'>{" " + "Склады в Алматы"}</a></h4>
+          <h1>Склады и складские помещения в Алматы</h1>
+          <h3>Найдено {total} объявлений</h3>
+        </div>
+      {storages === [] ? '' :  <StorageItems total={total} storages={storages} maxPage={maxPage} onChangePage={onChangePage} currentPage={currentPage} loading={loading}/>}
+      </div>
+      <SideBarCurrency />
+     </div>
         <StorageCal />
     
     

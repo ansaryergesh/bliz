@@ -19,12 +19,7 @@ const AuctionItem = ({
   const [auctionModal, setAuction] = useState(false)
   return (
     <>
-      <div className="products__content">
-        <div className="products__title">
-          <BreadCumbs />
-          <h1>Аукцион грузов в Казахстане</h1>
-          <h3>Найдено {total} объявлений</h3>
-        </div>
+      
         <div className="products__items__wrapper">
           {loading ? <div>Загрузка...</div> : 
             <div>
@@ -115,7 +110,7 @@ const AuctionItem = ({
               организуют просмотр и подписание договора с собственником.</p>
           </div>
         </div>
-      </div>
+  
 
     </>
   )

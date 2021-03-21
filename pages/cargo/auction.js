@@ -8,6 +8,7 @@ import PostItem from '../../components/post/PostItem'
 import AuctionItem from '../../components/post/AuctionItem'
 import SideBarCurrency from '../../components/post/SideBarCurrency';
 import cookie from 'js-cookie'
+import BreadCumbs from '../../components/shared/BreadCumbsConfigure';
 const Cargo = () => {
   const dispatch = useDispatch();
   const router  = useRouter()
@@ -93,6 +94,12 @@ const Cargo = () => {
       
     <div className="products__container container">
       {loading ? <Loader /> : ''}
+      <div className="products__content">
+        <div className="products__title">
+          <BreadCumbs />
+          <h1>Аукцион грузов в Казахстане</h1>
+          <h3>Найдено {total} объявлений</h3>
+        </div>
       <AuctionItem 
         total={total}
         auctions={auctions}
@@ -101,8 +108,10 @@ const Cargo = () => {
         loading={loading}
         onChangePage={onChangePage}
         onParticipate={onParticipate}
+
       />
-      
+      </div>
+
       <SideBarCurrency />
     </div>
       
