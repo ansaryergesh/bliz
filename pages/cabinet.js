@@ -11,6 +11,7 @@ import {fetchCurrentUser} from '../store/actions/userAction'
 import CompanySide from '../components/company/CompanySideInfo'
 import withAuth from '../hocs/withAuth'
 import BreadCumbs from '../components/shared/BreadNastroikaCabinet'
+import { loadGoogleMapScript } from '../defaults/googleMapDefaults'
 const mapStateToProps = state => {
   return {
     usersReducer: state.usersReducer
@@ -25,6 +26,12 @@ const mapDispatchToProps =dispatch =>({
 class Cabinet extends React.Component {
   componentDidMount() {
     console.log(this.props.usersReducer.user.image)
+
+    loadGoogleMapScript(() => {
+      this.setState({
+        loadMap: true
+      })
+    })
   }
 	constructor(props) {
 		super(props);
@@ -32,6 +39,7 @@ class Cabinet extends React.Component {
 			file:null,
       loading: false,
       edit: true,
+      loadMap: false,
 		}
 		this.onFormSubmit = this.onFormSubmit.bind(this)
 		this.onChange = this.onChange.bind(this)
@@ -134,7 +142,10 @@ class Cabinet extends React.Component {
 	render() {
 		return(
 			<>
-				<CabinetNav  activeLink='index'/>
+        {!this.state.loadMap ? <div>Загрузка...</div> : 
+        
+          <>
+	<CabinetNav  activeLink='index'/>
 				<div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">
@@ -158,6 +169,9 @@ class Cabinet extends React.Component {
           
         <CompanySide />
 				</div>
+          </>
+        }
+			
 			</>
 	)
 	}

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {Formik, Form, Field} from 'formik';
 import InputMask from "react-input-mask";
 import cookie from 'js-cookie'
@@ -16,22 +16,31 @@ const PhoneMask = ({field, form, ...props}) => <InputMask
 const UserPersonalData = ({user, edit, onEdit, onSave}) => {
   const dispatch = useDispatch()
    useEffect(() => {
+    initPlaceAPI();
     axios.get(`${process.env.BASE_URL}/country`)
       .then(res => {
         setCountries(res.data)
       })
   },[])
 
+  
+
   const [countries, setCountries] = useState([])
   const [cities, setCities] = useState([])
-  
-  const onChooseCountry = (id) => {
-    axios.get(`${process.env.BASE_URL}/city?countryID=${id}`)
-      .then(res => {
-        setCities(res.data)
-      })
-  }
-  
+  const [countryVal, setCountryVal] = useState('1')
+  const cityRef = useRef(null);
+  // const countrisVal = ['kz', 'ru', '', 'kg', '']
+  const initPlaceAPI = () => {
+    let autocomplete = new window.google.maps.places.Autocomplete(cityRef.current,
+      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
+    new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
+      let place = autocomplete.getPlace();
+      console.log(place)
+    });
+
+
+  };
+
   return (
     <>
       <div className="user__personal_data">
@@ -59,9 +68,8 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
               </div>
               <div className='user__data_form__item'>
                 <span>Страна</span>
-                {edit ?
-                
-                  <Field name='country' as='select' validate={required}  onChange={() => onChooseCountry(country.id)}>
+                  {edit ?
+                  <Field name='country' as='select' validate={required} value={countryVal} onChange={(e) => setCountryVal(e.target.value)}>
                     {countries.map(country=> (
                       <option key={country.id} value={country.id}>{country.name}</option>
                     ))}
@@ -73,20 +81,10 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
                 </Field>
                 }
               </div>
-              <div className='user__data_form__item'>
-                <span>Страна</span>
-                {edit ?
-                  <Field name='country' as='select' validate={required}>
-                    {cities.map(country=> (
-                      <option key={country.id} value={country.id}>{country.name}</option>
-                    ))}
-                  </Field> : 
-                  <Field name='country' disabled/>
-                }
-              </div>
+          
               <div className='user__data_form__item'>
                 <span>Адрес</span>
-                {edit ? <Field name='address' /> : <Field name='address' disabled/>}
+                <input type="text" ref={cityRef} />
               </div>
 
 
