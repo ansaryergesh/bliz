@@ -112,7 +112,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
               </div>
           
               <div className='user__data_form__item'>
-                <span>Адрес</span>
+                <span>Город / Регион</span>
                 <input type='text' value={user.city_string || 'Не указан адрес'} disabled className={addressChange ? 'd-none' : ''} />
                 <input type="text" ref={cityRef} className={!addressChange? 'd-none': ''}/>
                 {/* {!addressChange ? <input type='text' value="Алматы" onFocus={()=>setFocus(true)}/> : <input type="text" ref={cityRef} />} */}
@@ -124,7 +124,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
               <button  type='button' onClick={()=>{
                 setaddressChange(!addressChange)
                 
-                }}>{addressChange ? 'Отмена' : 'Изменить адрес'}</button>
+                }}>{addressChange ? 'Отмена' : 'Изменить'}</button>
               </div>
               <div className="user__personal_data">
                 <div className="user__profile__title">

@@ -9,44 +9,79 @@ import PostAside from '../../../components/post/PostAside'
 import Timer from '../../../components/post/Timer'
 import cookie from 'js-cookie'
 import { currencies } from '../../../defaults/defaults'
+import {connect} from 'react-redux'
 
-const AuctionDetail = () => {
+const mapStateToProps = ({usersReducer: {
+  user
+}}) => ({user})
+
+const AuctionDetail = ({user}) => {
+
+  const ButtonParticipate = () => {
+    if(postInfo.users.some(u=>u.user_id == user.id)) {
+      return(
+        <a className="btn" disabled={actionLoading} href="#" onClick={() => onCancelParticipate(pid)}>Отменить участие</a>
+      )
+    }else {
+      return (
+        <a className="btn" href="#" onClick={() => setAuction(true)}>Учавствовать в аукционе</a>
+      )
+    }
+  }
+
+  const OwnAuction = () => {
+    if(postInfo.organizatorinfo.id === user.id) {
+      return(
+        <>
+         <a className="btn" disabled={actionLoading}>Редактировать</a>
+         <a className="btn" disabled={actionLoading}>Удалить</a>
+        </>
+      )
+    }else {
+      return(<ButtonParticipate />)
+    }
+  }
   useEffect(() => {
-    axios
-      .get(`${process.env.BASE_URL}/getAuctionById?auction_id=${pid}`)
-      .then(res => {
-        setLoading(false)
-        if (res.data.success) {
-          let finalres = res.data.data[0];
-          setPostInfo({
-            details: {
-              date_finish: finalres.details[0].date_finish,
-              from: finalres.details[0].from_city,
-              to: finalres.details[0].to_city,
-              start_date: finalres.details[0].date_start,
-              end_date: finalres.details[0].date_end,
-              volume: finalres.details[0].volume,
-              net: finalres.details[0].net,
-              distance: finalres.details[0].distance,
-              duration: finalres.details[0].duration,
-              from_string: finalres.details[0].from_string,
-              to_string: finalres.details[0].to_string,
-              title: finalres.details[0].title,
-              type_trasport: finalres.details[0].type_trasport
-            },
-            updated_at: finalres.updated_at,
-            price_details: finalres.price_details,
-            organizator: finalres.price_details[0].user[0].fullName
-          })
-        } else {
-          setPostInfo({errorId: true})
-        }
-      })
-      
-
+      getAuctionInfo()
   }, [])
 
-
+  const getAuctionInfo = () => {
+    axios
+    .get(`${process.env.BASE_URL}/getAuctionById?auction_id=${pid}`)
+    .then(res => {
+      setLoading(false)
+      if (res.data.success) {
+        let finalres = res.data.data[0];
+        setPostInfo({
+          details: {
+            date_finish: finalres.details[0].date_finish,
+            from: finalres.details[0].from_city,
+            to: finalres.details[0].to_city,
+            start_date: finalres.details[0].date_start,
+            end_date: finalres.details[0].date_end,
+            volume: finalres.details[0].volume,
+            net: finalres.details[0].net,
+            distance: finalres.details[0].distance,
+            duration: finalres.details[0].duration,
+            from_string: finalres.details[0].from_string,
+            to_string: finalres.details[0].to_string,
+            title: finalres.details[0].title,
+            type_trasport: finalres.details[0].type_trasport
+          },
+          updated_at: finalres.updated_at,
+          users: finalres.user_id,
+          price_details: finalres.price_details,
+          organizatorinfo: {
+            id: finalres.user[0].id,
+            fullName: finalres.user[0].fullName,
+            type: finalres.user[0].type,
+          }
+        })
+      } else {
+        setPostInfo({errorId: true})
+      }
+    })
+  }
   const minPrice=() => {
     let prices = [];
     postInfo.price_details.forEach(p=>prices.push(p.price))
@@ -64,6 +99,7 @@ const AuctionDetail = () => {
         })
   }
   const onParticipate = (aucId) => {
+    setActionLoading(true)
     dispatch({type: 'CLOSE_MESSAGE'})
     let tokenUser = cookie.get('token')
     if(tokenUser!== undefined) {
@@ -74,9 +110,37 @@ const AuctionDetail = () => {
         auction_id: aucId
       })
         .then(res=> {
+          setActionLoading(false)
           console.log(res)
           if(res.data.success) {
             dispatch({type: 'SUCCESS_MESSAGE', payload: 'Вы участвуете'})
+            getAuctionInfo()
+          }
+          else {
+            dispatch({type: 'ERROR_MESSAGE', payload: res.data.message})
+          }
+        })
+    }else {
+      dispatch({type: 'ERROR_MESSAGE', payload: 'Чтобы участвовать в аукцион вам надо зайти на сайт через аккаунт'})
+    }
+   
+  }
+
+  const onCancelParticipate = (aucId) => {
+    setActionLoading(true)
+    dispatch({type: 'CLOSE_MESSAGE'})
+    let tokenUser = cookie.get('token')
+    if(tokenUser!== undefined) {
+      axios.get(`${process.env.BASE_URL}/cancelAuctionOrder`, {params: {
+        token: tokenUser,
+        auction_id: aucId}
+      })
+        .then(res=> {
+          setActionLoading(false)
+          console.log(res)
+          if(res.data.success) {
+            dispatch({type: 'SUCCESS_MESSAGE', payload: 'Отменен участие'})
+            getAuctionInfo();
           }
           else {
             dispatch({type: 'ERROR_MESSAGE', payload: res.data.message})
@@ -96,6 +160,7 @@ const AuctionDetail = () => {
   const [routeLoad,
     setRouteLoad] = useState(false)
   const [price, setPrice] = useState('');
+  const [actionLoading,setActionLoading] = useState(false)
   const [currency,setCurrency] = useState(1)
   const [auctionModal, setAuction] = useState(false)
   const {pid} = router.query
@@ -103,7 +168,7 @@ const AuctionDetail = () => {
     setPostInfo] = useState({
     errorId: false,
     updated_at: '',
-    organizator: '',
+    organizatorinfo: {fullName: '', id: '', type: ''},
     details: {
       from: "",
       to: "",
@@ -121,6 +186,7 @@ const AuctionDetail = () => {
     },
     price_details: [],
     steps: [],
+    users: []
   })
 
   return (
@@ -140,10 +206,12 @@ const AuctionDetail = () => {
                         <option value={c.id}>{c.name}</option>
                     ))}
                 </select>
-              </div>   
-                <button id="close_edit_photo" className="btn block inherit" onClick={() => onParticipate(pid)}>Участвовать...</button>
+              </div>
+          
+              <button disabled={actionLoading} id="close_edit_photo" className="btn block inherit" onClick={() => onParticipate(pid)}>Участвовать...</button>
+            
+                
                
-              
           
             </div>
           </div>
@@ -280,7 +348,7 @@ const AuctionDetail = () => {
             <div className="contactCard__content">
               <div className="contactCard__title noMargin">
                 <p>Организатор:</p>
-                <h3>{postInfo.organizator}</h3>
+                <h3>{postInfo.organizatorinfo.fullName}</h3>
               </div>
             </div>
             <div className="contactCard__auction__item">
@@ -312,7 +380,8 @@ const AuctionDetail = () => {
                 </p>
               </div>
             </div>
-            <a className="btn" href="#" onClick={() => setAuction(true)}>Учавствовать в аукционе</a>
+            <OwnAuction />
+         
           </div>
           <div className="aside__functions__wrapper">
             <div className="aside__functions">
@@ -322,16 +391,15 @@ const AuctionDetail = () => {
               <a className="someShit" href="#"><img src="/img/widgets/aside_function3.png" alt/></a>
             </div>
             <div className="aside__changed_date">
-              <p>Изменено: 7 мая 12:30</p>
+              <p>Изменено: {dateParse2(postInfo.updated_at)}</p>
             </div>
           </div>
         </aside>
       </div>
 
-      {/* <PostAside postinfo={postInfo} /> */}
     </div>
 
   )
 }
-
-export default AuctionDetail;
+export default(connect(mapStateToProps, null)(AuctionDetail));
+// {postInfo.users.some(u=> u.user_id ==user.id) ? 'true' :}

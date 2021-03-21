@@ -8,7 +8,12 @@ import PostAside from '../../components/post/PostAside'
 import {useDispatch} from 'react-redux'
 import cookie from 'js-cookie'
 import CheckBox from '../../components/shared/CheckBox'
+import {connect} from 'react-redux'
 import { documents, extra, pogruzka } from '../../defaults/checkboxes/documents'
+const mapStateToProps = ({usersReducer: {
+  user
+}}) => ({user})
+
 const CargoDetailed = () => {
   const dispatch = useDispatch();
   const getRoute = () => {
@@ -242,7 +247,8 @@ const CargoDetailed = () => {
                 Оплата на месте получения.</p>
             </div>
             <div className="goods__info__add">
-              <h4 className="goods__title">Документы</h4>
+              {postInfo.additional.docs ? <h4 className="goods__title">Документы</h4>: ''}
+            
               {documents.map(doc => (
                 <CheckBox name={doc.name} checked={postInfo.additional.docs && postInfo.additional.docs.includes(doc.name)} />
               ))}
