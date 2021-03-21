@@ -4,12 +4,12 @@ import {formatPhoneNumber, formatPhoneNumberHidden, parseDateTime} from "../../d
 import {useDispatch} from 'react-redux'
 import cookie from 'js-cookie'
 import {useRouter} from 'next/router'
+import Share from "../shared/ShareSocial";
 const PostAside = ({postinfo, sendRequest}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const {pid} = router.query
-  const [share,
-    setShare] = useState(false)
+  const [share, setShare] = useState(false)
   const closeModal = (e) => {
     e.preventDefault()
     if (e.target.className !== 'modal_bg') {
@@ -76,14 +76,18 @@ const PostAside = ({postinfo, sendRequest}) => {
           <div className="aside__functions__wrapper">
             <div className="aside__functions">
               <a className="izbrannoe" onClick={addFavour}><i className="far fa-star"/>В избранное</a>
-              <a onClick={() => setShare(true)} className="download" href="example" ><img src="/img/widgets/aside_function1.png" alt/></a>
+              {share ? <a  className='download' onClick={() => setShare(!share)}><img src="/img/widgets/aside_function1.png" alt/></a> : <a onClick={() => setShare(!share)} className="download" href="#" ><img src="/img/widgets/aside_function1.png" alt/></a>}
               <a className="print" href="javascript:(print());"><img src="/img/widgets/aside_function2.png" alt/></a>
               <a className="someShit" href="#"><img src="/img/widgets/aside_function3.png" alt/></a>
+            
             </div>
             <div className="aside__changed_date">
               <p>Изменено:  {parseDateTime(postinfo.updated_at)}</p>
             </div>
-            
+            {share ? <div className = 'sharing'>
+                <br/>Поделиться в соц сетях
+                <Share />
+              </div> : ''}
           </div>
         </aside>
         </>

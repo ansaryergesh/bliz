@@ -326,7 +326,7 @@ const AuctionDetail = () => {
         </aside>
       </div>
 
-      {/* <PostAside postinfo={postInfo} /> */}
+      <PostAside postinfo={postInfo} />
     </div>
 
   )

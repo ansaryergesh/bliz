@@ -1,37 +1,39 @@
 import { useRouter } from 'next/router'
-import {FacebookShareButton, FacebookIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon, ViberShareButton, ViberIcon} from "react-share";
+import {VKShareButton,OKShareButton,
+  InstapaperShareButton,FacebookShareButton, FacebookIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon, ViberShareButton, ViberIcon} from "react-share";
 
 const Share = () => {
     const router  = useRouter()
-    const url = process.env.PROD_URL + window.location.pathname
+    const url = process.env.PROD_URL + router.pathname
   return (
-    <div className='modal_share'>
-      <div className='modal_bg'>
+    <div className=''>
+      <div className=''>
     <div className='sharebutton'>
       <FacebookShareButton
-        url={process.env.PROD_URL}
+        url={url}
         quote={"CampersTribe - World is yours to explore"}
         hashtag="#camperstribe">
-        <FacebookIcon size={36}/>
+        <img src="/img/social-icons/Instagram Copy.svg" alt="instagram"/>
+        {/* <FacebookIcon size={36}/> */}
       </FacebookShareButton>
-      <WhatsappShareButton
-        url={process.env.PROD_URL}
+      <InstapaperShareButton
+        url={url}
         quote={"CampersTribe - World is yours to explore"}
         hashtag="#camperstribe">
-        <WhatsappIcon size={36}/>
-      </WhatsappShareButton>
-      <TelegramShareButton
-        url={process.env.PROD_URL}
+        <img src='/img/footer/Instagram.png' />
+      </InstapaperShareButton>
+      <VKShareButton
+        url={url}
         quote={"CampersTribe - World is yours to explore"}
         hashtag="#camperstribe">
-        <TelegramIcon size={36}/>
-      </TelegramShareButton>
-      <ViberShareButton
-        url={process.env.PROD_URL}
+        <img src='/img/footer/VK.png' />
+      </VKShareButton>
+      <OKShareButton
+        url={url}
         quote={"CampersTribe - World is yours to explore"}
         hashtag="#camperstribe">
-        <ViberIcon size={36}/>
-      </ViberShareButton>
+        <img src='/img/social-icons/Combined Shape.svg' />
+      </OKShareButton>
     </div>
     </div>
     </div>
