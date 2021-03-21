@@ -103,7 +103,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
                       <option key={country.id} value={country.id}>{country.name}</option>
                     ))}
                   </Field> : 
-                  <Field name='country' as='select' validate={required}  disabled>
+                  <Field name='country' as='select' validate={required} placeholeder=''  disabled>
                   {countries.map(country=> (
                     <option key={country.id} value={country.id} >{country.name}</option>
                   ))}
@@ -113,7 +113,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
           
               <div className='user__data_form__item'>
                 <span>Адрес</span>
-                <input type='text' value={user.city_string || ''} disabled className={addressChange ? 'd-none' : ''} />
+                <input type='text' value={user.city_string || 'Не указан адрес'} disabled className={addressChange ? 'd-none' : ''} />
                 <input type="text" ref={cityRef} className={!addressChange? 'd-none': ''}/>
                 {/* {!addressChange ? <input type='text' value="Алматы" onFocus={()=>setFocus(true)}/> : <input type="text" ref={cityRef} />} */}
                
