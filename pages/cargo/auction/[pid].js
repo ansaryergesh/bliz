@@ -28,6 +28,9 @@ const AuctionDetail = ({user}) => {
       )
     }
   }
+  const checkIfOwner = () => {
+    postInfo.organizatorinfo.id === user.id ? true : false
+  }
 
   const OwnAuction = () => {
     if(postInfo.organizatorinfo.id === user.id) {

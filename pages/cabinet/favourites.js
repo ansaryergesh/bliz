@@ -8,13 +8,12 @@ import BreadCumbs from "../../components/shared/BreadCumbsConfigure"
 const Favourites = () => {
   const router = useRouter()
   const [favourites,setFavourites] = useState({cargo: '',post: '', auction: '', storage: '', special: ''})
-  const [cargo, setCargo] = useState([{}]);
+  const [favourList, setFavourList] = useState([{}]);
   const [active, setActive] = useState('cargo');
+  const {fav} = router.query
   useEffect(() => {
-    axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
-      .then(res=> {
-        setCargo(res.data.data)
-      })
+    getFavoures()
+   
     axios.get(`${process.env.BASE_URL}/getAllFavourites?token=${cookie.get('token')}`)
       .then(res => {
         console.log(res)
@@ -23,23 +22,79 @@ const Favourites = () => {
         }
       })
   }, [])
+
+  const changeFavour = (name) => {
+    const finalDates = (val) => val.data.data[0] ? val.data.data[0] : val.data.data
+    setActive(name)
+    if(name==='cargo') {
+      axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
+        .then(res=> {
+          setFavourList(finalDates(res))
+        })
+    }
+    if(name==='transport') {
+      axios.get(`${process.env.BASE_URL}/getListPostFavourites?token=${cookie.get('token')}`)
+        .then(res=> {
+          setFavourList(finalDates(res))
+        })
+    }
+    if(name==='auction') {
+      axios.get(`${process.env.BASE_URL}/getListAuctionFavourites?token=${cookie.get('token')}`)
+        .then(res=> {
+          setFavourList(finalDates(res))
+        })
+    }
+    if(name==='storage') {
+      axios.get(`${process.env.BASE_URL}/getListStorageFavourites?token=${cookie.get('token')}`)
+        .then(res=> {
+          setFavourList(finalDates(res))
+        })
+    }
+    if(name==='special') {
+      axios.get(`${process.env.BASE_URL}/getListSpecialFavourites?token=${cookie.get('token')}`)
+        .then(res=> {
+          setFavourList(finalDates(res))
+        })
+    }
+  }
+  const getFavoures = () => {
+    if(fav && fav==='transport') {
+      axios.get(`${process.env.BASE_URL}/getListPostFavourites?token=${cookie.get('token')}`)
+        .then(res=> {
+          setFavourList(res.data.data)
+        })
+    }
+    if(fav && fav==='storage') {
+
+    }
+    if(!fav || fav==='cargo') {
+      axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
+        .then(res=> {
+          setFavourList(res.data.data[0])
+        })
+    }
+  }
   return (
     <div className="grid-container container">
       <div className="section">
         <div className="products__title paddings little_pad">
           <BreadCumbs />
+         
           <h1 className="smaller_font">Избранное</h1>
         </div>
         <nav className="cabinet_ad_nav">
           <div className="nav__wrapper">
             <div className="nav__links cabinet_ad_nav">
-               <a className="cabinet_ad_nav active" href="#">Грузоперевозки {favourites.cargo}</a>
-              <a href="#">Транспорт {favourites.post} </a>
-              <a href="#">Склады {favourites.storage}</a> 
+               <a className={active==='cargo' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('cargo')} href="#">Грузоперевозки {favourites.cargo}</a>
+              <a className={active==='transport' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('transport')} href="#" >Транспорт {favourites.post} </a>
+              <a className={active==='storage' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('storage')} href="#">Склады {favourites.storage}</a> 
+              <a className={active==='auction' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('auction')} href="#">Аукцион {favourites.auction}</a>
+              <a className={active==='special' ? `cabinet_ad_nav active` : 'cabinet_ad_nav'} onClick={() => changeFavour('special')} href="#">Спецтехника {favourites.special}</a>  
             </div>
           </div>
         </nav>
-        <PostItem post={cargo} pathName={router.pathname} />
+      
+        <PostItem post={favourList} pathName={router.pathname} />
 {/* 
         <div className="storage__item without_pads">
           <i id="storges_absolute" className="fas fa-star"/>
