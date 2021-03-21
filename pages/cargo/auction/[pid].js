@@ -35,7 +35,8 @@ const AuctionDetail = () => {
               type_trasport: finalres.details[0].type_trasport
             },
             updated_at: finalres.updated_at,
-            price_details: finalres.price_details
+            price_details: finalres.price_details,
+            organizator: finalres.price_details[0].user[0].fullName
           })
         } else {
           setPostInfo({errorId: true})
@@ -102,6 +103,7 @@ const AuctionDetail = () => {
     setPostInfo] = useState({
     errorId: false,
     updated_at: '',
+    organizator: '',
     details: {
       from: "",
       to: "",
@@ -278,7 +280,7 @@ const AuctionDetail = () => {
             <div className="contactCard__content">
               <div className="contactCard__title noMargin">
                 <p>Организатор:</p>
-                <h3>ТОО «Logistics Farm»</h3>
+                <h3>{postInfo.organizator}</h3>
               </div>
             </div>
             <div className="contactCard__auction__item">

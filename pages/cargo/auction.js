@@ -54,6 +54,7 @@ const Cargo = () => {
         auction_id: aucId
       })
         .then(res=> {
+          console.log(`${process.env.BASE_URL}/sendAuctionRequest`, aucId, price, currency, tokenUser)
           console.log(res)
           if(res.data.success) {
             dispatch({type: 'SUCCESS_MESSAGE', payload: 'Вы участвуете'})
