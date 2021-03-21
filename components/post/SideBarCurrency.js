@@ -101,7 +101,7 @@ const SideBarCurrency = () => {
           </div>
           <img src="/img/widgets/aside_call.png" alt/>
         </div>
-        <a className="btn btn--white" href="#">СВЯЗАТЬСЯ С НАМИ</a>
+        <a className="btn btn--white" href="/contacts">СВЯЗАТЬСЯ С НАМИ</a>
       </div>
       <div className="aside__ad">
         <a href="#"><img src="/img/widgets/ad3.png" alt/></a>
