@@ -35,7 +35,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
   // const countrisVal = ['kz', 'ru', '', 'kg', '']
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(cityRef.current,
-      { types: ["(regions)"], componentRestrictions: { country: [`${shortCode}`] } });
+      { types: ["(regions)"], componentRestrictions: { country: ['kz'] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
       console.log(place.place_id, place.formatted_address)
@@ -68,7 +68,7 @@ const UserPersonalData = ({user, edit, onEdit, onSave}) => {
           <h3>Персональные данные</h3>
           <p className='mb'>Личные данные администратора компании</p>
    
-          {shortCode}
+          {/* {shortCode} */}
         </div>
         <Formik initialValues={{
           fullName: user.fullName,
