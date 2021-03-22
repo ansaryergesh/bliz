@@ -12,42 +12,67 @@ import { deleteFalseKey } from '../../../defaults/extraFunctions'
 import CompanyOnAddInfo from '../../../components/company/CompanyOnAddInfo'
 import withAuth from '../../../hocs/withAuth'
 import Router, {useRouter} from 'next/router'
-// import { getUrlParameter } from '../../../defaults/getQuery'
+import {getParameterByName} from '../../../defaults/getQuery'
 
-// const getQuery = () => {
-//     const router = useRouter();
-//     const{id} = router.query
-
-//     return id;
-// }
 const mapDispatchToProps = (dispatch) =>({
   successMessage: (msg) => {dispatch(successMessage(msg))},
   errorMessage: (msg) => {dispatch(errorMessage(msg))},
   closeMessage: () => {dispatch(closeMessage)},
 })
 
-// const id = getUrlParameter('id')
-// const category = getUrlParameter('category')
 class CargoTransportEdit extends React.Component {
-  
-  componentDidMount(){
-
     
+  componentDidMount(){
+    if(getParameterByName('id') === null || getParameterByName('category') === null) {
+      this.props.errorMessage('Неправильный адрес')
+      Router.push('/cargo')
+    }else {
+      this.getPostId();
+    }
     loadGoogleMapScript(() => {
+     
       this.setState({
         loadMap: true,
       },() => this.initPlaceAPI())
     })
   }
-  
-  
-
+  getPostId = () => {
+    axios.get(`${process.env.BASE_URL}/getPostByID/${getParameterByName('id')}`)
+      .then(res => {
+        if(res.data.success) {
+          let finalres = res.data.data[0].details[0]
+          console.log(finalres)
+          this.setState({
+            loading: false,
+            title: finalres.title,
+            from: finalres.from,
+            to: finalres.to,
+            volume: finalres.volume,
+            net: finalres.net,
+            quantity: finalres.quantity,
+            startDate: finalres.start_date,
+            endDate: finalres.end_date,
+            fromString:finalres.from_string,
+            toString: finalres.to_string,
+            from: finalres.from,
+            to: finalres.to,
+            duration: finalres.duration,
+            distance: finalres.distance,
+            // price: finalres.price[0].price
+            // docs: finalres.additional[0].docs,
+            // pogruzki: finalres.additional[0].pogruzki
+          })
+        }
+      })
+  }
   constructor(props) {
-    
     super(props);
     this.placeInputRef = createRef();
     this.placeInputRef2 = createRef();
     this.state = {
+      address1: false,
+      address2: false,
+      loading: true,
       loadMap:false,
       loadingDisDur: false,
       title: '',
@@ -60,7 +85,7 @@ class CargoTransportEdit extends React.Component {
       width: '',
       startDate: todaysDate(),
       endDate: todaysDate(),
-      price: '100',
+      // price: '100',
       priceType: 1,
       paymentType: 1,
       type_transport:1,
@@ -179,12 +204,13 @@ class CargoTransportEdit extends React.Component {
   }
   
   handleSubmit(e) {
+    e.preventDefault()
     this.props.closeMessage();
     var docVals = deleteFalseKey(this.state.docs);
     var loads = deleteFalseKey(this.state.pogruzki);
     var condits = deleteFalseKey(this.state.condition)
     var extras = deleteFalseKey(this.state.extra)
-    axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=${docVals}&loading[]=${loads}&condition[]=${condits}&addition[]=${extras}`, {params: {
+    axios.get(`${process.env.BASE_URL}/editPost?documents[]=${docVals}&loading[]=${loads}&condition[]=${condits}&addition[]=${extras}`, {params: {
       token: cookie.get('token'),
       category_id: 1,
       sub_id: 1,
@@ -195,9 +221,11 @@ class CargoTransportEdit extends React.Component {
       net: this.state.net,
       start_date: this.state.startDate,
       end_date: this.state.endDate,
-      price_type: this.state.priceType,
-      payment_type: this.state.paymentType,
-      price: this.state.price,
+      price_type: 1,
+      payment_type: 1,
+      price: 100,
+      type_transport: 1,
+      post_id: parseInt(getParameterByName('id')),
       type_transport: this.state.type_transport,
       duration: this.state.duration,
       distance: this.state.distance,
@@ -206,8 +234,9 @@ class CargoTransportEdit extends React.Component {
     }})
       .then(res => {
         if(res.data.success) {
-          this.props.successMessage('Успешно добавлен пост')
-          Router.push('/cargo')
+          this.props.successMessage('Успешно обновлен пост')
+          
+          Router.push(`/cargo/${getParameterByName('id')}`)
           
         }else {
           this.props.errorMessage(res.data.message)
@@ -225,16 +254,14 @@ class CargoTransportEdit extends React.Component {
             <div className="products__container container">
               <div className="products__content">
               <div className="products__title">
-                {/* {getQuery()} */}
-                {/* {getUrlParameter('id')} */}
-                <h4><a href='/'>Главная</a> / <a href='/cargo/add'>Грузоперевозки</a> / <a href='#' className='gray_font'>Добавить обьявление</a></h4>
-                <h1>Добавить груз</h1>
+            
+                <h4><a href='/'>Главная</a> / <a href='/cargo/add'>Грузоперевозки</a> / <a href='#' className='gray_font'>Редактирование</a></h4>
+                <h1>Редактировать</h1>
              
                 <p className="post_ad__title">Укажите желаемые пункты погрузки и выгрузки, параметры
                   <br/>
                   транспортного средства и контактную информацию</p>
               </div>
-              <form onSubmit={this.handleSubmit}>
                 <div className="post_ad__adress no_topBorder">
                   <div className="post_ad__adress__wrapper">
                     <div className="post_ad__adress__items">
@@ -242,15 +269,22 @@ class CargoTransportEdit extends React.Component {
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Откуда</p>
                         <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" ref={this.placeInputRef} name='from' type="text" placeholder="Алматы, Казахстан"/>
-                          <i className="fas fa-map-marker-alt"/>
+                          <input className={this.state.address1 ?  `post_ad__input`  : `post_ad__input d-none`}  ref={this.placeInputRef} name='from' type="text" placeholder="Алматы, Казахстан"/> 
+                          <input className={this.state.address1 ? `d-none`  : ''} value={this.state.fromString} disabled />
+                            <a className={this.state.address1 ? 'd-none' : ''} onClick={() => this.setState({address1: true})}>Изменить адрес</a>
+                          
                         </div>
                       </div>
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Куда</p>
                         <div className="post_ad__adress__item__input">
+                        <input className={this.state.address2 ?  `post_ad__input`  : `post_ad__input d-none`}  ref={this.placeInputRef2} name='to' type="text" placeholder="Алматы, Казахстан"/> 
+                          <input className={this.state.address2 ? `d-none`  : ''} value={this.state.toString} disabled /><br />
+                            <a className={this.state.address2 ? 'd-none' : ''} onClick={() => this.setState({address2: true})}>Изменить адрес</a>
+                          {/* <input value={this.state.toString} disabled />
+                          <button onClick={() => this.setState({address2: true})}>Изменить адрес</button>
                           <input className="post_ad__input" type="text" name='to' ref={this.placeInputRef2} placeholder="Шымкент, Казахстан"/>
-                          <i className="fas fa-map-marker-alt"/>
+                          <i className="fas fa-map-marker-alt"/> */}
                         </div>
                       </div>
                       <div className="post_ad__adress__select__wrappers">
@@ -421,13 +455,12 @@ class CargoTransportEdit extends React.Component {
                 </div>
                 <CompanyOnAddInfo />
                 <div className="post_ad__btns">
-                  <button className="btn" type='submit'>Добавить объявление</button>
+                  <button className="btn" type='submit' onClick={this.handleSubmit}>Редактировать</button>
                   <div className="post_ad__price__checkbox">
                     <input type="checkbox"/>
                     <p className="post_ad__par">Добавить объявление в топ</p>
                   </div>
                 </div>
-              </form>
             </div>
               <div className="products__aside"></div>
           </div>

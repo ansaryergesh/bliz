@@ -52,12 +52,12 @@ const PostAside = ({postinfo, sendRequest, user}) => {
       }
     })
   }
-
+  const pgCategory = router.pathname.includes('cargo') ? 'cargo' : 'transport'
   const AsideButtons = () => {
     if(user && postinfo.user && postinfo.user.id == user.id) {
       return(
       <>
-      <a className="btn" href="#">Редактировать</a>
+      <a onClick={()=>router.push(`/cargo/edit?id=${pid}&category=${pgCategory}`)} className="btn" href="#">Редактировать</a>
       <a className="btn"  href="#" onClick={() => onDelete()}> Удалить</a>
       </>)
     }else {

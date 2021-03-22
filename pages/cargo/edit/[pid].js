@@ -12,14 +12,8 @@ import { deleteFalseKey } from '../../../defaults/extraFunctions'
 import CompanyOnAddInfo from '../../../components/company/CompanyOnAddInfo'
 import withAuth from '../../../hocs/withAuth'
 import Router, {useRouter} from 'next/router'
-import { route } from 'next/dist/next-server/server/router'
+import {getParameterByName} from '../../../defaults/getQuery'
 
-// const getQuery = () => {
-//     const router = useRouter();
-//     const{id} = router.query
-
-//     return id;
-// }
 const mapDispatchToProps = (dispatch) =>({
   successMessage: (msg) => {dispatch(successMessage(msg))},
   errorMessage: (msg) => {dispatch(errorMessage(msg))},
@@ -27,7 +21,7 @@ const mapDispatchToProps = (dispatch) =>({
 })
 
 class CargoTransportEdit extends React.Component {
-  router = useRouter()
+    
   componentDidMount(){
     
     loadGoogleMapScript(() => {
@@ -36,11 +30,7 @@ class CargoTransportEdit extends React.Component {
       },() => this.initPlaceAPI())
     })
   }
-  
-  
-
   constructor(props) {
-    
     super(props);
     this.placeInputRef = createRef();
     this.placeInputRef2 = createRef();
@@ -222,7 +212,9 @@ class CargoTransportEdit extends React.Component {
             <div className="products__container container">
               <div className="products__content">
               <div className="products__title">
-                {/* {getQuery()} */}
+                  
+                {getParameterByName('id')}
+            
                 <h4><a href='/'>Главная</a> / <a href='/cargo/add'>Грузоперевозки</a> / <a href='#' className='gray_font'>Добавить обьявление</a></h4>
                 <h1>Добавить груз</h1>
              
