@@ -71,7 +71,7 @@ const Favourites = () => {
   const getFavoures = () => {
     const finalDates = (val) => val.data.data[0] ? val.data.data[0] : val.data.data
     if(!fav || fav==='cargo') {
-      axios.get(`${process.env.BASE_URL}/getListPostFavourites?token=${cookie.get('token')}`)
+      axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
           setFavourList(finalDates(res))

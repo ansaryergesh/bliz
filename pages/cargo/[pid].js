@@ -14,6 +14,12 @@ const mapStateToProps = ({usersReducer: {
   user
 }}) => ({user})
 
+
+const FilteredCheckBox = ({document, otherDoc}) => {
+  let filtered = document.filter(item =>        // filter jsondata
+    otherDoc.every( f =>                // so every member of filter array
+         f.includes(item[f.id])) )
+}
 const CargoDetailed = ({user}) => {
   const dispatch = useDispatch();
   const getRoute = () => {
@@ -247,18 +253,19 @@ const CargoDetailed = ({user}) => {
                 Оплата на месте получения.</p>
             </div>
             <div className="goods__info__add">
-              {postInfo.additional.docs ? <h4 className="goods__title">Документы</h4>: ''}
-            
+        
+ 
               {documents.map(doc => (
-                <CheckBox name={doc.name} checked={postInfo.additional.docs && postInfo.additional.docs.includes(doc.name)} />
+                  <CheckBox className={postInfo.additional.docs && postInfo.additional.docs.includes(doc.name) ? '' : 'd-none'} name={doc.name} checked={true} />
+                // <CheckBox name={doc.name} checked={postInfo.additional.docs && postInfo.additional.docs.includes(doc.name)} />
               ))}
-              <h4 className="goods__title">Погрузка</h4>
+              {/* <h4 className="goods__title">Погрузка</h4> */}
               {pogruzka.map(doc => (
-                <CheckBox name={doc.name} checked={postInfo.additional.loading && postInfo.additional.loading.includes(doc.name)} />
+                <CheckBox className={postInfo.additional.loading && postInfo.additional.docs.includes(doc.name) ? '' : 'd-none'} name={doc.name} checked={postInfo.additional.loading && postInfo.additional.loading.includes(doc.name)} />
               ))}
-              <h4 className="goods__title">Дополнительно</h4>
+              {/* <h4 className="goods__title">Дополнительно</h4> */}
               {extra.map(doc => (
-                <CheckBox name={doc.name} checked={postInfo.additional.addition && postInfo.additional.addition.includes(doc.name)} />
+                <CheckBox className={postInfo.additional.addition && postInfo.additional.docs.includes(doc.name) ? '' : 'd-none'} name={doc.name} checked={postInfo.additional.addition && postInfo.additional.addition.includes(doc.name)} />
               ))}
             </div>
             <PostPlaceMap steps={steps} to_string={postInfo.details.to_string} from_string={postInfo.details.from_string} loading={loading} from={postInfo.details.from} to={postInfo.details.to}/>
