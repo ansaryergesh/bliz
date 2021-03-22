@@ -35,7 +35,7 @@ const Favourites = () => {
       axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
-          setFavourList(finalDates(res))
+          setFavourList(res.data.data)
         })
     }
     if(name==='transport') {
@@ -74,7 +74,7 @@ const Favourites = () => {
       axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
-          setFavourList(finalDates(res))
+          setFavourList(res.data.data)
         })
     }
   }
