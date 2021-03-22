@@ -14,7 +14,7 @@ const mapStateToProps = ({usersReducer: {
   user
 }}) => ({user})
 
-const CargoDetailed = () => {
+const CargoDetailed = ({user}) => {
   const dispatch = useDispatch();
   const getRoute = () => {
     setRouteLoad(true)
@@ -266,11 +266,11 @@ const CargoDetailed = () => {
             <button disabled={routeLoad ? true : false} className={steps.length>0 ? 'd-none' : ''} onClick={getRoute}>{routeLoad ? 'Подождите ...' : 'Показать маршрут'}</button>
           </div>
         </section>
-        <PostAside sendRequest={sendRequest} postinfo={postInfo} />
+        <PostAside user ={user} sendRequest={sendRequest} postinfo={postInfo} />
       </div>
 
     </div>
   )
 }
 
-export default CargoDetailed;
+export default(connect(mapStateToProps, null)(CargoDetailed));

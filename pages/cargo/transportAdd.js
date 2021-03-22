@@ -137,7 +137,21 @@ class CargoAdd extends React.Component {
   handleCheckBox(e) {
     const item = e.target.value;
     const isChecked = e.target.checked;
-    this.setState(prevState => ({ docs: prevState.docs.set(item, isChecked) }));
+
+
+    if(documents.some(d=> d.name === e.target.name)) {
+      this.setState(prevState => ({ docs: prevState.docs.set(item, isChecked) }));
+    }
+    if(condition.some(c=>c.name===e.target.name)) {
+      this.setState(prevState=>({condition: prevState.condition.set(item,isChecked)}))
+    }
+    if(pogruzka.some(p=>p.name===e.target.name)) {
+      this.setState(prevState=>({pogruzki: prevState.pogruzki.set(item,isChecked)}))
+    }
+    if(extra.some(c=>c.name===e.target.name)) {
+      this.setState(prevState=>({extra: prevState.extra.set(item,isChecked)}))
+    }
+    
   }
 
   handleSubmit(e) {
@@ -367,17 +381,17 @@ class CargoAdd extends React.Component {
                     <div className="post_ad__aditional__checkbox__items">
                       <h3>Погрузка</h3>
                       {pogruzka.map(pog=> (
-                        <CheckBox name={pog.name} value={pog.value} checked={this.state.pogruzki.get(pog.value)}  />
+                        <CheckBox name={pog.name} value={pog.value} checked={this.state.pogruzki.get(pog.value)} handleCheckBox={this.handleCheckBox}  />
                       ))}
                     </div>
                     <div className="post_ad__aditional__checkbox__items">
                       <h3>Условия </h3>
                       {condition.map(con=> (
-                        <CheckBox name={con.name} value={con.value} checked={this.state.condition.get(con.value)}  />
+                        <CheckBox name={con.name} value={con.value} checked={this.state.condition.get(con.value)}  handleCheckBox={this.handleCheckBox} />
                       ))}
                       <h3 class="margin">Дополнительно</h3>
                       {extra.map(ext=> (
-                        <CheckBox name={ext.name} value={ext.value} checked={this.state.extra.get(ext.value)}  />
+                        <CheckBox name={ext.name} value={ext.value} checked={this.state.extra.get(ext.value)} handleCheckBox={this.handleCheckBox}  />
                       ))}
                     </div>
                   </div>

@@ -5,7 +5,10 @@ import {useDispatch} from 'react-redux'
 import cookie from 'js-cookie'
 import {useRouter} from 'next/router'
 import Share from "../shared/ShareSocial";
-const PostAside = ({postinfo, sendRequest}) => {
+import {connect} from 'react-redux';
+
+
+const PostAside = ({postinfo, sendRequest, user}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const {pid} = router.query
@@ -17,6 +20,24 @@ const PostAside = ({postinfo, sendRequest}) => {
     }
   }
 
+
+  const AsideButtons = () => {
+    if(user && postinfo.user && postinfo.user.id == user.id) {
+      return(
+      <>
+      <a className="btn" href="#">Редактировать</a>
+      <a className="btn" href="#">Удалить</a>
+      </>)
+    }else {
+      return (
+        <>
+          {!router.pathname.includes('storage') ? <a className="btn" onClick={sendRequest}>Отправить заявку</a> : ''}
+          <a className="btn" href="#">Написать сообщение</a>
+        </>
+      )
+ 
+    }
+  }
   const addFavour = () => {
     if (router.pathname.includes('/cargo')) {
       axios.get(`https://test.money-men.kz/api/addPostFavourites?token=${cookie.get('token')}&post_id=${pid}&category_id=1`).then(res => {
@@ -55,7 +76,7 @@ const PostAside = ({postinfo, sendRequest}) => {
     {share ? ''  :''}
     <aside className="aside">
           <div className="aside__contactCard">
-            <p>Контактная информация</p>
+            <p>Контактная информация </p>
             <div className="contactCard__content">
               <img src="/img/widgets/company_icon.png" alt/>
               <div className="contactCard__title">
@@ -70,8 +91,9 @@ const PostAside = ({postinfo, sendRequest}) => {
               </p>
               <button className="show_num">Показать телефон</button>
             </div>
-            {!router.pathname.includes('storage') ? <a className="btn" onClick={sendRequest}>Отправить заявку</a> : ''}
-            <a className="btn" href="#">Написать сообщение</a>
+            <AsideButtons />
+            {/* {!router.pathname.includes('storage') ? <a className="btn" onClick={sendRequest}>Отправить заявку</a> : ''}
+            <a className="btn" href="#">Написать сообщение</a> */}
           </div>
           <div className="aside__functions__wrapper">
             <div className="aside__functions">
