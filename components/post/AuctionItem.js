@@ -80,8 +80,8 @@ const AuctionItem = ({
                           </select>
                         </div>   
                           <button id="close_edit_photo" className="btn block inherit" onClick={() => onParticipate(auction.id,price,currency)}>Участвовать...</button>
+                      </div>
                     </div>
-          </div>
                  </div>
 
                  
