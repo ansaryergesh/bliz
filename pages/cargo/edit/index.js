@@ -12,7 +12,7 @@ import { deleteFalseKey } from '../../../defaults/extraFunctions'
 import CompanyOnAddInfo from '../../../components/company/CompanyOnAddInfo'
 import withAuth from '../../../hocs/withAuth'
 import Router, {useRouter} from 'next/router'
-import { getUrlParameter } from '../../../defaults/getQuery'
+// import { getUrlParameter } from '../../../defaults/getQuery'
 
 // const getQuery = () => {
 //     const router = useRouter();
@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch) =>({
   closeMessage: () => {dispatch(closeMessage)},
 })
 
-const id = getUrlParameter('id')
-const category = getUrlParameter('category')
+// const id = getUrlParameter('id')
+// const category = getUrlParameter('category')
 class CargoTransportEdit extends React.Component {
   
   componentDidMount(){
@@ -226,7 +226,7 @@ class CargoTransportEdit extends React.Component {
               <div className="products__content">
               <div className="products__title">
                 {/* {getQuery()} */}
-                {getUrlParameter('id')}
+                {/* {getUrlParameter('id')} */}
                 <h4><a href='/'>Главная</a> / <a href='/cargo/add'>Грузоперевозки</a> / <a href='#' className='gray_font'>Добавить обьявление</a></h4>
                 <h1>Добавить груз</h1>
              
