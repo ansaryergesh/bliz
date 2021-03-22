@@ -8,7 +8,7 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
   return (
       <div className="products__content">
         <div className="products__title">
-          {pathName === '/cabinet/favourites' ? '' :
+          {pathName === '/cabinet/favourites' || pathName === '/cabinet/posts' ? '' :
               <>
               <BreadCumbs />
               <h1>{pathName==='/cargo' ? 'Грузоперевозки': 'Транспорт для грузоперевозок'} в Казахстане</h1>
@@ -31,7 +31,7 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
                   <a href={`/cargo/${p.id}`}>{p.details ? p.details[0].from_string : 'Загрузка...'}
                     — {p.details ? p.details[0].to_string : 'Загрузка...'}
                     </a>
-                  <p>~{p.details ? p.details[0].distance : '...'} км, отходы стальные, растентовка</p>
+                  <p>~{p.details ? p.details[0].distance : '...'} км, {p.details ? p.details[0].title : 'Загрузка'}</p>
                 </div>
                 <div className="product__item__title">
                   <h2>{p.sub_id} {p.title}</h2>

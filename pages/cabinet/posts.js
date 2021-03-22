@@ -19,7 +19,7 @@ const Posts = () => {
    
     axios.get(`${process.env.BASE_URL}/myPosts?token=${cookie.get('token')}`)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         if(res.data.success) {
           setLoading(false)
           setFavourites(res.data)
@@ -35,7 +35,7 @@ const Posts = () => {
       axios.get(`${process.env.BASE_URL}/getMyCargo?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
-          setFavourList(finalDates(res))
+          setFavourList(res.data.data)
         })
     }
     if(name==='transport') {
@@ -69,13 +69,12 @@ const Posts = () => {
     }
   }
   const getFavoures = () => {
-    if(fav && fav==='transport') {
-      axios.get(`${process.env.BASE_URL}/getMyCaro?token=${cookie.get('token')}`)
+      axios.get(`${process.env.BASE_URL}/getMyPosts?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
+          console.log(res)
           setFavourList(res.data.data)
         })
-    }
     if(fav && fav==='storage') {
 
     }
@@ -83,7 +82,8 @@ const Posts = () => {
       axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
-          setFavourList(res.data.data[0])
+      
+          setFavourList(res.data.data)
         })
     }
   }
