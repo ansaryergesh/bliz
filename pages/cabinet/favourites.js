@@ -69,21 +69,12 @@ const Favourites = () => {
     }
   }
   const getFavoures = () => {
-    if(fav && fav==='transport') {
+    const finalDates = (val) => val.data.data[0] ? val.data.data[0] : val.data.data
+    if(!fav || fav==='cargo') {
       axios.get(`${process.env.BASE_URL}/getListPostFavourites?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
-          setFavourList(res.data.data)
-        })
-    }
-    if(fav && fav==='storage') {
-
-    }
-    if(!fav || fav==='cargo') {
-      axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
-        .then(res=> {
-          setLoading(false)
-          setFavourList(res.data.data[0])
+          setFavourList(finalDates(res))
         })
     }
   }
