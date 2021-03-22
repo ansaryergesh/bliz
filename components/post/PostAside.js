@@ -6,7 +6,7 @@ import cookie from 'js-cookie'
 import {useRouter} from 'next/router'
 import Share from "../shared/ShareSocial";
 import {connect} from 'react-redux';
-
+import swal from "sweetalert";
 
 const PostAside = ({postinfo, sendRequest, user}) => {
   const router = useRouter();
@@ -19,14 +19,46 @@ const PostAside = ({postinfo, sendRequest, user}) => {
       setShare(false)
     }
   }
-
+  
+  const onDelete =() => {
+    swal({
+      title: 'Вы уверены, что хотите удалить пост',
+      buttons:{
+        catch:{
+          text: 'Да',
+          value: 'yes'
+        },
+        cancel: 'Нет'
+      }
+    }).then(value=>{
+      switch (value){
+        case 'yes':
+          console.log(pid)
+          
+          router.push('/cargo')
+            
+          axios.get(`${process.env.BASE_URL}/deletePost`, {params:{
+            token: cookie.get('token'),
+            post_id: pid,
+          }})
+          .then(response => {
+            console.log(response)
+            if(response.data.success) {
+              dispatch({type: 'SUCCESS_MESSAGE', payload: 'Успешно удален'})
+            }else {
+              dispatch({type: 'ERROR_MESSAGE', payload: res.data.message})
+            }
+          })
+      }
+    })
+  }
 
   const AsideButtons = () => {
     if(user && postinfo.user && postinfo.user.id == user.id) {
       return(
       <>
       <a className="btn" href="#">Редактировать</a>
-      <a className="btn" href="#">Удалить</a>
+      <a className="btn"  href="#" onClick={() => onDelete()}> Удалить</a>
       </>)
     }else {
       return (
