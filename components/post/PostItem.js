@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import PaginationBtns from '../pagination/PaginationBtns'
 import { dateParse, parseDateTime } from '../../defaults/extraFunctions';
 import BreadCumbs from '../shared/BreadCumbsConfigure';
+import {useRouter} from 'next/router'
 const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, loading}) => {
- 
+  const router = useRouter()
   return (
       <div className="products__content">
         <div className="products__title">
@@ -25,7 +26,7 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
               <div className="product__item">
                 <div className="product__item__date">
                 {p.details ? dateParse(p.details[0].start_date) + '-' + dateParse(p.details[0].end_date) : 'Загрузка...'}
-                  <p>{parseDateTime(p.updated_at)} </p>
+                  {!router.pathname.includes('cabinet') ? <p>{parseDateTime(p.updated_at)} </p> : ''}
                 </div>
                 <div className="product__item__title">
                   <a href={`/cargo/${p.id}`}>{p.details ? p.details[0].from_string : 'Загрузка...'}

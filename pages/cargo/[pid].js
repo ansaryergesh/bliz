@@ -256,7 +256,7 @@ const CargoDetailed = ({user}) => {
         
  
               {documents.map(doc => (
-                  <CheckBox className={postInfo.additional.docs && postInfo.additional.docs.includes(doc.name) ? '' : 'd-none'} name={doc.name} checked={true} />
+                <CheckBox className={postInfo.additional.docs && postInfo.additional.docs.includes(doc.name) ? '' : 'd-none'} name={doc.name} checked={true} />
                 // <CheckBox name={doc.name} checked={postInfo.additional.docs && postInfo.additional.docs.includes(doc.name)} />
               ))}
               {/* <h4 className="goods__title">Погрузка</h4> */}

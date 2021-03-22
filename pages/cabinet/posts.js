@@ -11,7 +11,7 @@ const Posts = () => {
   const router = useRouter()
   const [favourites,setFavourites] = useState({cargo: '',post: '', auction: '', storage: '', special: ''})
   const [favourList, setFavourList] = useState([{}]);
-  const [active, setActive] = useState('cargo');
+  const [active, setActive] = useState('transport');
   const [loading, setLoading] = useState(true)
   const {fav} = router.query
   useEffect(() => {
@@ -106,10 +106,10 @@ const Posts = () => {
             </div>
           </div>
         </nav>
-      
-        {active==='cargo' || active==='transport' ?  <PostItem post={favourList} pathName={router.pathname} /> : ''}
-        {active==='storage' ? <StorageItems storages={favourList} loading={loading}/> : ''}
-        {loading===false && active==='auction' ? <AuctionItem loading={true} auctions={favourList}/> : ''}
+
+        {active==='cargo' || active==='transport' ?  <PostItem post={!loading ? favourList: []} pathName={router.pathname} /> : ''}
+        {active==='storage' ? <StorageItems storages={!loading ? favourList: []} loading={loading}/> : ''}
+        {loading===false && active==='auction' ? <AuctionItem loading={true} auctions={!loading ? favourList: []} auctions={favourList}/> : ''}
         {/* <AuctionItem auctions={favourList} /> */}
 {/* 
         <div className="storage__item without_pads">
