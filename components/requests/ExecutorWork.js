@@ -39,7 +39,7 @@ const ExecutorWork = (props) => {
           <div className="auction__item cabinet_ad_item">
             <div className="cabinet_ad_auction_items">
               <a className="blue" href="#"><i className="far fa-map"/>Указать адрес погрузки</a>
-              <a href={`/cargo/${d.details[0].details[0].id}`}><i className="far fa-file-alt"/>Подробнее</a>
+              <a href={`/cargo/${d.details[0].id}`}><i className="far fa-file-alt"/>Подробнее</a>
             </div>
           </div>
         </div>
