@@ -8,12 +8,15 @@ import {useDispatch} from 'react-redux'
 import BreadCumbs from "../../components/shared/BreadCumbsConfigure"
 import LoadingSpinner from "../../components/shared/others/LoadingSpinner"
 import RequestFromOther from "../../components/requests/RequestFromOther"
+import CustomerWork from "../../components/requests/CustomerWork"
+import ExecutorWork from "../../components/requests/ExecutorWork"
 const Requests = () => {
   const dispatch = useDispatch()
   const [active, setActive] = useState('wait')
   const [executionWait, setExecutionWait] = useState({data: [], count: ''})
   const [requestFromOther, setRequestFromOther] = useState({data:[] , count: ''})
   const [executionWork, setExecutionWork] = useState({data: [], count: ''})
+  const [requestInWork, setRequestInWork] = useState({})
   const [loading, setLoading] = useState(true)
 
   const onCancelRequest = (e) => {
@@ -54,6 +57,8 @@ const Requests = () => {
   useEffect(() => {
     getSendedWaitingRequests()
     getRequestFromOther()
+    getWorkRequest()
+    getWorkOther()
   },[])
   const getSendedWaitingRequests = () => {
     setLoading(true)
@@ -63,6 +68,35 @@ const Requests = () => {
         if(res.data.success) {
           setExecutionWait({
             data: res.data.data,
+            count: res.data.count
+          })
+        }
+      })
+  }
+
+  const getWorkRequest = () => {
+    setLoading(true)
+    axios.get(`${process.env.BASE_URL}/customerOrdersInWork?token=${cookie.get('token')}`)
+      .then(res => {
+        setLoading(false)
+        if(res.data.success) {
+          setExecutionWork({
+            data: res.data.data,
+            count: res.data.count
+          })
+        }
+      })
+  }
+
+  const getWorkOther = () => {
+    setLoading(true)
+    axios.get(`${process.env.BASE_URL}/executorOrdersInWork?token=${cookie.get('token')}`)
+      .then(res => {
+        setLoading(false)
+        if(res.data.success) {
+          console.log(res.data.data)
+          setRequestInWork({
+            data:res.data.data,
             count: res.data.count
           })
         }
@@ -99,7 +133,10 @@ const Requests = () => {
             </div>
           </div>
         </nav>
-        {active==='inwork' ?  <InWork /> : ''}
+        {active==='inwork' ?  <>
+          <CustomerWork count={executionWork.count} data={executionWork.data}/>
+          <ExecutorWork count={requestInWork.count} data={requestInWork.data} />
+          </> : ''}
         {active=== 'wait'  ?
           <>
             <Waiting onCancelRequest = {onCancelRequest} count={executionWait.count} data={executionWait.data}/> 
