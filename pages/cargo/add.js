@@ -5,7 +5,7 @@ import {documents, pogruzka, condition, extra} from '../../defaults/checkboxes/d
 import CheckBox from '../../components/shared/CheckBox'
 import { closeMessage, errorMessage, successMessage } from '../../store/actions/messageAction'
 import {connect} from 'react-redux'
-import { currencies, paymentType, todaysDate } from '../../defaults/defaults'
+import { currencies, paymentType, typeTransports, todaysDate } from '../../defaults/defaults'
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
 import { deleteFalseKey } from '../../defaults/extraFunctions'
@@ -186,6 +186,10 @@ class CargoAdd extends React.Component {
       distance: this.state.distance,
       from_string: this.state.fromString,
       to_string: this.state.toString,
+      height: this.state.height,
+      length: this.state.length,
+      width: this.state.width,
+      quantity: this.state.quantity,
     }})
       .then(res => {
         if(res.data.success) {
@@ -288,21 +292,23 @@ class CargoAdd extends React.Component {
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Тип транспорта</p>
                           
-                          <select className="post_ad__input">
-                            <option >ЖД Рефрижиратор</option>
+                          <select className="post_ad__input" value={this.state.type_transport} name='type_transport' onChange={this.handleChange}>
+                            {typeTransports.map(p => (
+                              <option value={p.id}>{p.name}</option>
+                            ))}
                           </select>
                         </div>
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Кол-во</p>
-                          <input name='quantity' value={this.state.quantity} onChange={this.handleChange} className="post_ad__input" type="text" placeholder="Количество"/>
+                          <input name='quantity' value={this.state.quantity} onChange={this.handleChange} className="post_ad__input" type="number" placeholder="Количество"/>
                         </div>
                       </div>
                       <div className="post_ad__chars__items__inputs__container">
                         <p className="post_ad__par">Размер груза, м</p>
                         <div className="post_ad__chars__items__inputs__wrapper">
-                          <input name='width' value={this.state.width} onChange={this.handleChange} className="post_ad__input" type="text" placeholder="Ширина, м"/>
-                          <input name='length' value={this.state.length} onChange={this.handleChange} className="post_ad__input" type="text" placeholder="Длина, м"/>
-                          <input name='height' value={this.state.height}  onChange={this.handleChange} className="post_ad__input" type="text" placeholder="Высота, м"/>
+                          <input name='width' value={this.state.width} onChange={this.handleChange} className="post_ad__input" type="number" placeholder="Ширина, м"/>
+                          <input name='length' value={this.state.length} onChange={this.handleChange} className="post_ad__input" type="number" placeholder="Длина, м"/>
+                          <input name='height' value={this.state.height}  onChange={this.handleChange} className="post_ad__input" type="number" placeholder="Высота, м"/>
                         </div>
                       </div>
                     </div>
@@ -313,7 +319,7 @@ class CargoAdd extends React.Component {
                   <div className="post_ad__price__inputs">
                     <div className="post_ad__price__item">
                       <p className="post_ad__par">Цена</p>
-                      <input className="post_ad__input" value={this.state.price} name='price' onChange={this.handleChange} type="text" placeholder="150 680"/>
+                      <input className="post_ad__input" value={this.state.price} name='price' onChange={this.handleChange} type="number" placeholder="150 680"/>
                     </div>
                     <div className="post_ad__price__item">
                       <p className="post_ad__par">Валюта</p>

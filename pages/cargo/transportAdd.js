@@ -5,7 +5,7 @@ import {documents, pogruzka, condition, extra} from '../../defaults/checkboxes/d
 import CheckBox from '../../components/shared/CheckBox'
 import { closeMessage, errorMessage, successMessage } from '../../store/actions/messageAction'
 import {connect} from 'react-redux'
-import { todaysDate } from '../../defaults/defaults'
+import { todaysDate, typeTransports } from '../../defaults/defaults'
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
 import CompanyOnAddInfo from '../../components/company/CompanyOnAddInfo'
@@ -51,6 +51,11 @@ class CargoAdd extends React.Component {
       duration: '',
       fromString: '',
       toString: '',
+      quantity: '',
+      width: '',
+      height:'',
+      length: '',
+
     };
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -182,6 +187,10 @@ class CargoAdd extends React.Component {
       distance: this.state.distance,
       from_string: this.state.fromString,
       to_string: this.state.toString,
+      height: this.state.height,
+      quantity: this.state.quantity,
+      length: this.state.length,
+      width: this.state.width
     }})
       .then(res => {
         if(res.data.success) {
@@ -287,24 +296,23 @@ class CargoAdd extends React.Component {
                       <div className="post_ad__chars__items__selects">
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Тип транспорта</p>
-                          <select className="post_ad__input">
-                            <option>ЖД Рефрижиратор</option>
+                          <select className="post_ad__input" value={this.state.type_transport} name='type_transport' onChange={this.handleChange}>
+                            {typeTransports.map(p => (
+                              <option value={p.id}>{p.name}</option>
+                            ))}
                           </select>
                         </div>
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Кол-во</p>
-                          <select className="post_ad__input">
-                            <option>1</option>
-                            <option>2</option>
-                          </select>
+                          <input type='number' name='quantity' value={this.state.quantity} onChange={this.handleChange}/>
                         </div>
                       </div>
                       <div className="post_ad__chars__items__inputs__container">
                         <p className="post_ad__par">Размер транспорта, м</p>
                         <div className="post_ad__chars__items__inputs__wrapper">
-                          <input className="post_ad__input" type="text" placeholder="Ширина, м"/>
-                          <input className="post_ad__input" type="text" placeholder="Длина, м"/>
-                          <input className="post_ad__input" type="text" placeholder="Высота, м"/>
+                          <input className="post_ad__input" value={this.state.width} name='width' type="text" onChange={this.handleChange} placeholder="Ширина, м"/>
+                          <input className="post_ad__input" value={this.state.length} name='length' type="text" onChange={this.handleChange} placeholder="Длина, м"/>
+                          <input className="post_ad__input" value={this.state.height} name='height' type="text" onChange={this.handleChange} placeholder="Высота, м"/>
                         </div>
                       </div>
                     </div>

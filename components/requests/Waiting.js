@@ -1,6 +1,8 @@
-import { parseDateTime } from "../../defaults/extraFunctions"
-
+import { dateParse, parseDateTime } from "../../defaults/extraFunctions"
+import cookie from 'js-cookie'
+import swal from 'sweetalert'
 const Waiting = (props) => {
+
   return (
     <div>
       <> <div className="cabinet__requests__title">
@@ -25,22 +27,22 @@ const Waiting = (props) => {
               <span>{d.user[0].fullName}</span>
             </div>
             <div className="product__item__inner">
-              <p>{d.details[0].details[0].net} тн, {d.details[0].details[0].volume} м³, Авто Тент
+              <p>{d.details[0].details[0].net} тн, {d.details[0].details[0].volume} м³, {d.details[0].details[0].type_transport}
                 <br/>
-                14 июн, Хим. продукты, безопасные</p>
+                {d.details ? dateParse(d.details[0].details[0].start_date) : ''}, {d.details[0].details[0].title}</p>
             </div>
             <div className="product__item__inner">
               <div className="product__item__inner__offer">
                 <span className="yellow_span">{d.status}</span>
                 <span className="average_span">ВАША ЦЕНА:</span>
-                <h3>200 000 ₸</h3>
+                <h3>{d.price.price} ₸</h3>
               </div>
             </div>
           </div>
           <div className="auction__item cabinet_ad_item">
             <div className="cabinet_ad_auction_items">
-              <a href="#"><i className="fas fa-ban"/>Отменить предложение</a>
-              <a href="cabinet-requests-item.html"><i className="far fa-file-alt"/>Подробнее</a>
+              <a href="#" name={d.details[0].id} onClick={(e) => props.onCancelRequest(e)}><i className="fas fa-ban"/>Отменить предложение</a>
+              <a title={`/cargo/${d.details[0].id}`} href={`/cargo/${d.details[0].id}`} target='__blank'><i className="far fa-file-alt"/>Подробнее</a>
             </div>
           </div>
           </div>

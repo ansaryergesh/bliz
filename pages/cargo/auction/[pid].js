@@ -10,6 +10,7 @@ import Timer from '../../../components/post/Timer'
 import cookie from 'js-cookie'
 import { currencies } from '../../../defaults/defaults'
 import {connect} from 'react-redux'
+import PriceModal from '../../../components/modalForRequest/priceModal'
 
 const mapStateToProps = ({usersReducer: {
   user
@@ -101,7 +102,8 @@ const AuctionDetail = ({user}) => {
             }
         })
   }
-  const onParticipate = (aucId) => {
+  const onParticipate = () => {
+
     setActionLoading(true)
     dispatch({type: 'CLOSE_MESSAGE'})
     let tokenUser = cookie.get('token')
@@ -110,14 +112,14 @@ const AuctionDetail = ({user}) => {
         token: tokenUser,
         price:price,
         currency:currency,
-        auction_id: aucId
+        auction_id: pid
       })
         .then(res=> {
           setActionLoading(false)
-          console.log(res)
           if(res.data.success) {
             dispatch({type: 'SUCCESS_MESSAGE', payload: 'Вы участвуете'})
             getAuctionInfo()
+            setAuction(false)
           }
           else {
             dispatch({type: 'ERROR_MESSAGE', payload: res.data.message})
@@ -198,6 +200,16 @@ const AuctionDetail = ({user}) => {
         ? <LoadingSpinner/>
         : ''}
       <div className="grid-container container">
+      <PriceModal 
+        actionLoading={actionLoading}
+        modal={auctionModal}
+        setModal={setAuction}
+        price={price}
+        setPrice={setPrice}
+        currency ={currency}
+        setCurrency ={setCurrency}
+        onSendRequest={onParticipate}
+        />
       <div className={auctionModal ? "driver_modal edit_photo active" : 'driver_modal edit_photo'}>
             <div className="driver_modal__inner ">
               <h2>Аукцион</h2>

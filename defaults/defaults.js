@@ -156,6 +156,25 @@ export const subCategories = [
   }
 ]
 
+export const typeTransports = [
+  {
+    'id': 1,
+    'name': 'Авто'
+  }, {
+    'id': 2,
+    'name': 'Авиа'
+  }, {
+    'id': 3,
+    'name': 'ЖД'
+  }, {
+    'id': 4,
+    'name': 'Морской'
+  }, {
+    'id': 5,
+    'name': 'Мультимодальный'
+  }
+]
+
 export const rentalType = [
   {
     'id': 1,

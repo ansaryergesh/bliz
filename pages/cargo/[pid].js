@@ -10,6 +10,7 @@ import cookie from 'js-cookie'
 import CheckBox from '../../components/shared/CheckBox'
 import {connect} from 'react-redux'
 import { documents, extra, pogruzka } from '../../defaults/checkboxes/documents'
+import PriceModal from '../../components/modalForRequest/priceModal'
 const mapStateToProps = ({usersReducer: {
   user
 }}) => ({user})
@@ -78,8 +79,8 @@ const CargoDetailed = ({user}) => {
     axios.post(`https://test.money-men.kz/api/sendRequest`, {
       post_id: pid,
       token: cookie.get('token'),
-      currency: 1,
-      price: 15000
+      currency: currency ? currency : '15000',
+      price: price,
     })
       .then(res=> {
         if(res.data.success) {
@@ -95,6 +96,10 @@ const CargoDetailed = ({user}) => {
   }
   const router = useRouter()
   const [steps,setSteps] = useState([])
+  const [modal, setModal] = useState(false)
+  const [price, setPrice] = useState('1')
+  const [currency, setCurrency] = useState('')
+  const [actionLoading, setActionLoading] = useState(false)
   const [loading, setLoading] = useState(true)
   const [routeLoad, setRouteLoad] = useState(false)
   const {pid} = router.query
@@ -168,7 +173,7 @@ const CargoDetailed = ({user}) => {
                   <div className="table__dash__bord"></div>
                 </div>
                 <div className="table__column__2">
-                  <p>22 тн / 86 м³</p>
+                  <p>{postInfo.details.net} тн / {postInfo.details.volume} м³</p>
                 </div>
               </div>
               <div className="table__row">
@@ -273,7 +278,8 @@ const CargoDetailed = ({user}) => {
             <button disabled={routeLoad ? true : false} className={steps.length>0 ? 'd-none' : ''} onClick={getRoute}>{routeLoad ? 'Подождите ...' : 'Показать маршрут'}</button>
           </div>
         </section>
-        <PostAside user ={user} sendRequest={sendRequest} postinfo={postInfo} />
+        <PriceModal actionLoading={actionLoading} modal={modal} setModal={setModal} price={price} setPrice={setPrice} currency={setCurrency} onSendRequest={sendRequest} />
+        <PostAside user ={user} sendRequest={setModal} postinfo={postInfo} />
       </div>
 
     </div>
