@@ -30,7 +30,7 @@ const RequestFromOther = (props) => {
                   {parseDateTime(d.details[0].updated_at)}, {d.details[0].details[0].title}</p>
               </div>
               <div className="product__item__inner">
-                <span className="yellow_span">{d.details[0].details[0].count} ПРЕДЛОЖЕНИЯ</span>
+                <span className="yellow_span">{d.count} ПРЕДЛОЖЕНИЯ</span>
               </div>
             </div>
             <div className="auction__item cabinet_ad_item">
