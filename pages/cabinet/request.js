@@ -4,14 +4,31 @@ import {useRouter} from 'next/router'
 import { useEffect, useState } from "react"
 import cookie from 'js-cookie'
 import axios from "axios"
+import {useDispatch} from 'react-redux'
 import RequestParticipant from "../../components/request/RequestParticipant"
 import { dateParse, dateParse2 } from "../../defaults/extraFunctions"
 const Request = () => {
+  const dispatch = useDispatch()
   const router = useRouter()
   const {request_id} = router.query
   const [details,setDetails] = useState([])
   const [participants, setParticipants] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const onAccept = (e) => {
+    axios.get(`${process.env.BASE_URL}/acceptPost`, {params: {
+      token: cookie.get('token'),
+      user_id: e.target.name,
+    }})
+      .then(res=> {
+        if(res.data.success) {
+          router.push('/cabinet/requests')
+          dispatch({type: 'SUCCESS_MESSAGE', payload: 'Принять'})
+        }else {
+          dispatch({type: 'ERROR_MESSAGE', payload: res.data.message})
+        }
+      })
+  }
   useEffect(() => {
     if(!request_id) {
       router.push('/cabinet/requests')
@@ -105,7 +122,7 @@ const Request = () => {
               <a id="open_map_modal" className="btn btn--white tablet" href="#">Подробно о грузе</a>
             </div>
           </div>
-         <RequestParticipant participants={participants}/>
+         <RequestParticipant participants={participants} onAccept={onAccept}/>
          
         </div>
         <div className="aside"/>

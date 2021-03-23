@@ -1,6 +1,6 @@
 import { dateParse, dateParse2 } from "../../defaults/extraFunctions"
 
-const RequestParticipant = ({participants}) => {
+const RequestParticipant = ({participants, onAccept}) => {
   const currencyText = (currency) => {
     if(currency ===1) {
       return '₸'
@@ -33,7 +33,7 @@ const RequestParticipant = ({participants}) => {
               <h2>{p.price} {currencyText(p.currency)}</h2>
             </div>
           <div className="request_item__btns">
-            <a name = {p.user_id} className="btn tablet inherit" href="#">Принять предложение</a>
+            <a name = {p.user_id} className="btn tablet inherit" onClick={(e) => onAccept(e)} href="#">Принять предложение</a>
             <a name = {p.user_id} className="btn btn--white tablet gray open_rejection_modal" href="#">Отказать с причиной</a>
           </div>
         </div>
