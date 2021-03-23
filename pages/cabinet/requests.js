@@ -7,10 +7,12 @@ import withAuth from "../../hocs/withAuth"
 import {useDispatch} from 'react-redux'
 import BreadCumbs from "../../components/shared/BreadCumbsConfigure"
 import LoadingSpinner from "../../components/shared/others/LoadingSpinner"
+import RequestFromOther from "../../components/requests/RequestFromOther"
 const Requests = () => {
   const dispatch = useDispatch()
   const [active, setActive] = useState('wait')
   const [executionWait, setExecutionWait] = useState({data: [], count: ''})
+  const [requestFromOther, setRequestFromOther] = useState({data:[] , count: ''})
   const [executionWork, setExecutionWork] = useState({data: [], count: ''})
   const [loading, setLoading] = useState(true)
 
@@ -51,15 +53,30 @@ const Requests = () => {
 
   useEffect(() => {
     getSendedWaitingRequests()
+    getRequestFromOther()
   },[])
   const getSendedWaitingRequests = () => {
     setLoading(true)
-    axios.get(`https://test.money-men.kz/api/customerOrdersInHold?token=${cookie.get('token')}`)
+    axios.get(`${process.env.BASE_URL}/customerOrdersInHold?token=${cookie.get('token')}`)
       .then(res => {
         setLoading(false)
         if(res.data.success) {
           setExecutionWait({
             data: res.data.data,
+            count: res.data.count
+          })
+        }
+      })
+  }
+
+  const getRequestFromOther = () => {
+    setLoading(true)
+    axios.get(`${process.env.BASE_URL}/executorOrdersInHold?token=${cookie.get('token')}`)
+      .then(res => {
+        setLoading(false)
+        if(res.data.success) {
+          setRequestFromOther({
+            data:res.data.data,
             count: res.data.count
           })
         }
@@ -83,7 +100,12 @@ const Requests = () => {
           </div>
         </nav>
         {active==='inwork' ?  <InWork /> : ''}
-        {active=== 'wait'  ? <Waiting onCancelRequest = {onCancelRequest} count={executionWait.count} data={executionWait.data}/> :  ''}
+        {active=== 'wait'  ?
+          <>
+            <Waiting onCancelRequest = {onCancelRequest} count={executionWait.count} data={executionWait.data}/> 
+            <RequestFromOther count={requestFromOther.count} data={requestFromOther.data}/>
+          </>
+          :  ''}
       </div>
       <div className="aside"></div>
     </div>

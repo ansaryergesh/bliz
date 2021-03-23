@@ -6,7 +6,7 @@ const Waiting = (props) => {
   return (
     <div>
       <> <div className="cabinet__requests__title">
-        <img src="assets/img/widgets/requset_type1.png" alt/>
+        <img src="/img/widgets/requset_type1.png" alt/>
         <div className="cabinet__requests__title__inner">
           <h3>Я исполнитель({props.count})</h3>
           <p>Заявки, которые вы отправили для исполнение</p>
@@ -48,43 +48,7 @@ const Waiting = (props) => {
           </div>
         ))}
       </div>
-      <div className="cabinet__requests__title">
-        <img src="assets/img/widgets/requset_type2.png" alt/>
-        <div className="cabinet__requests__title__inner">
-          <h3>Я заказчик (2)</h3>
-          <p>Заявки, которые испольняете вы для клиентов</p>
-        </div>
-      </div>
-      <div className="cabinet__requests__wrapper">
-        <div className="auction__product__container">
-          <div className="product__item">
-            <div className="product__item__inner">
-              <p>Вам сделано:</p>
-              <h2>2 предложения</h2>
-            </div>
-            <div className="product__item__inner">
-              <h2>Нур-Султан
-                <i className="fas fa-arrow-right"/>
-                Алматы</h2>
-              <h4>Перевозчик: не выбран</h4>
-            </div>
-            <div className="product__item__inner">
-              <p>115 тн, 260 м³, Авто Тент
-                <br/>
-                14 июн, Хим. продукты, безопасные</p>
-            </div>
-            <div className="product__item__inner">
-              <span className="yellow_span">2 ПРЕДЛОЖЕНИЯ</span>
-            </div>
-          </div>
-          <div className="auction__item cabinet_ad_item">
-            <div className="cabinet_ad_auction_items">
-              <a className="blue big" href="cabinet-requests-item2.html">Смотреть предложения</a>
-              <a href="cabinet-requests-item2.html"><i className="far fa-file-alt"/>Подробнее</a>
-            </div>
-          </div>
-        </div>
-      </div>
+     
     </>
   </div>
   )
