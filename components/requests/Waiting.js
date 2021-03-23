@@ -9,7 +9,7 @@ const Waiting = (props) => {
         <img src="assets/img/widgets/requset_type1.png" alt/>
         <div className="cabinet__requests__title__inner">
           <h3>Я исполнитель({props.count})</h3>
-          <p>Заявки, которые испольняете вы для клиентов</p>
+          <p>Заявки, которые вы отправили для исполнение</p>
         </div>
       </div>
       <div className="cabinet__requests__wrapper">
