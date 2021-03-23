@@ -35,7 +35,7 @@ const RequestFromOther = (props) => {
             </div>
             <div className="auction__item cabinet_ad_item">
               <div className="cabinet_ad_auction_items">
-                <a className="blue big" href="cabinet-requests-item2.html">Смотреть предложения</a>
+                <a className="blue big" href={`/cabinet/request?request_id=${d.order_id}`}>Смотреть предложения</a>
                 <a href={`/cargo/${d.details[0].id}`}><i className="far fa-file-alt"/>Подробнее</a>
               </div>
             </div>
