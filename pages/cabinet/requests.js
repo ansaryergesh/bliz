@@ -133,14 +133,14 @@ const Requests = () => {
             </div>
           </div>
         </nav>
-        {active==='inwork' ?  <>
-          <CustomerWork count={executionWork.count} data={executionWork.data}/>
-          <ExecutorWork count={requestInWork.count} data={requestInWork.data} />
+        {!loading && active==='inwork' ?  <>
+          <CustomerWork count={executionWork.count} data={executionWork.data || []}/>
+          <ExecutorWork count={requestInWork.count} data={requestInWork.data || []} />
           </> : ''}
         {active=== 'wait'  ?
           <>
-            <Waiting onCancelRequest = {onCancelRequest} count={executionWait.count} data={executionWait.data}/> 
-            <RequestFromOther count={requestFromOther.count} data={requestFromOther.data}/>
+            <Waiting onCancelRequest = {onCancelRequest} count={executionWait.count} data={executionWait.data || []}/> 
+            <RequestFromOther count={requestFromOther.count} data={requestFromOther.data || []}/>
           </>
           :  ''}
       </div>
