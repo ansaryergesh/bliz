@@ -17,7 +17,7 @@ const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, load
                     </div>
                     <div className="storage__item__desc">
                       <div className="storage__item__title">
-                        <a href={`storage/${s.id}`}>Склад ", Алматы</a>
+                        <a href={`/storage/${s.id}`}>Склад ", Алматы</a>
                         <h3>{s.properties? s.properties[0].price : ''}</h3>
                       </div>
                       <div className="storage__item__details">

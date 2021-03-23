@@ -80,7 +80,7 @@ const Favourites = () => {
     axios.get(`${process.env.BASE_URL}/getListStorageFavourites?token=${cookie.get('token')}`)
       .then(res=> {
         setLoading(false)
-        setStorages(finalDates(res))
+        setStorages(res.data.data)
       })
   }
   return (

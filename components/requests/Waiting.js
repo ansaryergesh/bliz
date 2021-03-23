@@ -41,7 +41,7 @@ const Waiting = (props) => {
           </div>
           <div className="auction__item cabinet_ad_item">
             <div className="cabinet_ad_auction_items">
-              <a href="#" name={d.details[0].id} onClick={(e) => props.onCancelRequest(e)}><i className="fas fa-ban"/>Отменить предложение</a>
+              <a href="#" name={d.order_id} onClick={(e) => props.onCancelRequest(e)}><i className="fas fa-ban"/>Отменить предложение</a>
               <a title={`/cargo/${d.details[0].id}`} href={`/cargo/${d.details[0].id}`} target='__blank'><i className="far fa-file-alt"/>Подробнее</a>
             </div>
           </div>
