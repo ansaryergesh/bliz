@@ -7,10 +7,13 @@ import withAuth from "../../hocs/withAuth"
 import BreadCumbs from "../../components/shared/BreadCumbsConfigure"
 import AuctionItem from "../../components/post/AuctionItem"
 import StorageItems from "../../components/storage/StorageItems"
+import LoadingSpinner from "../../components/shared/others/LoadingSpinner"
 const Posts = () => {
   const router = useRouter()
   const [favourites,setFavourites] = useState({cargo: '',post: '', auction: '', storage: '', special: ''})
   const [favourList, setFavourList] = useState([{}]);
+  const [auctions, setAuctions] = useState([{}]);
+  const [storages, setStorages] = useState([{}])
   const [active, setActive] = useState('transport');
   const [loading, setLoading] = useState(true)
   const {fav} = router.query
@@ -47,18 +50,10 @@ const Posts = () => {
         })
     }
     if(name==='auction') {
-      axios.get(`${process.env.BASE_URL}/getMyAuction?token=${cookie.get('token')}`)
-        .then(res=> {
-          setLoading(false)
-          setFavourList(finalDates(res))
-        })
+      setLoading(false)
     }
     if(name==='storage') {
-      axios.get(`${process.env.BASE_URL}/getMyStorage?token=${cookie.get('token')}`)
-        .then(res=> {
-          setLoading(false)
-          setFavourList(finalDates(res))
-        })
+      setLoading(false)
     }
     if(name==='special') {
       axios.get(`${process.env.BASE_URL}/getMySpecial?token=${cookie.get('token')}`)
@@ -69,30 +64,42 @@ const Posts = () => {
     }
   }
   const getFavoures = () => {
+      
       axios.get(`${process.env.BASE_URL}/getMyPosts?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
           console.log(res)
           setFavourList(res.data.data)
         })
-    if(fav && fav==='storage') {
 
-    }
-    if(!fav || fav==='cargo') {
-      axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
+      axios.get(`${process.env.BASE_URL}/getMyAuction?token=${cookie.get('token')}`)
         .then(res=> {
           setLoading(false)
-      
-          setFavourList(res.data.data)
+          setAuctions(res.data.data)
         })
-    }
+      axios.get(`${process.env.BASE_URL}/getMyStorage?token=${cookie.get('token')}`)
+        .then(res=> {
+          setLoading(false)
+          setStorages(res.data.data)
+        })
+    // if(fav && fav==='storage') {
+
+    // }
+    // if(!fav || fav==='cargo') {
+    //   axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
+    //     .then(res=> {
+    //       setLoading(false)
+      
+    //       setFavourList(res.data.data)
+    //     })
+    // }
   }
   return (
     <div className="grid-container container">
       <div className="section">
         <div className="products__title paddings little_pad">
           <BreadCumbs />
-         
+          {loading ? <LoadingSpinner /> : ''}
           <h1 className="smaller_font">Мои обьявление</h1>
         </div>
         <nav className="cabinet_ad_nav">
@@ -108,8 +115,8 @@ const Posts = () => {
         </nav>
 
         {active==='cargo' || active==='transport' ?  <PostItem post={!loading ? favourList: []} pathName={router.pathname} /> : ''}
-        {active==='storage' ? <StorageItems storages={!loading ? favourList: []} loading={loading}/> : ''}
-        {loading===false && active==='auction' ? <AuctionItem loading={true} auctions={!loading ? favourList: []} auctions={favourList}/> : ''}
+        {active==='storage' ? <StorageItems storages={!loading ? storages: []} loading={loading}/> : ''}
+        {loading===false && active==='auction' ? <AuctionItem loading={loading} auctions={!loading ? auctions: []} /> : ''}
         {/* <AuctionItem auctions={favourList} /> */}
 {/* 
         <div className="storage__item without_pads">

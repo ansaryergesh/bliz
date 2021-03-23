@@ -7,10 +7,13 @@ import withAuth from "../../hocs/withAuth"
 import BreadCumbs from "../../components/shared/BreadCumbsConfigure"
 import AuctionItem from "../../components/post/AuctionItem"
 import StorageItems from "../../components/storage/StorageItems"
+import LoadingSpinner from "../../components/shared/others/LoadingSpinner"
 const Favourites = () => {
   const router = useRouter()
   const [favourites,setFavourites] = useState({cargo: '',post: '', auction: '', storage: '', special: ''})
   const [favourList, setFavourList] = useState([{}]);
+  const [storages, setStorages]  = useState([{}])
+  const [auctions,setAuctions] = useState([{}])
   const [active, setActive] = useState('cargo');
   const [loading, setLoading] = useState(true)
   const {fav} = router.query
@@ -47,18 +50,10 @@ const Favourites = () => {
         })
     }
     if(name==='auction') {
-      axios.get(`${process.env.BASE_URL}/getListAuctionFavourites?token=${cookie.get('token')}`)
-        .then(res=> {
-          setLoading(false)
-          setFavourList(finalDates(res))
-        })
+      setLoading(false)
     }
     if(name==='storage') {
-      axios.get(`${process.env.BASE_URL}/getListStorageFavourites?token=${cookie.get('token')}`)
-        .then(res=> {
-          setLoading(false)
-          setFavourList(finalDates(res))
-        })
+     setLoading(false)
     }
     if(name==='special') {
       axios.get(`${process.env.BASE_URL}/getListSpecialFavourites?token=${cookie.get('token')}`)
@@ -70,17 +65,28 @@ const Favourites = () => {
   }
   const getFavoures = () => {
     const finalDates = (val) => val.data.data[0] ? val.data.data[0] : val.data.data
-    if(!fav || fav==='cargo') {
-      axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
-        .then(res=> {
-          setLoading(false)
-          setFavourList(res.data.data)
-        })
-    }
+
+    axios.get(`${process.env.BASE_URL}/getListCargoFavourites?token=${cookie.get('token')}`)
+      .then(res=> {
+        setLoading(false)
+        setFavourList(res.data.data)
+      })
+    
+    axios.get(`${process.env.BASE_URL}/getListAuctionFavourites?token=${cookie.get('token')}`)
+      .then(res=> {
+        setLoading(false)
+        setAuctions(finalDates(res))
+      })
+    axios.get(`${process.env.BASE_URL}/getListStorageFavourites?token=${cookie.get('token')}`)
+      .then(res=> {
+        setLoading(false)
+        setStorages(finalDates(res))
+      })
   }
   return (
     <div className="grid-container container">
       <div className="section">
+        {loading ? <LoadingSpinner /> : ''}
         <div className="products__title paddings little_pad">
           <BreadCumbs />
          
@@ -99,8 +105,8 @@ const Favourites = () => {
         </nav>
       
         {active==='cargo' || active==='transport' ?  <PostItem post={favourList} pathName={router.pathname} /> : ''}
-        {active==='storage' ? <StorageItems storages={favourList} loading={loading}/> : ''}
-        {loading===false && active==='auction' ? <AuctionItem loading={true} auctions={favourList}/> : ''}
+        {active==='storage' ? <StorageItems storages={storages} loading={loading}/> : ''}
+        {loading===false && active==='auction' ? <AuctionItem loading={loading} auctions={auctions}/> : ''}
         {/* <AuctionItem auctions={favourList} /> */}
 {/* 
         <div className="storage__item without_pads">
