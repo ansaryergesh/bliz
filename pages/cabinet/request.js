@@ -19,6 +19,7 @@ const Request = () => {
     axios.get(`${process.env.BASE_URL}/acceptPost`, {params: {
       token: cookie.get('token'),
       user_id: e.target.name,
+      order_id: request_id,
     }})
       .then(res=> {
         if(res.data.success) {
