@@ -4,7 +4,7 @@ import React from 'react'
 
 const PaginationBtns = (props) => {
   const max_page = props.max_page;
-  const current_page = props.current_page;
+  const current_page = parseInt(props.current_page);
   const next_page = props.next_page;
   const prev_page = props.prev_page;
   const btnLength = 10;

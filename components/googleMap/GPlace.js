@@ -97,6 +97,7 @@ const GPlace = () => {
       });
     });
 
+    
     new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
       let place = autocomplete2.getPlace();
       setPlace2({

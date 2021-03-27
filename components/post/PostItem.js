@@ -53,6 +53,7 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
             <PaginationBtns max_page={maxPage} current_page={currentPage} onChangePage={onChangePage} />
             <div className="products__text">
               <div className="products__text__item">
+            
                 <h3>Грузоперевозки в Казахстане и в Алматы</h3>
                 <p>Исходя из набора и качества этих параметров складу присваивается класс: A,
                   B+, B или C. Стоит обратить внимание на склады B и C классов, где арендная

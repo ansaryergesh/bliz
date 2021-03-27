@@ -72,3 +72,7 @@ export const parseBoolean = (val) => {
     return 0
   }
 }
+
+export const formatForLetter = (val) => {
+  return val.replace(/[^a-zA-Z]+/g, '')
+}

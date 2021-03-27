@@ -1860,6 +1860,10 @@ nav.cabinet_ad_nav {
 .filter__item__form button:hover {
   border-color: #008EFF;
 }
+.filter__item__form.showbtn {
+  margin: 15px auto;
+  text-align: center;
+}
 
 .filter__item__form select {
   padding: 8px;

@@ -26,3 +26,10 @@ const active = ids.filter(id=> {
     return users[id]
 })
 console.log(active)
+
+
+const formatForLetter = (val) => {
+    return val.replace(/[^a-zA-Z]+/g, 'n')
+  }
+
+  console.log(formatForLetter('Нур-султан 12'))
