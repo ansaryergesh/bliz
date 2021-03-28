@@ -189,10 +189,7 @@ class Nav extends React.Component {
         })
       });
 
-      $('.big_filter_btn').click(function(){
-        $('.main_filter__big').toggle();
-      });
-    
+   
       $('.mobile_bar').click(function(){
         $(this).toggleClass('active');
         $('.header__top__mobile').slideToggle();

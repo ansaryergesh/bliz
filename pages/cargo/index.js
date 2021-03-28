@@ -8,15 +8,41 @@ import SideBarCurrency from '../../components/post/SideBarCurrency';
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults';
 
 const Cargo = () => {
+
+  const routerPath = (filter, id, from_id, to_id, from_string, to_string, page, net_start, net_end, volume_start,volume_end) => {
+    return (
+      router.push({
+        pathname: pathname,
+        query: {
+          filter: filter,
+          id: id,
+          from_id: from_id,
+          to_id: to_id,
+          from_string: from_string,
+          to_string: to_string,
+          page: page,
+          net_val: [net_start,net_end],
+          volume_val: [volume_start, volume_end]
+        }
+      })
+    )
+   
+  }
   const router  = useRouter()
+
+  const pathname = router.pathname
+  
   const {filter} = router.query
   const {id} = router.query
   const {from_string} = router.query
   const {from_id} = router.query
   const {to_string} = router.query
+  const {net_start} = router.query
+  const {net_end} = router.query
+  const {volume_start} = router.query
+  const {volume_end} = router.query
   const {to_id} = router.query
   const {page} = router.query
-
   const [loading, setLoading] = useState(true)
   const [posts, setPosts] = useState([{}])
   const [currentPage, setCurrentPage] = useState(page || '1')
@@ -28,16 +54,16 @@ const Cargo = () => {
       setLoadMapScript(true)
     })
     setLoading(true)
-    const pageVal = () => page === undefined ? '' : page;
-    const typeTransport = () => id === undefined || id==='0' ? '' : id;
-    const fromID = () => from_id === undefined ? '' : from_id
-    const toID = () => to_id === undefined ? '' : to_id
-
+    const typeTransport = () =>  id==='0' ? '' : id;
     axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
-      page: pageVal(),
+      page: page,
       type_transport: typeTransport(),
-      from: fromID(),
-      to: toID(),
+      from: from_id,
+      to: to_id,
+      net_start:net_start,
+      net_end: net_end,
+      volume_start: volume_start,
+      volume_end: volume_end
     }})
       .then(res => {
         console.log(res)
@@ -51,19 +77,17 @@ const Cargo = () => {
 
   const onChangeCategory = (catName,catId) => {
     setLoading(true)
-    const fromID = () => from_id === undefined ? '' : from_id
-    const toID = () => to_id === undefined ? '' : to_id
-    const fromString = () => from_string ? from_string : '' 
-    const toString = () => to_string ? to_string : ''
+
   
       axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
         type_transport: catId===0 ? '' : catId,
-        from: fromID(),
-        to: toID(),
+        from: from_id,
+        to: to_id,
       }})
         .then(res=> {
           console.log(res)
-          router.push(`/cargo?filter=${catName}&id=${catId}&from_id=${fromID()}&to_id=${toID()}&from_string=${fromString()}&to_string=${toString()}`)
+          // router.push({pathname: pathname, query: {...query, filter: catName, id:catId}})
+          routerPath(catName, id, from_id,to_id,from_string,to_string)
           setLoading(false)
           setPosts(res.data.data)
           setCurrentPage(res.data.pagination.page)
@@ -72,14 +96,23 @@ const Cargo = () => {
         })
 
   }
-  const onSearch = (from,to, fromString,toString) => {
-    const typeTransport = () => id === undefined || id==='0' ? '' : id;
-    const filterVal = () => filter === undefined ? '' : filter
+  const onSearch = (from,to, fromString,toString, netStart,netEnd, volumeStart, volumeEnd) => {
+    const typeTransport = () =>  id==='0' ? '' : id;
+
     setLoading(true)
-    axios.get(`${process.env.BASE_URL}/filterPost?category_id=1&type_transport=${typeTransport()}&from=${from}&to=${to}`)
+    axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
+      type_transport: typeTransport(),
+      from: from,
+      to: to,
+      net_start: netStart,
+      net_end: netEnd,
+      volume_start: volumeStart,
+      volume_end: volumeEnd
+    }})
       .then(res=> {
         console.log(res)
-        router.push(`/cargo?filter=${filterVal()}&id=${typeTransport()}&from_id=${from}&to_id=${to}&from_string=${fromString}&to_string=${toString}`)
+        routerPath(filter,typeTransport(), from, to, fromString, toString, '', netStart, netEnd,volumeStart, volumeEnd  )
+        // routerPath(filter, typeTransport(), from, to, fromString,toString, netStart, netEnd, volumeStart, volumeEnd)
         setLoading(false)
         setPosts(res.data.data)
         setCurrentPage(res.data.pagination.page)
@@ -89,21 +122,16 @@ const Cargo = () => {
   }
   const onChangePage = (pageNum) => {
     setLoading(true)
-    const typeTransport = () => id === undefined || id==='0' ? '' : id;
-    const fromID = () => from_id === undefined ? '' : from_id
-    const toID = () => to_id === undefined ? '' : to_id
-    const filterVal = () => filter === undefined ? '' : filter
-    const fromString = () => from_string ? from_string : '' 
-    const toString = () => to_string ? to_string : ''
+    const typeTransport = () =>  id==='0' ? '' : id;
     console.log(pageNum)
       axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
         type_transport: typeTransport(),
         page: pageNum,
-        from: fromID(),
-        to: toID(),
+        from: from_id,
+        to: to_id,
       }})
         .then(res=> {
-          router.push(`?page=${pageNum}&id=${typeTransport()}&filter=${filterVal()}&from_id=${fromID()}&from_string=${fromString()}&to_id=${toID()}&to_string=${toString()}`)
+          routerPath(filter,id,from_id, to_id,from_string,to_string, pageNum)
           console.log(res)
           setLoading(false)
           setPosts(res.data.data)
