@@ -16,6 +16,11 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
     initPlaceAPI()
   },[])
 
+  useEffect(() => {
+    if(!addressFrom.address_id && !addressTo.address_id) {
+    onSearch(addressFrom.address_id, addressTo.address_id, addressFrom.address_string, addressTo.address_string)}
+  },[addressFrom, addressTo])
+
 
   const onClearFilter = () => {
     setTimeout(() => {
@@ -28,16 +33,16 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
     }
     
   }
-  const clearAddressInput = (e) => {
-    let name = e.target.name;
+   function clearAddressInput(e) {
+    let name = e.target.id;
     if(name==='from') {
-      setAddressFrom({address_string: '', address_id: ''})
+       setAddressFrom({address_string: '', address_id: ''})
+     
     }else {
       setAddressTo({address_string: '', address_id: ''})
+   
     }
-    setTimeout(() => {
-      onSearch(addressFrom.address_id, addressTo.address_id, addressFrom.address_string, addressTo.address_string)
-    }, 1000)
+    
   }
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(fromRef.current,
@@ -101,7 +106,7 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
           {from_string ?
             <div className="main_filter__bottom__item">
               <p>{from_string ? `от: ${from_string} `: ''} </p>
-              <i name='from' className="fas fa-times" onClick={(e)=> clearAddressInput(e)}/>
+              <i id='from' className="fas fa-times" onClick={(e)=> clearAddressInput(e)}/>
             </div>
               : 
           ''}
@@ -109,7 +114,7 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
           {to_string ?
             <div className="main_filter__bottom__item">
               <p>{to_string ? `до: ${to_string} `: ''} </p>
-              <i name='to' className="fas fa-times"/>
+              <i id='to' className="fas fa-times" onClick={(e)=> clearAddressInput(e)}/>
             </div>
               : 
           ''}
