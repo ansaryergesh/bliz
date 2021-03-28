@@ -2,11 +2,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {subCategories} from '../../defaults/defaults'
 import {useRouter} from 'next/router'
+import { formatForLetter } from '../../defaults/extraFunctions'
 const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromString, fromId, toString,toId}) => {
   const router  = useRouter()
   const {from_string} = router.query;
   const {to_string} = router.query;
-
+  const [fromInput, setFromInput] = useState('')
+  const [toInput,setToInput] = useState('')
   const [addressFrom,setAddressFrom] = useState({address_string: fromString || '', address_id: fromId || '',})
   const [addressTo,setAddressTo] = useState({address_string: toString || '', address_id: toId || '',})
   const fromRef = useRef(null)
@@ -17,7 +19,7 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
   },[])
 
   useEffect(() => {
-    if(!addressFrom.address_id && !addressTo.address_id) {
+    if(!addressFrom.address_id || !addressTo.address_id) {
     onSearch(addressFrom.address_id, addressTo.address_id, addressFrom.address_string, addressTo.address_string)}
   },[addressFrom, addressTo])
 
@@ -36,7 +38,8 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
    function clearAddressInput(e) {
     let name = e.target.id;
     if(name==='from') {
-       setAddressFrom({address_string: '', address_id: ''})
+      setFromInput('')
+      setAddressFrom({address_string: '', address_id: ''})
      
     }else {
       setAddressTo({address_string: '', address_id: ''})
@@ -49,6 +52,7 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
       { types: ["(cities)"], componentRestrictions: { country: ['kz'] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
+      setFromInput('')
       console.log(place)
       setAddressFrom({address_string: place.formatted_address, address_id: place.place_id})
     });
@@ -56,6 +60,7 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
     let autocomplete2 = new window.google.maps.places.Autocomplete(toRef.current,
       { types: ["(cities)"], componentRestrictions: { country: ['kz'] } });
     new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
+      setToInput('')
       let place = autocomplete2.getPlace();
       setAddressTo({address_string: place.formatted_address, address_id: place.place_id})
     });
@@ -77,10 +82,13 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
           <div className="main_filter__top__item">
             <div className="filter__item__title">
               <h4>Направление</h4>
+              {/* {fromInput} */}
+              
               <div className="filter__item__form">
-                <input type="text" placeholder={addressFrom.address_string || 'Откуда'} ref={fromRef}/>
+                
+                <input type="text" value={fromInput} onChange={(e) => setFromInput(e.target.value)} placeholder={addressFrom.address_string || 'Откуда'} ref={fromRef}/>
                 <div className="hr"/>
-                <input type="text" placeholder={addressTo.address_string || "Куда"} ref={toRef}/>
+                <input  type="text" value={toInput} onChange={e=>setToInput(e.target.value)} placeholder={addressTo.address_string || "Куда"} ref={toRef}/>
                 <button onClick={() => onClearFilter()}>Сбросить</button>
                 <select name id>
                   <option value>Все фильтры</option>

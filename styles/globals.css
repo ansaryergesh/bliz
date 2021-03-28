@@ -5831,3 +5831,20 @@ input[type="file"] {
   justify-content: space-between;
   align-items: center;
 }
+
+
+
+.pac-target-input::-webkit-input-placeholder { /* Chrome */
+  color: rgba(0, 0, 0, 0.796);
+}
+.pac-target-input:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+}
+.pac-target-input::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+  opacity: 1;
+}
+.pac-target-input:-moz-placeholder { /* Firefox 4 - 18 */
+  color: black;
+  opacity: 1;
+}
