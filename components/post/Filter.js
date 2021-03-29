@@ -86,8 +86,8 @@ const Filter = ({
       newQueries.from_string = addressFrom.address_string;
     }
     if(addressTo.address_id) {
-      newQueries.from_id = addressTo.address_id;
-      newQueries.from_string = addressTo.address_string;
+      newQueries.to_id = addressTo.address_id;
+      newQueries.to_string = addressTo.address_string;
     }
     if(net.netStart) {
       newQueries.net_start = net.netStart
