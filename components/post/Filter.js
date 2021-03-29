@@ -3,12 +3,29 @@ import React, { useEffect, useRef, useState } from 'react'
 import {subCategories} from '../../defaults/defaults'
 import {useRouter} from 'next/router'
 import $ from 'jquery'
-const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromString, fromId, toString,toId}) => {
+import axios from 'axios'
+const Filter = ({
+  onChangeCategory,
+  activeCategory,
+  setPosts,
+  setTotal,
+  setCurrentPage,
+  setLoading,
+  queryFilter,
+  fromString,
+  setMaxPage,
+  fromId,
+  toString,
+  toId}) => {
   const router  = useRouter()
+  const pathname = router.pathname;
+  const {id} = router.query
   const {from_string} = router.query;
   const {to_string} = router.query;
-  const {net_val} = router.query;
-  const {volume_val} = router.query;
+  const {net_start} = router.query;
+  const {net_end} = router.query;
+  const {volume_start} = router.query
+  const {volume_end} = router.query;
   const [fromInput, setFromInput] = useState('')
   const [net,setNet] = useState({netStart: '',netEnd:''})
   const [volume,setVolume] = useState({volumeStart: '',volumeEnd:''})
@@ -41,6 +58,77 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
   },[addressFrom, addressTo])
   
 
+  const fixPath = (queries, newQueries) => {
+    delete queries.page
+    if(!addressFrom.address_id) {
+      delete queries.from_id;
+      delete queries.from_string;
+    }
+    if(!addressTo.address_id) {
+      delete queries.to_id;
+      delete queries.to_string;
+    }
+    if(!net.netStart) {
+      delete queries.net_start
+    }
+    if(!net.netEnd) {
+      delete queries.net_end
+    }
+    if(!volume.volumeStart) {
+      delete queries.volume_start;
+    }
+    if(!volume.volumeEnd) {
+      delete queries.volumeEnd;
+    }
+
+    if(addressFrom.address_id) {
+      newQueries.from_id = addressFrom.address_id;
+      newQueries.from_string = addressFrom.address_string;
+    }
+    if(addressTo.address_id) {
+      newQueries.from_id = addressTo.address_id;
+      newQueries.from_string = addressTo.address_string;
+    }
+    if(net.netStart) {
+      newQueries.net_start = net.netStart
+    }
+    if(net.netEnd) {
+      newQueries.net_end = net.netEnd
+    }
+    if(volume.volumeStart) {
+      newQueries.volume_start = volume.volumeStart
+    }
+    if(volume.volumeEnd) {
+      newQueries.volume_end = volume.volumeEnd
+    }
+
+    setLoading(true);
+
+    axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
+      type_transport: id==='0' ? '' : id,
+      from: addressFrom.address_id,
+      to: addressFrom.address_id,
+      net_start: net.netStart,
+      net_end: net.netEnd,
+      volume_start: volume.volumeStart,
+      volume_end: volume.volumeEnd
+    }})
+      .then(res=> {
+        setLoading(false);
+        setPosts(res.data.data)
+        setCurrentPage(res.data.pagination.page)
+        setTotal(res.data.pagination.total)
+        setMaxPage(res.data.pagination.max_page)
+        router.push({path: pathname, query: {...queries, ...newQueries}})
+      })
+  }
+
+  const onSearch = () => {
+    const queries = router.query;
+    const newQueries = {};
+    fixPath(queries,newQueries);
+  }
+
   const onClearFilter = () => {
     setTimeout(() => {
       location.reload()
@@ -60,9 +148,7 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
      
     }else {
       setAddressTo({address_string: '', address_id: ''})
-   
     }
-    
   }
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(fromRef.current,
@@ -176,30 +262,27 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
         </form>
 
         <div className="filter__item__form showbtn">
-          <button onClick={() => onSearch(
-            addressFrom.address_id,
-            addressTo.address_id,
-            addressFrom.address_string,
-            addressTo.address_string,
-            net.netStart,
-            net.netEnd,
-            volume.volumeStart,
-            volume.volumeEnd,
-          )}>
+          <button onClick={() => onSearch()}>
             Посмотреть
           </button></div>
         <div className="main_filter__bottom">
-          {net.netStart || net.netEnd ? 
+          {net_start || net_end ? 
             <div className="main_filter__bottom__item">
-              <p>Вес: {net.netStart} тн – {net.netEnd} тн</p>
+              <p>Вес: {net_start ? net_start : '∞'} тн - {net_end ? net_end : '∞'} тн</p>
               <i className="fas fa-times"/>
             </div>
           : ''}
         
-          
+        {volume_start || volume_end ? 
+            <div className="main_filter__bottom__item">
+              <p>Площадь: {volume_start ? volume_start : '∞'} м³ - {volume_end ? volume_end : '∞'} м³</p>
+              <i className="fas fa-times"/>
+            </div>
+          : ''}
+        
           {from_string ?
             <div className="main_filter__bottom__item">
-              <p>{from_string ? `от: ${from_string} `: ''} </p>
+              <p>{`от: ${from_string} `} </p>
               <i id='from' className="fas fa-times" onClick={(e)=> clearAddressInput(e)}/>
             </div>
               : 
@@ -207,7 +290,7 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
 
           {to_string ?
             <div className="main_filter__bottom__item">
-              <p>{to_string ? `до: ${to_string} `: ''} </p>
+              <p>{`до: ${to_string} `} </p>
               <i id='to' className="fas fa-times" onClick={(e)=> clearAddressInput(e)}/>
             </div>
               : 

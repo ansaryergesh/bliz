@@ -9,9 +9,7 @@ import { loadGoogleMapScript } from '../../defaults/googleMapDefaults';
 
 const Cargo = () => {
   const router  = useRouter()
-
   const pathname = router.pathname
-  
   const {filter} = router.query
   const {id} = router.query
   const {from_string} = router.query
@@ -29,6 +27,8 @@ const Cargo = () => {
   const [total, setTotal] = useState(0)
   const [maxPage,setMaxPage] = useState(0)
   const [loadMapScript, setLoadMapScript] = useState(false)
+
+
   useEffect(() => {
     loadGoogleMapScript(() => {
       setLoadMapScript(true)
@@ -75,54 +75,54 @@ const Cargo = () => {
         })
 
   }
-  const onSearch = (
-    from,
-    to, 
-    fromString,
-    toString,
-    netStart,
-    netEnd,
-    volumeStart,
-    volumeEnd
-  ) => {
-    const queries = router.query;
-    delete queries.page;
-    const typeTransport = () =>  id==='0' ? '' : id;
+  // const onSearch = (
+  //   from,
+  //   to, 
+  //   fromString,
+  //   toString,
+  //   netStart,
+  //   netEnd,
+  //   volumeStart,
+  //   volumeEnd
+  // ) => {
+  //   const queries = router.query;
+  //   delete queries.page;
+  //   const typeTransport = () =>  id==='0' ? '' : id;
     
 
-    setLoading(true)
-    axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
-      type_transport: typeTransport(),
-      from: from,
-      to: to,
-      net_start: netStart,
-      net_end: netEnd,
-      volume_start: volumeStart,
-      volume_end: volumeEnd
-    }})
-      .then(res=> {
-        console.log(res)
-        if (!from_string) {
-          delete queries.from_string;
-          delete queries.from_id
-        }
-        if(!to_string) {
-          delete queries.to_string;
-          delete queries.to_id
-        }
-        if(!net_start) {
-          delete queries.net_start
-        }
-        if(!net_end) {
-          delete queries.net_end
-        }
-        setLoading(false)
-        setPosts(res.data.data)
-        setCurrentPage(res.data.pagination.page)
-        setTotal(res.data.pagination.total)
-        setMaxPage(res.data.pagination.max_page)
-      })
-  }
+  //   setLoading(true)
+  //   axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
+  //     type_transport: typeTransport(),
+  //     from: from,
+  //     to: to,
+  //     net_start: netStart,
+  //     net_end: netEnd,
+  //     volume_start: volumeStart,
+  //     volume_end: volumeEnd
+  //   }})
+  //     .then(res=> {
+  //       console.log(res)
+  //       if (!from_string) {
+  //         delete queries.from_string;
+  //         delete queries.from_id
+  //       }
+  //       if(!to_string) {
+  //         delete queries.to_string;
+  //         delete queries.to_id
+  //       }
+  //       if(!net_start) {
+  //         delete queries.net_start
+  //       }
+  //       if(!net_end) {
+  //         delete queries.net_end
+  //       }
+  //       setLoading(false)
+  //       setPosts(res.data.data)
+  //       setCurrentPage(res.data.pagination.page)
+  //       setTotal(res.data.pagination.total)
+  //       setMaxPage(res.data.pagination.max_page)
+  //     })
+  // }
   const onChangePage = (pageNum) => {
     setLoading(true)
     const typeTransport = () =>  id==='0' ? '' : id;
@@ -156,7 +156,12 @@ const Cargo = () => {
           fromId = {from_id}
           toString=  {to_string}
           toId = {to_id}
-          onSearch={onSearch}
+          setLoading={setLoading}
+          setPosts={setPosts}
+          setCurrentPage={setCurrentPage}
+          setTotal={setTotal}
+          setMaxPage={setMaxPage}
+          // onSearch={onSearch}
         />
       }
      
