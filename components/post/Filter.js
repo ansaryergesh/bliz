@@ -67,10 +67,13 @@ const Filter = ({onSearch,onChangeCategory, activeCategory, queryFilter, fromStr
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(fromRef.current,
       { types: ["(cities)"], componentRestrictions: { country: ['kz'] } });
+
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
+      
+      // infowindow.close();
       let place = autocomplete.getPlace();
       setFromInput('')
-      console.log(place)
+      // console.log(place)
       setAddressFrom({address_string: place.formatted_address, address_id: place.place_id})
     });
 

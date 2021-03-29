@@ -8,26 +8,6 @@ import SideBarCurrency from '../../components/post/SideBarCurrency';
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults';
 
 const Cargo = () => {
-
-  const routerPath = (filter, id, from_id, to_id, from_string, to_string, page, net_start, net_end, volume_start,volume_end) => {
-    return (
-      router.push({
-        pathname: pathname,
-        query: {
-          filter: filter,
-          id: id,
-          from_id: from_id,
-          to_id: to_id,
-          from_string: from_string,
-          to_string: to_string,
-          page: page,
-          net_val: [net_start,net_end],
-          volume_val: [volume_start, volume_end]
-        }
-      })
-    )
-   
-  }
   const router  = useRouter()
 
   const pathname = router.pathname
@@ -52,6 +32,7 @@ const Cargo = () => {
   useEffect(() => {
     loadGoogleMapScript(() => {
       setLoadMapScript(true)
+      console.log(router.query)
     })
     setLoading(true)
     const typeTransport = () =>  id==='0' ? '' : id;
@@ -77,17 +58,15 @@ const Cargo = () => {
 
   const onChangeCategory = (catName,catId) => {
     setLoading(true)
-
-  
       axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
         type_transport: catId===0 ? '' : catId,
         from: from_id,
         to: to_id,
       }})
         .then(res=> {
-          console.log(res)
-          // router.push({pathname: pathname, query: {...query, filter: catName, id:catId}})
-          routerPath(catName, id, from_id,to_id,from_string,to_string)
+          const queries = router.query;
+          delete queries.page;
+          router.push({path: pathname, query: {...queries, filter: catName, id: catId}})
           setLoading(false)
           setPosts(res.data.data)
           setCurrentPage(res.data.pagination.page)
@@ -96,8 +75,20 @@ const Cargo = () => {
         })
 
   }
-  const onSearch = (from,to, fromString,toString, netStart,netEnd, volumeStart, volumeEnd) => {
+  const onSearch = (
+    from,
+    to, 
+    fromString,
+    toString,
+    netStart,
+    netEnd,
+    volumeStart,
+    volumeEnd
+  ) => {
+    const queries = router.query;
+    delete queries.page;
     const typeTransport = () =>  id==='0' ? '' : id;
+    
 
     setLoading(true)
     axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
@@ -111,8 +102,20 @@ const Cargo = () => {
     }})
       .then(res=> {
         console.log(res)
-        routerPath(filter,typeTransport(), from, to, fromString, toString, '', netStart, netEnd,volumeStart, volumeEnd  )
-        // routerPath(filter, typeTransport(), from, to, fromString,toString, netStart, netEnd, volumeStart, volumeEnd)
+        if (!from_string) {
+          delete queries.from_string;
+          delete queries.from_id
+        }
+        if(!to_string) {
+          delete queries.to_string;
+          delete queries.to_id
+        }
+        if(!net_start) {
+          delete queries.net_start
+        }
+        if(!net_end) {
+          delete queries.net_end
+        }
         setLoading(false)
         setPosts(res.data.data)
         setCurrentPage(res.data.pagination.page)
@@ -131,7 +134,7 @@ const Cargo = () => {
         to: to_id,
       }})
         .then(res=> {
-          routerPath(filter,id,from_id, to_id,from_string,to_string, pageNum)
+          router.push({path: pathname, query: {...router.query, page: pageNum}})
           console.log(res)
           setLoading(false)
           setPosts(res.data.data)
@@ -139,7 +142,6 @@ const Cargo = () => {
           setTotal(res.data.pagination.total)
           setMaxPage(res.data.pagination.max_page)
         })
-
   }
 
   return (
