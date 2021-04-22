@@ -13,6 +13,7 @@ const Posts = () => {
   const [favourites,setFavourites] = useState({cargo: '',post: '', auction: '', storage: '', special: ''})
   const [favourList, setFavourList] = useState([{}]);
   const [auctions, setAuctions] = useState([{}]);
+  const [tops,setTops] = useState({})
   const [storages, setStorages] = useState([{}])
   const [active, setActive] = useState('transport');
   const [loading, setLoading] = useState(true)
@@ -114,7 +115,7 @@ const Posts = () => {
           </div>
         </nav>
 
-        {active==='cargo' || active==='transport' ?  <PostItem post={!loading ? favourList: []} pathName={router.pathname} /> : ''}
+        {active==='cargo' || active==='transport' ?  <PostItem post={!loading ? favourList: []} pathName={router.pathname} tops={tops} /> : ''}
         {active==='storage' ? <StorageItems storages={!loading ? storages: []} loading={loading}/> : ''}
         {loading===false && active==='auction' ? <AuctionItem loading={loading} auctions={!loading ? auctions: []} /> : ''}
         {/* <AuctionItem auctions={favourList} /> */}

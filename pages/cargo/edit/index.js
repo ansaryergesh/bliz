@@ -494,9 +494,8 @@ class CargoTransportEdit extends React.Component {
                 <div className="post_ad__btns">
                   <button className="btn" type='submit' onClick={this.handleSubmit}>Редактировать</button>
                   <div className="post_ad__price__checkbox">
-                  {this.state.top === true ? <b>Объявление в топе</b> :
+                  {this.state.firstTop === true ? <b>Объявление в топе</b> :
                     <>
-                    {`${this.state.firstTop + " " +  this.state.top} `}
                     <>
                     <input type="checkbox" checked={this.state.top} onChange={e=> this.handleTop(e)}/>
                     <p className="post_ad__par">Добавить объявление в топ</p>
