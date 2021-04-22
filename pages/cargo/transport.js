@@ -23,7 +23,16 @@ const Cargo = () => {
   const [total, setTotal] = useState(0)
   const [maxPage,setMaxPage] = useState(0)
   const [loadMapScript, setLoadMapScript] = useState(false)
+  const [tops,setTops] = useState({})
+
+  const getTops = () => {
+    axios.get('https://test.money-men.kz/api/newGetPost?category_id=2')
+      .then(res=> {
+        setTops(res.data.top)
+      })
+  }
   useEffect(() => {
+    getTops()
     loadGoogleMapScript(() => {
       setLoadMapScript(true)
     })
@@ -144,6 +153,7 @@ const Cargo = () => {
           currentPage={currentPage}
           onChangePage={onChangePage}
           pathName={router.pathname}
+          tops={tops}
         />
         <SideBarCurrency />
     </div>

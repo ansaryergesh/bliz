@@ -25,11 +25,20 @@ const Cargo = () => {
   const [posts, setPosts] = useState([{}])
   const [currentPage, setCurrentPage] = useState(page || '1')
   const [total, setTotal] = useState(0)
+  const [tops,setTops] = useState({})
   const [maxPage,setMaxPage] = useState(0)
   const [loadMapScript, setLoadMapScript] = useState(false)
 
 
+  const getTops = () => {
+    axios.get('https://test.money-men.kz/api/newGetPost?category_id=1')
+      .then(res=> {
+        setTops(res.data.top)
+      })
+  }
+
   useEffect(() => {
+    getTops()
     loadGoogleMapScript(() => {
       setLoadMapScript(true)
       console.log(router.query)
@@ -55,7 +64,7 @@ const Cargo = () => {
         setMaxPage(res.data.pagination.max_page)
       })
   },[])
-
+  
   const onChangeCategory = (catName,catId) => {
     setLoading(true)
       axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
@@ -173,6 +182,7 @@ const Cargo = () => {
           maxPage={maxPage}
           currentPage={currentPage}
           onChangePage={onChangePage}
+          tops={tops}
           pathName={router.pathname}
         />
         <SideBarCurrency />

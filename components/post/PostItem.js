@@ -4,7 +4,8 @@ import PaginationBtns from '../pagination/PaginationBtns'
 import { dateParse, parseDateTime } from '../../defaults/extraFunctions';
 import BreadCumbs from '../shared/BreadCumbsConfigure';
 import {useRouter} from 'next/router'
-const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, loading}) => {
+import TopItem from './TopItem';
+const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, loading, tops}) => {
   const router = useRouter()
   return (
       <div className="products__content">
@@ -19,6 +20,7 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
         
 
           <div class="products__items__wrapper">
+            {tops.length>0 && <TopItem tops={tops} />}
             {loading ? <div>Загрузка....</div> : 
               <div>
                    {post.map((p) => (
