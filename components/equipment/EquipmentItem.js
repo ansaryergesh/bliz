@@ -18,7 +18,8 @@ const EquipmentItem = ({
             </div>
             <div className="storage__item__desc">
               <div className="storage__item__title">
-                <a href={`/equipment/${e.id}`}>{e.details ? e.details[0].name : ''}</a>
+                {/* <a href={`/equipment/${e.id}`}>{e.details ? e.details[0].name : ''}</a> */}
+                <a href={`#`}>{e.details ? e.details[0].name : ''}</a>
                 <h3>{e.details ? e.details[0].price: ''}</h3>
               </div>
               <div className="storage__item__details">

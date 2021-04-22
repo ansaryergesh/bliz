@@ -123,7 +123,12 @@ const Cargo = () => {
           queryFilter={filter ? filter : 'Все'}
           onChangeCategory={onChangeCategory}
           fromString = {from_string}
+          setLoading = {setLoading}
           fromId = {from_id}
+          setPosts={setPosts}
+          setCurrentPage={setCurrentPage}
+          setTotal={setTotal}
+          setMaxPage={setMaxPage}
           toString=  {to_string}
           toId = {to_id}
           onSearch={onSearch}

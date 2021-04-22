@@ -35,6 +35,7 @@ const CargoDetailed = ({user}) => {
     axios.get(`${process.env.BASE_URL}/getPostByID/${pid}`)
       .then(res=> {
         setLoading(false)
+        let top = res.data.data[0].top ? res.data.data[0].top : false
         if(res.data.success) {
           let finalres = res.data.data[0];
           console.log(finalres.additional[0])
@@ -67,7 +68,8 @@ const CargoDetailed = ({user}) => {
               title: finalres.details[0].title
           },
           additional: finalres.additional[0],
-          updated_at: finalres.updated_at
+          updated_at: finalres.updated_at,
+          top: top
       })}else {
         setPostInfo({errorId: true})
       }
@@ -106,6 +108,7 @@ const CargoDetailed = ({user}) => {
   const [postInfo, setPostInfo] = useState({
     errorId: false,
     updated_at: '',
+    top: false,
     user: {
       id: '',
       fullName: '',
@@ -150,7 +153,7 @@ const CargoDetailed = ({user}) => {
               <p className='goods__info__gray'><a href="/" className=''>Главная</a>{" " + "/" + " "}<a href='/storage' >Грузоперевозки </a>/<a href="#" className='gray_font'>{" " + "Грузы"}</a></p>
               </div>
               <div className="goods__info__title">
-                <h2>Груз: {postInfo.details.title} {postInfo.details.net} тн / {postInfo.details.volume} м³</h2>
+                <h2>Груз: {postInfo.details.title}  {postInfo.details.net} тн / {postInfo.details.volume} м³  </h2> {postInfo.top && "( Топ предложения 🔥  )"}
                 <p>
                   <span className="goods__info__gray">{dateParse(postInfo.details.start_date)} – {dateParse(postInfo.details.end_date)} /</span>
                   {postInfo.details.from_string} — {postInfo.details.to_string}

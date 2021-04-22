@@ -39,8 +39,12 @@ class CargoTransportEdit extends React.Component {
   getPostId = () => {
     axios.get(`${process.env.BASE_URL}/getPostByID/${getParameterByName('id')}`)
       .then(res => {
-        if(res.data.success) {
+        if(!res.data.data.length>0) {
+          Router.push('/cargo')
+        }
+        if(res.data.success && res.data.data.length>0) {
           let finalres = res.data.data[0].details[0]
+          let top = res.data.data[0].top ? res.data.data[0].top : false
           console.log(finalres)
           this.setState({
             loading: false,
@@ -58,6 +62,8 @@ class CargoTransportEdit extends React.Component {
             to: finalres.to,
             duration: finalres.duration,
             distance: finalres.distance,
+            top: top,
+            firstTop: top,
             // price: finalres.price[0].price
             // docs: finalres.additional[0].docs,
             // pogruzki: finalres.additional[0].pogruzki
@@ -98,10 +104,14 @@ class CargoTransportEdit extends React.Component {
       duration: '',
       fromString: '',
       toString: '',
+      top: false,
+      firstTop: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleCheckBox = this.handleCheckBox.bind(this)
+    this.handleTop = this.handleTop.bind(this)
+    this.addToTop = this.addToTop.bind(this)
     this.initPlaceAPI = this.initPlaceAPI.bind(this)
   }
 
@@ -141,6 +151,8 @@ class CargoTransportEdit extends React.Component {
       },() => {self.getDistanceDuration(self.state.from,self.state.to)})
     });
   }
+
+
 
   getDistanceDuration(p1,p2) {
     if(p1.length>0 && p2.length>0) {
@@ -183,6 +195,10 @@ class CargoTransportEdit extends React.Component {
       [name]: value
     });
   }
+
+  handleTop(e) {
+    this.setState({top: !this.state.top})
+  }
   handleCheckBox(e) {
     const item = e.target.value;
     const isChecked = e.target.checked;
@@ -201,6 +217,26 @@ class CargoTransportEdit extends React.Component {
       this.setState(prevState=>({extra: prevState.extra.set(item,isChecked)}))
     }
     
+  }
+
+  addToTop() {
+    if(this.state.firstTop !== this.state.top && this.state.top === true) {
+      let id = getParameterByName('id')
+      let token = cookie.get('token')
+      axios.get(`https://test.money-men.kz/api/topPost`, {params: {
+        post_id: id,
+        token: token,
+      }})
+        .then(res=> {
+          this.props.successMessage('Обновлен и добавлен в топ')
+          Router.push(`/cargo/${getParameterByName('id')}`)
+          console.log(res)
+        })
+    }
+    if(this.state.firstTop === this.state.top) {
+      Router.push(`/cargo/${getParameterByName('id')}`)
+    }
+  
   }
   
   handleSubmit(e) {
@@ -236,7 +272,8 @@ class CargoTransportEdit extends React.Component {
         if(res.data.success) {
           this.props.successMessage('Успешно обновлен пост')
           
-          Router.push(`/cargo/${getParameterByName('id')}`)
+          // Router.push(`/cargo/${getParameterByName('id')}`)
+          this.addToTop()
           
         }else {
           this.props.errorMessage(res.data.message)
@@ -457,9 +494,17 @@ class CargoTransportEdit extends React.Component {
                 <div className="post_ad__btns">
                   <button className="btn" type='submit' onClick={this.handleSubmit}>Редактировать</button>
                   <div className="post_ad__price__checkbox">
-                    <input type="checkbox"/>
+                  {this.state.top === true ? <b>Объявление в топе</b> :
+                    <>
+                    {`${this.state.firstTop + " " +  this.state.top} `}
+                    <>
+                    <input type="checkbox" checked={this.state.top} onChange={e=> this.handleTop(e)}/>
                     <p className="post_ad__par">Добавить объявление в топ</p>
-                  </div>
+                    </>
+                    </>
+                  }
+                    </div>
+                  
                 </div>
             </div>
               <div className="products__aside"></div>

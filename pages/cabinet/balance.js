@@ -1,37 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BreadCumbs from "../../components/shared/BreadCumbsConfigure";
-
+import cookie from 'js-cookie'
+import axios from "axios";
+import BalancePage from '../../components/userCabinet/Balance'
+import TransactionHistory from "../../components/userCabinet/TransactionHistory";
 const Balance = () => {
   const [balance, setBalance] = useState('0')
+  const [page,setPage] = useState('balance')
+  const [history,setHistory] = useState({})
+
+  const getTransactionHistory = () => {
+    axios.get('https://test.money-men.kz/api/paymentHistory', {params: {
+      token: cookie.get('token')
+    }})
+      .then(res=> {
+        setHistory(res.data.data)
+        console.log(res.data.data)
+      })
+  }
+  useEffect(() => {
+    getTransactionHistory()
+  },[])
   return (
     <div className="grid-container container">
       <div className="section">
         <div className="products__title paddings little_pad">
           <BreadCumbs />
           <h1 className="smaller_font">Мой баланс</h1>
+          {page === 'balance' ?
+          <button onClick={() => setPage('transaction')} className='btn green'>Открыть историю транзакций</button> : 
+          
+          <button onClick={() => setPage('balance')} className='btn green'>Проверка баланса</button>}
         </div>
-        <div className="balance__details">
-          <div className="balance__detail__item">
-            <p>Статус:</p>
-            <div className="balance__detail__item__inner">
-              <h3>Лимитед</h3>
-            </div>
-          </div>
-          <div className="balance__detail__item">
-            <p>Рейтинг:</p>
-            <div className="balance__detail__item__inner">
-              <i className="far fa-star"/>
-              <h3 className="blue">0</h3>
-            </div>
-          </div>
-          <div className="balance__detail__item">
-            <p>Баланс:</p>
-            <div className="balance__detail__item__inner">
-              <img src="/img/widgets/tenge.svg" alt/>
-              <h3 className="green">{balance} ₸</h3>
-            </div>
-          </div>
-        </div>
+        {page === 'balance' ? 
+        <BalancePage balance={balance} /> : <TransactionHistory history={history} />}
         <div className="balance__top-up">
           <div className="products__title">
             <h1>Пополнить счет</h1>

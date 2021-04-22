@@ -7,6 +7,7 @@ import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import cookie from 'js-cookie'
 import CompanyOnAddInfo from '../../components/company/CompanyOnAddInfo'
 import withAuth from '../../hocs/withAuth'
+import Router from 'next/router'
 
 
 const mapDispatchToProps = (dispatch) =>({
@@ -139,7 +140,7 @@ class EquipmentAdd extends React.Component  {
       .then(res => {
         if(res.data.success) {
           this.props.successMessage('Успешно добавлен пост')
-          console.log('posted')
+          Router.push('/equipment')
         }else {
           this.props.errorMessage(res.data.message)
         }
