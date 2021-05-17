@@ -89,6 +89,7 @@ const CargoDetailed = ({user}) => {
       saveToDatabase(`/chats/${currentChat}/messages/${messageId}`, {
         body: message, sender: cookie.get('active_user'), created: new Date().toISOString(),
       })
+      router.push('/cabinet/message')
     }
   },[currentChat])
 

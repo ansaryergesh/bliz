@@ -1,8 +1,8 @@
 import React from 'react';
 import cookie from 'js-cookie'
 import { dateParse } from '../../defaults/extraFunctions';
-const ChatWindow = ({ messages = [], sendMessage, currentChat }) => {
-  const [messageBody, setMessageBody] = React.useState('');
+const ChatWindow = ({ messages = [], sendMessage, currentChat, messageBody, setMessageBody }) => {
+  // const [messageBody, setMessageBody] = React.useState('');
   const myId = cookie.get('active_user');
   // Sort messages into descending order by the date they were created
   const sortedMessages = messages.sort((a, b) => new Date(a.created).valueOf() - new Date(b.created).valueOf());

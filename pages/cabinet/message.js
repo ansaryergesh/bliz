@@ -11,7 +11,7 @@ const Message = () => {
   const userId= cookie.get('active_user')
   const [myActiveChats, setMyActiveChats] = useState([])
   const [currentChatMessages,setCurrentChatMessages] =useState([])
-  
+  const [messageBody,setMessageBody] = useState('')
   const [currentChat,setCurrentChat] = useState(null)
   useEffect(() => {
     getFromDatabase(`/${userId}/chats`, res => {
@@ -28,6 +28,7 @@ const Message = () => {
     saveToDatabase(`/chats/${chatName}/messages/${messageId}`, {
       body, sender: cookie.get('active_user'), created: new Date().toISOString(),
     })
+    setMessageBody('')
   }
   return (
     <div className="messager__container container">
@@ -65,7 +66,7 @@ const Message = () => {
           <ActiveChats setCurrentChat={setCurrentChat} myActiveChats={myActiveChats} />
          
         </div>
-        { currentChat && <ChatWindow sendMessage={sendMessage} currentChat={currentChat} messages={currentChatMessages} /> }
+        { currentChat && <ChatWindow sendMessage={sendMessage} currentChat={currentChat} messages={currentChatMessages} messageBody={messageBody} setMessageBody={setMessageBody} /> }
       </div>
     </div>
   )
