@@ -30,6 +30,7 @@ export const userAuthentication = (url,values) =>dispatch => {
       cookie.set('token', jsonresponse.token, {expires: 7})
       dispatch({type: 'SUCCESS_MESSAGE', payload: 'Добро пожаловать'})
       dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse})
+      console.log(jsonresponse)
       setTimeout(() => {
         dispatch({type: 'CLOSE_MESSAGE'})
       },3500)

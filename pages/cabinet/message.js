@@ -7,6 +7,7 @@ import uuid from 'uuid'
 import {getFromDatabase, saveToDatabase} from '../../fbdatabase/database'
 import ActiveChats from "../../components/firebaseComponents/ActiveChat"
 import ChatWindow from "../../components/firebaseComponents/ChatWindow"
+import withAuth from "../../hocs/withAuth"
 const Message = () => {
   const userId= cookie.get('active_user')
   const [myActiveChats, setMyActiveChats] = useState([])
@@ -72,4 +73,4 @@ const Message = () => {
   )
 }
 
-export default Message;
+export default withAuth(Message);

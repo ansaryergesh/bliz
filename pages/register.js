@@ -31,7 +31,6 @@ class Register extends React.Component {
     this.handleSubmitLegal = this.handleSubmitLegal.bind(this);
     this.handleSubmitNatural = this.handleSubmitNatural.bind(this);
     this.handleType = this.handleType.bind(this);
-    this.registerFirebaseAccount = this.registerFirebaseAccount.bind(this);
   }
 
   componentDidMount() {
