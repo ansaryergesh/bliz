@@ -6,7 +6,7 @@ import RegisterNatural from '../components/auth/RegisterNatural'
 import {userAuthentication} from '../store/actions/userAction'
 import cookie from 'js-cookie'
 import { connect } from 'react-redux';
-
+import firebase from '../firebase';
 
 
 const mapStateToProps = state => {
@@ -31,6 +31,7 @@ class Register extends React.Component {
     this.handleSubmitLegal = this.handleSubmitLegal.bind(this);
     this.handleSubmitNatural = this.handleSubmitNatural.bind(this);
     this.handleType = this.handleType.bind(this);
+    this.registerFirebaseAccount = this.registerFirebaseAccount.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +53,7 @@ class Register extends React.Component {
   handleType() {
     this.setState({legal: !this.state.legal})
   }
+
   
   handleSubmitLegal(values) {
     this.props.userAuthentication(`${process.env.BASE_URL}/entityRegistration`, values)

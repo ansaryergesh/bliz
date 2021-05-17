@@ -1,6 +1,6 @@
 import cookie from 'js-cookie';
 import Router from 'next/router';
-
+import {saveToDatabase} from '../../fbdatabase/database'
 function replaceDate(val) {
   return String(val).replace(/[^A-Z0-9]/g, '')
 }
@@ -58,7 +58,13 @@ export const fetchCurrentUser = () => dispatch => {
   .then(jsonresponse => {
     console.log(jsonresponse)
     if(jsonresponse.data.length) {
+      
       dispatch({type: 'SET_CURRENT_USER', payload: jsonresponse.data[0]})
+      const username = jsonresponse.data[0].id
+      const fullName = jsonresponse.data[0].fullName
+      saveToDatabase(`/users/${username}`, true);
+      cookie.set('active_user', username)
+      cookie.set('active_fullname', fullName)
     }else {
       dispatch({type: 'FAILED_LOGIN'})
       cookie.remove('token')

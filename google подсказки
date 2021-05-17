@@ -1,7 +1,0 @@
-https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ1zkMCyZpgzgRtn7Iw11yJMc&key=AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk
-https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%D0%90%D1%83%D0%B5%D0%B7%D0%BE%D0%B2%D0%B0%20112%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%20%D0%90%D0%BB%D0%BC%D0%B0%D1%82%D1%8B&types=geocode&language=ru&key=AIzaSyAplKiP9AOLuUbWdH655ApFMl1nnfXwcwk
-
-ссылки
-https://stackoverflow.com/questions/40106541/google-maps-api-how-to-get-street-addresses-only-as-results-of-autocomplete
-https://ride.readme.io/docs/google-place-autocomplete
-https://medium.com/@hamzaqaisrani/using-the-google-maps-places-autocomplete-javascript-api-in-a-react-project-5742bab4abc9

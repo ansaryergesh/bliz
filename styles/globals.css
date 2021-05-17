@@ -5965,4 +5965,10 @@ input[type="file"] {
   }
 }
 
+.tinyDate {
+  font-size: 12px;
+  color: rgb(169, 168, 168);
+  /* margin-bottom: 28px; */
+}
+
 /* TransactionHistoryEnd */

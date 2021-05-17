@@ -104,7 +104,7 @@ const Favourites = () => {
           </div>
         </nav>
       
-        {active==='cargo' || active==='transport' ?  <PostItem post={favourList} pathName={router.pathname} /> : ''}
+        {active==='cargo' || active==='transport' ?  <PostItem tops={{}} post={favourList} pathName={router.pathname} /> : ''}
         {active==='storage' ? <StorageItems storages={storages} loading={loading}/> : ''}
         {loading===false && active==='auction' ? <AuctionItem loading={loading} auctions={auctions}/> : ''}
         {/* <AuctionItem auctions={favourList} /> */}

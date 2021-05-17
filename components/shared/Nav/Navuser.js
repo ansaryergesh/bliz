@@ -5,6 +5,7 @@ import * as msgaction from '../../../store/actions/messageAction'
 import axios from 'axios'
 import cookie from 'js-cookie'
 import Router from 'next/router'
+import firebase from '../../../firebase'
 import { useRouter } from 'next/router'
 import { fetchCurrentUser } from '../../../store/actions/userAction'
 const mapStateToProps = ({
@@ -24,7 +25,8 @@ const handleLogout =(val) => {
     .then(response => {
       if(response.data.success) {
         cookie.remove('token')
-        Router.push('/login')
+        firebase.auth().signOut()
+          .then(Router.push('/'))
         setTimeout(() => {
           location.reload()
         },200)

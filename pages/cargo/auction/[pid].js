@@ -209,7 +209,7 @@ const AuctionDetail = ({user}) => {
         currency ={currency}
         setCurrency ={setCurrency}
         onSendRequest={onParticipate}
-        />
+      />
       <div className={auctionModal ? "driver_modal edit_photo active" : 'driver_modal edit_photo'}>
             <div className="driver_modal__inner ">
               <h2>Аукцион</h2>

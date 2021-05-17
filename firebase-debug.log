@@ -1,0 +1,213 @@
+[debug] [2021-04-27T04:23:09.531Z] ----------------------------------------------------------------------
+[debug] [2021-04-27T04:23:09.533Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Ansar\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-04-27T04:23:09.533Z] CLI Version:   9.10.0
+[debug] [2021-04-27T04:23:09.533Z] Platform:      win32
+[debug] [2021-04-27T04:23:09.533Z] Node Version:  v15.3.0
+[debug] [2021-04-27T04:23:09.534Z] Time:          Tue Apr 27 2021 10:23:09 GMT+0600 (Восточный Казахстан)
+[debug] [2021-04-27T04:23:09.534Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-04-27T04:23:09.540Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-27T04:23:09.540Z] > authorizing via signed-in user (yergeshovansar@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Ansar\Desktop\bliz\front-bliz
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2021-04-27T04:23:16.862Z] > refreshing access token with scopes: []
+[debug] [2021-04-27T04:23:16.862Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-04-27T04:23:17.222Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","date":"Tue, 27 Apr 2021 04:23:17 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:23:17.242Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2021-04-27T04:23:17.745Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2021-04-27T04:23:17.745Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project bliz-6af36 (bliz) 
+[info] 
+=== Database Setup
+[info] i  database: ensuring required API firebasedatabase.googleapis.com is enabled... 
+[debug] [2021-04-27T04:23:18.775Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-04-27T04:23:18.775Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-04-27T04:23:19.034Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","date":"Tue, 27 Apr 2021 04:23:19 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:23:19.047Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/bliz-6af36/services/firebasedatabase.googleapis.com  
+ 
+[debug] [2021-04-27T04:23:20.249Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:20 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  database: required API firebasedatabase.googleapis.com is enabled 
+[info] 
+[debug] [2021-04-27T04:23:20.251Z] >>> HTTP REQUEST GET https://firebasedatabase.googleapis.com/v1beta/projects/bliz-6af36/locations/-/instances/bliz-6af36-default-rtdb  
+ 
+[debug] [2021-04-27T04:23:20.867Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:21 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] Firebase Realtime Database Security Rules allow you to define how your data should be
+[info] structured and when your data can be read from and written to.
+[info] 
+[debug] [2021-04-27T04:23:24.129Z] >>> HTTP REQUEST GET https://bliz-6af36-default-rtdb.firebaseio.com/.settings/rules.json  
+ 
+[debug] [2021-04-27T04:23:24.895Z] <<< HTTP RESPONSE 200 {"server":"nginx","date":"Tue, 27 Apr 2021 04:23:25 GMT","content-type":"application/json; charset=utf-8","content-length":"121","connection":"keep-alive","access-control-allow-origin":"*","cache-control":"no-cache","strict-transport-security":"max-age=31556926; includeSubDomains; preload"}
+[info] +  Database Rules for bliz-6af36-default-rtdb have been written to database.rules.json. 
+[info] Future modifications to database.rules.json will update Realtime Database Security Rules when you run
+[info] firebase deploy.
+[info] 
+=== Firestore Setup
+[debug] [2021-04-27T04:23:24.899Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/bliz-6af36/services/firestore.googleapis.com  
+ 
+[debug] [2021-04-27T04:23:26.165Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:26 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:23:26.166Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bliz-6af36  
+ 
+[debug] [2021-04-27T04:23:26.908Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:27 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:23:26.909Z] database_type: CLOUD_FIRESTORE
+[debug] [2021-04-27T04:23:26.909Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-27T04:23:26.910Z] > authorizing via signed-in user (yergeshovansar@gmail.com)
+[debug] [2021-04-27T04:23:26.910Z] [iam] checking project bliz-6af36 for permissions ["firebase.projects.get"]
+[debug] [2021-04-27T04:23:26.910Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/bliz-6af36:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-04-27T04:23:28.003Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=790","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2021-04-27T04:23:31.997Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/bliz-6af36/releases?pageSize=10&pageToken=  
+ 
+[debug] [2021-04-27T04:23:33.132Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:33 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:23:33.133Z] Found ruleset: projects/bliz-6af36/rulesets/0f4d167a-87d7-4cf9-a9ec-992011a966a9
+[debug] [2021-04-27T04:23:33.133Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/bliz-6af36/rulesets/0f4d167a-87d7-4cf9-a9ec-992011a966a9  
+ 
+[debug] [2021-04-27T04:23:34.165Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[debug] [2021-04-27T04:23:35.929Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/bliz-6af36/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2021-04-27T04:23:35.930Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1/projects/bliz-6af36/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2021-04-27T04:23:37.301Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:37 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:23:37.612Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:38 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with a Node.js
+[info] package pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2021-04-27T04:23:37.620Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-04-27T04:23:37.621Z] > authorizing via signed-in user (yergeshovansar@gmail.com)
+[debug] [2021-04-27T04:23:37.621Z] [iam] checking project bliz-6af36 for permissions ["firebase.projects.get"]
+[debug] [2021-04-27T04:23:37.621Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/bliz-6af36:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2021-04-27T04:23:38.614Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:39 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=772","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:23:38.615Z] >>> HTTP REQUEST POST https://serviceusage.googleapis.com/v1/projects/bliz-6af36/services/cloudfunctions.googleapis.com:enable  
+ 
+[debug] [2021-04-27T04:23:38.615Z] >>> HTTP REQUEST POST https://serviceusage.googleapis.com/v1/projects/bliz-6af36/services/runtimeconfig.googleapis.com:enable  
+ 
+[debug] [2021-04-27T04:23:39.753Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:40 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:23:40.331Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:23:40 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  Wrote functions/package.json 
+[info] +  Wrote functions/index.js 
+[info] +  Wrote functions/.gitignore 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] +  Wrote (public)/404.html 
+[debug] [2021-04-27T04:24:43.359Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2021-04-27T04:24:43.668Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2021-04-27T04:24:43.669Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"8.4.2","browserURL":"https://www.gstatic.com/firebasejs/8.4.2/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/8.4.2/firebase.tgz"},"live":{"version":"8.4","browserURL":"https://www.gstatic.com/firebasejs/live/8.4/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/8.4/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/8.4.2/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js","auth":"https://www.gstatic.com/firebasejs/8.4.2/firebase-auth.js","database":"https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js","firestore":"https://www.gstatic.com/firebasejs/8.4.2/firebase-firestore.js","functions":"https://www.gstatic.com/firebasejs/8.4.2/firebase-functions.js","installations":"https://www.gstatic.com/firebasejs/8.4.2/firebase-installations.js","messaging":"https://www.gstatic.com/firebasejs/8.4.2/firebase-messaging.js","storage":"https://www.gstatic.com/firebasejs/8.4.2/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/8.4.2/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/8.4.2/firebase-remote-config.js","firestore.memory":"https://www.gstatic.com/firebasejs/8.4.2/firebase-firestore.memory.js"}}
+[info] +  Wrote (public)/index.html 
+[info] 
+[info] i  Detected a .git folder at C:\Users\Ansar\Desktop\bliz\front-bliz 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=958316527&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2021-04-27T04:24:51.911Z] >>> HTTP REQUEST POST https://github.com/login/oauth/access_token  
+ {"client_id":"89cf50f02ac6aaed3484","client_secret":"3330d14abc895d9a74d5f17cd7a00711fa2c5bf0","code":"8c96273d3da0d73af7b4","redirect_uri":"http://localhost:9005","state":"958316527"}
+[debug] [2021-04-27T04:24:52.562Z] <<< HTTP RESPONSE 200 {"server":"GitHub.com","date":"Tue, 27 Apr 2021 04:24:53 GMT","content-type":"application/json; charset=utf-8","transfer-encoding":"chunked","vary":"X-PJAX, Accept-Encoding, Accept, X-Requested-With","permissions-policy":"interest-cohort=()","etag":"W/\"e4ab3ff19abc8d9bf6269e0e49a5d99b\"","cache-control":"max-age=0, private, must-revalidate","strict-transport-security":"max-age=31536000; includeSubdomains; preload","x-frame-options":"deny","x-content-type-options":"nosniff","x-xss-protection":"0","referrer-policy":"origin-when-cross-origin, strict-origin-when-cross-origin","expect-ct":"max-age=2592000, report-uri=\"https://api.github.com/_private/browser/errors\"","content-security-policy":"default-src 'none'; base-uri 'self'; block-all-mixed-content; connect-src 'self' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com; frame-ancestors 'none'; frame-src render.githubusercontent.com; img-src 'self' data: github.githubassets.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com; manifest-src 'self'; media-src 'none'; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; worker-src github.com/socket-worker-3f088aa2.js gist.github.com/socket-worker-3f088aa2.js","x-github-request-id":"FDA2:C845:526B352:558F75B:60879214"}
+[debug] [2021-04-27T04:24:52.567Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2021-04-27T04:24:53.079Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2021-04-27T04:24:53.079Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"ansaryergesh","id":23493156,"node_id":"MDQ6VXNlcjIzNDkzMTU2","avatar_url":"https://avatars.githubusercontent.com/u/23493156?v=4","gravatar_id":"","url":"https://api.github.com/users/ansaryergesh","html_url":"https://github.com/ansaryergesh","followers_url":"https://api.github.com/users/ansaryergesh/followers","following_url":"https://api.github.com/users/ansaryergesh/following{/other_user}","gists_url":"https://api.github.com/users/ansaryergesh/gists{/gist_id}","starred_url":"https://api.github.com/users/ansaryergesh/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/ansaryergesh/subscriptions","organizations_url":"https://api.github.com/users/ansaryergesh/orgs","repos_url":"https://api.github.com/users/ansaryergesh/repos","events_url":"https://api.github.com/users/ansaryergesh/events{/privacy}","received_events_url":"https://api.github.com/users/ansaryergesh/received_events","type":"User","site_admin":false,"name":"Ansar Yergeshov","company":"Full-stack Developer","blog":"https://www.linkedin.com/in/ansaryergesh/","location":"Almaty, Kazakhstan","email":"yergeshovansar@gmail.com","hireable":null,"bio":"Full-stack Developer | React | Redux | JavaScript | | Ruby | Ruby on Rails |  Laravel\r\n","twitter_username":null,"public_repos":67,"public_gists":0,"followers":12,"following":16,"created_at":"2016-11-16T05:29:54Z","updated_at":"2021-04-27T04:24:51Z","private_gists":0,"total_private_repos":9,"owned_private_repos":9,"disk_usage":636230,"collaborators":0,"two_factor_authentication":false,"plan":{"name":"free","space":976562499,"collaborators":0,"private_repos":10000}}
+[info] 
+[info] +  Success! Logged into GitHub as ansaryergesh 
+[info] 
+[debug] [2021-04-27T04:25:26.899Z] >>> [apiv2][query] GET https://api.github.com/repos/ansaryergesh/bliz/actions/secrets/public-key type=owner
+[debug] [2021-04-27T04:25:27.367Z] <<< [apiv2][status] GET https://api.github.com/repos/ansaryergesh/bliz/actions/secrets/public-key 200
+[debug] [2021-04-27T04:25:27.367Z] <<< [apiv2][body] GET https://api.github.com/repos/ansaryergesh/bliz/actions/secrets/public-key {"key_id":"568250167242549743","key":"/cpjnzmUw2sd83XEbY185I/v1pS8Y32EClUCTxcLLWY="}
+[debug] [2021-04-27T04:25:27.369Z] >>> [apiv2][query] GET https://api.github.com/repos/ansaryergesh/bliz [none]
+[debug] [2021-04-27T04:25:27.906Z] <<< [apiv2][status] GET https://api.github.com/repos/ansaryergesh/bliz 200
+[debug] [2021-04-27T04:25:27.906Z] <<< [apiv2][body] GET https://api.github.com/repos/ansaryergesh/bliz {"id":330642266,"node_id":"MDEwOlJlcG9zaXRvcnkzMzA2NDIyNjY=","name":"bliz","full_name":"ansaryergesh/bliz","private":true,"owner":{"login":"ansaryergesh","id":23493156,"node_id":"MDQ6VXNlcjIzNDkzMTU2","avatar_url":"https://avatars.githubusercontent.com/u/23493156?v=4","gravatar_id":"","url":"https://api.github.com/users/ansaryergesh","html_url":"https://github.com/ansaryergesh","followers_url":"https://api.github.com/users/ansaryergesh/followers","following_url":"https://api.github.com/users/ansaryergesh/following{/other_user}","gists_url":"https://api.github.com/users/ansaryergesh/gists{/gist_id}","starred_url":"https://api.github.com/users/ansaryergesh/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/ansaryergesh/subscriptions","organizations_url":"https://api.github.com/users/ansaryergesh/orgs","repos_url":"https://api.github.com/users/ansaryergesh/repos","events_url":"https://api.github.com/users/ansaryergesh/events{/privacy}","received_events_url":"https://api.github.com/users/ansaryergesh/received_events","type":"User","site_admin":false},"html_url":"https://github.com/ansaryergesh/bliz","description":null,"fork":false,"url":"https://api.github.com/repos/ansaryergesh/bliz","forks_url":"https://api.github.com/repos/ansaryergesh/bliz/forks","keys_url":"https://api.github.com/repos/ansaryergesh/bliz/keys{/key_id}","collaborators_url":"https://api.github.com/repos/ansaryergesh/bliz/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/ansaryergesh/bliz/teams","hooks_url":"https://api.github.com/repos/ansaryergesh/bliz/hooks","issue_events_url":"https://api.github.com/repos/ansaryergesh/bliz/issues/events{/number}","events_url":"https://api.github.com/repos/ansaryergesh/bliz/events","assignees_url":"https://api.github.com/repos/ansaryergesh/bliz/assignees{/user}","branches_url":"https://api.github.com/repos/ansaryergesh/bliz/branches{/branch}","tags_url":"https://api.github.com/repos/ansaryergesh/bliz/tags","blobs_url":"https://api.github.com/repos/ansaryergesh/bliz/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/ansaryergesh/bliz/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/ansaryergesh/bliz/git/refs{/sha}","trees_url":"https://api.github.com/repos/ansaryergesh/bliz/git/trees{/sha}","statuses_url":"https://api.github.com/repos/ansaryergesh/bliz/statuses/{sha}","languages_url":"https://api.github.com/repos/ansaryergesh/bliz/languages","stargazers_url":"https://api.github.com/repos/ansaryergesh/bliz/stargazers","contributors_url":"https://api.github.com/repos/ansaryergesh/bliz/contributors","subscribers_url":"https://api.github.com/repos/ansaryergesh/bliz/subscribers","subscription_url":"https://api.github.com/repos/ansaryergesh/bliz/subscription","commits_url":"https://api.github.com/repos/ansaryergesh/bliz/commits{/sha}","git_commits_url":"https://api.github.com/repos/ansaryergesh/bliz/git/commits{/sha}","comments_url":"https://api.github.com/repos/ansaryergesh/bliz/comments{/number}","issue_comment_url":"https://api.github.com/repos/ansaryergesh/bliz/issues/comments{/number}","contents_url":"https://api.github.com/repos/ansaryergesh/bliz/contents/{+path}","compare_url":"https://api.github.com/repos/ansaryergesh/bliz/compare/{base}...{head}","merges_url":"https://api.github.com/repos/ansaryergesh/bliz/merges","archive_url":"https://api.github.com/repos/ansaryergesh/bliz/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/ansaryergesh/bliz/downloads","issues_url":"https://api.github.com/repos/ansaryergesh/bliz/issues{/number}","pulls_url":"https://api.github.com/repos/ansaryergesh/bliz/pulls{/number}","milestones_url":"https://api.github.com/repos/ansaryergesh/bliz/milestones{/number}","notifications_url":"https://api.github.com/repos/ansaryergesh/bliz/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/ansaryergesh/bliz/labels{/name}","releases_url":"https://api.github.com/repos/ansaryergesh/bliz/releases{/id}","deployments_url":"https://api.github.com/repos/ansaryergesh/bliz/deployments","created_at":"2021-01-18T11:16:42Z","updated_at":"2021-03-29T08:57:07Z","pushed_at":"2021-03-29T08:57:04Z","git_url":"git://github.com/ansaryergesh/bliz.git","ssh_url":"git@github.com:ansaryergesh/bliz.git","clone_url":"https://github.com/ansaryergesh/bliz.git","svn_url":"https://github.com/ansaryergesh/bliz","homepage":null,"size":27421,"stargazers_count":0,"watchers_count":0,"language":"JavaScript","has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"disabled":false,"open_issues_count":0,"license":null,"forks":0,"open_issues":0,"watchers":0,"default_branch":"main","permissions":{"admin":true,"push":true,"pull":true},"temp_clone_token":"AFTHUJAZVFBKVZVEHER3FRLAQ6JWI","allow_squash_merge":true,"allow_merge_commit":true,"allow_rebase_merge":true,"delete_branch_on_merge":false,"network_count":0,"subscribers_count":1}
+[debug] [2021-04-27T04:25:27.908Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/bliz-6af36/serviceAccounts  
+ {"accountId":"github-action-330642266","serviceAccount":{"displayName":"GitHub Actions (ansaryergesh/bliz)","description":"A service account with permission to deploy to Firebase Hosting for the GitHub repository ansaryergesh/bliz"}}
+[debug] [2021-04-27T04:25:29.271Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:25:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:25:29.272Z] >>> HTTP REQUEST GET https://iam.googleapis.com/v1/projects/bliz-6af36/serviceAccounts/github-action-330642266@bliz-6af36.iam.gserviceaccount.com  
+ 
+[debug] [2021-04-27T04:25:29.272Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/bliz-6af36:getIamPolicy  
+ 
+[debug] [2021-04-27T04:25:29.813Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:25:30 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:25:30.421Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:25:30 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=928","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:25:30.422Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/bliz-6af36:setIamPolicy  
+ {"policy":{"version":1,"etag":"BwXA7KCPCmg=","bindings":[{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-970557461414@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:bliz-6af36@appspot.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:firebase-service-account@firebase-sa-management.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fr65n@bliz-6af36.iam.gserviceaccount.com"]},{"role":"roles/firebasedatabase.admin","members":["serviceAccount:firebase-adminsdk-fr65n@bliz-6af36.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-970557461414@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fr65n@bliz-6af36.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:yergeshovansar@gmail.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:github-action-330642266@bliz-6af36.iam.gserviceaccount.com"]},{"role":"roles/serviceusage.apiKeysViewer","members":["serviceAccount:github-action-330642266@bliz-6af36.iam.gserviceaccount.com"]},{"role":"roles/firebasehosting.admin","members":["serviceAccount:github-action-330642266@bliz-6af36.iam.gserviceaccount.com"]},{"role":"roles/run.viewer","members":["serviceAccount:github-action-330642266@bliz-6af36.iam.gserviceaccount.com"]}]},"updateMask":"bindings"}
+[debug] [2021-04-27T04:25:31.909Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:25:32 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1258","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-04-27T04:25:31.909Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/bliz-6af36/serviceAccounts/github-action-330642266@bliz-6af36.iam.gserviceaccount.com/keys  
+ {"keyAlgorithm":"KEY_ALG_UNSPECIFIED","privateKeyType":"TYPE_GOOGLE_CREDENTIALS_FILE"}
+[debug] [2021-04-27T04:25:32.751Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 27 Apr 2021 04:25:33 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] +  Created service account github-action-330642266 with Firebase Hosting admin permissions. 
+[debug] [2021-04-27T04:25:32.779Z] >>> [apiv2][query] PUT https://api.github.com/repos/ansaryergesh/bliz/actions/secrets/FIREBASE_SERVICE_ACCOUNT_BLIZ_6AF36 [none]
+[debug] [2021-04-27T04:25:32.779Z] >>> [apiv2][body] PUT https://api.github.com/repos/ansaryergesh/bliz/actions/secrets/FIREBASE_SERVICE_ACCOUNT_BLIZ_6AF36 {"encrypted_value":"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","key_id":"568250167242549743"}
+[debug] [2021-04-27T04:25:33.303Z] <<< [apiv2][status] PUT https://api.github.com/repos/ansaryergesh/bliz/actions/secrets/FIREBASE_SERVICE_ACCOUNT_BLIZ_6AF36 201
+[debug] [2021-04-27T04:25:33.303Z] <<< [apiv2][body] PUT https://api.github.com/repos/ansaryergesh/bliz/actions/secrets/FIREBASE_SERVICE_ACCOUNT_BLIZ_6AF36 {}
+[info] +  Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_BLIZ_6AF36. 
+[info] i  You can manage your secrets at https://github.com/ansaryergesh/bliz/settings/secrets. 
+[info] 
+[info] 
+[info] +  Created workflow file C:\Users\Ansar\Desktop\bliz\front-bliz\.github/workflows/firebase-hosting-pull-request.yml 
+[info] 
+[info] i  Action required: Visit this URL to revoke authorization for the Firebase CLI GitHub OAuth App: 
+[info] https://github.com/settings/connections/applications/89cf50f02ac6aaed3484
+[info] i  Action required: Push any new workflow file(s) to your repo 
+[info] 
+=== Storage Setup
+[info] 
+[info] Firebase Storage Security Rules allow you to define how and when to allow
+[info] uploads and downloads. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[info] 
+=== Emulators Setup
+[info] i  firestore: downloading cloud-firestore-emulator-v1.11.14.jar... {"metadata":{"emulator":{"name":"firestore"},"message":"downloading cloud-firestore-emulator-v1.11.14.jar..."}}
+[debug] [2021-04-27T08:42:15.727Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-firestore-emulator-v1.11.14.jar 
+[debug] [2021-04-27T08:42:16.506Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-firestore-emulator-v1.11.14.jar 200
+[debug] [2021-04-27T08:42:16.506Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-firestore-emulator-v1.11.14.jar [stream]
+[info] i  database: downloading firebase-database-emulator-v4.7.2.jar... {"metadata":{"emulator":{"name":"database"},"message":"downloading firebase-database-emulator-v4.7.2.jar..."}}
+[debug] [2021-04-27T08:42:37.203Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.7.2.jar 
+[debug] [2021-04-27T08:42:38.378Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.7.2.jar 200
+[debug] [2021-04-27T08:42:38.378Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/firebase-database-emulator-v4.7.2.jar [stream]
+[info] i  pubsub: downloading pubsub-emulator-0.1.0.zip... {"metadata":{"emulator":{"name":"pubsub"},"message":"downloading pubsub-emulator-0.1.0.zip..."}}
+[debug] [2021-04-27T08:42:47.964Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/pubsub-emulator-0.1.0.zip 
+[debug] [2021-04-27T08:42:48.749Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/pubsub-emulator-0.1.0.zip 200
+[debug] [2021-04-27T08:42:48.750Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/pubsub-emulator-0.1.0.zip [stream]
+[info] i  ui: downloading ui-v1.4.2.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.4.2.zip..."}}
+[debug] [2021-04-27T08:43:00.956Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.4.2.zip 
+[info] 
+=== Remoteconfig Setup
+[debug] [2021-04-27T08:43:01.757Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.4.2.zip 200
+[debug] [2021-04-27T08:43:01.758Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.4.2.zip [stream]

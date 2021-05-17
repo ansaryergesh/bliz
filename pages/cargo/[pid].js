@@ -8,9 +8,13 @@ import PostAside from '../../components/post/PostAside'
 import {useDispatch} from 'react-redux'
 import cookie from 'js-cookie'
 import CheckBox from '../../components/shared/CheckBox'
+import firebase from '../../firebase'
 import {connect} from 'react-redux'
+import uuid from 'uuid'
 import { documents, extra, pogruzka } from '../../defaults/checkboxes/documents'
+import {saveToDatabase} from '../../fbdatabase/database'
 import PriceModal from '../../components/modalForRequest/priceModal'
+import MessageModal from '../../components/firebaseComponents/MessageModal'
 const mapStateToProps = ({usersReducer: {
   user
 }}) => ({user})
@@ -76,6 +80,29 @@ const CargoDetailed = ({user}) => {
       })
   },[])
 
+  const [currentChat,setCurrentChat] = useState(null)
+  // Send message after creating chat with two people
+  useEffect(() => {
+    console.log('first run')
+    if(currentChat !== null) {
+      const messageId = uuid()
+      saveToDatabase(`/chats/${currentChat}/messages/${messageId}`, {
+        body: message, sender: cookie.get('active_user'), created: new Date().toISOString(),
+      })
+    }
+  },[currentChat])
+
+  const sendMessageRequest = () => {
+    if(message !== '') {
+      const fullChatName = `post_id_${pid}`;
+      const recipient = postInfo.user.id;
+      const sender = cookie.get('active_user')
+      saveToDatabase(`/${recipient}/chats/${fullChatName}`, fullChatName)
+      saveToDatabase(`/${sender}/chats/${fullChatName}`, fullChatName)
+      saveToDatabase(`/chats/${fullChatName}/messages`, {})
+      setCurrentChat(fullChatName)
+    }
+  }
   
   const sendRequest = () => {
     axios.post(`https://test.money-men.kz/api/sendRequest`, {
@@ -99,6 +126,8 @@ const CargoDetailed = ({user}) => {
   const router = useRouter()
   const [steps,setSteps] = useState([])
   const [modal, setModal] = useState(false)
+  const [modalMessage,setModalMessage] = useState(false)
+  const [message,setMessage] = useState('')
   const [price, setPrice] = useState('1')
   const [currency, setCurrency] = useState('')
   const [actionLoading, setActionLoading] = useState(false)
@@ -282,7 +311,8 @@ const CargoDetailed = ({user}) => {
           </div>
         </section>
         <PriceModal actionLoading={actionLoading} modal={modal} setModal={setModal} price={price} setPrice={setPrice} currency={setCurrency} onSendRequest={sendRequest} />
-        <PostAside user ={user} sendRequest={setModal} postinfo={postInfo} />
+        <MessageModal  actionLoading={actionLoading} modal={modalMessage} setModal={setModalMessage} setMessage={setMessage} message={message} onSendRequest={sendMessageRequest} />
+        <PostAside user ={user} sendRequest={setModal} postinfo={postInfo} setModal={setModalMessage}/>
       </div>
 
     </div>

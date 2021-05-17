@@ -73,48 +73,6 @@ const Balance = () => {
             </div>
           </div>
         </div>
-        {/* <div className="balance__history">
-          <div className="products__title special_pads">
-            <h1>История счета</h1>
-          </div>
-          <div className="balance__history__container">
-            <div className="balance__history__title">
-              <div className="balance__history__title__inner">
-                <p>ДАТА</p>
-                <p>ОПЕРАЦИЯ</p>
-              </div>
-              <p>СУММА</p>
-            </div>
-            <div className="balance__history__item">
-              <div className="balance__history__item__inner">
-                <p>15.05.2020</p>
-                <h3>Пополение счета онлайн Paybox.kz</h3>
-              </div>
-              <h3 className="green">+ {balance} тг</h3>
-            </div>
-            <div className="balance__history__item">
-              <div className="balance__history__item__inner">
-                <p>10.05.2020</p>
-                <h3>Поднятие объявления в ТОП</h3>
-              </div>
-              <h3> {balance} тг</h3>
-            </div>
-            <div className="balance__history__item">
-              <div className="balance__history__item__inner">
-                <p>15.05.2020</p>
-                <h3>Пополение счета (счет для юр. лица)</h3>
-              </div>
-              <h3 className="green">{balance} тг</h3>
-            </div>
-            <div className="balance__history__item">
-              <div className="balance__history__item__inner">
-                <p>10.05.2020</p>
-                <h3>Поднятие объявления в ТОП</h3>
-              </div>
-              <h3> {balance} тг</h3>
-            </div>
-          </div>
-        </div> */}
       </div>
       <div className="aside"></div>
     </div>

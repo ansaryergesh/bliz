@@ -8,7 +8,7 @@ import Share from "../shared/ShareSocial";
 import {connect} from 'react-redux';
 import swal from "sweetalert";
 
-const PostAside = ({postinfo, sendRequest, user}) => {
+const PostAside = ({postinfo, sendRequest, user, setModal}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const {pid} = router.query
@@ -64,7 +64,7 @@ const PostAside = ({postinfo, sendRequest, user}) => {
       return (
         <>
           {!router.pathname.includes('storage') ? <a className="btn" onClick={sendRequest}>Отправить заявку</a> : ''}
-          <a className="btn" href="#">Написать сообщение</a>
+          <a onClick={() => setModal(true)} className="btn" href="#">Написать сообщение</a>
         </>
       )
  
