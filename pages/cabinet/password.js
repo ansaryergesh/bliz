@@ -23,7 +23,7 @@ class Password extends React.Component {
 	render() {
 		return(
 			<>
-				<CabinetNav activeLink='password'/>
+				<CabinetNav bin={this.props.usersReducer.user.companyDetails ? true : false} activeLink='password'/>
 				<div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">

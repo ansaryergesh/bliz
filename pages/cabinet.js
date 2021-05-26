@@ -18,6 +18,7 @@ const mapStateToProps = state => {
   }
 }
 
+
 const mapDispatchToProps =dispatch =>({
   successMessage:(msg)=>dispatch(msgaction.successMessage(msg)),
   errorMessage:(msg)=>dispatch(msgaction.errorMessage(msg)),
@@ -146,7 +147,8 @@ class Cabinet extends React.Component {
         {!this.state.loadMap ? <div>Загрузка...</div> : 
         
           <>
-	<CabinetNav  activeLink='index'/>
+	<CabinetNav bin={this.props.usersReducer.user.companyDetails ? true : false} activeLink='index'/>
+
 				<div className="grid-container container">
 					<div className="section">
 						<div className="products__title paddings">
