@@ -1,11 +1,24 @@
 import React from 'react'
-import {connect} from 'react-redux'
-
+import {connect, useDispatch} from 'react-redux'
+import cookie from 'js-cookie'
+import axios from 'axios'
 const mapStateToProps = ({usersReducer: {
   user
 }}) => ({user})
 
 const CompanySideInfo = ({user}) => {
+  const dispatch = useDispatch()
+  const getSubscription = () => {
+    axios.get(`${process.env.BASE_URL}/buySubscription?token=${cookie.get('token')}`)
+      .then(res=> {
+        console.log(res)
+        if(res.data.success) {
+          dispatch({type: 'SUCCESS_MESSAGE', payload: 'Вы брали подписку на объявление'})
+        }else {
+          dispatch({type: 'ERROR_MESSAGE', payload: 'У вас уже есть активная подписка'})
+        }
+      })
+  }
   const nameOfUser = () => user.companyDetails ? user.companyDetails[0].companyName : user.fullName
     return(
         <div className="aside">
@@ -38,6 +51,8 @@ const CompanySideInfo = ({user}) => {
             </div>
           </div>
           <a className="btn btn--white green" href="#">Пополнить баланс</a>
+          {!user.subscription && <a className="btn btn--white blue" onClick={() => getSubscription()} href="#">Взять подписку</a>}
+          {user.subscription && <a className='btn btn--white blue'>У вас доступно подписка до {user.end_subscription_date}</a>}
         </div>
       </div>
     )
