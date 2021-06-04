@@ -37,14 +37,14 @@ class CargoAdd extends React.Component {
       title: '',
       from: '',
       to: '',
-      volume: '22',
-      net: '86',
+      volume: '',
+      net: '',
       height: '',
       length: '',
       width: '',
       startDate: todaysDate(),
       endDate: todaysDate(),
-      price: '100',
+      price: '',
       priceType: 1,
       paymentType: 1,
       type_transport:1,
@@ -228,14 +228,14 @@ class CargoAdd extends React.Component {
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Откуда</p>
                         <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" ref={this.placeInputRef} name='from' type="text" placeholder="Алматы, Казахстан"/>
+                          <input className="post_ad__input" ref={this.placeInputRef} name='from' type="text" placeholder=''/>
                           <i className="fas fa-map-marker-alt"/>
                         </div>
                       </div>
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Куда</p>
                         <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" type="text" name='to' ref={this.placeInputRef2} placeholder="Шымкент, Казахстан"/>
+                          <input className="post_ad__input" type="text" name='to' ref={this.placeInputRef2} placeholder=''/>
                           <i className="fas fa-map-marker-alt"/>
                         </div>
                       </div>

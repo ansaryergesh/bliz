@@ -35,7 +35,7 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
                   <a href={`/cargo/${p.id}`}>{p.details ? p.details[0].from_string : 'Загрузка...'}
                     — {p.details ? p.details[0].to_string : 'Загрузка...'}
                     </a>
-                  <p>~{p.details ? p.details[0].distance : '...'} км, {p.details ? p.details[0].title : 'Загрузка'}</p>
+                  <p>~{p.details ? p.details[0].distance : '...'} , {p.details ? p.details[0].title : 'Загрузка'}</p>
                 </div>
                 <div className="product__item__title">
                   <h2>{p.sub_id} {p.title}</h2>

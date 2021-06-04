@@ -44,7 +44,7 @@ const Filter = ({
   },[])
 
   useEffect(() => {
-    if(!addressFrom.address_id && !addressTo.address_id) {
+    if(addressFrom.address_id || addressTo.address_id) {
       onSearch(
         addressFrom.address_id,
         addressTo.address_id,
@@ -107,13 +107,15 @@ const Filter = ({
     axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
       type_transport: id==='0' ? '' : id,
       from: addressFrom.address_id,
-      to: addressFrom.address_id,
+      to: addressTo.address_id,
       net_start: net.netStart,
       net_end: net.netEnd,
       volume_start: volume.volumeStart,
       volume_end: volume.volumeEnd
     }})
       .then(res=> {
+        console.log(res)
+        console.log(addressTo)
         setLoading(false);
         setPosts(res.data.data)
         setCurrentPage(res.data.pagination.page)
@@ -159,7 +161,7 @@ const Filter = ({
       // infowindow.close();
       let place = autocomplete.getPlace();
       setFromInput('')
-      // console.log(place)
+      console.log(place)
       setAddressFrom({address_string: place.formatted_address, address_id: place.place_id})
     });
 
@@ -168,6 +170,7 @@ const Filter = ({
     new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
       setToInput('')
       let place = autocomplete2.getPlace();
+      console.log(place)
       setAddressTo({address_string: place.formatted_address, address_id: place.place_id})
     });
   };
@@ -242,7 +245,7 @@ const Filter = ({
               </div>
             </div>
             <div className="main_filter__big__item">
-              <label>Площадь</label>
+              <label>Объем</label>
               <div className='main_filter__big__item_inputs'>
               <input type="number" value={volume.volumeStart} onChange={(e) => setVolume({volumeStart: e.target.value, volumeEnd: volume.volumeEnd})} placeholder=" от" />
               <p>-</p>

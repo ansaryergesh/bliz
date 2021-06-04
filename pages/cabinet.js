@@ -154,6 +154,7 @@ class Cabinet extends React.Component {
 						<div className="products__title paddings">
               <BreadCumbs />
 							<h1 className="smaller_font">Личная информация</h1>
+              {this.props.usersReducer.user.subscription && <p>Активная подписка до {this.props.usersReducer.user.end_subscription_date}</p>}
 						</div>
             <Avatar
               img={this.state.file}
