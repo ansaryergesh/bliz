@@ -85,7 +85,7 @@ class AddPost extends React.Component {
     const self = this;
     let viewport = '';
     let autocomplete =  new window.google.maps.places.Autocomplete(this.city.current,
-      { types: ['(cities)'], componentRestrictions: {country: ['kz', 'ru']}});
+      { types: ['(cities)'], componentRestrictions: {country: ["kz", "ru", 'kg','az','uz', 'am',]}});
     
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
@@ -266,11 +266,11 @@ class AddPost extends React.Component {
                   <div className="post_ad__storage__chars__items">
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Площадь, м2</p>
-                      <input type='number' name='area' className="post_ad__input" value={this.state.area} placeholder={640} onChange={this.handleChange} />
+                      <input type='number' name='area' className="post_ad__input" value={this.state.area} onChange={this.handleChange} />
                     </div>
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Общ. площадь, м2</p>
-                      <input name='totalArea' className="post_ad__input" type="number" value={this.state.totalArea} placeholder="45 000"  onChange={this.handleChange}  />
+                      <input name='totalArea' className="post_ad__input" type="number" value={this.state.totalArea} onChange={this.handleChange}  />
                     </div>  
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Класс</p>
@@ -289,13 +289,13 @@ class AddPost extends React.Component {
                   <div className="post_ad__storage__chars__items">
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Год постройки, г</p>
-                      <input name='year' className="post_ad__input" type="number" value={this.state.year} onChange={this.handleChange} placeholder={2004} />
+                      <input name='year' className="post_ad__input" type="number" value={this.state.year} onChange={this.handleChange}  />
                     </div>
                     
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Город/Регион</p>
                       <div className="post_ad__storage__chars__item__input">
-                        <input name='city_id' ref={this.city} className="post_ad__input" type="text" placeholder="Казахстан, Алматы" />
+                        <input name='city_id' ref={this.city} className="post_ad__input" type="text" placeholder=" " />
                         <i className="fas fa-map-marker-alt" />
                       </div>
                     </div>
@@ -304,7 +304,7 @@ class AddPost extends React.Component {
                   <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Адрес</p>
                       <div className="post_ad__storage__chars__item__input">
-                        <input name='address' disabled={this.state.place.place_id != '' ? false : true}ref={this.street} className="post_ad__input" type="text" placeholder="ул. Розыбакиева 17А, Алматы, Казахстан" />
+                        <input name='address' disabled={this.state.place.place_id != '' ? false : true}ref={this.street} className="post_ad__input" type="text" placeholder=" " />
                         <i className="fas fa-map-marker-alt" />
                       </div>
                     </div>
@@ -318,11 +318,11 @@ class AddPost extends React.Component {
                     </div>
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Паркинг, груз. авто</p>
-                      <input name='parking_cargo' onChange={this.handleChange} value={this.state.parking_cargo} className="post_ad__input" type="text" placeholder="30 мест" />
+                      <input name='parking_cargo' onChange={this.handleChange} value={this.state.parking_cargo} className="post_ad__input" type="text" placeholder="" />
                     </div>
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Паркинг, легк. авто</p>
-                      <input name='parking_car' onChange={this.handleChange} value={this.state.parking_car} className="post_ad__input" type="text" placeholder="60 мест" />
+                      <input name='parking_car' onChange={this.handleChange} value={this.state.parking_car} className="post_ad__input" type="text" placeholder="" />
                     </div>
                   </div>
                   <div className="post_ad__storage__chars__items">
@@ -334,7 +334,7 @@ class AddPost extends React.Component {
                     </div>
                     <div className="post_ad__storage__chars__item">
                       <p className="post_ad__par">Нагрузка на пол</p>
-                      <input name='floor_load' onChange={this.handleChange} value={this.state.floor_load} className="post_ad__input" type="text" placeholder="Нагрузка на пол" />
+                      <input name='floor_load' onChange={this.handleChange} value={this.state.floor_load} className="post_ad__input" type="text" placeholder="" />
                     </div>
                     <div className="post_ad__storage__chars__item margin">
                       <p className="post_ad__par">Стеллажи</p>

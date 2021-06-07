@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch) =>({
 const DateMask = ({ field, form, ...props }) => <InputMask
   className='post_ad__input'
   mask="99.99.9999"
+  // maskChar={null}
   onChange={props.onChange}
   name='dateAuction'
   value={props.value}
@@ -32,6 +33,7 @@ const DateMask = ({ field, form, ...props }) => <InputMask
 const TimeMask = ({ field, form, ...props }) => <InputMask
   mask="99:99"
   className=''
+  // maskChar={null}
   maskPlaceholder='Время'
   name='timeAuction'
   className="post_ad__input"
@@ -100,9 +102,9 @@ class AuctionAdd extends React.Component {
   initPlaceAPI() {
     const self = this;
     let autocomplete =  new window.google.maps.places.Autocomplete(this.placeInputRef.current,
-      { types: ['(cities)'], componentRestrictions: {country: ['kz', 'ru']}});
+      { types: ['(cities)'], componentRestrictions: {country: ["kz", "ru", 'kg','az','uz', 'am',]}});
     let autocomplete2 =  new window.google.maps.places.Autocomplete(this.placeInputRef2.current,
-      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru"] } });
+      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
       console.log(place)
@@ -295,14 +297,14 @@ class AuctionAdd extends React.Component {
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Откуда</p>
                         <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" ref={this.placeInputRef} name='from' type="text" placeholder="Алматы, Казахстан"/>
+                          <input className="post_ad__input" ref={this.placeInputRef} name='from' type="text" placeholder=""/>
                           <i className="fas fa-map-marker-alt"/>
                         </div>
                       </div>
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Куда</p>
                         <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" type="text" name='to' ref={this.placeInputRef2} placeholder="Шымкент, Казахстан"/>
+                          <input className="post_ad__input" type="text" name='to' ref={this.placeInputRef2} placeholder=""/>
                           <i className="fas fa-map-marker-alt"/>
                         </div>
                       </div>

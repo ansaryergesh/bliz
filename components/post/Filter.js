@@ -154,7 +154,7 @@ const Filter = ({
   }
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(fromRef.current,
-      { types: ["(cities)"], componentRestrictions: { country: ['kz'] } });
+      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
 
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       
@@ -166,7 +166,7 @@ const Filter = ({
     });
 
     let autocomplete2 = new window.google.maps.places.Autocomplete(toRef.current,
-      { types: ["(cities)"], componentRestrictions: { country: ['kz'] } });
+      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
     new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
       setToInput('')
       let place = autocomplete2.getPlace();

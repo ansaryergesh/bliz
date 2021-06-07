@@ -85,9 +85,9 @@ const GPlace = () => {
   // initialize the google place autocomplete
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(placeInputRef.current,
-      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
+      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
     let autocomplete2 = new window.google.maps.places.Autocomplete(placeInputRef2.current,
-      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru"] } });
+      { types: ["(regions)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
       console.log(place)

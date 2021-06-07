@@ -119,9 +119,9 @@ class CargoTransportEdit extends React.Component {
   initPlaceAPI() {
     const self = this;
     let autocomplete =  new window.google.maps.places.Autocomplete(this.placeInputRef.current,
-      { types: ['(cities)'], componentRestrictions: {country: ['kz', 'ru']}});
+      { types: ['(cities)'], componentRestrictions: {country: ["kz", "ru", 'kg','az','uz', 'am',]}});
     let autocomplete2 =  new window.google.maps.places.Autocomplete(this.placeInputRef2.current,
-      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru"] } });
+      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
       console.log(place)

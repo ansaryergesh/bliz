@@ -19,10 +19,10 @@ const Check = () => {
             <h3>Выберите страну</h3>
             <select onChange={(e) => setCountry(e.target.value)} className="check_company_select">
             <option value='1'>Казахстан</option>
-              <option value='2'>Украина</option>
+              {/* <option value='2'>Украина</option>
               
               <option value='3'>Россия</option>
-              <option value='4'>Узбекистан</option>
+              <option value='4'>Узбекистан</option> */}
             </select>
           </div>
           <a className="btn" href="#">ПОКАЗАТЬ</a>
