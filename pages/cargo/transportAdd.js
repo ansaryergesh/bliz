@@ -232,14 +232,14 @@ class CargoAdd extends React.Component {
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Откуда</p>
                         <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" ref={this.placeInputRef} name='from' type="text" placeholder="Алматы, Казахстан"/>
+                          <input className="post_ad__input" ref={this.placeInputRef} name='from' type="text" placeholder=""/>
                           <i className="fas fa-map-marker-alt"/>
                         </div>
                       </div>
                       <div className="post_ad__adress__item">
                         <p className="post_ad__par">Куда</p>
                         <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" type="text" name='to' ref={this.placeInputRef2} placeholder="Шымкент, Казахстан"/>
+                          <input className="post_ad__input" type="text" name='to' ref={this.placeInputRef2} placeholder=""/>
                           <i className="fas fa-map-marker-alt"/>
                         </div>
                       </div>
@@ -248,14 +248,14 @@ class CargoAdd extends React.Component {
                          
                           <p className="post_ad__par">Дата погрузки</p>
                           <div className="post_ad__adress__item__input">
-                            <input className="post_ad__input" type="date" value={this.state.startDate}  name='startDate' onChange={this.handleChange} placeholder="28.04.2020"/>
+                            <input className="post_ad__input" type="date" value={this.state.startDate}  name='startDate' onChange={this.handleChange} placeholder=""/>
                           
                           </div>
                         </div>
                         <div className="post_ad__adress__item">
                           <p className="post_ad__par">Дата выгрузки</p>
                           <div className="post_ad__adress__item__input">
-                            <input className="post_ad__input" type="date" value={this.state.endDate} name='endDate' onChange={this.handleChange} placeholder="28.04.2020"/>
+                            <input className="post_ad__input" type="date" value={this.state.endDate} name='endDate' onChange={this.handleChange} placeholder=""/>
                         
                           </div>
                         </div>
@@ -279,16 +279,16 @@ class CargoAdd extends React.Component {
                     <div className="post_ad__chars__items">
                       <div className="post_ad__chars__item">
                         <p className="post_ad__par">Характер транспорта</p>
-                        <input className="post_ad__input" type="text" placeholder="Овощи и фрукты"/>
+                        <input className="post_ad__input" type="text" placeholder=""/>
                       </div>
                       <div className="post_ad__chars__items__inputs">
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Вес транспорта, тн</p>
-                          <input className="post_ad__input" type="text" value={this.state.net} name='net' onChange={this.handleChange}placeholder="22 тн"/>
+                          <input className="post_ad__input" type="text" value={this.state.net} name='net' onChange={this.handleChange}placeholder=""/>
                         </div>
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Объем транспорта, м³</p>
-                          <input className="post_ad__input" value={this.state.volume} name='volume' onChange={this.handleChange} type="text" placeholder="86 м³"/>
+                          <input className="post_ad__input" value={this.state.volume} name='volume' onChange={this.handleChange} type="text" placeholder=""/>
                         </div>
                       </div>
                     </div>
@@ -323,7 +323,7 @@ class CargoAdd extends React.Component {
                   <div className="post_ad__price__inputs">
                     <div className="post_ad__price__item">
                       <p className="post_ad__par">Цена</p>
-                      <input className="post_ad__input" value={this.state.price} name='price' onChange={this.handleChange} type="text" placeholder="150 680"/>
+                      <input className="post_ad__input" value={this.state.price} name='price' onChange={this.handleChange} type="text" placeholder=""/>
                     </div>
                     <div className="post_ad__price__item">
                       <p className="post_ad__par">Валюта</p>

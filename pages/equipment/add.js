@@ -255,11 +255,11 @@ class EquipmentAdd extends React.Component  {
                         <div className="post_ad__equipment__chars__item">
                           
                           <p className="post_ad__par">Город</p>
-                          <input name='city_id' ref={this.city} className="post_ad__input" type="text" placeholder="Казахстан, Алматы" />
+                          <input name='city_id' ref={this.city} className="post_ad__input" type="text" placeholder="" />
                         </div>
                         <div className="post_ad__equipment__chars__item">
                           <p className="post_ad__par">Район</p>
-                          <input name='address' disabled={this.state.place.place_id != '' ? false : true}ref={this.street} className="post_ad__input" type="text" placeholder="ул. Розыбакиева 17А, Алматы, Казахстан" />
+                          <input name='address' disabled={this.state.place.place_id != '' ? false : true}ref={this.street} className="post_ad__input" type="text" placeholder="" />
                         </div>
                       </div>
                     </div>
@@ -269,11 +269,11 @@ class EquipmentAdd extends React.Component  {
                       <div className="post_ad__equipment__chars__details1">
                         <div className="post_ad__equipment__chars__item">
                           <p className="post_ad__par">Масса, тн</p>
-                          <input name='net' value={this.state.net} onChange={this.handleChange} className="post_ad__input" type="text" placeholder={18}/>
+                          <input name='net' value={this.state.net} onChange={this.handleChange} className="post_ad__input" type="text" placeholder=""/>
                         </div>
                         <div className="post_ad__equipment__chars__item">
                           <p className="post_ad__par">Год выпуска</p>
-                          <input name='year' onChange={this.handleChange} value={this.state.year} className="post_ad__input" type="text" placeholder={2008}/>
+                          <input name='year' onChange={this.handleChange} value={this.state.year} className="post_ad__input" type="text" placeholder=""/>
                         </div>
                         <div className="post_ad__equipment__chars__item">
                           <p className="post_ad__par">Тип отвала</p>
@@ -284,7 +284,7 @@ class EquipmentAdd extends React.Component  {
                         <div className="post_ad__equipment__chars__item">
                           <p className="post_ad__par">Мощн. двигателя, кВт
                           </p>
-                          <input name='power' value={this.state.power} onChange={this.handleChange} className="post_ad__input" type="text" placeholder={3200}/>
+                          <input name='power' value={this.state.power} onChange={this.handleChange} className="post_ad__input" type="text" placeholder=""/>
                         </div>
                       </div>
                       <div className="post_ad__equipment__chars__details2">
@@ -324,7 +324,7 @@ class EquipmentAdd extends React.Component  {
                     <div className="post_ad__equipment__price__wrapper">
                       <div className="post_ad__equipment__chars__item">
                         <p className="post_ad__par">Цена</p>
-                        <input name='price' value={this.state.price} onChange={this.handleChange} className="post_ad__input" type="text" placeholder="150 680"/>
+                        <input name='price' value={this.state.price} onChange={this.handleChange} className="post_ad__input" type="text" placeholder=""/>
                       </div>
                       <div className="post_ad__equipment__chars__item">
                         <p className="post_ad__par">Валюта</p>
