@@ -10,6 +10,8 @@ import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
 import CompanyOnAddInfo from '../../components/company/CompanyOnAddInfo'
 import Router from 'next/router'
+import { trtypes } from '../../defaults/transportType'
+import { deleteFalseKey } from '../../defaults/extraFunctions'
 const mapDispatchToProps = (dispatch) =>({
   successMessage: (msg) => {dispatch(successMessage(msg))},
   errorMessage: (msg) => {dispatch(errorMessage(msg))},
@@ -55,6 +57,8 @@ class CargoAdd extends React.Component {
       width: '',
       height:'',
       length: '',
+      subTypes: new Map(),
+      subTypeLists: trtypes.filter(f=>f.id === 1)[0],
 
     };
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -138,6 +142,11 @@ class CargoAdd extends React.Component {
     this.setState({
       [name]: value
     });
+    if(name === 'type_transport') {
+      this.setState({
+        subTypeLists: trtypes.filter(f=>f.id === parseInt(value))[0], subTypes: new Map()
+      })
+    }
   }
   handleCheckBox(e) {
     const item = e.target.value;
@@ -156,7 +165,9 @@ class CargoAdd extends React.Component {
     if(extra.some(c=>c.name===e.target.name)) {
       this.setState(prevState=>({extra: prevState.extra.set(item,isChecked)}))
     }
-    
+    if(this.state.subTypeLists.date.some(c=>c.name === e.target.name)) {
+      this.setState(prevState=>({subTypes: prevState.subTypes.set(item, isChecked)}))
+    }
   }
 
   handleSubmit(e) {
@@ -168,7 +179,8 @@ class CargoAdd extends React.Component {
       }
     })
     var ks = Array.from(docVals.keys()).join(",");
-    axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=${ks}`, {params: {
+    var subTps = deleteFalseKey(this.state.subTypes)
+    axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=${ks}&type_sub_transport[]=${subTps}`, {params: {
       token: cookie.get('token'),
       category_id: 2,
       sub_id: 1,
@@ -190,7 +202,7 @@ class CargoAdd extends React.Component {
       height: this.state.height,
       quantity: this.state.quantity,
       length: this.state.length,
-      width: this.state.width
+      width: this.state.width,
     }})
       .then(res => {
         if(res.data.success) {
@@ -381,6 +393,11 @@ class CargoAdd extends React.Component {
                   </div>
                   <div className="post_ad__aditional__checkbox__wrapper">
                     <div className="post_ad__aditional__checkbox__items">
+                    <h3>Суб типы:</h3>
+                    {/* <p>{this.state.docs.get(2)} +++ </p> */}
+                      {this.state.subTypeLists.date && this.state.subTypeLists.date.map(s => (
+                        <CheckBox name={s.name} value={s.sub_id} checked={this.state.subTypes.get(s.sub_id.toString())} handleCheckBox={this.handleCheckBox} />
+                      ))}
                       <h3>Документы</h3>
                       {documents.map(doc => (
                         <CheckBox name={doc.name} value={doc.value} checked={this.state.docs.get(doc.value)} handleCheckBox={this.handleCheckBox} />
