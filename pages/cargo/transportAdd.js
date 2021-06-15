@@ -57,7 +57,7 @@ class CargoAdd extends React.Component {
       width: '',
       height:'',
       length: '',
-      subTypes: new Map(),
+      subType: '1',
       subTypeLists: trtypes.filter(f=>f.id === 1)[0],
 
     };
@@ -144,7 +144,7 @@ class CargoAdd extends React.Component {
     });
     if(name === 'type_transport') {
       this.setState({
-        subTypeLists: trtypes.filter(f=>f.id === parseInt(value))[0], subTypes: new Map()
+        subTypeLists: trtypes.filter(f=>f.id === parseInt(value))[0], subType: '1'
       })
     }
   }
@@ -165,9 +165,7 @@ class CargoAdd extends React.Component {
     if(extra.some(c=>c.name===e.target.name)) {
       this.setState(prevState=>({extra: prevState.extra.set(item,isChecked)}))
     }
-    if(this.state.subTypeLists.date.some(c=>c.name === e.target.name)) {
-      this.setState(prevState=>({subTypes: prevState.subTypes.set(item, isChecked)}))
-    }
+ 
   }
 
   handleSubmit(e) {
@@ -179,8 +177,7 @@ class CargoAdd extends React.Component {
       }
     })
     var ks = Array.from(docVals.keys()).join(",");
-    var subTps = deleteFalseKey(this.state.subTypes)
-    axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=${ks}&type_sub_transport[]=${subTps}`, {params: {
+    axios.get(`${process.env.BASE_URL}/newAddPost?documents[]=${ks}&type_sub_transport[]=${this.state.subType}`, {params: {
       token: cookie.get('token'),
       category_id: 2,
       sub_id: 1,
@@ -314,11 +311,23 @@ class CargoAdd extends React.Component {
                             ))}
                           </select>
                         </div>
-                        <div className="post_ad__chars__item">
+                        <div className="post_ad__price__item">
+                      <p className="post_ad__par">Суб типы</p>
+                     
+                        <select className="post_ad__input" value={this.state.subType} name='subType' onChange={this.handleChange}>
+                          {this.state.subTypeLists.date.map(p => (
+                            <option value={p.sub_id}>{p.name}</option>
+                          ))}
+                         </select>
+                   
+                    
+                    </div>
+                        
+                      </div>
+                      <div className="post_ad__chars__item">
                           <p className="post_ad__par">Кол-во</p>
                           <input type='number' name='quantity' value={this.state.quantity} onChange={this.handleChange}/>
                         </div>
-                      </div>
                       <div className="post_ad__chars__items__inputs__container">
                         <p className="post_ad__par">Размер транспорта, м</p>
                         <div className="post_ad__chars__items__inputs__wrapper">
@@ -326,6 +335,7 @@ class CargoAdd extends React.Component {
                           <input className="post_ad__input" value={this.state.length} name='length' type="text" onChange={this.handleChange} placeholder="Длина, м"/>
                           <input className="post_ad__input" value={this.state.height} name='height' type="text" onChange={this.handleChange} placeholder="Высота, м"/>
                         </div>
+                       
                       </div>
                     </div>
                   </div>
@@ -393,11 +403,6 @@ class CargoAdd extends React.Component {
                   </div>
                   <div className="post_ad__aditional__checkbox__wrapper">
                     <div className="post_ad__aditional__checkbox__items">
-                    <h3>Суб типы:</h3>
-                    {/* <p>{this.state.docs.get(2)} +++ </p> */}
-                      {this.state.subTypeLists.date && this.state.subTypeLists.date.map(s => (
-                        <CheckBox name={s.name} value={s.sub_id} checked={this.state.subTypes.get(s.sub_id.toString())} handleCheckBox={this.handleCheckBox} />
-                      ))}
                       <h3>Документы</h3>
                       {documents.map(doc => (
                         <CheckBox name={doc.name} value={doc.value} checked={this.state.docs.get(doc.value)} handleCheckBox={this.handleCheckBox} />
