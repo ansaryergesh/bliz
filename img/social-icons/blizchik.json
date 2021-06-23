@@ -1,0 +1,2245 @@
+{
+	"info": {
+		"_postman_id": "78dded26-f6a2-47fc-979a-50d8336df119",
+		"name": "bliz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullName",
+									"value": "mukhan77",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mukhan@i-credit.kz",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "77071656497",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "companyName",
+									"value": "I-Credit",
+									"type": "text"
+								},
+								{
+									"key": "companyType",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "bin",
+									"value": "070440003902",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://test.money-men.kz/api/entityRegistration",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"entityRegistration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://test.money-men.kz/api/login",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://test.money-men.kz/api/country",
+							"protocol": "http",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"country"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get city by countryID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://test.money-men.kz/api/city?countryID=1",
+							"protocol": "http",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"city"
+							],
+							"query": [
+								{
+									"key": "countryID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Регистрация для юр лиц",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone",
+									"value": "77771234567",
+									"type": "text"
+								},
+								{
+									"key": "fullName",
+									"value": "testASd",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "rers@asd.zcx",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "companyName",
+									"value": "Оясчясч",
+									"type": "text"
+								},
+								{
+									"key": "companyType",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "bin",
+									"value": "001023123132132",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://test.money-men.kz/api/entityRegistration",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"entityRegistration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить тип компании",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getCompanyTypes",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getCompanyTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить профиля",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getProfile?token=6ae01c7842e70871cc6dfca1dd687cef8fc7eee9",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getProfile"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "6ae01c7842e70871cc6dfca1dd687cef8fc7eee9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить профиль",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/updateProfile?token=62316a5065edb95b1abbc7bfc813835b0d6822e0&name=test&secondName=test&email=test@test.com&phone=77471656497&birthDay=08.09.1997&country_id=1&city=1&city_string=google data&address=Аузова 112",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"updateProfile"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "62316a5065edb95b1abbc7bfc813835b0d6822e0"
+								},
+								{
+									"key": "name",
+									"value": "test"
+								},
+								{
+									"key": "secondName",
+									"value": "test"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com"
+								},
+								{
+									"key": "phone",
+									"value": "77471656497"
+								},
+								{
+									"key": "birthDay",
+									"value": "08.09.1997"
+								},
+								{
+									"key": "country_id",
+									"value": "1"
+								},
+								{
+									"key": "city",
+									"value": "1"
+								},
+								{
+									"key": "city_string",
+									"value": "google data"
+								},
+								{
+									"key": "address",
+									"value": "Аузова 112"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Получить документы",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/postDocuments",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"postDocuments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Получить документы",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://test.money-men.kz/api/postDocuments",
+									"protocol": "https",
+									"host": [
+										"test",
+										"money-men",
+										"kz"
+									],
+									"path": [
+										"api",
+										"postDocuments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Feb 2021 20:51:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15768000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PleskLin"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"CMR\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"TIR\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"T1\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"T2\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"EKMT\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Санпаспорт\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Санкнижка\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Тамож. свидельство\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Тамож. контроль\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Получить погрузки",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/postLoading",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"postLoading"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Получить погрузки",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://test.money-men.kz/api/postLoading",
+									"protocol": "https",
+									"host": [
+										"test",
+										"money-men",
+										"kz"
+									],
+									"path": [
+										"api",
+										"postLoading"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Feb 2021 20:52:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "expires",
+									"value": "-1"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15768000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PleskLin"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Задняя\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Боковая\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Верхная\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Растентовка\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Обрешетка\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Пневмоход\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Гидроборт\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Пирамида\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Пломба\"\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Любая\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Получить условии",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/postCondition",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"postCondition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить доп условии",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/postAddition",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"postAddition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить валюты",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getCurrency",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getCurrency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить способ оплаты",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getPaymentType",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getPaymentType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить пост",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/newAddPost?token=23284572cc23dbada8c29177fbcbefdaf61e212d&category_id=1&sub_id=1&title=Овощи&from=1&to=2&volume=20&net=22&start_date=09.02.2021&end_date=18.02.2021&documents[]=1,2,3&price=159900&price_type=1&payment_type=1&type_transport=1",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"newAddPost"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "23284572cc23dbada8c29177fbcbefdaf61e212d"
+								},
+								{
+									"key": "category_id",
+									"value": "1"
+								},
+								{
+									"key": "sub_id",
+									"value": "1"
+								},
+								{
+									"key": "title",
+									"value": "Овощи"
+								},
+								{
+									"key": "from",
+									"value": "1"
+								},
+								{
+									"key": "to",
+									"value": "2"
+								},
+								{
+									"key": "volume",
+									"value": "20"
+								},
+								{
+									"key": "net",
+									"value": "22"
+								},
+								{
+									"key": "start_date",
+									"value": "09.02.2021"
+								},
+								{
+									"key": "end_date",
+									"value": "18.02.2021"
+								},
+								{
+									"key": "documents[]",
+									"value": "1,2,3"
+								},
+								{
+									"key": "price",
+									"value": "159900"
+								},
+								{
+									"key": "price_type",
+									"value": "1"
+								},
+								{
+									"key": "payment_type",
+									"value": "1"
+								},
+								{
+									"key": "type_transport",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить объявление",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/newGetPost?category_id=1",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"newGetPost"
+							],
+							"query": [
+								{
+									"key": "category_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить посты по айди",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getPostByID/1",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getPostByID",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование объявление",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/newAddPost?token=23284572cc23dbada8c29177fbcbefdaf61e212d&title=Овощи&from=1&to=2&volume=20&net=22&start_date=09.02.2021&end_date=18.02.2021&price=159900&price_type=1&payment_type=1&type_transport=1&documents[]=1,2,3&loading[]=1,2,3,4&condition[]=1&addition[]=1&from_string&to_string&duration&distance",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"newAddPost"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "23284572cc23dbada8c29177fbcbefdaf61e212d"
+								},
+								{
+									"key": "title",
+									"value": "Овощи"
+								},
+								{
+									"key": "from",
+									"value": "1"
+								},
+								{
+									"key": "to",
+									"value": "2"
+								},
+								{
+									"key": "volume",
+									"value": "20"
+								},
+								{
+									"key": "net",
+									"value": "22"
+								},
+								{
+									"key": "start_date",
+									"value": "09.02.2021"
+								},
+								{
+									"key": "end_date",
+									"value": "18.02.2021"
+								},
+								{
+									"key": "price",
+									"value": "159900"
+								},
+								{
+									"key": "price_type",
+									"value": "1"
+								},
+								{
+									"key": "payment_type",
+									"value": "1"
+								},
+								{
+									"key": "type_transport",
+									"value": "1"
+								},
+								{
+									"key": "documents[]",
+									"value": "1,2,3"
+								},
+								{
+									"key": "loading[]",
+									"value": "1,2,3,4"
+								},
+								{
+									"key": "condition[]",
+									"value": "1"
+								},
+								{
+									"key": "addition[]",
+									"value": "1"
+								},
+								{
+									"key": "from_string",
+									"value": null
+								},
+								{
+									"key": "to_string",
+									"value": null
+								},
+								{
+									"key": "duration",
+									"value": null
+								},
+								{
+									"key": "distance",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Склад",
+			"item": [
+				{
+					"name": "Получить систему пожаротушения",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getFireSystem",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getFireSystem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить систему вентиляции",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getVentilation",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getVentilation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить склад",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "a299290ea284863c89338c39ad35624a02529bba",
+									"description": "токен пользователя",
+									"type": "text"
+								},
+								{
+									"key": "area",
+									"value": "45",
+									"description": "площадь",
+									"type": "text"
+								},
+								{
+									"key": "totalArea",
+									"value": "640",
+									"description": "общая площадь",
+									"type": "text"
+								},
+								{
+									"key": "image[]",
+									"description": "Изображение",
+									"type": "file",
+									"src": [
+										"/C:/Users/mukha/Desktop/attestat_1.jpg",
+										"/C:/Users/mukha/Desktop/attestat_2.jpg",
+										"/C:/Users/mukha/Desktop/attestat_3.jpg",
+										"/C:/Users/mukha/Desktop/attestat_4.jpg"
+									]
+								},
+								{
+									"key": "class",
+									"value": "A",
+									"description": "Класс склада",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Сухой",
+									"description": "Тип склада",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "1957",
+									"description": "Год постройки",
+									"type": "text"
+								},
+								{
+									"key": "city_id",
+									"value": "1",
+									"description": "Айди города",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "Розыбакиева 17",
+									"description": "Адрес склада",
+									"type": "text"
+								},
+								{
+									"key": "floor",
+									"value": "1",
+									"description": "Этажность",
+									"type": "text"
+								},
+								{
+									"key": "parking_car",
+									"value": "30",
+									"description": "Место для парковки легкый транспорт",
+									"type": "text"
+								},
+								{
+									"key": "parking_cargo",
+									"value": "60",
+									"description": "Парковка для грузовика",
+									"type": "text"
+								},
+								{
+									"key": "floor_type",
+									"value": "Бетонный",
+									"description": "Тип пола",
+									"type": "text"
+								},
+								{
+									"key": "floor_load",
+									"value": "test",
+									"description": "Нагрузка на пол",
+									"type": "text"
+								},
+								{
+									"key": "fire_system[]",
+									"value": "1,2,3",
+									"description": "Система пожаротушения",
+									"type": "text"
+								},
+								{
+									"key": "ventilation[]",
+									"value": "1",
+									"description": "Система вентиляции",
+									"type": "text"
+								},
+								{
+									"key": "fire_alarm",
+									"value": "1",
+									"description": "Пожарная сигнализация 1-есть,0-нет ",
+									"type": "text"
+								},
+								{
+									"key": "security_alarm",
+									"value": "0",
+									"description": "Охранная сигнализация",
+									"type": "text"
+								},
+								{
+									"key": "storage_transport_area",
+									"value": "0",
+									"description": "Площадка для отстоя ",
+									"type": "text"
+								},
+								{
+									"key": "inline_block",
+									"value": "0",
+									"description": "Встроенные блоки",
+									"type": "text"
+								},
+								{
+									"key": "infrastructure",
+									"value": "Простой склад",
+									"description": "Инфраструктура",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "150000",
+									"description": "Цена",
+									"type": "text"
+								},
+								{
+									"key": "price_type",
+									"value": "3",
+									"description": "Тип цены: за месяц, за год и т.д",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "1",
+									"description": "Валюта",
+									"type": "text"
+								},
+								{
+									"key": "rack",
+									"value": "0",
+									"description": "Стеллажи",
+									"type": "text"
+								},
+								{
+									"key": "ramp",
+									"value": "0",
+									"description": "Пандус",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://test.money-men.kz/api/addStorage",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"addStorage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Спец техника",
+			"item": [
+				{
+					"name": "Получить категории спецтехники",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getEquipmentCategory",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getEquipmentCategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить тип аренды техники",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getEquipmentRent",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getEquipmentRent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить тип спецтехники",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getEquipmentType",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getEquipmentType"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить спецтехнику",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "caf518bbfdbbb5b76d2c22ea776c5ee69b7cfc1e",
+									"description": "Токен пользователя",
+									"type": "text"
+								},
+								{
+									"key": "type_equipment",
+									"value": "1",
+									"description": "Тип спецтехники",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"description": "Тип категории",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "JBC 5010K",
+									"description": "Модель техники",
+									"type": "text"
+								},
+								{
+									"key": "city_id",
+									"value": "ChIJq8vFFn1ugzgRdm2YrY9mRD0",
+									"description": "Данные из гугла",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "ChIJu4FmVFbyqDgRmzZb54K1Z6E",
+									"type": "text"
+								},
+								{
+									"key": "net",
+									"value": "5",
+									"description": "Масса техники",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2012",
+									"description": "Год выпуска",
+									"type": "text"
+								},
+								{
+									"key": "type_blade",
+									"value": "1",
+									"description": "Тип отвала",
+									"type": "text"
+								},
+								{
+									"key": "power",
+									"value": "3200",
+									"description": "Мощность",
+									"type": "text"
+								},
+								{
+									"key": "height",
+									"value": "5",
+									"description": "Высота отвата",
+									"type": "text"
+								},
+								{
+									"key": "width",
+									"value": "1",
+									"description": "Ширина отвата",
+									"type": "text"
+								},
+								{
+									"key": "rise",
+									"value": "3",
+									"description": "Подъем отвата",
+									"type": "text"
+								},
+								{
+									"key": "deep",
+									"value": "32",
+									"description": "Заглубление",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Для мелких работ",
+									"description": "Описание",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "150000",
+									"description": "Цена",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "1",
+									"description": "Валюта",
+									"type": "text"
+								},
+								{
+									"key": "equipment_rent",
+									"value": "1",
+									"description": "Тип аренды",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": [
+										"/C:/Users/mukha/Desktop/1222.png",
+										"/C:/Users/mukha/Desktop/123.png"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "https://test.money-men.kz/api/addEquipment",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"addEquipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить все спецтехники",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getAllEquipment?category_id=3&page=1",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getAllEquipment"
+							],
+							"query": [
+								{
+									"key": "category_id",
+									"value": "3"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Аукцион",
+			"item": [
+				{
+					"name": "Добавить аукцион",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "a3e0207cc10a08280915d1f16f09691e7c072648",
+									"description": "токен пользователья",
+									"type": "text"
+								},
+								{
+									"key": "date_finish",
+									"value": "28.02.2021 18:30",
+									"description": "дата окончание аукциона",
+									"type": "text"
+								},
+								{
+									"key": "from_city",
+									"value": "ChIJq8vFFn1ugzgRdm2YrY9mRD0",
+									"description": "откуда",
+									"type": "text"
+								},
+								{
+									"key": "to_city",
+									"value": "ChIJu4FmVFbyqDgRmzZb54K1Z6E",
+									"description": "куда",
+									"type": "text"
+								},
+								{
+									"key": "date_start",
+									"value": "01.03.2021",
+									"description": "дата погрузки",
+									"type": "text"
+								},
+								{
+									"key": "date_end",
+									"value": "05.03.2021",
+									"description": "дата выгрузки",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Овощи",
+									"description": "характер груза",
+									"type": "text"
+								},
+								{
+									"key": "type_transport",
+									"value": "1",
+									"description": "тип транспорта",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "100",
+									"description": "количество",
+									"type": "text"
+								},
+								{
+									"key": "volume",
+									"value": "20",
+									"description": "объем",
+									"type": "text"
+								},
+								{
+									"key": "net",
+									"value": "80",
+									"description": "масса",
+									"type": "text"
+								},
+								{
+									"key": "width",
+									"value": "5",
+									"description": "ширина",
+									"type": "text"
+								},
+								{
+									"key": "height",
+									"value": "4",
+									"description": "высота",
+									"type": "text"
+								},
+								{
+									"key": "length",
+									"value": "3",
+									"description": "длина",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100000",
+									"description": "цена",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "1",
+									"description": "валюта",
+									"type": "text"
+								},
+								{
+									"key": "payment_type",
+									"value": "1",
+									"description": "тип оплаты",
+									"type": "text"
+								},
+								{
+									"key": "documents[]",
+									"value": "1",
+									"description": "документы",
+									"type": "text"
+								},
+								{
+									"key": "loading[]",
+									"value": "1,2,3",
+									"description": "погрузка",
+									"type": "text"
+								},
+								{
+									"key": "condition[]",
+									"value": "1,2",
+									"description": "условия",
+									"type": "text"
+								},
+								{
+									"key": "addition[]",
+									"value": "1,2",
+									"description": "допольнительно",
+									"type": "text"
+								},
+								{
+									"key": "at_unloading",
+									"value": "0",
+									"description": "на выгрузке",
+									"type": "text"
+								},
+								{
+									"key": "negotiable_price",
+									"value": "0",
+									"description": "цена договорная",
+									"type": "text"
+								},
+								{
+									"key": "nds",
+									"value": "1",
+									"description": "НДС",
+									"type": "text"
+								},
+								{
+									"key": "when_loading",
+									"value": "0",
+									"description": "при погрузке",
+									"type": "text"
+								},
+								{
+									"key": "prepayment",
+									"value": "0",
+									"description": "предоплата",
+									"type": "text"
+								},
+								{
+									"key": "bargain",
+									"value": "0",
+									"description": "торг",
+									"type": "text"
+								},
+								{
+									"key": "price_request",
+									"value": "0",
+									"description": "запрос цены",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://test.money-men.kz/api/addAuction",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"addAuction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Отправить заявку к аукциону",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "a3e0207cc10a08280915d1f16f09691e7c072648",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "80000",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "auction_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://test.money-men.kz/api/sendAuctionRequest",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"sendAuctionRequest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить все аукционы",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getAllAuction",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getAllAuction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить аукцион по айди",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getAuctionById?auction_id=2",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getAuctionById"
+							],
+							"query": [
+								{
+									"key": "auction_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Отмена участие в аукционе",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/cancelAuctionOrder?token=57db922f9ecef2a4bdcbcd98887a4c2979548de7&auction_id=6",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"cancelAuctionOrder"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "57db922f9ecef2a4bdcbcd98887a4c2979548de7"
+								},
+								{
+									"key": "auction_id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Личный кабинет",
+			"item": [
+				{
+					"name": "Объявление на работе",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/customerOrdersInWork?token=10f79a79968a1e279294463f13c91717cf58ec58",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"customerOrdersInWork"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "10f79a79968a1e279294463f13c91717cf58ec58",
+									"description": "токен пользователья"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Объявление в ожидание",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/customerOrdersInHold?token=10f79a79968a1e279294463f13c91717cf58ec58",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"customerOrdersInHold"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "10f79a79968a1e279294463f13c91717cf58ec58"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Заявки на работе",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/executorOrdersInWork?token=10f79a79968a1e279294463f13c91717cf58ec58",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"executorOrdersInWork"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "10f79a79968a1e279294463f13c91717cf58ec58"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Заявки в ожидание",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/executorOrdersInHold?token=10f79a79968a1e279294463f13c91717cf58ec58",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"executorOrdersInHold"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "10f79a79968a1e279294463f13c91717cf58ec58"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Отменить предложение",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/cancelOrder?token=625282bdba5093b1563e7b6f9df7919a916be3f4&order_id=6",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"cancelOrder"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "625282bdba5093b1563e7b6f9df7919a916be3f4"
+								},
+								{
+									"key": "order_id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить доп телефоны",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/addPhone?token=b5f66d1a6bbf06f4e1d879b97dbaa22dc1752c97&phone=77471656497",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"addPhone"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "b5f66d1a6bbf06f4e1d879b97dbaa22dc1752c97"
+								},
+								{
+									"key": "phone",
+									"value": "77471656497"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Сотрудники",
+			"item": [
+				{
+					"name": "Получить список должностей",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getPositions",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getPositions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить список своих сотрудников",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getEmployee?token=d8ad34c722f2e61b7249bfc1350705afc76c2826",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getEmployee"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "d8ad34c722f2e61b7249bfc1350705afc76c2826"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Избранные",
+			"item": [
+				{
+					"name": "Добавить грузы в избранные",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/addPostFavourites?token=977e73fbbdc97a8b13ae3b6990eb6b1100bd35e4&post_id=1&category_id=1",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"addPostFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "977e73fbbdc97a8b13ae3b6990eb6b1100bd35e4"
+								},
+								{
+									"key": "post_id",
+									"value": "1",
+									"description": "Айди поста"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"description": "Айди категория(Груз,транспорт,аукцион)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить аукцион в избранные",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/addAuctionFavourites?token=9e4f41991d1335ba3a16b8f6a5424edd5759a2f9&auction_id=1",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"addAuctionFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "9e4f41991d1335ba3a16b8f6a5424edd5759a2f9"
+								},
+								{
+									"key": "auction_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить склады в избранные",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/addStorageFavourites?token=token&storage_id=storage_id",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"addStorageFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "token"
+								},
+								{
+									"key": "storage_id",
+									"value": "storage_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить спецтехнику в избранные",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/addSpecialFavourites?token=token&special_id=special_id",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"addSpecialFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "token"
+								},
+								{
+									"key": "special_id",
+									"value": "special_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить весь список избранных",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getAllFavourites?token=977e73fbbdc97a8b13ae3b6990eb6b1100bd35e4",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getAllFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "977e73fbbdc97a8b13ae3b6990eb6b1100bd35e4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить список избранных транспорт",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getListCargoFavourites?token=token",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getListCargoFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "token"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить список грузы объявленией",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getListPostFavourites?token=token",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getListPostFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "token"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить список избранных аукцион",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getListAuctionFavourites?token=token",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getListAuctionFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "token"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить избранные спецтехники",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/getListSpecialFavourites?token=token",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"getListSpecialFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "token"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить избранного поста (груз,объявление)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/cancelPostFavourites?token=9e4f41991d1335ba3a16b8f6a5424edd5759a2f9&post_id=1",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"cancelPostFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "9e4f41991d1335ba3a16b8f6a5424edd5759a2f9"
+								},
+								{
+									"key": "post_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "удалить аукцион из избранного",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://test.money-men.kz/api/cancelAuctionFavourites?token=9e4f41991d1335ba3a16b8f6a5424edd5759a2f9&auction_id=1",
+							"protocol": "https",
+							"host": [
+								"test",
+								"money-men",
+								"kz"
+							],
+							"path": [
+								"api",
+								"cancelAuctionFavourites"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "9e4f41991d1335ba3a16b8f6a5424edd5759a2f9"
+								},
+								{
+									"key": "auction_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
