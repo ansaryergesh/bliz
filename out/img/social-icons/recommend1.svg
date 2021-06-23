@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
+    <title>btns copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="20" cy="20" r="20"></circle>
+        <filter x="-31.2%" y="-28.8%" width="162.5%" height="162.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.423100934   0 0 0 0 0.759793931  0 0 0 0.063128278 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="--desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2.Грузов-ки:-2.3.1--Аукцион:-Объявление" transform="translate(-1087.000000, -1067.000000)">
+            <g id="btns-copy" transform="translate(1095.000000, 1074.000000)">
+                <g id="Oval">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#008EFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="share" transform="translate(14.000000, 12.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="M-1.60655802e-13,7.05882353 L-1.60655802e-13,13.4117647 C-1.60655802e-13,14.2889228 0.711077162,15 1.58823529,15 L11.1176471,15 C11.9948052,15 12.7058824,14.2889228 12.7058824,13.4117647 L12.7058824,7.05882353" id="Shape"></path>
+                    <polyline id="Shape" points="9.52941176 3.17647059 6.35294118 0 3.17647059 3.17647059"></polyline>
+                    <line x1="6.35294118" y1="0" x2="6.35294118" y2="10.3235294" id="Shape"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
