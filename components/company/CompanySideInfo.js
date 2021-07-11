@@ -45,8 +45,8 @@ const CompanySideInfo = ({user}) => {
             <div className="contactCard__detail__item">
               <p>Ваш баланс:</p>
               <div className="contactCard__detail__item__inner">
-                <img src="assets/img/widgets/tenge.svg" alt />
-                <h3 className="green">0 ₸</h3>
+                <img src="/img/widgets/tenge.svg" alt />
+                <h3 className="green">{cookie.get('balance')} ₸</h3>
               </div>
             </div>
           </div>

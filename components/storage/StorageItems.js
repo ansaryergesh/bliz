@@ -1,7 +1,7 @@
 import { dateParse2 } from '../../defaults/extraFunctions';
 import PaginationBtns from '../pagination/PaginationBtns'
 import SideBarCurrency from '../post/SideBarCurrency';
-
+import Link from 'next/link'
 const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, loading}) => {
   return (
     <>
@@ -12,12 +12,13 @@ const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, load
             <>
               {storages.map((s) => (
                  <div className="storage__item">
+                  
                     <div className="storage__item__img">
                       <img src={s.images && s.images=== [] ? '/img/no_post_image.jpg' : '/img/no_post_image.jpg'} alt/>
                     </div>
                     <div className="storage__item__desc">
                       <div className="storage__item__title">
-                        <a href={`/storage/${s.id}`}>Склад ", Алматы</a>
+                      <Link href="/storage/[pid]" as={`/storage/${s.id}`}><a>Склад ", Алматы</a></Link>
                         <h3>{s.properties? s.properties[0].price : ''}</h3>
                       </div>
                       <div className="storage__item__details">

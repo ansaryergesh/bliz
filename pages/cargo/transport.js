@@ -42,20 +42,20 @@ const Cargo = () => {
     const fromID = () => from_id === undefined ? '' : from_id
     const toID = () => to_id === undefined ? '' : to_id
 
-    axios.get(`${process.env.BASE_URL}/filterCargo`, {params: {
-      page: pageVal(),
-      type_transport: typeTransport(),
-      from: fromID(),
-      to: toID(),
-    }})
-      .then(res => {
-        console.log(res)
-        setLoading(false)
-        setPosts(res.data.data)
-        setTotal(res.data.pagination.total)
-        setCurrentPage(res.data.pagination.page)
-        setMaxPage(res.data.pagination.max_page)
-      })
+    // axios.get(`${process.env.BASE_URL}/filterCargo`, {params: {
+    //   page: pageVal(),
+    //   type_transport: typeTransport(),
+    //   from: fromID(),
+    //   to: toID(),
+    // }})
+    //   .then(res => {
+    //     console.log(res)
+    //     setLoading(false)
+    //     setPosts(res.data.data)
+    //     setTotal(res.data.pagination.total)
+    //     setCurrentPage(res.data.pagination.page)
+    //     setMaxPage(res.data.pagination.max_page)
+    //   })
   },[])
 
   const onChangeCategory = (catName,catId) => {
@@ -85,7 +85,7 @@ const Cargo = () => {
     const typeTransport = () => id === undefined || id==='0' ? '' : id;
     const filterVal = () => filter === undefined ? '' : filter
     setLoading(true)
-    axios.get(`${process.env.BASE_URL}/filterCargo?category_id=1&type_transport=${typeTransport()}&from=${from}&to=${to}`)
+    axios.get(`${process.env.BASE_URL}/filterCargo?type_transport=${typeTransport()}&from=${from}&to=${to}`)
       .then(res=> {
         console.log(res)
         router.push(`/cargo/transport?filter=${filterVal()}&id=${typeTransport()}&from_id=${from}&to_id=${to}&from_string=${fromString}&to_string=${toString}`)

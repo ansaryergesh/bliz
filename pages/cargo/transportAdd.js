@@ -70,9 +70,9 @@ class CargoAdd extends React.Component {
   initPlaceAPI() {
     const self = this;
     let autocomplete =  new window.google.maps.places.Autocomplete(this.placeInputRef.current,
-      { types: ['(cities)'], componentRestrictions: {country: ["kz", "ru", 'kg','az','uz', 'am', ]}});
+      { types: ['(cities)'], });
     let autocomplete2 =  new window.google.maps.places.Autocomplete(this.placeInputRef2.current,
-      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am', ] } });
+      { types: ["(cities)"],  });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
       console.log(place)
@@ -265,21 +265,10 @@ class CargoAdd extends React.Component {
                           <p className="post_ad__par">Дата выгрузки</p>
                           <div className="post_ad__adress__item__input">
                             <input className="post_ad__input" type="date" value={this.state.endDate} name='endDate' onChange={this.handleChange} placeholder=""/>
-                        
                           </div>
                         </div>
                       </div>
                     </div>
-                    {/* <div className="post_ad__adress__items">
-                      <div className="post_ad__adress__item">
-                        <p className="post_ad__par">Промежуточные точки</p>
-                        <div className="post_ad__adress__item__input">
-                          <input className="post_ad__input" type="text" placeholder="Выберите город…"/>
-                          <i className="fas fa-map-marker-alt"/>
-                        </div>
-                        <button className="btn btn--white">ДОБАВИТЬ</button>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
                 <div className="post_ad__chars">

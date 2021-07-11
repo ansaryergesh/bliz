@@ -66,11 +66,12 @@ const Footer = () => {
           </div>
           <div className="footer__block">
             <div className="footer__block-title footer__block-title--agreement">
-              <a href="/rules">Пользовательское соглашение</a>
-              <a href="/politics">Политика конфиденциальности</a>
+              <a href="/Публичная оферта  BLIZ.pdf" target="_blank">Пользовательское соглашение</a>
+              <a href="/Политика конфиденциальности.pdf" target="_blank">Политика конфиденциальности</a>
             </div>
             <div className="footer__block-title footer__block-title--trademark">
               <p>2020 © «Bliz.kz» является юридически зарегистрированной торговой маркой</p>
+              <p>© Разработано<a href='https://dynamica.kz' target='_blank'> Dynamica</a></p>
             </div>
           </div>
         </div>

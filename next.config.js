@@ -13,4 +13,5 @@ module.exports = {
     appId: "1:970557461414:web:3d3c7d0db11636bee53567",
     measurementId: "G-9L8W7T2CL0"
   },
+  trailingSlash: true,
 }

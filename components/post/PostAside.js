@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {formatPhoneNumber, formatPhoneNumberHidden, parseDateTime} from "../../defaults/extraFunctions";
 import {useDispatch} from 'react-redux'
 import cookie from 'js-cookie'
@@ -7,12 +7,19 @@ import {useRouter} from 'next/router'
 import Share from "../shared/ShareSocial";
 import {connect} from 'react-redux';
 import swal from "sweetalert";
-
+import $ from 'jquery'
 const PostAside = ({postinfo, sendRequest, user, setModal}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const {pid} = router.query
   const [share, setShare] = useState(false)
+
+  useEffect(() => {
+    $('.show_num').click(function () {
+      $('.hidden_num').show();
+      $(this).hide();
+    });
+  },[])
   const closeModal = (e) => {
     e.preventDefault()
     if (e.target.className !== 'modal_bg') {

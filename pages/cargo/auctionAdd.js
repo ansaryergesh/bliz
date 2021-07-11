@@ -6,12 +6,13 @@ import {documents, pogruzka, condition, extra} from '../../defaults/checkboxes/d
 import CheckBox from '../../components/shared/CheckBox'
 import { closeMessage, errorMessage, successMessage } from '../../store/actions/messageAction'
 import {connect} from 'react-redux'
-import { todaysDate } from '../../defaults/defaults'
+import { currencies, paymentType, todaysDate, typeTransports } from '../../defaults/defaults'
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults'
 import LoadingSpinner from '../../components/shared/others/LoadingSpinner'
 import InputMask from 'react-input-mask'
 import { deleteFalseKey, parseBoolean } from '../../defaults/extraFunctions'
 import CompanyOnAddInfo from '../../components/company/CompanyOnAddInfo'
+import { trtypes } from '../../defaults/transportType'
 const mapDispatchToProps = (dispatch) =>({
   successMessage: (msg) => {dispatch(successMessage(msg))},
   errorMessage: (msg) => {dispatch(errorMessage(msg))},
@@ -90,7 +91,9 @@ class AuctionAdd extends React.Component {
       prepayment:false,
       bargain: false,
       price_request:false,
-      at_unloading: false
+      at_unloading: false,
+      subType: 1,
+      subTypeLists: trtypes.filter(f=>f.id === 1)[0]
     };
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -102,9 +105,9 @@ class AuctionAdd extends React.Component {
   initPlaceAPI() {
     const self = this;
     let autocomplete =  new window.google.maps.places.Autocomplete(this.placeInputRef.current,
-      { types: ['(cities)'], componentRestrictions: {country: ["kz", "ru", 'kg','az','uz', 'am',]}});
+      { types: ['(cities)'], });
     let autocomplete2 =  new window.google.maps.places.Autocomplete(this.placeInputRef2.current,
-      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
+      { types: ["(cities)"],});
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
       console.log(place)
@@ -174,6 +177,12 @@ class AuctionAdd extends React.Component {
     this.setState({
       [name]: value
     });
+
+    if(name === 'type_transport') {
+      this.setState({
+        subTypeLists: trtypes.filter(f=>f.id === parseInt(value))[0], subType: '1'
+      })
+    }
   }
   handleCheckBox(e) {
     const item = e.target.value;
@@ -362,8 +371,10 @@ class AuctionAdd extends React.Component {
                       <div className="post_ad__chars__items__selects">
                         <div className="post_ad__chars__item">
                           <p className="post_ad__par">Тип транспорта</p>
-                          <select className="post_ad__input">
-                            <option>ЖД Рефрижиратор</option>
+                          <select className="post_ad__input"  onChange={this.handleChange} value={this.state.type_transport}  name='type_transport'>
+                            {typeTransports.map(p => (
+                              <option value={p.id}>{p.name}</option>
+                            ))}
                           </select>
                         </div>
                         <div className="post_ad__chars__item">
@@ -392,20 +403,34 @@ class AuctionAdd extends React.Component {
                     <div className="post_ad__price__item">
                       <p className="post_ad__par">Валюта</p>
                       <select className="post_ad__input" value={this.state.currency} name='currency' onChange={this.handleChange}>
-                        <option value='1'>Тенге, KZT</option>
+                        {currencies.map(p => (
+                          <option value={p.value}>{p.name}</option>
+                        ))}
                       </select>
                     </div>
+                  
                     <div className="post_ad__price__item">
                       <p className="post_ad__par">Способ оплаты</p>
                       <select className="post_ad__input" value={this.state.paymentType} name='paymentType' onChange={this.handleChange}>
-                        <option value='1'>Безналичный</option>
+                        {paymentType.map(p => (
+                            <option value={p.value}>{p.name}</option>
+                          ))}
                       </select>
                     </div>
                   </div>
+                  <div className='post_ad__price__item'>
+                    <p className="post_ad__par">Суб типы</p>
+                      <select className="post_ad__input" value={this.state.subType} name='subType' onChange={this.handleChange}>
+                          {this.state.subTypeLists.date.map(p => (
+                            <option value={p.sub_id}>{p.name}</option>
+                          ))}
+                         </select>
+                    </div>
                   <div className="post_ad__price__checkbox">
                     <input name='negotiable_price' checked={this.state.negotiable_price} onChange={this.handleOtherCheckBox} type="checkbox"/>
                     <p className="post_ad__par">Цена договорная</p>
                   </div>
+                
                   <div className="post_ad__price__checkbox__wrapper">
                     <div className="post_ad__price__checkbox__items">
                       <div className="post_ad__price__checkbox">

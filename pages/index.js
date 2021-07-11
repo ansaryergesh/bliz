@@ -35,14 +35,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <div className="under_header container">
-        <h2>Сервис
-          <span>грузоперевозок</span><br/>и
-          <span>услуг в сфере логистики</span>
-          <br/>
-          по Казахстану и СНГ</h2>
-        <p>Сервис логистики от А до Я по Казахстану. Поиск грузовладельцев
-          <br/>
-          и перевозчиков. База складов и спецтехники.
+        <h2>Портал <span>{" "}логистики</span> и <span>{" "}транспорта</span>
+          <br/></h2>
+        <p>Быстрый и удобный поиск:
+          <br/>Груза и транспорта <br />Складов и спецтехники<br/>В любой точке мира.
         </p>
         <div className="under_header__btns">
           <a className="btn" href="/cargo">НАЙТИ ГРУЗЫ И ТРАНСПОРТ</a>
@@ -54,10 +50,10 @@ export default function Home() {
           <div className="service__item__img">
             <img src="/img/widgets/service1.png"/>
           </div>
-          <a href="/cargo">Грузы и транспорт</a>
-          <p>Поиск исполнителей и клиентов
+          <a href="/cargo">Груза и транспорта</a>
+          <p>Поиск грузовладельцев и
             <br/>
-            грузовперевозок</p>
+            перевозчиков</p>
         </div>
         <div className="service__item">
           <div className="service__item__img">
@@ -77,7 +73,7 @@ export default function Home() {
             <br/>
             по любым напрвлениям</p>
         </div>
-        <div className="service__item">
+        {/* <div className="service__item">
           <div className="service__item__img">
             <img src="/img/widgets/service4.png"/>
           </div>
@@ -85,7 +81,7 @@ export default function Home() {
           <p>Повышение квалификации
             <br/>
             для логистов и менеджеров продаж</p>
-        </div>
+        </div> */}
       </div>
       <div className="benefits">
         <div className="benefits__wrapper container">
@@ -112,21 +108,22 @@ export default function Home() {
             <h4>Уникальные возможности для вас:</h4>
             <div className="offer1__item">
               <i className="far fa-check-circle"/>
-              <p>Дополнительный поток грузовладельцев Возможность работы как с собственным,</p>
+              <p>Дополнительный поток грузовладельцев</p>
             </div>
             <div className="offer1__item">
               <i className="far fa-check-circle"/>
-              <p>так и с привлеченным транспортом Для ваших логистов: ведение статистики,
+              <p>Возможность работы как с собственным, так и с привлеченным транспортом так и с привлеченным транспортом Для ваших логистов: ведение статистики,
                 аналитики, и отчетности в личных</p>
             </div>
             <div className="offer1__item">
               <i className="far fa-check-circle"/>
-              <p>кабинетах сайта Мгновенное SMS или e-mail уведомление клиента о сроках
-                прибытия Вашего автомобиля на место</p>
+              <p>Для ваших логистов: ведение статистики, аналитики, и отчетности в личных кабинетах
+сайта</p>
             </div>
             <div className="offer1__item">
               <i className="far fa-check-circle"/>
-              <p>разгрузки</p>
+              <p>Мгновенное SMS или e-mail уведомление клиента о сроках прибытия Вашего автомобиля
+на место разгрузки.</p>
             </div>
             <div className="offer1__btns">
               <a className="btn" href="/register">ЗАРЕГИСТРИРОВАТЬСЯ</a>
@@ -165,11 +162,10 @@ export default function Home() {
               помещений</h2>
             <div className="offer1__item offer2__item">
               <p>Эффективно использовать сервис смогут и крупные логистические центры, которые
-                предоставляют,
+                предоставляют, складские помещения в аренду. С помощью раздела «Склад» компании могут
+                подавать объявления, о наличии свободных складских помещений, а также оснащенностей склада.
               </p>
-              <p>складские помещения в аренду. С помощью раздела «Склад» компании могут
-                подавать объявления, о наличии свободных складских помещений,</p>
-              <p>а также оснащенностей склада.</p>
+          
             </div>
             <div className="offer1__btns">
               <a className="btn" href="/register">ЗАРЕГИСТРИРОВАТЬСЯ</a>

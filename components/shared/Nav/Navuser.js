@@ -104,7 +104,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
         <i className="far fa-envelope" />
         <a href="/cabinet/message">Сообщения</a>
       </div>
-      <div className="header__top__item">
+      <div onClick={() => router.push('/cabinet')} className="header__top__item">
         <img src="/img/widgets/personal_cabinet_logo.png"  />
         {/* + secondName.charAt(0) + "." */}
         <a>{fullName + " " }</a>

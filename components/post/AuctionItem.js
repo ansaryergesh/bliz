@@ -4,6 +4,7 @@ import React,{useState} from 'react'
 import Timer from "./Timer";
 import { currencies } from "../../defaults/defaults";
 import BreadCumbs from "../shared/BreadCumbsConfigure";
+import Link from 'next/link'
 const AuctionItem = ({
   total,
   auctions,
@@ -32,7 +33,7 @@ const AuctionItem = ({
                        <p>{auction.details ? dateParse2(auction.updated_at) : ''}</p>
                      </div>
                      <div className="product__item__title">
-                       <a href={`/cargo/auction/${auction.id}`}>{auction.details ? auction.details[0].from_string : ''} — {auction.details ? auction.details[0].to_string : ''}</a>
+                     <Link href="/cargo/auction/[pid]" as={`/cargo/auction/${auction.id}`}><a>{auction.details ? auction.details[0].from_string : ''} — {auction.details ? auction.details[0].to_string : ''}</a></Link>
                        <p>~{auction.details ? auction.details[0].distance : ''}, отходы стальные, растентовка</p>
                      </div>
                      <div className="product__item__title">

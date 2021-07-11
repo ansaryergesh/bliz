@@ -5,6 +5,7 @@ import { dateParse, parseDateTime } from '../../defaults/extraFunctions';
 import BreadCumbs from '../shared/BreadCumbsConfigure';
 import {useRouter} from 'next/router'
 import TopItem from './TopItem';
+import Link from 'next/link'
 const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, loading, tops}) => {
   const router = useRouter()
   return (
@@ -32,9 +33,12 @@ const PostItem = ({post, total, maxPage, currentPage, onChangePage, pathName, lo
                   <p>{parseDateTime(p.updated_at)} </p>
                 </div>
                 <div className="product__item__title">
-                  <a href={`/cargo/${p.id}`}>{p.details ? p.details[0].from_string : 'Загрузка...'}
+                  <Link href="/cargo/[pid]" as={`/cargo/${p.id}`}>
+                  <a>{p.details ? p.details[0].from_string : 'Загрузка...'}
                     — {p.details ? p.details[0].to_string : 'Загрузка...'}
                     </a>
+                  </Link>
+                 
                   <p>~{p.details ? p.details[0].distance : '...'} , {p.details ? p.details[0].title : 'Загрузка'}</p>
                 </div>
                 <div className="product__item__title">

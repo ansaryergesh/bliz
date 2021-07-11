@@ -74,7 +74,7 @@ class EquipmentAdd extends React.Component  {
     const self = this;
     let viewport = '';
     let autocomplete =  new window.google.maps.places.Autocomplete(this.city.current,
-      { types: ['(cities)'], componentRestrictions: {country: ["kz", "ru", 'kg','az','uz', 'am',]}});
+      { types: ['(cities)'], });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
       console.log(place)

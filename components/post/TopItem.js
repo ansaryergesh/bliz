@@ -1,5 +1,5 @@
 import { dateParse, parseDateTime } from "../../defaults/extraFunctions"
-
+import Link from 'next/link'
 const TopItem = ({tops}) => {
   return (
     <div className='top_offers'>
@@ -18,13 +18,16 @@ const TopItem = ({tops}) => {
             </p>
           </div>
           <div className="product__item__title">
-            <a href={`/cargo/${p.id}`}>{p.details
-                ? p.details[0].from_string
+          <Link href="/cargo/[pid]" as={`/cargo/${p.id}`}>
+            <a>{p.details
+              ? p.details[0].from_string
                 : 'Загрузка...'}
               — {p.details
                 ? p.details[0].to_string
                 : 'Загрузка...'}
             </a>
+          </Link>
+          
             <p>~{p.details
                 ? p.details[0].distance
                 : '...'}

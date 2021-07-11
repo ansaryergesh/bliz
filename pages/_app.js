@@ -16,7 +16,8 @@ import firebase from 'firebase'
 import {saveToDatabase} from '../fbdatabase/database'
 // import FirebaseLogin from '../components/firebaseComponents/FirebaseLogin';
 import { config } from '../firebaseconfig';
-
+import $ from 'jquery'
+import axios from 'axios';
 
 if (!firebase.apps.length) {
   firebase.initializeApp(config);
@@ -28,8 +29,14 @@ if (!firebase.apps.length) {
 class MyApp extends App {
   
   componentDidMount() {
-    // const [userId, users, connect] = useAuth();
-   
+      $(window).scroll(function (){
+        if ($(this).scrollTop() > 120){
+            $('.header__top').addClass('fixed');
+        } else{
+          $('.header__top').removeClass('fixed');
+        } 
+    });
+
     if(localStorage.getItem('lang')=== null) {
       localStorage.setItem('lang', 'ru')
     }
@@ -52,8 +59,17 @@ class MyApp extends App {
       
       this.props.fetchCurrentUser(connect)
     }
-   
-
+    
+    if(userToken !== undefined) {
+      axios.get(`${process.env.BASE_URL}/getBalance?token=${cookie.get('token')}`)
+        .then(res=> {
+          console.log(res.data.amount)
+          cookie.set('balance', res.data.amount)
+          // cookie.set('balance', res.data.amount)
+        })
+    }else {
+      cookie.remove('balance')
+    }
   }
   render(){
     <Head>

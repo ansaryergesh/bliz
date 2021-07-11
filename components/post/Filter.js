@@ -6,7 +6,6 @@ import $ from 'jquery'
 import axios from 'axios'
 const Filter = ({
   onChangeCategory,
-  activeCategory,
   setPosts,
   setTotal,
   setCurrentPage,
@@ -15,7 +14,9 @@ const Filter = ({
   fromString,
   setMaxPage,
   fromId,
+  mobileFilter,
   toString,
+  onFilterMobile,
   toId}) => {
   const router  = useRouter()
   const pathname = router.pathname;
@@ -34,7 +35,7 @@ const Filter = ({
   const [addressTo,setAddressTo] = useState({address_string: toString || '', address_id: toId || '',})
   const fromRef = useRef(null)
   const toRef = useRef(null)
-  const currentPath = router.pathname
+  const currentPath = router.pathname;
   useEffect(() => {
     initPlaceAPI()
     $('.big_filter_btn').click(function(){
@@ -43,8 +44,21 @@ const Filter = ({
   
   },[])
 
+  // useEffect(() => {
+  //   onSearch(
+  //     addressFrom.address_id,
+  //     addressTo.address_id,
+  //     addressFrom.address_string,
+  //     addressTo.address_string,
+  //     net.netStart,
+  //     net.netEnd,
+  //     volume.volumeStart,
+  //     volume.volumeEnd,
+  //   )
+  // },[addressFrom,addressTo])
+
   useEffect(() => {
-    if(addressFrom.address_id || addressTo.address_id) {
+    if(net.netStart === '' && net.netEnd=== '') {
       onSearch(
         addressFrom.address_id,
         addressTo.address_id,
@@ -54,10 +68,26 @@ const Filter = ({
         net.netEnd,
         volume.volumeStart,
         volume.volumeEnd,
-      )}
-  },[addressFrom, addressTo])
-  
+      )
+    }
+  },[net])
 
+  
+  useEffect(() => {
+    if(volume.volumeStart === '' && volume.volumeEnd=== '') {
+      onSearch(
+        addressFrom.address_id,
+        addressTo.address_id,
+        addressFrom.address_string,
+        addressTo.address_string,
+        net.netStart,
+        net.netEnd,
+        volume.volumeStart,
+        volume.volumeEnd,
+      )
+    } 
+  },[volume])
+  
   const fixPath = (queries, newQueries) => {
     delete queries.page
     if(!addressFrom.address_id) {
@@ -101,34 +131,42 @@ const Filter = ({
     if(volume.volumeEnd) {
       newQueries.volume_end = volume.volumeEnd
     }
-
     setLoading(true);
-
-    axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
+    const filterPath = () => {
+      let pathname = router.pathname
+      if(pathname === '/cargo/transport') {
+        return "filterCargo"
+      }
+      if(pathname === '/cargo') {
+        return "filterPost"
+      }
+    }
+    const finalPath = filterPath()
+    axios.get(`${process.env.BASE_URL}/${finalPath}`, {params: {
       type_transport: id==='0' ? '' : id,
       from: addressFrom.address_id,
       to: addressTo.address_id,
       net_start: net.netStart,
       net_end: net.netEnd,
       volume_start: volume.volumeStart,
-      volume_end: volume.volumeEnd
+      volume_end: volume.volumeEnd,
     }})
-      .then(res=> {
-        console.log(res)
-        console.log(addressTo)
-        setLoading(false);
-        setPosts(res.data.data)
-        setCurrentPage(res.data.pagination.page)
-        setTotal(res.data.pagination.total)
-        setMaxPage(res.data.pagination.max_page)
-        router.push({path: pathname, query: {...queries, ...newQueries}})
-      })
+    .then(res=> {
+      setLoading(false);
+      setPosts(res.data.data)
+      setCurrentPage(res.data.pagination.page)
+      setTotal(res.data.pagination.total)
+      setMaxPage(res.data.pagination.max_page)
+      router.push({path: pathname, query: {...queries, ...newQueries}})
+    })
   }
 
   const onSearch = () => {
     const queries = router.query;
     const newQueries = {};
     fixPath(queries,newQueries);
+    onFilterMobile()
+    // 
   }
 
   const onClearFilter = () => {
@@ -144,98 +182,78 @@ const Filter = ({
   }
    function clearAddressInput(e) {
     let name = e.target.id;
-    if(name==='from') {
-      setFromInput('')
-      setAddressFrom({address_string: '', address_id: ''})
-     
-    }else {
-      setAddressTo({address_string: '', address_id: ''})
+    if(name==="from") {
+      setFromInput("")
+      setAddressFrom({address_string: "", address_id: ""})
+    }
+    if(name === "net") {
+      setNet({netStart: "", netEnd: ""})
+    }
+    if(name === "volume") {
+      setVolume({volumeStart: "", volumeEnd: ""})
+    }
+    if(name==="to") {
+      setAddressTo({address_string: "", address_id: ""})
     }
   }
   const initPlaceAPI = () => {
     let autocomplete = new window.google.maps.places.Autocomplete(fromRef.current,
-      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
+      { types: ["(cities)"], });
 
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
-      
-      // infowindow.close();
       let place = autocomplete.getPlace();
       setFromInput('')
-      console.log(place)
       setAddressFrom({address_string: place.formatted_address, address_id: place.place_id})
     });
 
     let autocomplete2 = new window.google.maps.places.Autocomplete(toRef.current,
-      { types: ["(cities)"], componentRestrictions: { country: ["kz", "ru", 'kg','az','uz', 'am',] } });
+      { types: ["(cities)"], });
     new window.google.maps.event.addListener(autocomplete2, "place_changed", function () {
       setToInput('')
       let place = autocomplete2.getPlace();
-      console.log(place)
       setAddressTo({address_string: place.formatted_address, address_id: place.place_id})
     });
   };
+
   return (
-    <div className="main_filter">
+    <div className="main_filter filter_mobile">
+      <div className='close_filter' onClick={() => onFilterMobile()}>✖</div>
       <div className="main_filter__content container">
         <div className="main_filter__top">
           <div className="main_filter__top__item">
             <div className="filter__item__title">
               <h4>Транспорт</h4>
-              <div className="filter__item__form">
+              <div className="filter__item__form type_transports">
                 {subCategories.map(cat=> (
                   <a onClick={() => onChangeCategory(cat.name, cat.id)} key={cat.id} className={queryFilter === cat.name ? 'active' : ''}>{cat.name}</a>
                 ))}
+              </div>
+              <div className='filter__item__form select_transports'>
+                <select>
+                  {subCategories.map(cat=> (
+                    <option value={cat.id}>{cat.name}</option>
+                ))}
+                </select>
               </div>
             </div>
           </div>
           <div className="main_filter__top__item">
             <div className="filter__item__title">
               <h4>Направление</h4>
-              {/* {fromInput} */}
-              
-              <div className="filter__item__form">
-                
+              <div className="filter__item__form address_input">
                 <input type="text" value={fromInput} onChange={(e) => setFromInput(e.target.value)} placeholder={addressFrom.address_string || 'Откуда'} ref={fromRef}/>
                 <div className="hr"/>
                 <input  type="text" value={toInput} onChange={e=>setToInput(e.target.value)} placeholder={addressTo.address_string || "Куда"} ref={toRef}/>
+                <div className='margin_val'>
                 <button onClick={() => onClearFilter()}>Сбросить</button>
                 <button type="button" className="big_filter_btn">Все фильтры</button>
+                </div>
               </div>
             </div>
           </div>
-          
-            
         </div>
         <form className="main_filter__big">
-          {/* <div className="main_filter__big__items">
-            <div className="main_filter__big__item">
-              <select>
-                <option>Фильтр</option>
-              </select>
-            </div>
-            <div className="main_filter__big__item">
-              <select>
-                <option>Фильтр</option>
-              </select>
-            </div>
-            <div className="main_filter__big__item">
-              <select>
-                <option>Фильтр</option>
-              </select>
-            </div>
-            <div className="main_filter__big__item">
-              <select>
-                <option>Фильтр</option>
-              </select>
-            </div>
-            <div className="main_filter__big__item">
-              <select>
-                <option>Фильтр</option>
-              </select>
-            </div>
-          </div> */}
           <div className="main_filter__big__items">
-            
             <div className="main_filter__big__item">
               <label>Вес</label>
               <div className='main_filter__big__item_inputs'>
@@ -252,15 +270,6 @@ const Filter = ({
               <input type="number" value={volume.volumeEnd} placeholder=" до" onChange={(e) => setVolume({volumeStart: volume.volumeStart, volumeEnd: e.target.va})}/>
               </div>
             </div>
-            {/* <div className="main_filter__big__item">
-              <input type="text" placeholder="Фильтр" />
-            </div>
-            <div className="main_filter__big__item">
-              <input type="text" placeholder="Фильтр" />
-            </div>
-            <div className="main_filter__big__item">
-              <input type="text" placeholder="Фильтр" />
-            </div> */}
           </div>
         </form>
 
@@ -272,14 +281,14 @@ const Filter = ({
           {net_start || net_end ? 
             <div className="main_filter__bottom__item">
               <p>Вес: {net_start ? net_start : '∞'} тн - {net_end ? net_end : '∞'} тн</p>
-              <i className="fas fa-times"/>
+              <i id='net' className="fas fa-times" onClick={(e)=> clearAddressInput(e)}/>
             </div>
           : ''}
         
         {volume_start || volume_end ? 
             <div className="main_filter__bottom__item">
               <p>Площадь: {volume_start ? volume_start : '∞'} м³ - {volume_end ? volume_end : '∞'} м³</p>
-              <i className="fas fa-times"/>
+              <i id='volume' className="fas fa-times" onClick={(e)=> clearAddressInput(e)}/>
             </div>
           : ''}
         
@@ -298,14 +307,9 @@ const Filter = ({
             </div>
               : 
           ''}
-        
-          
         </div>
-        
       </div>
-      
     </div>
-
   )
 }
 

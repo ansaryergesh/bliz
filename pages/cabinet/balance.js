@@ -4,11 +4,38 @@ import cookie from 'js-cookie'
 import axios from "axios";
 import BalancePage from '../../components/userCabinet/Balance'
 import TransactionHistory from "../../components/userCabinet/TransactionHistory";
+import { useDispatch } from "react-redux";
 const Balance = () => {
-  const [balance, setBalance] = useState('0')
+  const dispatch = useDispatch()
+  const [balance, setBalance] = useState(cookie.get('balance')!== undefined ? cookie.get('balance') : 0)
   const [page,setPage] = useState('balance')
   const [history,setHistory] = useState({})
+  const [amount,setAmount] = useState('')
 
+  const onPayment = () => {
+    dispatch({type: 'CLOSE_MESSAGE'})
+    if(amount>0) {
+      axios.post(`${process.env.BASE_URL}/makePayment?user_id=${cookie.get('active_user')}&amount=${amount}`)
+      .then(res=> {
+        if(res) {
+          setAmount('')
+          console.log(res)
+          window.open(res.data[0] + "?" + res.data[1])
+        }
+        else {
+          dispatch({type: 'ERROR_MESSAGE', payload: 'Что то пошло не так'})
+        }
+      })
+      .catch(err=> {
+        dispatch({type: 'ERROR_MESSAGE', payload: 'Что то пошло не так'})
+      })
+    }else {
+      console.log('ok')
+      dispatch({type: 'ERROR_MESSAGE', payload: 'Введите сумму'})
+    }
+
+  
+  }
   const getTransactionHistory = () => {
     axios.get('https://test.money-men.kz/api/paymentHistory', {params: {
       token: cookie.get('token')
@@ -51,11 +78,12 @@ const Balance = () => {
                     кошельки через сервис платеже
                     <br/>
                     Paybox.kz</p>
+                <input className='form_group' placeholder='Введите сумму' onChange={e=>setAmount(e.target.value)} value={amount} className='amount_input' name='amount' type='number'></input>
                 </div>
-                <a className="btn green" href="#">Пополнить онлайн</a>
+                <a onClick={() => onPayment()} className="btn green"  >Пополнить онлайн</a>
               </div>
             </div>
-            <div className="balance__top-up__item">
+            {/* <div className="balance__top-up__item">
               <div className="balance__top-up__item__img">
                 <img src="/img/widgets/balance2.png" alt/>
               </div>
@@ -68,9 +96,9 @@ const Balance = () => {
                     <br/>
                     и выписками.</p>
                 </div>
-                <a className="btn green" href="#">Пополнить онлайн</a>
+                <a onClick={() => onPayment()} className="btn green"  >Пополнить онлайн</a>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
