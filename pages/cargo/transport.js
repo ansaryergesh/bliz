@@ -23,6 +23,7 @@ const Cargo = () => {
   const [total, setTotal] = useState(0)
   const [maxPage,setMaxPage] = useState(0)
   const [loadMapScript, setLoadMapScript] = useState(false)
+  const [mobileFilter,setFilterMobile] = useState(false)
   const [tops,setTops] = useState({})
 
   const getTops = () => {
@@ -41,6 +42,8 @@ const Cargo = () => {
     const typeTransport = () => id === undefined || id==='0' ? '' : id;
     const fromID = () => from_id === undefined ? '' : from_id
     const toID = () => to_id === undefined ? '' : to_id
+
+
 
     // axios.get(`${process.env.BASE_URL}/filterCargo`, {params: {
     //   page: pageVal(),
@@ -96,6 +99,21 @@ const Cargo = () => {
         setMaxPage(res.data.pagination.max_page)
       })
   }
+
+  const onFilterMobile = () => {
+    if(!mobileFilter) {
+      document.querySelector('.main_filter').style.display='inherit';
+      // document.body.style.overflow='hidden'
+    }else {
+      document.querySelector('.main_filter').style.display='none'
+      // document.body.style.overflow='auto'
+    }
+
+    if(window.screen.width>=796) {
+      document.querySelector('.main_filter').style.display='inherit';
+    }
+    setFilterMobile(!mobileFilter)
+  }
   const onChangePage = (pageNum) => {
     setLoading(true)
     const typeTransport = () => id === undefined || id==='0' ? '' : id;
@@ -127,6 +145,13 @@ const Cargo = () => {
 
     
     <div>
+       <div className='filter_icon'>
+        <div onClick={() => onFilterMobile()}>   
+          <i class="fas fa-sliders-h "></i>
+     
+          <p>Фильтр {Object.keys(router.query).length!==0 && `(${Object.keys(router.query).length})`} </p>
+        </div>
+      </div>
       {!loadMapScript ? <div> Загрузка ... </div> :
         <Filter 
           queryFilter={filter ? filter : 'Все'}
@@ -140,6 +165,8 @@ const Cargo = () => {
           setMaxPage={setMaxPage}
           toString=  {to_string}
           toId = {to_id}
+          mobileFilter={mobileFilter}
+          onFilterMobile={onFilterMobile}
           onSearch={onSearch}
         />
       }

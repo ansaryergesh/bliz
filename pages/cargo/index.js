@@ -49,6 +49,9 @@ const Cargo = () => {
     if(window.screen.width>=796) {
       document.querySelector('.main_filter').style.display='inherit';
     }
+    if(window.screen.width<=796) {
+      document.querySelector('.main_filter').style.display='none';
+    }
     setFilterMobile(!mobileFilter)
   }
 
