@@ -75,7 +75,6 @@ class CargoAdd extends React.Component {
       { types: ["(cities)"], });
     new window.google.maps.event.addListener(autocomplete, "place_changed", function () {
       let place = autocomplete.getPlace();
-      console.log(place)
       let addressString=new Map();
       place.address_components.forEach(elem=> {
         if(elem.types.includes('locality') || elem.types.includes('country')) {

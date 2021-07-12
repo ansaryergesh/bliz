@@ -25,12 +25,18 @@ const Cargo = () => {
   const [loadMapScript, setLoadMapScript] = useState(false)
   const [mobileFilter,setFilterMobile] = useState(false)
   const [tops,setTops] = useState({})
-
+  const [selectType,setSelectType] = useState('')
   const getTops = () => {
     axios.get('https://test.money-men.kz/api/newGetPost?category_id=2')
       .then(res=> {
         setTops(res.data.top)
       })
+  }
+
+  const onSelectType = (e) => {
+    setLoading(true)
+    setSelectType(e.target.value)
+    onChangeCategory(e.target.name, e.target.value)
   }
   useEffect(() => {
     getTops()
@@ -102,15 +108,15 @@ const Cargo = () => {
 
   const onFilterMobile = () => {
     if(!mobileFilter && window.screen.width <=796) {
-      document.querySelector('.main_filter').style.display='inherit';
+      document.querySelector('.main_filter').style.display='none';
       // document.body.style.overflow='hidden'
     }
     if(mobileFilter && window.screen.width <=796) {
-      document.querySelector('.main_filter').style.display='none'
+      document.querySelector('.main_filter').style.display='inherit'
     }
     setFilterMobile(!mobileFilter)
   }
-  
+
   const onChangePage = (pageNum) => {
     setLoading(true)
     const typeTransport = () => id === undefined || id==='0' ? '' : id;
@@ -165,6 +171,8 @@ const Cargo = () => {
           mobileFilter={mobileFilter}
           onFilterMobile={onFilterMobile}
           onSearch={onSearch}
+          onSelectType={onSelectType}
+          selectType={selectType}
         />
       }
      

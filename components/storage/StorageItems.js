@@ -2,11 +2,9 @@ import { dateParse2 } from '../../defaults/extraFunctions';
 import PaginationBtns from '../pagination/PaginationBtns'
 import SideBarCurrency from '../post/SideBarCurrency';
 import Link from 'next/link'
-const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, loading}) => {
+const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, loading, from_string}) => {
   return (
     <>
-    
-      
         <div className="products__items__wrapper">
           {loading? <div>Загрузка...</div> :
             <>
@@ -18,7 +16,7 @@ const StorageItems = ({total, storages, maxPage, currentPage, onChangePage, load
                     </div>
                     <div className="storage__item__desc">
                       <div className="storage__item__title">
-                      <Link href="/storage/[pid]" as={`/storage/${s.id}`}><a>Склад ", Алматы</a></Link>
+                      <Link href="/storage/[pid]" as={`/storage/${s.id}`}><a>Склад {from_string && ", " + from_string}</a></Link>
                         <h3>{s.properties? s.properties[0].price : ''}</h3>
                       </div>
                       <div className="storage__item__details">

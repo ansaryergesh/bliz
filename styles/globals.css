@@ -1796,8 +1796,11 @@ nav.cabinet_ad_nav {
 
 .filter__item__form {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   align-items: center;
+}
+.address_input {
+  flex-wrap: wrap;
 }
 
 .filter__item__form.modal {
@@ -2054,7 +2057,6 @@ nav.cabinet_ad_nav {
 
   .main_filter {
     display: none;
-    
     overflow: scroll;
     /* overflow-y: scroll!important; */
   }

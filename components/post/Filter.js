@@ -15,6 +15,8 @@ const Filter = ({
   setMaxPage,
   fromId,
   mobileFilter,
+  selectType,
+  onSelectType,
   toString,
   onFilterMobile,
   toId}) => {
@@ -44,18 +46,18 @@ const Filter = ({
   
   },[])
 
-  // useEffect(() => {
-  //   onSearch(
-  //     addressFrom.address_id,
-  //     addressTo.address_id,
-  //     addressFrom.address_string,
-  //     addressTo.address_string,
-  //     net.netStart,
-  //     net.netEnd,
-  //     volume.volumeStart,
-  //     volume.volumeEnd,
-  //   )
-  // },[addressFrom,addressTo])
+  useEffect(() => {
+    onSearch(
+      addressFrom.address_id,
+      addressTo.address_id,
+      addressFrom.address_string,
+      addressTo.address_string,
+      net.netStart,
+      net.netEnd,
+      volume.volumeStart,
+      volume.volumeEnd,
+    )
+  },[addressFrom,addressTo])
 
   useEffect(() => {
     if(net.netStart === '' && net.netEnd=== '') {
@@ -229,9 +231,9 @@ const Filter = ({
                 ))}
               </div>
               <div className='filter__item__form select_transports'>
-                <select>
+                <select value={selectType} onChange={e=> onSelectType(e)}>
                   {subCategories.map(cat=> (
-                    <option value={cat.id}>{cat.name}</option>
+                    <option name={cat.name} value={cat.id}>{cat.name}</option>
                 ))}
                 </select>
               </div>

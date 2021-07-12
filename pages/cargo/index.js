@@ -22,6 +22,7 @@ const Cargo = () => {
   const {to_id} = router.query
   const {page} = router.query
   const [loading, setLoading] = useState(true)
+  const [selectType,setSelectType] = useState('')
   const [posts, setPosts] = useState([{}])
   const [currentPage, setCurrentPage] = useState(page || '1')
   const [mobileFilter,setFilterMobile] = useState(false)
@@ -39,11 +40,10 @@ const Cargo = () => {
 
   const onFilterMobile = () => {
     if(!mobileFilter && window.screen.width <=796) {
-      document.querySelector('.main_filter').style.display='inherit';
-      // document.body.style.overflow='hidden'
+      document.querySelector('.main_filter').style.display='none';
     }
     if(mobileFilter && window.screen.width <=796) {
-      document.querySelector('.main_filter').style.display='none'
+      document.querySelector('.main_filter').style.display='inherit'
     }
     setFilterMobile(!mobileFilter)
   }
@@ -77,6 +77,11 @@ const Cargo = () => {
     //   })
   },[])
   
+  const onSelectType = (e) => {
+    setLoading(true)
+    setSelectType(e.target.value)
+    onChangeCategory(e.target.name, e.target.value)
+  }
   const onChangeCategory = (catName,catId) => {
     setLoading(true)
       axios.get(`${process.env.BASE_URL}/filterPost`, {params: {
@@ -141,6 +146,8 @@ const Cargo = () => {
           setMaxPage={setMaxPage}
           mobileFilter={mobileFilter}
           onFilterMobile={onFilterMobile}
+          onSelectType={onSelectType}
+          selectType={selectType}
           // onSearch={onSearch}
         />
       }
