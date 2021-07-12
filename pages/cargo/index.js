@@ -38,19 +38,12 @@ const Cargo = () => {
   }
 
   const onFilterMobile = () => {
-    if(!mobileFilter) {
+    if(!mobileFilter && window.screen.width <=796) {
       document.querySelector('.main_filter').style.display='inherit';
       // document.body.style.overflow='hidden'
-    }else {
+    }
+    if(mobileFilter && window.screen.width <=796) {
       document.querySelector('.main_filter').style.display='none'
-      // document.body.style.overflow='auto'
-    }
-
-    if(window.screen.width>=796) {
-      document.querySelector('.main_filter').style.display='inherit';
-    }
-    if(window.screen.width<=796) {
-      document.querySelector('.main_filter').style.display='none';
     }
     setFilterMobile(!mobileFilter)
   }
