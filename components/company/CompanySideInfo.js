@@ -50,7 +50,7 @@ const CompanySideInfo = ({user}) => {
               </div>
             </div>
           </div>
-          <a className="btn btn--white green" href="#">Пополнить баланс</a>
+          <a className="btn btn--white green" href="/cabinet/balance">Пополнить баланс</a>
           {!user.subscription && <a className="btn btn--white blue" onClick={() => getSubscription()} href="#">Взять подписку</a>}
           {user.subscription && <a className='btn btn--white blue'>У вас доступно подписка до {user.end_subscription_date}</a>}
         </div>

@@ -36,6 +36,48 @@ class MyApp extends App {
           $('.header__top').removeClass('fixed');
         } 
     });
+    function showPosition(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+      console.log(lat, lng)
+      // var latlng = parseFloat(lat),parseFloat(lng);
+      // 
+
+      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${parseFloat(lat)},${parseFloat(lng)}&key=${process.env.GOOGLE_MAP_API_KEY}`)
+        .then(res=> {
+          console.log(res)
+          let filter = res.data.results.filter(r=> r.types.includes("locality"))
+          console.log(filter[0])
+          if(cookie.get('place_id') !== filter[0].place_id || cookie.get('formatted_address') === undefined) {
+            cookie.set('place_id', filter[0].place_id)
+            cookie.set('formatted_address', filter[0].formatted_address)
+          }
+        })
+      // var geocoder = new google.maps.Geocoder;
+
+      // geocoder.geocode({'location': latlng}, function(results, status) {
+      //   if (status === google.maps.GeocoderStatus.OK) {
+      //     if (results[1]) {
+      //       console.log(results);
+      //     } else {
+      //       window.alert('No results found');
+      //     }
+      //   } else {
+      //     window.alert('Geocoder failed due to: ' + status);
+      //   }
+      // });
+    }
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+      } else {
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        cookie.remove('place_id')
+        cookie.remove('formatted_address')
+        alert("Geolocation is not supported by this browser.");
+      }
+    
 
     if(localStorage.getItem('lang')=== null) {
       localStorage.setItem('lang', 'ru')

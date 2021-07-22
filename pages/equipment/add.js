@@ -43,7 +43,7 @@ class EquipmentAdd extends React.Component  {
       eqCategories: [],
       type_equipment: 1,
       category_id: 1,
-      name: 1,
+      name: "",
       image: [],
       net: '',
       type_blade: 1,
@@ -52,13 +52,13 @@ class EquipmentAdd extends React.Component  {
       place: {place_id: 'фывфывфывф', placeBound: '', formatted_address: ''},
       address: {address_id: 'вфвфывфывфв', formatted_address: ''},
       height: '',
-      width: 1,
+      width: '',
       rise: '',
       deep: '',
       description: '',
       parking_car: '',
       parking_cargo:'',
-      price: '200000',
+      price: '',
       currency: 1,
       forHour: true,
       forMonth: false,
@@ -233,25 +233,11 @@ class EquipmentAdd extends React.Component  {
                           </select>
                         </div>
                         <div className="post_ad__equipment__chars__item">
-                          <p name='type_equipment' value={this.state.type_equipment} onChange={this.handleChange} className="post_ad__par">Тип склада</p>
-                          <select className="post_ad__input">
-                            <option>Бульдозеры</option>
-                          </select>
-                        </div>
-                        <div className="post_ad__equipment__chars__item">
                           <p className="post_ad__par">Название/модель</p>
-                          <select value={this.state.name} onChange={this.handleChange} name='name'  className="post_ad__input">
-                            <option value='1'>JCB 5010K</option>
-                          </select>
+                          <input name="name" value={this.state.name} className="post_ad__input" placeholder='Название/модель' onChange={this.handleChange}/>
                         </div>
                       </div>
                       <div className="post_ad__equipment__chars__adress">
-                        <div className="post_ad__equipment__chars__item">
-                          <p className="post_ad__par">Регион</p>
-                          <select className="post_ad__input">
-                            <option>Казахстан</option>
-                          </select>
-                        </div>
                         <div className="post_ad__equipment__chars__item">
                           
                           <p className="post_ad__par">Город</p>
@@ -275,12 +261,12 @@ class EquipmentAdd extends React.Component  {
                           <p className="post_ad__par">Год выпуска</p>
                           <input name='year' onChange={this.handleChange} value={this.state.year} className="post_ad__input" type="text" placeholder=""/>
                         </div>
-                        <div className="post_ad__equipment__chars__item">
+                        {/* <div className="post_ad__equipment__chars__item">
                           <p className="post_ad__par">Тип отвала</p>
                           <select name='type_blade' value={this.state.type_blade} onChange={this.handleChange} className="post_ad__input">
                             <option value='1'>С неповоротным отвалом</option>
                           </select>
-                        </div>
+                        </div> */}
                         <div className="post_ad__equipment__chars__item">
                           <p className="post_ad__par">Мощн. двигателя, кВт
                           </p>

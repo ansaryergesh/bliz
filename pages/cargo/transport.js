@@ -6,8 +6,11 @@ import Filter from '../../components/post/Filter'
 import PostItem from '../../components/post/PostItem'
 import SideBarCurrency from '../../components/post/SideBarCurrency';
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults';
-
+import cookie from 'js-cookie'
 const Cargo = () => {
+  const currentPlace_id = cookie.get('place_id') !== undefined ? cookie.get('place_id') : "";
+  const currentPlace_name = cookie.get('formatted_address') !== undefined ? cookie.get('formatted_address') : "";
+  const [geoLoc, setGeoLoc] = useState({place_id: currentPlace_id, formatted_address: currentPlace_name})
   const router  = useRouter()
   const {filter} = router.query
   const {id} = router.query
@@ -173,6 +176,8 @@ const Cargo = () => {
           onSearch={onSearch}
           onSelectType={onSelectType}
           selectType={selectType}
+          currentPlace_id={geoLoc.place_id}
+          currentPlace_name={geoLoc.formatted_address}
         />
       }
      

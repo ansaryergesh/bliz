@@ -19,11 +19,14 @@ const Filter = ({
   onSelectType,
   toString,
   onFilterMobile,
+  currentPlace_id,
+  currentPlace_name,
   toId}) => {
   const router  = useRouter()
   const pathname = router.pathname;
   const {id} = router.query
   const {from_string} = router.query;
+  const {from_id} = router.query;
   const {to_string} = router.query;
   const {net_start} = router.query;
   const {net_end} = router.query;
@@ -33,7 +36,7 @@ const Filter = ({
   const [net,setNet] = useState({netStart: '',netEnd:''})
   const [volume,setVolume] = useState({volumeStart: '',volumeEnd:''})
   const [toInput,setToInput] = useState('')
-  const [addressFrom,setAddressFrom] = useState({address_string: fromString || '', address_id: fromId || '',})
+  const [addressFrom,setAddressFrom] = useState({address_string: fromString || from_string ||  '', address_id: fromId || from_id || '',})
   const [addressTo,setAddressTo] = useState({address_string: toString || '', address_id: toId || '',})
   const fromRef = useRef(null)
   const toRef = useRef(null)

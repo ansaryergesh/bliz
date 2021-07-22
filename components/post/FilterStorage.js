@@ -4,6 +4,7 @@ import {subCategories} from '../../defaults/defaults'
 import {useRouter} from 'next/router'
 import $ from 'jquery'
 import axios from 'axios'
+import cookie from 'js-cookie'
 const Filter = ({
   onChangeCategory,
   setPosts,
@@ -19,11 +20,14 @@ const Filter = ({
   onSelectType,
   toString,
   onFilterMobile,
+  currentPlace_id,
+  currentPlace_name,
   toId}) => {
   const router  = useRouter()
   const pathname = router.pathname;
   const {id} = router.query
   const {from_string} = router.query;
+  const {from_id} = router.query;
   const {to_string} = router.query;
   const {area_start} = router.query;
   const {area_end} = router.query;
@@ -33,7 +37,7 @@ const Filter = ({
   const [area,setArea] = useState({areaStart: '',areaEnd:''})
   const [price,setPrice] = useState({priceStart: '',priceEnd:''})
   const [toInput,setToInput] = useState('')
-  const [addressFrom,setAddressFrom] = useState({address_string: fromString || '', address_id: fromId || '',})
+  const [addressFrom,setAddressFrom] = useState({address_string: fromString || from_string || currentPlace_name ||  '', address_id: fromId || from_id || currentPlace_id || '',})
   const [addressTo,setAddressTo] = useState({address_string: toString || '', address_id: toId || '',})
   const fromRef = useRef(null)
   const toRef = useRef(null)

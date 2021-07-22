@@ -6,14 +6,17 @@ import axios from 'axios';
 import StorageCal from '../../components/storage/StorageCalculator';
 import { loadGoogleMapScript } from '../../defaults/googleMapDefaults';
 import SideBarCurrency from '../../components/post/SideBarCurrency';
-
+import cookie from 'js-cookie'
 const Storage = () => {
-  
+  const currentPlace_id = cookie.get('place_id') !== undefined ? cookie.get('place_id') : "";
+  const currentPlace_name = cookie.get('formatted_address') !== undefined ? cookie.get('formatted_address') : "";
+  const [geoLoc, setGeoLoc] = useState({place_id: currentPlace_id, formatted_address: currentPlace_name})
   const router  = useRouter()
   const {id} = router.query
   const {page} = router.query
   const {from_string} = router.query
   const [loading, setLoading] = useState(true)
+  
   const [storages, setStorages] = useState([{}])
   const [currentPage, setCurrentPage] = useState(1)
   const [mobileFilter,setFilterMobile] = useState(false)
@@ -87,6 +90,8 @@ const Storage = () => {
        setMaxPage={setMaxPage}
        mobileFilter={mobileFilter}
        onFilterMobile={onFilterMobile}
+       currentPlace_id={geoLoc.place_id}
+       currentPlace_name={geoLoc.formatted_address}
        // onSearch={onSearch}
      />
       }
