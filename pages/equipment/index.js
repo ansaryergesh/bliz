@@ -2,31 +2,48 @@ import SideBarCurrency from "../../components/post/SideBarCurrency"
 import {useRouter} from 'next/router'
 import { useEffect, useState } from "react"
 import axios from "axios"
+import cookie from 'js-cookie'
+import FilterEquipment from '../../components/post/FilterEquipment'
 import EquipmentItem from "../../components/equipment/EquipmentItem"
+import { loadGoogleMapScript } from "../../defaults/googleMapDefaults"
+import { eqCategories } from "../../defaults/eqCategories"
 const Equipment = () => {
+  const currentPlace_id = cookie.get('place_id') !== undefined ? cookie.get('place_id') : "";
+  const currentPlace_name = cookie.get('formatted_address') !== undefined ? cookie.get('formatted_address') : "";
+  const [geoLoc, setGeoLoc] = useState({place_id: currentPlace_id, formatted_address: currentPlace_name})
   const router = useRouter()
   const {id} = router.query
+  const {from_string} = router.query
   const {page} = router.query
   const [loading, setLoading] = useState(true)
   const [equipments,setEquipments] = useState([{}])
   const [total,setTotal] = useState(0)
   const [currentPage,setCurrentPage] = useState(1)
   const [maxPage,setMaxPage] = useState(0)
+  const [loadMapScript, setLoadMapScript] = useState(false)
+  const [mobileFilter,setFilterMobile] = useState(false)
 
   useEffect(() => {
+    loadGoogleMapScript(() => {
+      setLoadMapScript(true)
+    })
     setLoading(true)
-    axios.get(`${process.env.BASE_URL}/getAllEquipment?page=${page}`)
-      .then(res=> {
-        console.log(res)
-        setLoading(false)
-        setEquipments(res.data.data)
-        setTotal(res.data.count)
-        setMaxPage(res.data.max_page)
-        setCurrentPage(res.data.current_page)
-      })
-  }, [])
+  },[])
+
+  const onFilterMobile = () => {
+    if(!mobileFilter && window.screen.width <=796) {
+      document.querySelector('.main_filter').style.display='none';
+    }
+    if(mobileFilter && window.screen.width <=796) {
+      document.querySelector('.main_filter').style.display='inherit'
+    }
+    setFilterMobile(!mobileFilter)
+  }
+
+  const pageFinal = page ? page : 1
+
   const onChangePage=(pageNum) => {
-    axios.get(`${process.env.BASE_URL}/getAllEquipment?page=${pageNum}`)
+    axios.get(`${process.env.BASE_URL}/filterEquipment?page=${pageNum}`)
       .then(res=> {
         router.push(`/equipment?page=${pageNum}`)
         setLoading(false)
@@ -38,110 +55,33 @@ const Equipment = () => {
   }
   return (
     <div>
-      <div className="main_filter">
-        <div className="main_filter__content container">
-          <div className="main_filter__top flex_end">
-            <div className="main_filter__top__item">
-              <div className="filter__item__title">
-                <h4>Город, регион</h4>
-                <div className="filter__item__form">
-                  <select className="storage__city_filter">
-                    <option>Казахстан, Алматы</option>
-                    <option>Казахстан, Астана</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="main_filter__top__item">
-              <div className="filter__item__title">
-                <h4>Техника</h4>
-                <form className="filter__item__form">
-                  <select className="storage__city_filter">
-                    <option>Эсковаторы-погрузчики</option>
-                  </select>
-                </form>
-              </div>
-            </div>
-            <div className="main_filter__top__item">
-              <div className="filter__item__title">
-                <h4>Цена, ₸ за час</h4>
-                <div className="filter__item__form">
-                  <input className="mini_input" type="text" placeholder="от"/>
-                  <div className="hr"/>
-                  <input className="mini_input" type="text" placeholder="до"/>
-                </div>
-              </div>
-            </div>
-            <div className="main_filter__top__item">
-              <div className="filter__item__form">
-                <button>Сбросить</button>
-                <button type="button" className="big_filter_btn">Все фильтры</button>
-              </div>
-            </div>
-          </div>
-          {/* <form className="main_filter__big">
-            <div className="main_filter__big__items">
-              <div className="main_filter__big__item">
-                <select>
-                  <option>Фильтр</option>
-                </select>
-              </div>
-              <div className="main_filter__big__item">
-                <select>
-                  <option>Фильтр</option>
-                </select>
-              </div>
-              <div className="main_filter__big__item">
-                <select>
-                  <option>Фильтр</option>
-                </select>
-              </div>
-              <div className="main_filter__big__item">
-                <select>
-                  <option>Фильтр</option>
-                </select>
-              </div>
-              <div className="main_filter__big__item">
-                <select>
-                  <option>Фильтр</option>
-                </select>
-              </div>
-            </div>
-            <div className="main_filter__big__items">
-              <div className="main_filter__big__item">
-                <input type="text" placeholder="Дата выгрузки"/>
-              </div>
-              <div className="main_filter__big__item">
-                <input type="text" placeholder="Вес"/>
-              </div>
-              <div className="main_filter__big__item">
-                <input type="text" placeholder="Фильтр"/>
-              </div>
-              <div className="main_filter__big__item">
-                <input type="text" placeholder="Фильтр"/>
-              </div>
-              <div className="main_filter__big__item">
-                <input type="text" placeholder="Фильтр"/>
-              </div>
-            </div>
-          </form> */}
-          <div className="main_filter__bottom">
-            <div className="main_filter__bottom__item">
-              <p>Казахстан, Алматы</p>
-              <i className="fas fa-times"/>
-            </div>
-            <div className="main_filter__bottom__item">
-              <p>от 100 м2 до 1 200 м2</p>
-              <i className="fas fa-times"/>
-            </div>
-          </div>
+        <div className='filter_icon'>
+        <div onClick={() => onFilterMobile()}>   
+          <i class="fas fa-sliders-h "></i>
+     
+          <p>Фильтр {Object.keys(router.query).length!==0 && `(${Object.keys(router.query).length})`} </p>
         </div>
       </div>
+      {!loadMapScript ? <div>Загрузка...</div> :
+      
+      <FilterEquipment 
+       setLoading={setLoading}
+       setPosts={setEquipments}
+       setCurrentPage={setCurrentPage}
+       setTotal={setTotal}
+       setMaxPage={setMaxPage}
+       mobileFilter={mobileFilter}
+       onFilterMobile={onFilterMobile}
+       currentPlace_id={geoLoc.place_id}
+       currentPlace_name={geoLoc.formatted_address}
+       // onSearch={onSearch}
+     />
+      }
       <div className="products__container container">
         <div className="products__content">
           <div className="products__title">
             <h4>Главная / Спецтехника / Землеройная техника / Эсковаторы-погрузчики</h4>
-            <h1>Эсковаторы-погрузчики в Алматы</h1>
+            <h1>Эсковаторы-погрузчики {from_string && "в " + from_string}</h1>
             <h3>Найдено {total} объявлений</h3>
           </div>
           <EquipmentItem equipments={equipments} maxPage={maxPage} currentPage={currentPage} onChangePage={onChangePage} loading={loading} />
