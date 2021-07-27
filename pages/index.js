@@ -37,8 +37,9 @@ export default function Home() {
       <div className="under_header container">
         <h2>Портал <span>{" "}логистики</span> и <span>{" "}транспорта</span>
           <br/></h2>
-        <p>Быстрый и удобный поиск:
-          <br/>Груза и транспорта <br />Складов и спецтехники<br/>В любой точке мира.
+        <p>
+              <i className="far fa-check-circle"/>  Быстрый и удобный поиск:
+          <br/><i className="far fa-check-circle"/>  Груза и транспорта <br /><i className="far fa-check-circle"/>  Складов и спецтехники<br/><i className="far fa-check-circle"/>  В любой точке мира.
         </p>
         <div className="under_header__btns">
           <a className="btn" href="/cargo">НАЙТИ ГРУЗЫ И ТРАНСПОРТ</a>

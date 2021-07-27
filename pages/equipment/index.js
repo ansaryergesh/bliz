@@ -12,7 +12,10 @@ const Equipment = () => {
   const currentPlace_name = cookie.get('formatted_address') !== undefined ? cookie.get('formatted_address') : "";
   const [geoLoc, setGeoLoc] = useState({place_id: currentPlace_id, formatted_address: currentPlace_name})
   const router = useRouter()
+  const pathname = router.pathname
   const {id} = router.query
+  const {from_id} = router.query
+  const {filter} = router.query
   const {from_string} = router.query
   const {page} = router.query
   const [loading, setLoading] = useState(true)
@@ -22,7 +25,7 @@ const Equipment = () => {
   const [maxPage,setMaxPage] = useState(0)
   const [loadMapScript, setLoadMapScript] = useState(false)
   const [mobileFilter,setFilterMobile] = useState(false)
-
+  const [selectType,setSelectType] = useState(id || '0')
   useEffect(() => {
     loadGoogleMapScript(() => {
       setLoadMapScript(true)
@@ -42,6 +45,30 @@ const Equipment = () => {
 
   const pageFinal = page ? page : 1
 
+  const onSelectType = (e) => {
+    setLoading(true)
+    setSelectType(e.target.value)
+    onChangeCategory(e.target.name, e.target.value)
+  }
+  const onChangeCategory = (catName,catId) => {
+    setLoading(true)
+      axios.get(`${process.env.BASE_URL}/filterEquipment`, {params: {
+        category_id: catId===0 ? '' : catId,
+        from: from_id
+      }})
+        .then(res=> {
+          const queries = router.query;
+          delete queries.page;
+          router.push({path: pathname, query: {...queries, filter: catName, id: catId}})
+          setLoading(false)
+          setEquipments(res.data.data)
+          setCurrentPage(res.data.current_page)
+          setTotal(res.data.count)
+          setMaxPage(res.data.max_page)
+        })
+
+  }
+  
   const onChangePage=(pageNum) => {
     axios.get(`${process.env.BASE_URL}/filterEquipment?page=${pageNum}`)
       .then(res=> {
@@ -64,7 +91,8 @@ const Equipment = () => {
       </div>
       {!loadMapScript ? <div>Загрузка...</div> :
       
-      <FilterEquipment 
+      <FilterEquipment
+        queryFilter={filter ? filter : 'Все'}
        setLoading={setLoading}
        setPosts={setEquipments}
        setCurrentPage={setCurrentPage}
@@ -74,6 +102,9 @@ const Equipment = () => {
        onFilterMobile={onFilterMobile}
        currentPlace_id={geoLoc.place_id}
        currentPlace_name={geoLoc.formatted_address}
+       onSelectType={onSelectType}
+       selectType={selectType}
+       onChangeCategory={onChangeCategory}
        // onSearch={onSearch}
      />
       }

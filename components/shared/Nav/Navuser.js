@@ -173,7 +173,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
             <a className={router.pathname === '/cargo/check' ? 'active' : ''}  href="/cargo/check">Проверка компаний</a>
           </div>
         </div>
-        <div className={router.pathname.includes('equipment') ? 'goods__nav equipment active' : 'goods__nav equipment'}>
+        {/* <div className={router.pathname.includes('equipment') ? 'goods__nav equipment active' : 'goods__nav equipment'}>
           <div className="goods__nav__links container">
             <a href="/equipment">Все</a>
             <a className={router.pathname === '/equipment' ? 'active' : ''} href="#">Землеройная</a>
@@ -183,7 +183,7 @@ export default (connect(mapStateToProps,mapDispatchToProps)(function Navuser({em
             <a href="#">Коммунальная</a>
             <a href="#">Прочее</a>
           </div>
-        </div>
+        </div> */}
       </header>}
     </>
 

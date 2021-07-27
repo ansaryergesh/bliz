@@ -1,5 +1,9 @@
 export const eqCategories =[
   {
+    "id": 0,
+    "name": "Все"
+  },
+  {
     "id": 1,
     "name": "Землеройная"
   },

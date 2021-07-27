@@ -1,6 +1,5 @@
 
 import React, { useEffect, useRef, useState } from 'react'
-import {subCategories} from '../../defaults/defaults'
 import {useRouter} from 'next/router'
 import $ from 'jquery'
 import axios from 'axios'
@@ -16,9 +15,9 @@ const Filter = ({
   fromString,
   setMaxPage,
   fromId,
-  mobileFilter,
   selectType,
   onSelectType,
+  mobileFilter,
   toString,
   onFilterMobile,
   currentPlace_id,
@@ -267,13 +266,24 @@ const Filter = ({
                 </div>
               </div>
             </div>
-            <div className='filter__item__form select_transports'>
+            <div className="main_filter__top__item">
+            <div className="filter__item__title">
+              <br></br>
+              <h4>Спецтехника</h4>
+              <div className="filter__item__form type_transports">
+                {eqCategories.map(cat=> (
+                  <a onClick={() => onChangeCategory(cat.name, cat.id)} key={cat.id} className={queryFilter === cat.name ? 'active' : ''}>{cat.name}</a>
+                ))}
+              </div>
+              <div className='filter__item__form select_transports'>
                 <select value={selectType} onChange={e=> onSelectType(e)}>
                   {eqCategories.map(cat=> (
                     <option name={cat.name} value={cat.id}>{cat.name}</option>
                 ))}
                 </select>
               </div>
+            </div>
+          </div>
           </div>
         </div>
         <form className="main_filter__big">
