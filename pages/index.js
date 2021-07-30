@@ -35,12 +35,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <div className="under_header container">
-        <h2>Портал <span>{" "}логистики</span> и <span>{" "}транспорта</span>
+        <h2>Биржа <span>грузоперевозок</span>
           <br/></h2>
-        <p>
-              <i className="far fa-check-circle"/>  Быстрый и удобный поиск:
+        {/* <p>
           <br/><i className="far fa-check-circle"/>  Груза и транспорта <br /><i className="far fa-check-circle"/>  Складов и спецтехники<br/><i className="far fa-check-circle"/>  В любой точке мира.
-        </p>
+        </p> */}
         <div className="under_header__btns">
           <a className="btn" href="/cargo">НАЙТИ ГРУЗЫ И ТРАНСПОРТ</a>
           <a className="btn btn--white" href="/addposts">РАЗМЕСТИТЬ ОБЪЯВЛЕНИЕ</a>

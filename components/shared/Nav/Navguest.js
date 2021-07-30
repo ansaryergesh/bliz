@@ -163,6 +163,11 @@ const handleLogout =(val) => {
                   </div>
                 </div>
               </div>
+              <div className="header__top__mobile__nav__item">
+                <div className="header__top__mobile__nav__item__text">
+                  <h3 onClick={() => Router.push('/faq')}>Вопросы и ответы</h3>
+                </div>
+              </div>
               {isActiveUser !== undefined && 
                  <div className="header__top__mobile__nav__item">
                  <div className="header__top__mobile__nav__item__text">

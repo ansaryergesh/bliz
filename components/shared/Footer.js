@@ -43,6 +43,7 @@ const Footer = () => {
               <div className="footer__block-list">
                 <div className="list__items">
                   <a href="/about" className="list__item">О сервисе</a>
+                  <a href="/faq" className="list__item">Вопросы и ответы</a>
                   <a href="/contacts">Связаться с нами</a>
                   <a href="#">Реклама на сайте</a>
                 </div>
